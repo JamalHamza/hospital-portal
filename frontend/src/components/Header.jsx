@@ -30,7 +30,6 @@ const Header = () => {
           <BiLogIn size={35} />
           
         </div>
-
         <ul className='home-links'>
           <ShowOnLogin>
             <li className='--flex-center'>
