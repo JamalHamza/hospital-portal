@@ -28,11 +28,13 @@ function Login() {
   const { isLoading, isLoggedIn, isSuccess, message, isError, towFactors } =
     useSelector((state) => state.auth);
 
+  // ! --------------------------------------------
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // ! --------------------------------------------
   const LoginUser = async (e) => {
     e.preventDefault();
     if (!email || !password) {
@@ -56,6 +58,7 @@ function Login() {
     );
   };
 
+  // ! --------------------------------------------
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
       navigate('/profile');
@@ -67,6 +70,7 @@ function Login() {
     dispatch(RESET());
   }, [isSuccess, isLoggedIn, navigate, dispatch, isError, towFactors, email]);
 
+  // ! --------------------------------------------
   return (
     <div className={`container ${styles.auth}`}>
       {isLoading && <Loader />}

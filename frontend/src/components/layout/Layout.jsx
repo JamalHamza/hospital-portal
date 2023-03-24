@@ -9,7 +9,6 @@ function Layout({ children }) {
       <div className='--pad' style={{ minHeight: '90vh' }}>
         {children}
       </div>
-      <Footer />
     </>
   );
 }

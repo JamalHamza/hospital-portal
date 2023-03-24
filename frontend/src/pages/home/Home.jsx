@@ -1,17 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import loginImg from '../../assets/Home.png'
-import './Home.scss'
+import { Link } from 'react-router-dom';
+import loginImg from '../../assets/HomePageLogo.png';
+import './Home.scss';
 
 function Home() {
   return (
     <div>
       <section className='container hero'>
         <div className='hero-text'>
-          <h2>HEALTH PORTAL</h2>
-          <p>Instant appointment with doctors.Guaranteed.</p>
+          <h2>Vita Health Center</h2>
+          <p>Instant appointment with doctors-Guaranteed.</p>
           <p>
             100% Safe Consultations Be assured that your online consultation
             will be fully private and secured.
