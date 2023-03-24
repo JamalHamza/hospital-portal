@@ -17,7 +17,6 @@ function Home() {
           </p>
           <div className='hero-buttons --flex-start'>
             <Button
-              // className='--btn --btn-danger'
               sx={{
                 bgcolor: 'third.main',
                 padding: '1em 1.8em',
@@ -34,7 +33,6 @@ function Home() {
               </Link>
             </Button>
             <Button
-              // className='--btn --btn-primary'
               sx={{
                 bgcolor: 'fourth.main',
                 padding: '1em 1.8em',
