@@ -29,6 +29,22 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#ADA2FF',
+      light: '#dcd7ff',
+    },
+    secondary: {
+      main: '#C0DEFF',
+      light: '#d2e7ff',
+    },
+    third: {
+      main: '#FFE5F1',
+      light: '#ffeff6',
+    },
+    fourth: {
+      main: '#FFF8E1',
+      light: '#fffaea',
+    },
+    btn: {
+      main: '#000205',
     },
   },
 });

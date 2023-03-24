@@ -2,14 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // background-color: #eee;
-    min-height: 80vh;
-    
+    height: 100vh;
+    padding: 3em ;
 }
+
+
 
 .hero-text {
     width: 50%;
-
     &>* {
         color: #333;
         margin-bottom: 2rem;

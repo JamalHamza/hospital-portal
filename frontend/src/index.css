@@ -47,8 +47,8 @@ section {
 
 .container {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 4rem 1rem;
+   margin: 0 auto;
+  /* padding: 4rem 1rem;  */
 }
 
 .--pad {
@@ -456,6 +456,14 @@ p {
 }
 
 a {
+  font-size: 1.4rem;
+  /* color: var(--dark-blue); */
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+
+.--btn, .--btn-danger, .btn.--bg-primary {
   font-size: 1.4rem;
   /* color: var(--dark-blue); */
   text-decoration: none;
