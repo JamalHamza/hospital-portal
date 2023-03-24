@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
+
 :root {
   --nav-width: 68px;
   --header-height: 45px;
@@ -519,16 +521,16 @@ a:hover {
 }
 
 .Toastify__toast-theme--colored.Toastify__toast--success {
-   background-color: #fcfcfc;
-   box-shadow: 3px inset;
+  background-color: #fcfcfc;
+  box-shadow: 3px inset;
   border-left: 1rem rgb(87, 255, 87) solid;
   color: #045502;
   font-size: 1.6rem;
   min-height: 0.8rem;
 }
 .Toastify__toast-theme--colored.Toastify__toast--error {
-   background-color: #fcfcfc;
-   box-shadow: 3px inset;
+  background-color: #fcfcfc;
+  box-shadow: 3px inset;
   border-left: 1rem rgb(255, 0, 0) solid;
   color: #5e0404;
   font-size: 1.6rem;

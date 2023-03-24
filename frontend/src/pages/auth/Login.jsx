@@ -72,7 +72,8 @@ function Login() {
 
   // ! --------------------------------------------
   return (
-    <div className={`container ${styles.auth}`}>
+    
+    <div className={`container ${styles.auth}`} >
       {isLoading && <Loader />}
       <Card>
         <div className={styles.form}>

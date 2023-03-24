@@ -1,3 +1,4 @@
+import { createTheme, ThemeProvider } from '@mui/material';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 import { useEffect } from 'react';
@@ -24,6 +25,14 @@ import {
 } from './redux/features/auth/authSlice';
 axios.defaults.withCredentials = true;
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ADA2FF',
+    },
+  },
+});
+
 function App() {
   const dispatch = useDispatch();
 
@@ -38,7 +47,7 @@ function App() {
   }, [dispatch, isLogin, user]);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <BrowserRouter>
         <ToastContainer
           pauseOnHover='false'
@@ -52,12 +61,7 @@ function App() {
           clientId={import.meta.env.VITE_REACT_GOOGLE_CLIENT_ID}
         >
           <Routes>
-            <Route
-              path='/'
-              element={
-                  <Home />
-              }
-            />
+            <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/forgot' element={<Forgot />} />
@@ -98,7 +102,7 @@ function App() {
           </Routes>
         </GoogleOAuthProvider>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
 }
 
