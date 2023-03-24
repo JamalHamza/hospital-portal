@@ -1,0 +1,4 @@
+#00695c
+
+light red #ffe6e6
+light green #ccffeb
