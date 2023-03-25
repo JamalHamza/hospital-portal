@@ -6,34 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Card from '../../components/card/Card';
+import './auth-mui-overwrited.css';
 import styles from './auth.module.scss';
-// import { styled } from '@mui/system';
 // ! ------------------------------
-
-// const CustomTextField = styled(TextField)({
-//   '& label.Mui-focused': {
-//     color: 'green',
-//   },
-//   '& .MuiInput-underline:after': {
-//     borderBottomColor: 'green',
-//   },
-//   // '& .MuiOutlinedInput-root': {
-//   //   '& fieldset': {
-//   //     borderColor: 'gray',
-//   //   },
-//   //   '&:hover fieldset': {
-//   //     borderColor: 'darkgray',
-//   //   },
-//   //   '&.Mui-focused fieldset': {
-//   //     borderColor: 'green',
-//   //   },
-//   // },
-// });
-
-const sxStyle = {
-  margin: '8px',
-  width: '100%',
-};
 
 // ! -------------------------
 
@@ -42,7 +17,7 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    password2: '',
   };
   const [formData, setFormData] = useState(initialValues);
   const { name, email, password, password2 } = formData;
@@ -83,7 +58,7 @@ const Register = () => {
     password: Yup.string()
       .min(8, 'Password must be at least 8 characters')
       .required('Password is required'),
-    confirmPassword: Yup.string()
+    password2: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
       .required('Confirm Password is required'),
   });
@@ -159,43 +134,45 @@ const Register = () => {
               }}
             >
               <Field
+                as={TextField}
                 name='name'
                 label='Name'
+                type='text'
                 variant='outlined'
-                sx={sxStyle}
+                value={name}
+                style={{ margin: '8px', width: '100%' }}
                 error={touched.name && Boolean(errors.name)}
-                helperText={<p>{touched.name && errors.name} </p>}
+                helperText={touched.name && errors.name}
               />
-              {/* <CustomTextField
+              <Field
+                as={TextField}
                 name='email'
                 label='Email'
                 variant='outlined'
-                sx={sxStyle}
+                type='email'
+                style={{ margin: '8px', width: '100%' }}
                 error={touched.email && Boolean(errors.email)}
                 helperText={touched.email && errors.email}
-              /> */}
+              />
               <Field
                 as={TextField}
-                name='confirmPassword'
+                name='password'
+                label='Password'
+                variant='outlined'
+                type='password'
+                style={{ margin: '8px', width: '100%' }}
+                error={touched.password && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
+              />
+              <Field
+                as={TextField}
+                name='password2'
                 label='Confirm Password'
                 variant='outlined'
                 type='password'
                 style={{ margin: '8px', width: '100%' }}
-                error={
-                  touched.confirmPassword && Boolean(errors.confirmPassword)
-                }
-                helperText={touched.confirmPassword && errors.confirmPassword}
-              />
-              <Field
-                name='confirmPassword'
-                label='Confirm Password'
-                variant='outlined'
-                type='password'
-                sx={sxStyle}
-                error={
-                  touched.confirmPassword && Boolean(errors.confirmPassword)
-                }
-                helperText={touched.confirmPassword && errors.confirmPassword}
+                error={touched.password2 && Boolean(errors.password2)}
+                helperText={touched.password2 && errors.password2}
               />
               <Button
                 type='submit'
@@ -245,9 +222,16 @@ const Register = () => {
                   </li>
                 </ul>
               </Card>
-              <Box className={styles.register}>
-                <Link to='/'>Home |</Link>
-                <p className='text'>&nbsp; Already have an account?</p>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  margin: '1em'
+                }}
+              >
+                <Link to='/'>Home </Link>
+
                 <Link to='/login'> &nbsp; Login</Link>
               </Box>
             </Form>
