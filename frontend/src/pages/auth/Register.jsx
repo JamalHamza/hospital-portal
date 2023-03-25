@@ -1,15 +1,16 @@
-import { Box, Button, Link, TextField } from '@mui/material';
+import { Box, Button, IconButton, TextField } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { ImCheckmark, ImCross } from 'react-icons/im';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Card from '../../components/card/Card';
 import './auth-mui-overwrited.css';
 import styles from './auth.module.scss';
 // ! ------------------------------
-
+import HomeIcon from '@mui/icons-material/Home';
+import LoginIcon from '@mui/icons-material/Login';
 // ! -------------------------
 
 const Register = () => {
@@ -107,12 +108,16 @@ const Register = () => {
         minHeight: '100vh',
         width: '100vw',
         bgcolor: 'secondary.main',
-        padding: '2em',
+        // padding: '2em',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <Box
         sx={{
           maxWidth: '30rem',
+          width: '32rem',
           minheight: '70vh',
           m: '0 auto',
           p: '1em 2em',
@@ -125,7 +130,7 @@ const Register = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, handleChange }) => (
             <Form
               style={{
                 display: 'flex',
@@ -140,6 +145,7 @@ const Register = () => {
                 type='text'
                 variant='outlined'
                 value={name}
+                onChange={handleChange}
                 style={{ margin: '8px', width: '100%' }}
                 error={touched.name && Boolean(errors.name)}
                 helperText={touched.name && errors.name}
@@ -179,7 +185,7 @@ const Register = () => {
                 variant='contained'
                 sx={{
                   bgcolor: 'fourth.main',
-                  margin: '8px',
+                  margin: '0.8em',
                   '&:hover': {
                     background: '#fffaea',
                   },
@@ -225,14 +231,25 @@ const Register = () => {
               <Box
                 sx={{
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'space-between',
                   alignItems: 'center',
-                  margin: '1em'
+                  margin: '0.4em',
                 }}
               >
-                <Link to='/'>Home </Link>
+                <Link to='/'>
+                  <IconButton>
+                    <HomeIcon fontSize='large' sx={{ color: 'primary.main' }} />
+                  </IconButton>
+                </Link>
 
-                <Link to='/login'> &nbsp; Login</Link>
+                <Link to='/login'>
+                  <IconButton>
+                    <LoginIcon
+                      fontSize='large'
+                      sx={{ color: 'primary.main' }}
+                    />
+                  </IconButton>
+                </Link>
               </Box>
             </Form>
           )}
