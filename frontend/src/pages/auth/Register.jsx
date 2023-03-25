@@ -1,29 +1,50 @@
+import { Box, Button, Link, TextField } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { HiOutlineUserAdd } from 'react-icons/hi';
 import { ImCheckmark, ImCross } from 'react-icons/im';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 import Card from '../../components/card/Card';
-import Loader from '../../components/loader/Loader';
-import Password from '../../components/showPassword/Password';
-import { validateEmail } from '../../redux/features/auth/authServices';
-import {
-  register,
-  RESET,
-  sendVerificationEmail,
-} from '../../redux/features/auth/authSlice';
 import styles from './auth.module.scss';
+// import { styled } from '@mui/system';
+// ! ------------------------------
 
-const initialState = {
-  name: '',
-  email: '',
-  password: '',
-  password2: '',
+// const CustomTextField = styled(TextField)({
+//   '& label.Mui-focused': {
+//     color: 'green',
+//   },
+//   '& .MuiInput-underline:after': {
+//     borderBottomColor: 'green',
+//   },
+//   // '& .MuiOutlinedInput-root': {
+//   //   '& fieldset': {
+//   //     borderColor: 'gray',
+//   //   },
+//   //   '&:hover fieldset': {
+//   //     borderColor: 'darkgray',
+//   //   },
+//   //   '&.Mui-focused fieldset': {
+//   //     borderColor: 'green',
+//   //   },
+//   // },
+// });
+
+const sxStyle = {
+  margin: '8px',
+  width: '100%',
 };
 
-function Register() {
-  const [formData, setFormData] = useState(initialState);
+// ! -------------------------
+
+const Register = () => {
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+  const [formData, setFormData] = useState(initialValues);
   const { name, email, password, password2 } = formData;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,6 +56,7 @@ function Register() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   // ! ------- Password Strength Indicator ------------
   const [uCase, setUCase] = useState(false);
   const [num, setNum] = useState(false);
@@ -42,6 +64,7 @@ function Register() {
   const [passLength, setPassLength] = useState(false);
   const [passMatch, setPassMatch] = useState(true);
   // ! ------------------------------------------------
+
   const timesIcon = <ImCross size={8} color='red' />;
   const checkIcon = <ImCheckmark size={8} color='green' />;
   ImCross;
@@ -52,6 +75,22 @@ function Register() {
       return checkIcon;
     }
     return timesIcon;
+  };
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
+  });
+
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values);
+    resetForm();
   };
 
   useEffect(() => {
@@ -87,129 +126,136 @@ function Register() {
     }
   }, [password, password2]);
 
-  const RegisterUser = async (e) => {
-    e.preventDefault();
-    if (!name || !email || !password) {
-      return toast.error('All field are required!');
-    }
-    if (password.length < 6) {
-      return toast.error('Password must be up to 6 characters');
-    }
-    if (!validateEmail(email)) {
-      return toast.error('Please enter a valid email');
-    }
-    if (password !== password2) {
-      return toast.error('Password did not match');
-    }
-    const userData = {
-      name,
-      email,
-      password,
-    };
-
-    await dispatch(register(userData));
-    await dispatch(sendVerificationEmail());
-  };
-
-  useEffect(() => {
-    if (isSuccess && isLoggedIn) {
-      navigate('/profile');
-    }
-    dispatch(RESET());
-  }, [isSuccess, isLoggedIn, navigate, dispatch]);
-
   return (
-    <div className={`container ${styles.auth}`}>
-      {isLoading && <Loader />}
-      <Card>
-        <div className={styles.form}>
-          <div className='--flex-center'>
-            <HiOutlineUserAdd size={40} color='#00695c' />
-          </div>
-          <h2>Register</h2>
-          <br />
-          <form onSubmit={RegisterUser} noValidate>
-            <input
-              type='text'
-              placeholder='Name'
-              required
-              name='name'
-              value={name}
-              onChange={handleInputChange}
-            />
-            <input
-              type='email'
-              placeholder='Your email'
-              required
-              name='email'
-              value={email}
-              onChange={handleInputChange}
-            />
-            <Password
-              placeholder='Your password'
-              name='password'
-              value={password}
-              onChange={handleInputChange}
-            />
-            <Password
-              placeholder='Confirm Password'
-              name='password2'
-              value={password2}
-              onChange={handleInputChange}
-              onPaste={(e) => {
-                e.preventDefault();
-                toast.error('Can not paste into confirm password field');
-                return false;
+    <Box
+      sx={{
+        minHeight: '100vh',
+        width: '100vw',
+        bgcolor: 'secondary.main',
+        padding: '2em',
+      }}
+    >
+      <Box
+        sx={{
+          maxWidth: '30rem',
+          minheight: '70vh',
+          m: '0 auto',
+          p: '1em 2em',
+          bgcolor: '#fff',
+          borderRadius: '10px',
+        }}
+      >
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched }) => (
+            <Form
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
-            />
-            {/* Password Stregth Indicator */}
-            <Card cardclass={styles.group}>
-              <ul className='form-list'>
-                <li>
-                  <span className={styles.indicator}>
-                    {switchIcon(uCase)}
-                    &nbsp; Lowercase & UpperCase
-                  </span>
-                </li>
-                <li>
-                  <span className={styles.indicator}>
-                    {switchIcon(num)}
-                    &nbsp; Number (0-9)
-                  </span>
-                </li>
-                <li>
-                  <span className={styles.indicator}>
-                    {switchIcon(sChar)}
-                    &nbsp; Special Character(!@#$%^&*)
-                  </span>
-                </li>
-                <li>
-                  <span className={styles.indicator}>
-                    {switchIcon(passLength)}
-                    &nbsp; At least 6 Character
-                  </span>
-                </li>
-                <li>
-                  <span className={styles.indicator}>
-                    {switchIcon(passMatch)}
-                    &nbsp; Password Match
-                  </span>
-                </li>
-              </ul>
-            </Card>
-            <button type='submit' className='--btn --btn-primary --btn-block'>
-              Register
-            </button>
-          </form>
-          <span className={styles.register}>
-            <Link to='/'>Home |</Link>
-            <p className='text'>&nbsp; Already have an account?</p>
-            <Link to='/login'> &nbsp; Login</Link>
-          </span>
-        </div>
-      </Card>
-    </div>
+            >
+              <Field
+                name='name'
+                label='Name'
+                variant='outlined'
+                sx={sxStyle}
+                error={touched.name && Boolean(errors.name)}
+                helperText={<p>{touched.name && errors.name} </p>}
+              />
+              {/* <CustomTextField
+                name='email'
+                label='Email'
+                variant='outlined'
+                sx={sxStyle}
+                error={touched.email && Boolean(errors.email)}
+                helperText={touched.email && errors.email}
+              /> */}
+              <Field
+                as={TextField}
+                name='confirmPassword'
+                label='Confirm Password'
+                variant='outlined'
+                type='password'
+                style={{ margin: '8px', width: '100%' }}
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
+                helperText={touched.confirmPassword && errors.confirmPassword}
+              />
+              <Field
+                name='confirmPassword'
+                label='Confirm Password'
+                variant='outlined'
+                type='password'
+                sx={sxStyle}
+                error={
+                  touched.confirmPassword && Boolean(errors.confirmPassword)
+                }
+                helperText={touched.confirmPassword && errors.confirmPassword}
+              />
+              <Button
+                type='submit'
+                variant='contained'
+                sx={{
+                  bgcolor: 'fourth.main',
+                  margin: '8px',
+                  '&:hover': {
+                    background: '#fffaea',
+                  },
+                }}
+              >
+                Register
+              </Button>
+
+              <Card cardclass={styles.group}>
+                <ul className='form-list'>
+                  <li>
+                    <span className={styles.indicator}>
+                      {switchIcon(uCase)}
+                      &nbsp; Lowercase & UpperCase
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.indicator}>
+                      {switchIcon(num)}
+                      &nbsp; Number (0-9)
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.indicator}>
+                      {switchIcon(sChar)}
+                      &nbsp; Special Character(!@#$%^&*)
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.indicator}>
+                      {switchIcon(passLength)}
+                      &nbsp; At least 6 Character
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.indicator}>
+                      {switchIcon(passMatch)}
+                      &nbsp; Password Match
+                    </span>
+                  </li>
+                </ul>
+              </Card>
+              <Box className={styles.register}>
+                <Link to='/'>Home |</Link>
+                <p className='text'>&nbsp; Already have an account?</p>
+                <Link to='/login'> &nbsp; Login</Link>
+              </Box>
+            </Form>
+          )}
+        </Formik>
+      </Box>
+    </Box>
   );
-}
+};
 
 export default Register;
