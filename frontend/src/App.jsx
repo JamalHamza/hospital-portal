@@ -36,10 +36,12 @@ const theme = createTheme({
       light: '#d2e7ff',
     },
     third: {
+      dark: '#ccb7c0',
       main: '#FFE5F1',
       light: '#ffeff6',
     },
     fourth: {
+      dark: '#ccc6b4',
       main: '#FFF8E1',
       light: '#fffaea',
     },

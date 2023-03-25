@@ -184,10 +184,14 @@ const Register = () => {
                 type='submit'
                 variant='contained'
                 sx={{
-                  bgcolor: 'fourth.main',
+                  bgcolor: 'third.main',
                   margin: '0.8em',
+                  padding: '0.8em 2em',
+                  fontWeight: 800,
+                  fontSize: '1.2rem',
+                  color: 'primary.dark',
                   '&:hover': {
-                    background: '#fffaea',
+                    background: '#ccb7c0',
                   },
                 }}
               >
