@@ -14,6 +14,7 @@
   --fourthdark: #f1e0a5;
   --fourthmain: #fff8e1;
   --fourthlight: #fffaea;
+  --fourthlighter: #fffaea96;
   /* -------------- */
   --btnfontcolorBlack: #000205;
   --btnfontcolorWhite: #ffffff;
@@ -27,7 +28,7 @@
 
 
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-  background: var(--fourthlight) !important;
+  background: var(--fourthlighter) !important;
   color: var(--primarydark) !important;
   height: 0.6rem !important;
   font-size: 1.2rem !important;
@@ -42,6 +43,9 @@
 .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
   border: 1px solid var(--primarydark) !important;
 }
+
+
+
 
 /* Error Text */
 .css-1wc848c-MuiFormHelperText-root {

@@ -16,6 +16,8 @@ import {
   RESET,
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
+import {validateEmail} from '../../redux/features/auth/authServices';
+import {toast} from 'react-toastify';
 
 const initialValues = {
   name: '',
@@ -29,7 +31,7 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
   password: Yup.string()
-    .min(8, 'Password must be at least 8 characters')
+    .min(6, 'Password must be at least 8 characters')
     .required('Password is required'),
   password2: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -54,7 +56,6 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  console.log(password);
   // ! ------- Password Strength Indicator ------------
   const [uCase, setUCase] = useState(false);
   const [num, setNum] = useState(false);
@@ -103,7 +104,7 @@ const Register = () => {
       setSChar(false);
     }
     // Check for PASSWORD LENGTH
-    if (password.length > 8) {
+    if (password.length > 6) {
       setPassLength(true);
     } else {
       setPassLength(false);
@@ -123,7 +124,7 @@ const Register = () => {
     if (!name || !email || !password) {
       return toast.error('All field are required!');
     }
-    if (password.length < 8) {
+    if (password.length < 6) {
       return toast.error('Password must be up to 6 characters');
     }
     if (!validateEmail(email)) {
@@ -157,6 +158,7 @@ const Register = () => {
     onSubmit: (values, { setSubmitting }) => {
       // Handle form submission here
       console.log(values);
+      RegisterUser(values);
     },
   });
 

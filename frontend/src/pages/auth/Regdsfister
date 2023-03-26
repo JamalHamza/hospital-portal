@@ -92,7 +92,7 @@ function Register() {
     if (!name || !email || !password) {
       return toast.error('All field are required!');
     }
-    if (password.length < 8) {
+    if (password.length < 6) {
       return toast.error('Password must be up to 6 characters');
     }
     if (!validateEmail(email)) {
