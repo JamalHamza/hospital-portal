@@ -69,6 +69,7 @@
         border: 1px solid var(--light-blue);
         padding: 5px;
         margin-bottom: 5px;
+        margin-top: 1em;
     }
 
     .indicator {
@@ -103,5 +104,18 @@
     .img {
         display: none;
     }
+}
+
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    background: #55c57a !important;
+    font-size: 10rem;
+}
+
+
+
+.css-o37r7p-MuiInputBase-root-MuiOutlinedInput-root {
+    background: #55c57a !important;
+    font-size: 10rem;
 }
 
