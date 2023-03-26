@@ -19,26 +19,31 @@
   --btnfontcolorWhite: #ffffff;
 }
 
-
 /* Font */
 .css-13vtfjq-MuiFormLabel-root-MuiInputLabel-root {
-    font-size: 1.1rem !important;
+  font-size: 1rem !important;
+  padding: 0 !important;
+}
+
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  background: var(--fourthlight) !important;
+  color: var(--primarydark) !important;
+  height: 0.6rem !important;
+  font-size: 1.2rem !important;
 }
 
 /* Background of Label */
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-  background: var(--fourthlight) !important;
-  
+  color: red !important;
 }
 
 /* Input border */
-.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline{
-    border: 1px solid var(--primarydark) !important
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border: 1px solid var(--primarydark) !important;
 }
-
-
 
 /* Error Text */
 .css-1wc848c-MuiFormHelperText-root {
-    font-size: 1em !important;
+  font-size: 1em !important;
 }
