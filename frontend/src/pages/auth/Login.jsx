@@ -1,8 +1,15 @@
-import LoginIcon from '@mui/icons-material/Login';
 import HomeIcon from '@mui/icons-material/Home';
-import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
@@ -10,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
+import loginImg from '../../assets/authPage/login.png';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   login,
@@ -17,7 +25,6 @@ import {
   RESET,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
-import loginImg from '../../assets/authPage/login.png';
 
 const initialValues = {
   email: '',
@@ -32,12 +39,17 @@ const validationSchema = Yup.object().shape({
 
 function Login() {
   const [formData, setFormData] = useState(initialValues);
+  const [showPassword, setShowPassword] = useState(false);
   const { email, password } = formData;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, isLoggedIn, isSuccess, message, isError, towFactors } =
     useSelector((state) => state.auth);
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   // ! --------------------------------------------
   // ! can use this handleChange while not using formik
@@ -122,9 +134,18 @@ function Login() {
           borderRadius: '10px',
         }}
       >
-        <Box sx={{ p: '3em', display: 'flex', justifyContent: 'center', alignItems:'center' }}>
+        <Box
+          sx={{
+            p: '3em',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <img src={loginImg} alt='login' />
-          <Typography sx={{color: 'primary.main', ml: '0.4em'}} variant='h3'>Login</Typography>
+          <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
+            Login
+          </Typography>
         </Box>
         <form
           style={{
@@ -146,15 +167,22 @@ function Login() {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-
           <TextField
             name='password'
-            label='Password'
-            variant='outlined'
-            type='password'
-            value={formik.values.password}
+            type={showPassword ? 'text' : 'password'}
+            label='password'
             onChange={handleChange}
+            value={formik.values.password}
             style={{ margin: '8px', width: '100%' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={togglePassword}>
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
