@@ -18,6 +18,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import loginImg from '../../assets/authPage/login.png';
+import Password from '../../components/showPassword/Password';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   login,
@@ -206,7 +207,6 @@ function Login() {
           </Button>
 
           <Box sx={{ p: '1.4em' }}>
-            {/* <button className='--btn --btn-google'>login with google</button> */}
             <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
