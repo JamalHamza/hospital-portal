@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, TextField } from '@mui/material';
+import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { ImCheckmark, ImCross } from 'react-icons/im';
@@ -11,13 +11,15 @@ import styles from './auth.module.scss';
 
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
+
+import { toast } from 'react-toastify';
+import RegisterImg from '../../assets/authPage//register.png';
+import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   register,
   RESET,
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
-import {validateEmail} from '../../redux/features/auth/authServices';
-import {toast} from 'react-toastify';
 
 const initialValues = {
   name: '',
@@ -184,6 +186,19 @@ const Register = () => {
           borderRadius: '10px',
         }}
       >
+        <Box
+          sx={{
+            p: '2em',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={RegisterImg} alt='login' />
+          <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
+            Login
+          </Typography>
+        </Box>
         <form
           style={{
             display: 'flex',
