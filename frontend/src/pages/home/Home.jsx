@@ -54,7 +54,7 @@ function Home() {
         </div>
 
         <div className='hero-image'>
-          <img src={loginImg} alt='Auth' width={100} />
+          <img src={loginImg} alt='Auth'  />
         </div>
       </Box>
     </Box>
