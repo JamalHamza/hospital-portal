@@ -14,15 +14,25 @@ import {
   RESET,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
+import * as Yup from 'yup';
 import styles from './auth.module.scss';
+
 const initialState = {
   email: '',
   password: '',
 };
 
+// ! ------ Yup Validation ------------------
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string()
+    .required('Password is required'),
+});
+
 function Login() {
   const [formData, setFormData] = useState(initialState);
   const { email, password } = formData;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, isLoggedIn, isSuccess, message, isError, towFactors } =
@@ -72,8 +82,7 @@ function Login() {
 
   // ! --------------------------------------------
   return (
-    
-    <div className={`container ${styles.auth}`} >
+    <div className={`container ${styles.auth}`}>
       {isLoading && <Loader />}
       <Card>
         <div className={styles.form}>
