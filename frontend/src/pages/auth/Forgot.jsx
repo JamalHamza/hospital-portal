@@ -28,6 +28,7 @@ function Forgot() {
     await dispatch(forgotPassword(userData));
     await dispatch(RESET(userData));
   };
+  
   return (
     <div className={`container ${styles.auth}`}>
       {isLoading ? (

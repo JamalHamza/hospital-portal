@@ -198,7 +198,7 @@ const Register = () => {
       >
         <Box
           sx={{
-            // p: '2em',
+            p: '1.6em',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
