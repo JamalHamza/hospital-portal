@@ -1,14 +1,8 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-} from '@mui/material';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { MdOutlinePassword } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import Card from '../../components/card/Card';
@@ -19,11 +13,9 @@ import styles from './auth.module.scss';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { useFormik } from 'formik';
 import { ImCheckmark, ImCross } from 'react-icons/im';
+import FormBottomLinks from '../../components/formBottomLinks/FormBottomLinks';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
 
 const initialValues = {
@@ -285,37 +277,7 @@ function Reset() {
                 </ul>
               </Card> */}
               <PasswordStrength password={password} password2={password2} />
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  margin: '0.4em',
-                }}
-              >
-                <Link to='/'>
-                  <IconButton>
-                    <HomeIcon fontSize='large' sx={{ color: 'primary.main' }} />
-                  </IconButton>
-                </Link>
-
-                <Link to='/register'>
-                  <IconButton>
-                    <PersonAddAltIcon
-                      fontSize='large'
-                      sx={{ color: 'primary.main' }}
-                    />
-                  </IconButton>
-                </Link>
-                <Link to='/login'>
-                  <IconButton>
-                    <LoginIcon
-                      fontSize='large'
-                      sx={{ color: 'primary.main' }}
-                    />
-                  </IconButton>
-                </Link>
-              </Box>
+              <FormBottomLinks />
             </form>
           </div>
         </Card>
