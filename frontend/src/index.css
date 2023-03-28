@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-
 html {
-  background-color: #C0DEFF;
+  background-color: #c0deff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -27,13 +33,6 @@ html {
   --color-danger: orangered;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
 html {
   font-size: 10px;
 }
@@ -50,7 +49,7 @@ section {
 
 .container {
   max-width: 1000px;
-   margin: 0 auto;
+  margin: 0 auto;
   /* padding: 4rem 1rem;  */
 }
 
@@ -465,8 +464,9 @@ a {
   transition: all 0.2s;
 }
 
-
-.--btn, .--btn-danger, .btn.--bg-primary {
+.--btn,
+.--btn-danger,
+.btn.--bg-primary {
   font-size: 1.4rem;
   /* color: var(--dark-blue); */
   text-decoration: none;

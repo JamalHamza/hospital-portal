@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImCheckmark, ImCross } from 'react-icons/im';
 
-function PasswordStrength({password, password2}) {
+function PasswordStrength({ password, password2 }) {
   // ! ------- Password Strength Indicator ------------
   const [uCase, setUCase] = useState(false);
   const [num, setNum] = useState(false);
@@ -60,12 +60,18 @@ function PasswordStrength({password, password2}) {
     }
   }, [password, password2]);
 
-
   // ! ------------------------------
 
   return (
-    <Box sx={{border: '1px solid orange'}}>
-      <ul className='form-list'>
+    <Box
+      sx={{
+        border: '1px solid #C0DEFF',
+        m: '8px 0',
+        width: '100%',
+        p: '1em',
+      }}
+    >
+      <ul>
         <li>
           <span>
             {switchIcon(uCase)}

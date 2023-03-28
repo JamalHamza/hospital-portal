@@ -1,5 +1,3 @@
-import HomeIcon from '@mui/icons-material/Home';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
@@ -19,6 +17,7 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import loginImg from '../../assets/authPage/login.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { FormBottomLinksLoginPage } from '../../components/formBottomLinks/FormBottomLinks';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   login,
@@ -77,7 +76,7 @@ function Login() {
     await dispatch(login(userData));
   };
 
-  // ! ---- Google Login
+  // ! ---- Google Login -----------------------
 
   const googleLogin = async (credentialResponse) => {
     console.log(credentialResponse);
@@ -201,29 +200,7 @@ function Login() {
               }}
             />
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              margin: '0.4em',
-            }}
-          >
-            <Link to='/'>
-              <IconButton>
-                <HomeIcon fontSize='large' sx={{ color: 'primary.main' }} />
-              </IconButton>
-            </Link>
-
-            <Link to='/register'>
-              <IconButton>
-                <PersonAddAltIcon
-                  fontSize='large'
-                  sx={{ color: 'primary.main' }}
-                />
-              </IconButton>
-            </Link>
-          </Box>
+          <FormBottomLinksLoginPage />
         </form>
       </Box>
     </BodyWrapper>

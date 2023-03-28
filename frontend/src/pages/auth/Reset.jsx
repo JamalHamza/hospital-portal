@@ -1,21 +1,26 @@
-import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { MdOutlinePassword } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
-import Card from '../../components/card/Card';
 import Loader from '../../components/loader/Loader';
 import { RESET, resetPassword } from '../../redux/features/auth/authSlice';
-import styles from './auth.module.scss';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import { useFormik } from 'formik';
-import { ImCheckmark, ImCross } from 'react-icons/im';
-import FormBottomLinks from '../../components/formBottomLinks/FormBottomLinks';
+import resetImg from '../../assets/authPage/reset-password.png';
+import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import {FormBottomLinks} from '../../components/formBottomLinks/FormBottomLinks';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
 
 const initialValues = {
@@ -47,8 +52,6 @@ function Reset() {
   const navigate = useNavigate();
   const { resetToken } = useParams();
 
-  // console.log(typeof resetToken);
-
   const togglePassword2 = () => {
     setShowPassword2(!showPassword2);
   };
@@ -61,25 +64,6 @@ function Reset() {
     const { name, value } = event.target;
     formik.setFieldValue(name, value);
     setFormData({ ...formData, [name]: value });
-  };
-
-  // ! ------- Password Strength Indicator ------------
-  const [uCase, setUCase] = useState(false);
-  const [num, setNum] = useState(false);
-  const [sChar, setSChar] = useState(false);
-  const [passLength, setPassLength] = useState(false);
-  const [passMatch, setPassMatch] = useState(false);
-  // ! ---- Dynamic function for passwrod stength ----
-  const timesIcon = <ImCross size={8} color='red' />;
-  const checkIcon = <ImCheckmark size={8} color='green' />;
-  ImCross;
-
-  const switchIcon = (condition) => {
-    if (condition) {
-      return checkIcon;
-    } else {
-      return timesIcon;
-    }
   };
 
   // ! ----- Reset Function -----------------------
@@ -112,40 +96,6 @@ function Reset() {
     dispatch(RESET());
   }, [dispatch, navigate, message, isSuccess]);
 
-  // ! ----- password & password2 check -------
-  useEffect(() => {
-    // Check Lower and Uppercase
-    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
-      setUCase(true);
-    } else {
-      setUCase(false);
-    }
-    // Check for numbers
-    if (password.match(/([0-9])/)) {
-      setNum(true);
-    } else {
-      setNum(false);
-    }
-    // Check for special character
-    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
-      setSChar(true);
-    } else {
-      setSChar(false);
-    }
-    // Check for PASSWORD LENGTH
-    if (password.length > 6) {
-      setPassLength(true);
-    } else {
-      setPassLength(false);
-    }
-    // Check for Password Match
-    if (password === password2 && password.length > 0 && password2.length > 0) {
-      setPassMatch(true);
-    } else {
-      setPassMatch(false);
-    }
-  }, [password, password2]);
-
   // ! --------------------------------------
 
   const formik = useFormik({
@@ -160,16 +110,38 @@ function Reset() {
 
   // ! ---------------------------------------
   return (
-    <div className={`container ${styles.auth}`}>
+    <BodyWrapper>
       {isLoading ? (
         <Loader />
       ) : (
-        <Card>
-          <div className={styles.form}>
-            <div className='--flex-center'>
-              <MdOutlinePassword size={40} color='#00695c' />
-            </div>
-            <h2>Reset Password</h2>
+        <Box
+          sx={{
+            maxWidth: '30rem',
+            width: '32rem',
+            minheight: '68vh',
+            m: '0 auto',
+            p: '0.5em 2em',
+            bgcolor: '#fff',
+            borderRadius: '10px',
+          }}
+        >
+          <Box>
+            <Box
+              sx={{
+                p: '1.6em',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={resetImg} alt='login' />
+              <Typography
+                sx={{ color: 'primary.main', ml: '0.4em' }}
+                variant='h3'
+              >
+                Register
+              </Typography>
+            </Box>
             <form onSubmit={reset} noValidate>
               <TextField
                 name='password'
@@ -177,7 +149,7 @@ function Reset() {
                 label='New Password'
                 onChange={handleChange}
                 value={formik.values.password}
-                style={{ margin: '8px', width: '100%' }}
+                style={{ margin: '8px 0', width: '100%' }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
@@ -203,7 +175,7 @@ function Reset() {
                 label='Confirm New Password'
                 onChange={handleChange}
                 value={formik.values.password2}
-                style={{ margin: '8px', width: '100%' }}
+                style={{ margin: '8px 0', width: '100%' }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
@@ -219,9 +191,9 @@ function Reset() {
                 }}
                 onBlur={formik.handleBlur}
                 error={
-                  formik.touched.password && Boolean(formik.errors.password)
+                  formik.touched.password2 && Boolean(formik.errors.password2)
                 }
-                helperText={formik.touched.password && formik.errors.password}
+                helperText={formik.touched.password2 && formik.errors.password2}
               />
 
               <Button
@@ -229,7 +201,7 @@ function Reset() {
                 variant='contained'
                 sx={{
                   bgcolor: 'third.main',
-                  margin: '0.8em',
+                  margin: '0.8em 0',
                   padding: '0.8em 2em',
                   fontWeight: 800,
                   fontSize: '1.2rem',
@@ -242,47 +214,13 @@ function Reset() {
               >
                 Reset Password
               </Button>
-              {/* <Card cardclass={styles.group}>
-                <ul className='form-list'>
-                  <li>
-                    <span className={styles.indicator}>
-                      {switchIcon(uCase)}
-                      &nbsp; Lowercase & UpperCase
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.indicator}>
-                      {switchIcon(num)}
-                      &nbsp; Number (0-9)
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.indicator}>
-                      {switchIcon(sChar)}
-                      &nbsp; Special Character(!@#$%^&*)
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.indicator}>
-                      {switchIcon(passLength)}
-                      &nbsp; At least 6 Character
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.indicator}>
-                      {switchIcon(passMatch)}
-                      &nbsp; Password Match
-                    </span>
-                  </li>
-                </ul>
-              </Card> */}
               <PasswordStrength password={password} password2={password2} />
               <FormBottomLinks />
             </form>
-          </div>
-        </Card>
+          </Box>
+        </Box>
       )}
-    </div>
+    </BodyWrapper>
   );
 }
 
