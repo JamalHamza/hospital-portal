@@ -178,20 +178,19 @@ function Login() {
             type='submit'
             variant='contained'
             sx={{
-              bgcolor: 'third.main',
+              bgcolor: 'fourth.main',
               margin: '0.8em',
               padding: '0.8em 2em',
               fontWeight: 800,
               fontSize: '1.2rem',
               color: 'primary.dark',
               '&:hover': {
-                background: '#ccb7c0',
+                background: '#ccc6b4',
               },
             }}
           >
             Login
           </Button>
-
           <Box sx={{ p: '1.4em' }}>
             <GoogleLogin
               onSuccess={googleLogin}
@@ -201,7 +200,6 @@ function Login() {
               }}
             />
           </Box>
-
           <Box
             sx={{
               display: 'flex',
