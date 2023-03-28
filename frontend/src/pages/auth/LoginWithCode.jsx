@@ -1,3 +1,4 @@
+import {Box} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { CiUnlock } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +16,7 @@ import styles from './auth.module.scss';
 function LoginWithCode() {
   const [loginCode, setLoginCode] = useState('');
   const { email } = useParams();
-  console.log(email);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading, isLoggedIn, isSuccess } = useSelector(
@@ -53,7 +54,7 @@ function LoginWithCode() {
   return (
     <div className={`container ${styles.auth}`}>
       {isLoading && <Loader />}
-      <Card>
+      <Box >
         <div className={styles.form}>
           <div className='--flex-center'>
             <CiUnlock size={40} color='#00695c' />
@@ -88,7 +89,7 @@ function LoginWithCode() {
             </div>
           </form>
         </div>
-      </Card>
+      </Box>
     </div>
   );
 }

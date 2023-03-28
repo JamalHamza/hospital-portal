@@ -23,6 +23,7 @@ import LoginIcon from '@mui/icons-material/Login';
 
 import { toast } from 'react-toastify';
 import RegisterImg from '../../assets/authPage//register.png';
+import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   register,
@@ -182,16 +183,7 @@ const Register = () => {
   });
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        width: '100vw',
-        bgcolor: 'secondary.main',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <BodyWrapper>
       <Box
         sx={{
           maxWidth: '30rem',
@@ -213,7 +205,7 @@ const Register = () => {
         >
           <img src={RegisterImg} alt='login' />
           <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
-            Login
+            Register
           </Typography>
         </Box>
         <form
@@ -249,33 +241,6 @@ const Register = () => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-
-          {/* <TextField
-            name='password'
-            label='Password'
-            variant='outlined'
-            type='password'
-            value={formik.values.password}
-            onChange={handleChange}
-            style={{ margin: '8px', width: '100%' }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          /> */}
-
-          {/* <TextField
-            name='password2'
-            label='Confirm Password'
-            variant='outlined'
-            type='password'
-            value={formik.values.password2}
-            onChange={handleChange}
-            style={{ margin: '8px', width: '100%' }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password2 && Boolean(formik.errors.password2)}
-            helperText={formik.touched.password2 && formik.errors.password2}
-          /> */}
-
           {/* ! Added Show and Hide Password */}
           <TextField
             name='password'
@@ -392,7 +357,7 @@ const Register = () => {
           </Box>
         </form>
       </Box>
-    </Box>
+    </BodyWrapper>
   );
 };
 
