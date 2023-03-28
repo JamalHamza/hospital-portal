@@ -188,9 +188,9 @@ const Register = () => {
         sx={{
           maxWidth: '30rem',
           width: '32rem',
-          minheight: '70vh',
+          minheight: '68vh',
           m: '0 auto',
-          p: '1em 2em',
+          p: '0.5em 2em',
           bgcolor: '#fff',
           borderRadius: '10px',
         }}
