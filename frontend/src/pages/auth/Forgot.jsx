@@ -1,12 +1,12 @@
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import { Box, Button, IconButton, TextField } from '@mui/material';
+import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import forgotImg from '../../assets/authPage/forgotPassword.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import Loader from '../../components/loader/Loader';
 import { validateEmail } from '../../redux/features/auth/authServices';
@@ -50,10 +50,22 @@ function Forgot() {
             textAlign: 'center',
           }}
         >
-          {/* <Box> */}
-          <MdOutlineMarkEmailUnread size={40} color='#00695c' />
-          {/* </Box> */}
-          <h4>Forgot Password</h4>
+          <Box
+            sx={{
+              p: '1.6em',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <img src={forgotImg} alt='forgotImg' />
+            <Typography
+              sx={{ color: 'primary.main', ml: '0.4em' }}
+              variant='h4'
+            >
+              Forgot Password
+            </Typography>
+          </Box>
           <form
             onSubmit={forgot}
             noValidate
