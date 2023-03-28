@@ -66,6 +66,7 @@ const Register = () => {
   const togglePassword2 = () => {
     setShowPassword2(!showPassword2);
   };
+
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
@@ -197,7 +198,7 @@ const Register = () => {
       >
         <Box
           sx={{
-            p: '2em',
+            // p: '2em',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -264,7 +265,7 @@ const Register = () => {
           />
           <TextField
             name='password2'
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword2 ? 'text' : 'password'}
             label='Confirm Password'
             onChange={handleChange}
             value={formik.values.password2}
@@ -273,7 +274,7 @@ const Register = () => {
               endAdornment: (
                 <InputAdornment position='end'>
                   <IconButton onClick={togglePassword2}>
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    {showPassword2 ? <VisibilityIcon /> : <VisibilityOffIcon />}
                   </IconButton>
                 </InputAdornment>
               ),
