@@ -10,6 +10,7 @@ function BodyWrapper({ children, cardclass }) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        border: '6px solid red'
       }}
     >
       {children}
