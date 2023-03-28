@@ -1,4 +1,13 @@
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { ImCheckmark, ImCross } from 'react-icons/im';
@@ -42,8 +51,9 @@ const validationSchema = Yup.object().shape({
 
 const Register = () => {
   // ! Initial Values for form
-
   const [formData, setFormData] = useState(initialValues);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const { name, email, password, password2 } = formData;
   const navigate = useNavigate();
@@ -51,6 +61,13 @@ const Register = () => {
   const { isLoading, isLoggedIn, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
+  const togglePassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -232,7 +249,8 @@ const Register = () => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-          <TextField
+
+          {/* <TextField
             name='password'
             label='Password'
             variant='outlined'
@@ -243,8 +261,9 @@ const Register = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
-          />
-          <TextField
+          /> */}
+
+          {/* <TextField
             name='password2'
             label='Confirm Password'
             variant='outlined'
@@ -255,7 +274,50 @@ const Register = () => {
             onBlur={formik.handleBlur}
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
+          /> */}
+
+          {/* ! Added Show and Hide Password */}
+          <TextField
+            name='password'
+            type={showPassword ? 'text' : 'password'}
+            label='password'
+            onChange={handleChange}
+            value={formik.values.password}
+            style={{ margin: '8px', width: '100%' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={togglePassword}>
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
           />
+          <TextField
+            name='password2'
+            type={showPassword ? 'text' : 'password'}
+            label='Confirm Password'
+            onChange={handleChange}
+            value={formik.values.password2}
+            style={{ margin: '8px', width: '100%' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={togglePassword2}>
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+
           <Button
             type='submit'
             variant='contained'

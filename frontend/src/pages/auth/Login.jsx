@@ -18,7 +18,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import loginImg from '../../assets/authPage/login.png';
-import Password from '../../components/showPassword/Password';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   login,
@@ -54,10 +53,6 @@ function Login() {
 
   // ! --------------------------------------------
   // ! can use this handleChange while not using formik
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;

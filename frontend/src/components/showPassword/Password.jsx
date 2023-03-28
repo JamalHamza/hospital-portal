@@ -30,16 +30,15 @@ function Password({ placeholder, value, onChange, onPaste, name }) {
     //     )}
     //   </div>
     // </div>
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
+    <Box>
       <TextField
-        size='small'
         type={showPassword ? 'text' : 'password'}
         label={placeholder}
         value={value}
         onChange={onChange}
         onPaste={onPaste}
         name={name}
-        style={{ margin: '8px', width: '100%' }}
+        style={{ margin: '8px', width: '100%' ,}}
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>
