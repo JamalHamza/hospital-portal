@@ -18,6 +18,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import loginImg from '../../assets/authPage/login.png';
+import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   login,
@@ -104,22 +105,12 @@ function Login() {
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
       // Handle form submission here
-      console.log(values);
       LoginUser(values);
     },
   });
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        width: '100vw',
-        bgcolor: 'secondary.main',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <BodyWrapper>
       <Box
         sx={{
           maxWidth: '30rem',
@@ -236,7 +227,7 @@ function Login() {
           </Box>
         </form>
       </Box>
-    </Box>
+    </BodyWrapper>
   );
 }
 
