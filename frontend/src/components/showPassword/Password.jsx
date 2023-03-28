@@ -1,9 +1,6 @@
-import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import '../../pages/auth/auth-mui-overwrited.css';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function Password({ placeholder, value, onChange, onPaste, name }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -31,7 +28,7 @@ function Password({ placeholder, value, onChange, onPaste, name }) {
     //   </div>
     // </div>
     <Box>
-      <TextField
+      {/* <TextField
         type={showPassword ? 'text' : 'password'}
         label={placeholder}
         value={value}
@@ -48,7 +45,7 @@ function Password({ placeholder, value, onChange, onPaste, name }) {
             </InputAdornment>
           ),
         }}
-      />
+      /> */}
     </Box>
   );
 }

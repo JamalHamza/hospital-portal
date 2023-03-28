@@ -174,6 +174,7 @@ function Login() {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
+          <Link to='/forgot'>Forgot Password</Link>
           <Button
             type='submit'
             variant='contained'

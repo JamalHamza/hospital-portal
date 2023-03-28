@@ -14,6 +14,7 @@ function Forgot() {
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
 
+  // ! ------ Forgot Function ----------------------
   const forgot = async (e) => {
     e.preventDefault();
     if (!email) {
@@ -28,6 +29,7 @@ function Forgot() {
     await dispatch(forgotPassword(userData));
     await dispatch(RESET(userData));
   };
+  
   
   return (
     <div className={`container ${styles.auth}`}>
