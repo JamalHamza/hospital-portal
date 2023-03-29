@@ -78,8 +78,8 @@ function App() {
       <BrowserRouter>
         <ToastContainer
           pauseOnHover='false'
-          style={{ fontSize: '0.8rem' }}
           hideProgressBar
+          autoClose={200}
           position='top-left'
           theme='colored'
           bodyClassName='toast'

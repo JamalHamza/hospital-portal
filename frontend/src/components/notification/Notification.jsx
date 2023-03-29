@@ -5,6 +5,7 @@ import {
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
 import './Notification.scss';
+import {Box} from '@mui/material'
 
 const Notification = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Notification = () => {
   };
 
   return (
-    <div className='container'>
+    <Box sx={{m: '2em'}}>
       <div className='alert'>
         <p>
           <b>Message:</b> &nbsp;
@@ -28,7 +29,7 @@ const Notification = () => {
           <b>Resend Link</b>
         </p>
       </div>
-    </div>
+    </Box>
   );
 };
 

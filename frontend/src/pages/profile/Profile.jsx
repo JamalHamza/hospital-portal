@@ -120,9 +120,9 @@ function Profile() {
         <Loader />
       ) : (
         <>
+            {!profile.isVerified && <Notification />}
           <section>
             <div className='container'>
-              {!profile.isVerified && <Notification />}
               <PageMenu />
               <h4 className='head-pro'>Profile</h4>
               <div className='--flex-start profile'>
