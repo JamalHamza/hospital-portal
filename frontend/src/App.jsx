@@ -78,7 +78,7 @@ function App() {
           style={{ fontSize: '0.8rem' }}
           
           hideProgressBar
-          position='top-center'
+          position='top-left'
           theme='colored'
           bodyClassName='toast'
         />
