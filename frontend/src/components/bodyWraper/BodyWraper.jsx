@@ -6,11 +6,9 @@ function BodyWrapper({ children, cardclass }) {
       sx={{
         minHeight: '100vh',
         width: '100vw',
-        bgcolor: 'secondary.main',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'end',
         alignItems: 'center',
-        border: '6px solid red'
       }}
     >
       {children}

@@ -121,6 +121,7 @@ const Register = () => {
   return (
     <BodyWrapper>
       <Box
+        className='boxxx'
         sx={{
           maxWidth: '30rem',
           width: '32rem',
@@ -132,6 +133,7 @@ const Register = () => {
         }}
       >
         <Box
+          className='register--box'
           sx={{
             p: '1.6em',
             display: 'flex',

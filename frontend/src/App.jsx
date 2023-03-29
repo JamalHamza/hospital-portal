@@ -27,6 +27,9 @@ axios.defaults.withCredentials = true;
 
 const theme = createTheme({
   palette: {
+    Menu: {
+      main: '#2950ee',
+    },
     primary: {
       main: '#ADA2FF',
       light: '#dcd7ff',
@@ -47,6 +50,9 @@ const theme = createTheme({
     },
     btn: {
       main: '#000205',
+    },
+    btnAlert: {
+      main: '#D61355',
     },
   },
 });
@@ -69,7 +75,8 @@ function App() {
       <BrowserRouter>
         <ToastContainer
           pauseOnHover='false'
-          style={{ fontSize: '1rem' }}
+          style={{ fontSize: '0.8rem' }}
+          
           hideProgressBar
           position='top-center'
           theme='colored'
