@@ -116,7 +116,7 @@ function Login() {
           width: '32rem',
           m: '0 auto',
           p: '1em 2em',
-          bgcolor: '#fff',
+          bgcolor: 'form.main',
           borderRadius: '10px',
         }}
       >

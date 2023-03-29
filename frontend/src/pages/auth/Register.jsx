@@ -128,7 +128,7 @@ const Register = () => {
           minheight: '68vh',
           m: '0 auto',
           p: '0.5em 2em',
-          bgcolor: '#fff',
+          bgcolor: 'form.main',
           borderRadius: '10px',
         }}
       >
