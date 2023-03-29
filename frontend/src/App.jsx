@@ -28,7 +28,7 @@ axios.defaults.withCredentials = true;
 const theme = createTheme({
   palette: {
     menu: {
-      main: '#2950ee',
+      main: '#7564f5',
     },
     form: {
       main: '#fff',

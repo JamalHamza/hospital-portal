@@ -1,5 +1,25 @@
 .css-g62fru-MuiToolbar-root {
   height: 5rem !important;
-  width: 100vw;
 }
 
+/*  ! Sidebar - */
+.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+  background: #C0DEFF !important;
+}
+
+
+/* ! Mui sidebare Icon */
+
+.css-cveggr-MuiListItemIcon-root {
+ min-width: 3rem !important;
+ cursor: pointer;
+
+}
+
+
+.css-10hburv-MuiTypography-root {
+  color: black !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+}

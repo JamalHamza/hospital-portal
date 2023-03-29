@@ -1,23 +1,24 @@
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import MenuIcon from '@mui/icons-material/Menu';
+import SyncLockIcon from '@mui/icons-material/SyncLock';
+import {
+  AppBar,
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+} from '@mui/material';
 import React, { useState } from 'react';
-// import { BiLogIn } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { UserName } from '../pages/profile/Profile';
-
 import { logout, RESET } from '../redux/features/auth/authSlice';
 import './Header.css';
-// import { ShowOnLogin, ShowOnLogout } from './protect/hiddenLink';
 const activeLink = ({ isActive }) => (isActive ? 'active' : '');
-
-// ! ----------------------------------------
-import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 
 // ! ----------------------------------------
 
@@ -26,7 +27,25 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // ! --- Drawer --------------------------------
+  // ! --- itemList ------------------------
+  const itemsList = [
+    {
+      text: 'Profile',
+      icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+      onClick: () => {
+        navigate('/profile'), setOpen(false);
+      },
+    },
+    {
+      text: 'Change Password',
+      icon: <SyncLockIcon fontSize='large' color='btn' />,
+      onClick: () => {
+        navigate('/changePassword'), setOpen(false);
+      },
+    },
+  ];
+
+  // ! --- Drawer --------------------------
   const handleOpen = () => {
     setOpen(true);
   };
@@ -50,31 +69,52 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <>
         <Drawer anchor='left' open={open} onClose={handleClose}>
-          <div style={{ width: 250 }}>This is the drawer content</div>
+          <div style={{ width: 200 }}>
+            <List>
+              {itemsList.map((item, index) => {
+                const { text, icon, onClick } = item;
+                return (
+                  <ListItem key={text} onClick={onClick}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </div>
         </Drawer>
       </>
-      <AppBar position='static' sx={{ bgcolor: '5rem' }}>
-        <Toolbar sx={{ bgcolor: 'primary.main' }}>
-          <IconButton
-            onClick={handleOpen}
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
+      <AppBar position='static'>
+        <Toolbar sx={{ bgcolor: 'menu.main' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button
-            variant='contained'
-            sx={{ bgcolor: 'third.main', fontWeight: 800 }}
-            onClick={logoutUser}
-          >
-            LogOut
-          </Button>
+            <Box>
+              <IconButton
+                onClick={handleOpen}
+                size='large'
+                edge='start'
+                color='inherit'
+                aria-label='menu'
+                sx={{ mr: 1 }}
+              >
+                <MenuIcon fontSize='large' sx={{ color: '#fff' }} />
+              </IconButton>
+            </Box>
+
+            <Button
+              variant='contained'
+              sx={{ bgcolor: 'third.main', fontWeight: 800 }}
+              onClick={logoutUser}
+            >
+              LogOut
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
