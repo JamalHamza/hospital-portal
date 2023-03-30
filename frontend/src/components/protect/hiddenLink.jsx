@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux';
+import {useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {
   selectIsLoggedIn,
-  selectorUser,
+  selectorUser
 } from '../../redux/features/auth/authSlice';
 
 export const ShowOnLogin = ({ children }) => {
@@ -22,9 +24,19 @@ export const ShowOnLogout = ({ children }) => {
 };
 
 export const AdminAutoLink = ({ children }) => {
+  const navigate = useNavigate();
+  const loaction = useLocation();
+  const urlLocation = location.pathname === '/users';
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const userRole = useSelector(selectorUser);
   const role = userRole?.role;
+
+  useEffect(() => {
+    if ((role === 'patient' || role === 'doctor') && urlLocation) {
+      navigate('/profile');
+    }
+  }, [role]);
+
   if (isLoggedIn && (role === 'admin' || role === 'author')) {
     return <>{children}</>;
   }

@@ -1,21 +1,25 @@
-.css-g62fru-MuiToolbar-root {
-  height: 5rem !important;
-}
-
 /*  ! Sidebar - */
-.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
-  background: #C0DEFF !important;
+
+.header--logo {
+  width: 6% !important;
 }
 
+
+.css-lvucg2-MuiListItem-root:hover,
+.css-lvucg2-MuiListItem-root:focus {
+  background: #afd2f8 !important;
+}
+
+.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+  background: #c0deff !important;
+}
 
 /* ! Mui sidebare Icon */
 
 .css-cveggr-MuiListItemIcon-root {
- min-width: 3rem !important;
- cursor: pointer;
-
+  min-width: 3rem !important;
+  cursor: pointer;
 }
-
 
 .css-10hburv-MuiTypography-root {
   color: black !important;
@@ -23,3 +27,4 @@
   font-weight: 700 !important;
   cursor: pointer;
 }
+

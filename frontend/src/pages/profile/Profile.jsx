@@ -25,7 +25,7 @@ export const shortenText = (text, n) => {
   return text;
 };
 
-function Profile() {
+function ProfileAdmin() {
   useRedirectLoggedOutUser('/login');
   const dispatch = useDispatch();
   const { isLoading, isLoggedIn, isSuccess, message, user } = useSelector(
@@ -212,4 +212,4 @@ export const UserName = () => {
   return <p className='--color-white'>Hi, {shortenText(username, 9)} |</p>;
 };
 
-export default Profile;
+export default ProfileAdmin;

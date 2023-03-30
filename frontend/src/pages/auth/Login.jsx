@@ -44,8 +44,17 @@ function Login() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, isLoggedIn, isSuccess, message, isError, towFactors } =
-    useSelector((state) => state.auth);
+  const {
+    isLoading,
+    isLoggedIn,
+    isSuccess,
+    message,
+    isError,
+    towFactors,
+    user,
+  } = useSelector((state) => state.auth);
+
+
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -88,6 +97,12 @@ function Login() {
   // ! --------------------------------------------
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
+      // if (isAdmin) {
+      //   navigate('/admin/profile');
+      // } else if (isDoctor) {
+      //   navigate('/doctor/profile');
+      // }
+
       navigate('/profile');
     }
     if (isError && towFactors) {
