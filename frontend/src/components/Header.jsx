@@ -15,30 +15,19 @@ import {
   Toolbar,
 } from '@mui/material';
 import React, { useState } from 'react';
+import { GiHospitalCross } from 'react-icons/gi';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import logoIcon from '../../src/assets/logo8.png';
+import { useNavigate } from 'react-router-dom';
 import { logout, RESET } from '../redux/features/auth/authSlice';
 import './Header.css';
-const activeLink = ({ isActive }) => (isActive ? 'active' : '');
 
 // ! ----------------------------------------
 
 const Header = () => {
-
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {
-    isLoading,
-    isLoggedIn,
-    isSuccess,
-    message,
-    isError,
-    towFactors,
-    user,
-  } = useSelector((state) => state.auth);
-
+  const { user } = useSelector((state) => state.auth);
 
   // ! --- checking for user Role to show content
 
@@ -134,7 +123,7 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <>
         <Drawer anchor='left' open={open} onClose={handleClose}>
-          <div style={{ width: 200 }}>
+          <div style={{ width: 250 }}>
             <List>
               {itemsList?.map((item, index) => {
                 const { text, icon, onClick } = item;
@@ -160,7 +149,7 @@ const Header = () => {
             }}
           >
             <Box
-              className="header--left"
+              className='header--left'
               sx={{
                 display: 'flex',
                 justifyContent: 'left',
@@ -175,9 +164,9 @@ const Header = () => {
                 aria-label='menu'
                 sx={{ mr: 1 }}
               >
-                <MenuIcon fontSize='large' sx={{ color: '#fff' }} />
+                <MenuIcon  sx={{ color: '#fff', fontSize: '1.8em' }} />
               </IconButton>
-              <img className='header--logo' src={logoIcon} alt='logo' />
+              <GiHospitalCross fontSize={26} color='white' />
             </Box>
 
             <Button
@@ -195,38 +184,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// <header className='header'>
-//   <nav>
-//     <div className='logo' onClick={goHome}>
-//       <BiLogIn size={35} />
-
-//     </div>
-//     <ul className='home-links'>
-//       <ShowOnLogin>
-//         <li className='--flex-center'>
-//           <UserName />
-//         </li>
-//       </ShowOnLogin>
-//       <ShowOnLogout>
-//         <li>
-//           <button className='--btn --btn-primary'>
-//             <Link to='/login'>Login</Link>
-//           </button>
-//         </li>
-//       </ShowOnLogout>
-//       <ShowOnLogin>
-//         <li>
-//           <NavLink to='/profile' className={activeLink}>
-//             Profile
-//           </NavLink>
-//         </li>
-//         <li>
-//           <button onClick={logoutUser} className='--btn --btn-secondary'>
-//             Logout
-//           </button>
-//         </li>
-//       </ShowOnLogin>
-//     </ul>
-//   </nav>
-// </header>
