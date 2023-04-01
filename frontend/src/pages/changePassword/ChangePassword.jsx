@@ -23,7 +23,6 @@ import {
   logout,
 } from '../../redux/features/auth/authSlice';
 import { sendAutomatedEmail } from '../../redux/features/email/emailSlice';
-import './ChangePassword.scss';
 
 const initialValues = {
   oldPassword: '',
@@ -80,6 +79,7 @@ function ChangePassword() {
     if (password !== password2) {
       return toast.error('Passwords do not match');
     }
+
     const userData = {
       oldPassword,
       password,
@@ -114,8 +114,8 @@ function ChangePassword() {
       <Box
         className='boxxx'
         sx={{
-          maxWidth: '100%',
-          width: '40vw',
+          maxWidth: '40rem',
+          width: '31rem',
           minheight: '68vh',
           m: '2em auto',
           p: '0.5em 2em',
@@ -133,7 +133,7 @@ function ChangePassword() {
           }}
         >
           <img src={chnagePasswordIcon} alt='changePassword' />
-          <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
+          <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h4'>
             Change Password
           </Typography>
         </Box>
