@@ -6,7 +6,6 @@ import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import ChangeRole from '../../components/changeRole/ChangeRole';
 import { Spinner } from '../../components/loader/Loader';
-import PageMenu from '../../components/pageMenu/PageMenu';
 import Search from '../../components/search/Search';
 import UserStats from '../../components/userStats/UserStats';
 import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
@@ -72,7 +71,7 @@ function UserList() {
   return (
     <section>
       <div className='container'>
-        <PageMenu />
+        {/* <PageMenu /> */}
         <UserStats />
         <div className='user-list'>
           {isLoading && <Spinner />}
