@@ -44,6 +44,7 @@ const Header = () => {
   const isDoctor = user?.role === 'doctor';
 
   // ! --- itemList ------------------------
+  // TODO can move itemsList to seperate component
   let itemsList;
   if (isAdmin) {
     itemsList = [
@@ -103,37 +104,41 @@ const Header = () => {
     ];
   } else if (isDoctor) {
     itemsList = [
-      [{
-        text: 'Profile',
-        icon: <ManageAccountsIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/profile'), setOpen(false);
+      [
+        {
+          text: 'Profile',
+          icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+          onClick: () => {
+            navigate('/profile'), setOpen(false);
+          },
         },
-      },
-      {
-        text: 'Change Password',
-        icon: <LockResetIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/changePassword'), setOpen(false);
+        {
+          text: 'Change Password',
+          icon: <LockResetIcon fontSize='large' color='btn' />,
+          onClick: () => {
+            navigate('/changePassword'), setOpen(false);
+          },
         },
-      }],
+      ],
     ];
   } else if (isPatient) {
     itemsList = [
-      [{
-        text: 'Profile',
-        icon: <ManageAccountsIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/profile'), setOpen(false);
+      [
+        {
+          text: 'Profile',
+          icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+          onClick: () => {
+            navigate('/profile'), setOpen(false);
+          },
         },
-      },
-      {
-        text: 'Change Password',
-        icon: <LockResetIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/changePassword'), setOpen(false);
+        {
+          text: 'Change Password',
+          icon: <LockResetIcon fontSize='large' color='btn' />,
+          onClick: () => {
+            navigate('/changePassword'), setOpen(false);
+          },
         },
-      }],
+      ],
     ];
   } else {
     itemsList = [];
@@ -175,9 +180,15 @@ const Header = () => {
             />
             <Typography
               variant='h5'
-              sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
+              sx={{ color: 'menu.main', fontWeight: '700', pt: '0.4em' }}
             >
               {user?.name}
+            </Typography>
+            <Typography
+              variant='h6'
+              sx={{ color: 'red', fontWeight: '700', p: '0.1em' }}
+            >
+              {user?.role}
             </Typography>
           </Box>
           <Divider />
