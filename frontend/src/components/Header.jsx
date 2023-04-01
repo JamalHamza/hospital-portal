@@ -1,11 +1,16 @@
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupIcon from '@mui/icons-material/Group';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -13,12 +18,14 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
+  Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
 import { GiHospitalCross } from 'react-icons/gi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout, RESET } from '../redux/features/auth/authSlice';
+import doctors from '../../src/assets/drawerIcon/medical-assistance.png';
+import { RESET, logout } from '../redux/features/auth/authSlice';
 import './Header.css';
 
 // ! ----------------------------------------
@@ -28,6 +35,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  console.log(user);
 
   // ! --- checking for user Role to show content
 
@@ -39,31 +47,63 @@ const Header = () => {
   let itemsList;
   if (isAdmin) {
     itemsList = [
-      {
-        text: 'Profile',
-        icon: <ManageAccountsIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/profile'), setOpen(false);
+      [
+        {
+          text: 'Profile',
+          icon: <ManageAccountsIcon fontSize='large' color='secondary.main' />,
+          onClick: () => {
+            navigate('/profile'), setOpen(false);
+          },
         },
-      },
-      {
-        text: 'Change Password',
-        icon: <LockResetIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/changePassword'), setOpen(false);
+        {
+          text: 'Change Password',
+          icon: <LockResetIcon fontSize='large' color='secondary.main' />,
+          onClick: () => {
+            navigate('/changePassword'), setOpen(false);
+          },
         },
-      },
-      {
-        text: 'Users',
-        icon: <GroupIcon fontSize='large' color='btn' />,
-        onClick: () => {
-          navigate('/users'), setOpen(false);
+        {
+          text: 'Users',
+          icon: <GroupIcon fontSize='large' color='red' />,
+          onClick: () => {
+            navigate('/users'), setOpen(false);
+          },
         },
-      },
+      ],
+      [
+        {
+          text: 'Doctors',
+          icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
+          onClick: () => {
+            navigate('/users'), setOpen(false);
+          },
+        },
+        {
+          text: 'Appointments',
+          icon: <CalendarMonthIcon fontSize='large' />,
+          onClick: () => {
+            navigate('/users'), setOpen(false);
+          },
+        },
+        {
+          text: 'Add Doctor',
+          icon: <GroupAddIcon fontSize='large' />,
+          onClick: () => {
+            navigate('/users'), setOpen(false);
+          },
+        },
+        {
+          text: 'Set Working Time',
+          icon: <HistoryToggleOffIcon fontSize='large' />,
+          onClick: () => {
+            navigate('/users'), setOpen(false);
+          },
+        },
+      ],
     ];
   } else if (isDoctor) {
     itemsList = [
-      {
+      [{
         text: 'Profile',
         icon: <ManageAccountsIcon fontSize='large' color='btn' />,
         onClick: () => {
@@ -76,11 +116,11 @@ const Header = () => {
         onClick: () => {
           navigate('/changePassword'), setOpen(false);
         },
-      },
+      }],
     ];
   } else if (isPatient) {
     itemsList = [
-      {
+      [{
         text: 'Profile',
         icon: <ManageAccountsIcon fontSize='large' color='btn' />,
         onClick: () => {
@@ -93,7 +133,7 @@ const Header = () => {
         onClick: () => {
           navigate('/changePassword'), setOpen(false);
         },
-      },
+      }],
     ];
   } else {
     itemsList = [];
@@ -107,12 +147,7 @@ const Header = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // ! ----------------------------------------
-  const goHome = () => {
-    navigate('/');
-  };
-
+  // ! ---- Logout function -----------------
   const logoutUser = async () => {
     dispatch(RESET());
     await dispatch(logout());
@@ -123,9 +158,44 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <>
         <Drawer anchor='left' open={open} onClose={handleClose}>
+          <Box
+            sx={{
+              bgcolor: 'primary.light',
+              height: '16%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Avatar
+              alt='userPhoto'
+              src={user?.photo}
+              sx={{ width: 56, height: 56 }}
+            />
+            <Typography
+              variant='h5'
+              sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
+            >
+              {user?.name}
+            </Typography>
+          </Box>
+          <Divider />
           <div style={{ width: 250 }}>
             <List>
-              {itemsList?.map((item, index) => {
+              {itemsList[0]?.map((item, index) => {
+                const { text, icon, onClick } = item;
+                return (
+                  <ListItem key={text} onClick={onClick}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                );
+              })}
+            </List>
+            <Divider />
+            <List>
+              {itemsList[1]?.map((item, index) => {
                 const { text, icon, onClick } = item;
                 return (
                   <ListItem key={text} onClick={onClick}>
@@ -138,6 +208,7 @@ const Header = () => {
           </div>
         </Drawer>
       </>
+      {/* Open Appbar */}
       <AppBar position='static'>
         <Toolbar sx={{ bgcolor: 'primary.main' }}>
           <Box
@@ -164,7 +235,7 @@ const Header = () => {
                 aria-label='menu'
                 sx={{ mr: 1 }}
               >
-                <MenuIcon  sx={{ color: '#fff', fontSize: '1.8em' }} />
+                <MenuIcon sx={{ color: '#fff', fontSize: '1.8em' }} />
               </IconButton>
               <GiHospitalCross fontSize={26} color='white' />
             </Box>

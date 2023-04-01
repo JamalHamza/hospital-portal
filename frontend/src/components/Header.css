@@ -7,11 +7,11 @@
 
 .css-lvucg2-MuiListItem-root:hover,
 .css-lvucg2-MuiListItem-root:focus {
-  background: #afd2f8 !important;
+  background: #c5bef3 !important;
 }
 
 .css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
-  background: #c0deff !important;
+  background: #dcd7ff !important;
 }
 
 /* ! Mui sidebare Icon */
@@ -28,3 +28,7 @@
   cursor: pointer;
 }
 
+
+.sidebar-icon {
+  width: 2.2em;
+}

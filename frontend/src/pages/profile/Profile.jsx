@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import Card from '../../components/card/Card';
 import Loader from '../../components/loader/Loader';
 import Notification from '../../components/notification/Notification';
-import PageMenu from '../../components/pageMenu/PageMenu';
 import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
 import {
   getUser,
@@ -120,10 +119,10 @@ function ProfileAdmin() {
         <Loader />
       ) : (
         <>
-            {!profile.isVerified && <Notification />}
+          {!profile.isVerified && <Notification />}
           <section>
-            <div className='container'>
-              <PageMenu />
+            <div>
+              {/* <PageMenu /> */}
               <h4 className='head-pro'>Profile</h4>
               <div className='--flex-start profile'>
                 <Card cardclass={'card'}>
