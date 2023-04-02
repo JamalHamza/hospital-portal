@@ -163,7 +163,6 @@ const Header = () => {
         <Drawer anchor='left' open={open} onClose={handleClose}>
           <Box
             sx={{
-              bgcolor: 'third.main',
               height: '16%',
               display: 'flex',
               alignItems: 'center',
@@ -230,7 +229,7 @@ const Header = () => {
       </>
       {/* Open Appbar */}
       <AppBar position='static'>
-        <Toolbar sx={{ bgcolor: 'primary.main' }}>
+        <Toolbar sx={{ bgcolor: 'menu.main' }}>
           <Box
             sx={{
               display: 'flex',
@@ -240,7 +239,6 @@ const Header = () => {
             }}
           >
             <Box
-              className='header--left'
               sx={{
                 display: 'flex',
                 justifyContent: 'left',
@@ -264,10 +262,9 @@ const Header = () => {
               variant='contained'
               sx={{
                 bgcolor: 'third.main',
-                margin: '0.8em',
-                padding: '0.8em 2em',
+                padding: '0.4em 1em',
                 fontWeight: 800,
-                fontSize: '1.2rem',
+                fontSize: '1rem',
                 color: 'primary.dark',
                 '&:hover': {
                   background: '#ccb7c0',

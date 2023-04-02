@@ -122,7 +122,6 @@ function ProfileAdmin() {
           {!profile.isVerified && <Notification />}
           <section>
             <div>
-              {/* <PageMenu /> */}
               <h4 className='head-pro'>Profile</h4>
               <div className='--flex-start profile'>
                 <Card cardclass={'card'}>
