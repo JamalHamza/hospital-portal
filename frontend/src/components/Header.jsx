@@ -163,7 +163,7 @@ const Header = () => {
         <Drawer anchor='left' open={open} onClose={handleClose}>
           <Box
             sx={{
-              bgcolor: 'primary.light',
+              bgcolor: 'third.main',
               height: '16%',
               display: 'flex',
               alignItems: 'center',
