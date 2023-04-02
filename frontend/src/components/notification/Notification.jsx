@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
 import { FaUserTimes } from 'react-icons/fa';
@@ -17,7 +17,7 @@ const Notification = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: '40rem', m: '1em auto' }}>
+    <Box sx={{ maxWidth: '38rem', m: '1em auto' }}>
       <Box
         sx={{
           bgcolor: 'third.main',
@@ -31,7 +31,7 @@ const Notification = () => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           <FaUserTimes color='red' fontSize={24} />
@@ -45,9 +45,24 @@ const Notification = () => {
         <Typography variant='body1'>
           To verify your account, check your email for a verification link
         </Typography>
-        <Typography variant='h5' sx={{ color: 'primary.main' }} onClick={sendVerEmail}>
-          <b>Resend Link</b>
-        </Typography>
+        <Button onClick={sendVerEmail}>
+          <Typography
+            variant='h4'
+            sx={{
+              bgcolor: 'primary.main',
+              padding: '0.4em 1em',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '4px',
+              color: 'red',
+              '&:hover': {
+                background: '#ccb7c0',
+              },
+            }}
+          >
+            Resend Link
+          </Typography>
+        </Button>
       </Box>
     </Box>
   );

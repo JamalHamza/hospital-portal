@@ -1,3 +1,5 @@
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -5,6 +7,7 @@ import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import MenuIcon from '@mui/icons-material/Menu';
+import PersonIcon from '@mui/icons-material/Person';
 import {
   AppBar,
   Avatar,
@@ -27,18 +30,13 @@ import { useNavigate } from 'react-router-dom';
 import doctors from '../../src/assets/drawerIcon/medical-assistance.png';
 import { RESET, logout } from '../redux/features/auth/authSlice';
 import './Header.css';
-
 // ! ----------------------------------------
-
 const Header = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
-
   // ! --- checking for user Role to show content
-
   const isAdmin = user?.role === 'admin';
   const isPatient = user?.role === 'patient';
   const isDoctor = user?.role === 'doctor';
@@ -169,8 +167,7 @@ const Header = () => {
               height: '16%',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
+              justifyContent: 'space-evenly',
             }}
           >
             <Avatar
@@ -178,18 +175,30 @@ const Header = () => {
               src={user?.photo}
               sx={{ width: 56, height: 56 }}
             />
-            <Typography
-              variant='h5'
-              sx={{ color: 'menu.main', fontWeight: '700', pt: '0.4em' }}
-            >
-              {user?.name}
-            </Typography>
-            <Typography
-              variant='h6'
-              sx={{ color: 'red', fontWeight: '700', p: '0.1em' }}
-            >
-              {user?.role}
-            </Typography>
+            <Box sx={{ width: '40%', textAlign: 'center' }}>
+              <Typography
+                variant='h5'
+                sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
+              >
+                {user?.name}
+              </Typography>
+              {/* <Divider /> */}
+              <Typography
+                variant='h6'
+                sx={{
+                  color: 'red',
+                  fontWeight: '700',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                {isAdmin ? <AdminPanelSettingsIcon fontSize='large' /> : ''}
+                {isDoctor ? <AssignmentIndIcon fontSize='large' /> : ''}
+                {isPatient ? <PersonIcon fontSize='large' /> : ''}
+                {user?.role}
+              </Typography>
+            </Box>
           </Box>
           <Divider />
           <div style={{ width: 250 }}>
@@ -253,8 +262,18 @@ const Header = () => {
 
             <Button
               variant='contained'
-              sx={{ bgcolor: 'third.main', fontWeight: 800 }}
-              onClick={logoutUser}
+              sx={{
+                bgcolor: 'third.main',
+                margin: '0.8em',
+                padding: '0.8em 2em',
+                fontWeight: 800,
+                fontSize: '1.2rem',
+                color: 'primary.dark',
+                '&:hover': {
+                  background: '#ccb7c0',
+                },
+              }}
+              onClick={() => logoutUser()}
             >
               LogOut
             </Button>
