@@ -28,7 +28,6 @@ function UserStats() {
 
   return (
     <div className='user-summary'>
-      <h4 className='--mt'>User State</h4>
       <div className='info-summary'>
         <InfoBox
           icon={icon1}

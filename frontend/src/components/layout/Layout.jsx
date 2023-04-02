@@ -1,12 +1,12 @@
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import Header from '../Header';
 
 function Layout({ children }) {
   return (
-    <Box sx={{bgcolor: 'primary.main'}}>
+    <Box>
       <Header />
-      <div className='--pad' style={{ minHeight: '90vh' }}>
+      <div>
         {children}
       </div>
     </Box>

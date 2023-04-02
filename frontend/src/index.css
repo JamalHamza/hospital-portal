@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+html {
+  background-color: #c0deff;
+}
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
 :root {
   --nav-width: 68px;
@@ -24,20 +33,13 @@
   --color-danger: orangered;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-
 html {
   font-size: 10px;
 }
 
 body {
   font-family: var(--font-family);
-  background: #eee;
+  /* background: #eee; */
 }
 
 section {
@@ -47,7 +49,7 @@ section {
 
 .container {
   max-width: 1000px;
-   margin: 0 auto;
+  margin: 0 auto;
   /* padding: 4rem 1rem;  */
 }
 
@@ -118,17 +120,6 @@ section {
   grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
   row-gap: 1rem;
   column-gap: 1rem;
-}
-
-/* Center All */
-.--center-all {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  margin: auto;
-  text-align: center;
 }
 
 /* Heading */
@@ -462,8 +453,9 @@ a {
   transition: all 0.2s;
 }
 
-
-.--btn, .--btn-danger, .btn.--bg-primary {
+.--btn,
+.--btn-danger,
+.btn.--bg-primary {
   font-size: 1.4rem;
   /* color: var(--dark-blue); */
   text-decoration: none;
@@ -528,28 +520,31 @@ a:hover {
   background-color: #fff;
 }
 
+/* ! ----------------- By Myself --------*/
+
 .Toastify__toast-theme--colored.Toastify__toast--success {
   background-color: #fcfcfc;
   box-shadow: 3px inset;
-  border-left: 1rem rgb(87, 255, 87) solid;
+  border-left: 0.4rem rgb(87, 255, 87) solid;
   color: #045502;
-  font-size: 1.6rem;
-  min-height: 0.8rem;
+  font-size: 1.2rem;
+  padding: 0.1em;
+  max-width: 20em;
+  min-height: .6rem;
 }
 .Toastify__toast-theme--colored.Toastify__toast--error {
   background-color: #fcfcfc;
   box-shadow: 3px inset;
-  border-left: 1rem rgb(255, 0, 0) solid;
+  border-left: 0.4rem rgb(255, 0, 0) solid;
   color: #5e0404;
-  font-size: 1.6rem;
-
-  min-height: 0.8rem;
+  font-size: 1.2rem;
+  padding: 0.1em;
+  max-width: 20em;
+  min-height: .6rem;
 }
 
-/* ---------- */
-@media screen and (max-width: 360px) {
-  .text {
-    display: none;
-    color: #00ff55;
+@media screen and (max-width: 400px) {
+  .register--box {
+    padding: 0.4em 1.6em !important;
   }
 }

@@ -6,8 +6,10 @@ import './Home.scss';
 
 function Home() {
   return (
-    <Box sx={{ bgcolor: 'secondary.main' }}>
-      <Box className='container hero'>
+    <Box sx={{ bgcolor: 'secondary.main', minHeight: '100vh' }}>
+      <Box
+        className='container hero'
+      >
         <div className='hero-text'>
           <h1>Vita Health Center</h1>
           <p>Instant appointment with doctors-Guaranteed.</p>
@@ -52,7 +54,7 @@ function Home() {
         </div>
 
         <div className='hero-image'>
-          <img src={loginImg} alt='Auth' width={100} />
+          <img src={loginImg} alt='Auth'  />
         </div>
       </Box>
     </Box>

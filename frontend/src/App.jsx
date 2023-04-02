@@ -15,7 +15,7 @@ import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
 import Home from './pages/home/Home';
-import Profile from './pages/profile/Profile';
+import ProfileAdmin from './pages/profile/Profile';
 import UserList from './pages/userList/UserList';
 import {
   getUser,
@@ -27,6 +27,13 @@ axios.defaults.withCredentials = true;
 
 const theme = createTheme({
   palette: {
+    menu: {
+      main: '#537FE7',
+      light: '#537FE7',
+    },
+    form: {
+      main: '#fff',
+    },
     primary: {
       main: '#ADA2FF',
       light: '#dcd7ff',
@@ -47,6 +54,9 @@ const theme = createTheme({
     },
     btn: {
       main: '#000205',
+    },
+    btnAlert: {
+      main: '#D61355',
     },
   },
 });
@@ -69,9 +79,9 @@ function App() {
       <BrowserRouter>
         <ToastContainer
           pauseOnHover='false'
-          style={{ fontSize: '1.4rem' }}
           hideProgressBar
-          position='bottom-left'
+          autoClose={200}
+          position='top-left'
           theme='colored'
           bodyClassName='toast'
         />
@@ -86,18 +96,18 @@ function App() {
             <Route path='/resetPassword/:resetToken' element={<Reset />} />
             <Route path='/loginWithCode/:email' element={<LoginWithCode />} />
             <Route
-              path='/profile'
-              element={
-                <Layout>
-                  <Profile />
-                </Layout>
-              }
-            />
-            <Route
               path='/verify/:verificationToken'
               element={
                 <Layout>
                   <Verify />
+                </Layout>
+              }
+            />
+            <Route
+              path='/profile'
+              element={
+                <Layout>
+                  <ProfileAdmin />
                 </Layout>
               }
             />

@@ -1,12 +1,23 @@
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { RiLoginBoxLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Card from '../../components/card/Card';
-import Loader from '../../components/loader/Loader';
-import Password from '../../components/showPassword/Password';
+import * as Yup from 'yup';
+import loginImg from '../../assets/authPage/login.png';
+import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { FormBottomLinksLoginPage } from '../../components/formBottomLinks/FormBottomLinks';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   login,
@@ -14,29 +25,52 @@ import {
   RESET,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
-import styles from './auth.module.scss';
-const initialState = {
+
+const initialValues = {
   email: '',
   password: '',
 };
 
+// ! ------ Yup Validation ------------------
+const validationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string().required('Password is required'),
+});
+
 function Login() {
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(initialValues);
+  const [showPassword, setShowPassword] = useState(false);
   const { email, password } = formData;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, isLoggedIn, isSuccess, message, isError, towFactors } =
-    useSelector((state) => state.auth);
+  const {
+    isLoading,
+    isLoggedIn,
+    isSuccess,
+    message,
+    isError,
+    towFactors,
+    user,
+  } = useSelector((state) => state.auth);
+
+
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   // ! --------------------------------------------
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  // ! can use this handleChange while not using formik
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formik.setFieldValue(name, value);
     setFormData({ ...formData, [name]: value });
   };
 
   // ! --------------------------------------------
   const LoginUser = async (e) => {
-    e.preventDefault();
     if (!email || !password) {
       return toast.error('All field are required!');
     }
@@ -51,6 +85,8 @@ function Login() {
     await dispatch(login(userData));
   };
 
+  // ! ---- Google Login -----------------------
+
   const googleLogin = async (credentialResponse) => {
     console.log(credentialResponse);
     await dispatch(
@@ -61,6 +97,12 @@ function Login() {
   // ! --------------------------------------------
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
+      // if (isAdmin) {
+      //   navigate('/admin/profile');
+      // } else if (isDoctor) {
+      //   navigate('/doctor/profile');
+      // }
+
       navigate('/profile');
     }
     if (isError && towFactors) {
@@ -71,18 +113,100 @@ function Login() {
   }, [isSuccess, isLoggedIn, navigate, dispatch, isError, towFactors, email]);
 
   // ! --------------------------------------------
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      // Handle form submission here
+      LoginUser(values);
+    },
+  });
+
   return (
-    
-    <div className={`container ${styles.auth}`} >
-      {isLoading && <Loader />}
-      <Card>
-        <div className={styles.form}>
-          <div className='--flex-center'>
-            <RiLoginBoxLine size={40} color='#00695c' />
-          </div>
-          <h2>Login</h2>
-          <div className='--flex-center'>
-            {/* <button className='--btn --btn-google'>login with google</button> */}
+    <BodyWrapper>
+      <Box
+        sx={{
+          maxWidth: '30rem',
+          width: '32rem',
+          m: '0 auto',
+          p: '1em 2em',
+          bgcolor: 'form.main',
+          borderRadius: '10px',
+        }}
+      >
+        <Box
+          sx={{
+            p: '3em',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={loginImg} alt='login' />
+          <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
+            Login
+          </Typography>
+        </Box>
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+          onSubmit={formik.handleSubmit}
+        >
+          <TextField
+            name='email'
+            label='Email'
+            type='text'
+            variant='outlined'
+            value={formik.values.email}
+            onChange={handleChange}
+            style={{ margin: '8px', width: '100%' }}
+            onBlur={formik.handleBlur}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+          <TextField
+            name='password'
+            type={showPassword ? 'text' : 'password'}
+            label='password'
+            onChange={handleChange}
+            value={formik.values.password}
+            style={{ margin: '8px', width: '100%' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={togglePassword}>
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+          <Link to='/forgot'>Forgot Password</Link>
+          <Button
+            type='submit'
+            variant='contained'
+            sx={{
+              bgcolor: 'fourth.main',
+              margin: '0.8em',
+              padding: '0.8em 2em',
+              fontWeight: 800,
+              fontSize: '1.2rem',
+              color: 'primary.dark',
+              '&:hover': {
+                background: '#ccc6b4',
+              },
+            }}
+          >
+            Login
+          </Button>
+          <Box sx={{ p: '1.4em' }}>
             <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
@@ -90,37 +214,11 @@ function Login() {
                 toast.error('Login Failed');
               }}
             />
-          </div>
-          <br />
-          <p className='--text-center --fw-bold'>or</p>
-          <form onSubmit={LoginUser} noValidate>
-            <input
-              type='email'
-              placeholder='Your email'
-              required
-              name='email'
-              value={email}
-              onChange={handleInputChange}
-            />
-            <Password
-              placeholder='Your password'
-              name='password'
-              value={password}
-              onChange={handleInputChange}
-            />
-            <button type='submit' className='--btn --btn-primary --btn-block'>
-              Login
-            </button>
-          </form>
-          <Link to='/forgot'>Forgot Password?</Link>
-          <span className={styles.register}>
-            <Link to='/'>Home</Link>
-            <p className='text'>&nbsp; Create an account</p>
-            <Link to='/register'> &nbsp; Register</Link>
-          </span>
-        </div>
-      </Card>
-    </div>
+          </Box>
+          <FormBottomLinksLoginPage />
+        </form>
+      </Box>
+    </BodyWrapper>
   );
 }
 

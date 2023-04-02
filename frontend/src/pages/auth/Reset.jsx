@@ -1,35 +1,72 @@
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { MdOutlinePassword } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Card from '../../components/card/Card';
+import * as Yup from 'yup';
 import Loader from '../../components/loader/Loader';
-import Password from '../../components/showPassword/Password';
 import { RESET, resetPassword } from '../../redux/features/auth/authSlice';
-import styles from './auth.module.scss';
 
-const initialState = {
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
+import { useFormik } from 'formik';
+import resetImg from '../../assets/authPage/reset-password.png';
+import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import {FormBottomLinks} from '../../components/formBottomLinks/FormBottomLinks';
+import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
+
+const initialValues = {
   password: '',
   password2: '',
 };
 
+// ! ------ Yup Validation ------------------
+const validationSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(6, 'Password must be at least 6 characters')
+    .required('Password is required'),
+  password2: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm Password is required'),
+});
+
 function Reset() {
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(initialValues);
   const { password, password2 } = formData;
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
   const { isLoading, message, isLoggedIn, isSuccess } = useSelector(
     (state) => state.auth
   );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { resetToken } = useParams();
 
-  console.log(typeof resetToken);
+  const togglePassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    formik.setFieldValue(name, value);
     setFormData({ ...formData, [name]: value });
   };
+
+  // ! ----- Reset Function -----------------------
 
   const reset = async (e) => {
     e.preventDefault();
@@ -40,7 +77,7 @@ function Reset() {
       return toast.error('Password must to be up to 6 characters');
     }
 
-    const userData = { 
+    const userData = {
       password,
     };
 
@@ -48,6 +85,8 @@ function Reset() {
     await dispatch(RESET(userData));
     navigate('/login');
   };
+
+  // ! -----------------------------------------
 
   useEffect(() => {
     if (isSuccess && message.includes('Reset Successful')) {
@@ -57,48 +96,131 @@ function Reset() {
     dispatch(RESET());
   }, [dispatch, navigate, message, isSuccess]);
 
-  // ! --------------
+  // ! --------------------------------------
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      // Handle form submission here
+      console.log(values);
+      reset(values);
+    },
+  });
+
+  // ! ---------------------------------------
   return (
-    <div className={`container ${styles.auth}`}>
+    <BodyWrapper>
       {isLoading ? (
         <Loader />
       ) : (
-        <Card>
-          <div className={styles.form}>
-            <div className='--flex-center'>
-              <MdOutlinePassword size={40} color='#00695c' />
-            </div>
-            <h2>Reset Password</h2>
+        <Box
+          sx={{
+            maxWidth: '30rem',
+            width: '32rem',
+            minheight: '68vh',
+            m: '0 auto',
+            p: '0.5em 2em',
+            bgcolor: 'form.main',
+            borderRadius: '10px',
+          }}
+        >
+          <Box>
+            <Box
+              sx={{
+                p: '1.6em',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={resetImg} alt='login' />
+              <Typography
+                sx={{ color: 'primary.main', ml: '0.4em' }}
+                variant='h3'
+              >
+                Register
+              </Typography>
+            </Box>
             <form onSubmit={reset} noValidate>
-              <Password
-                placeholder='New Password'
+              <TextField
                 name='password'
-                value={password}
-                onChange={handleInputChange}
+                type={showPassword ? 'text' : 'password'}
+                label='New Password'
+                onChange={handleChange}
+                value={formik.values.password}
+                style={{ margin: '8px 0', width: '100%' }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton onClick={togglePassword}>
+                        {showPassword ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
               />
-              <Password
-                placeholder='Confirm Password'
+              <TextField
                 name='password2'
-                value={password2}
-                onChange={handleInputChange}
+                type={showPassword2 ? 'text' : 'password'}
+                label='Confirm New Password'
+                onChange={handleChange}
+                value={formik.values.password2}
+                style={{ margin: '8px 0', width: '100%' }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton onClick={togglePassword2}>
+                        {showPassword2 ? (
+                          <VisibilityIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.password2 && Boolean(formik.errors.password2)
+                }
+                helperText={formik.touched.password2 && formik.errors.password2}
               />
 
-              <button type='submit' className='--btn --btn-primary --btn-block'>
-                Get Reset Email
-              </button>
-              <div className={styles.links}>
-                <p>
-                  <Link to='/'>-Home</Link>
-                </p>
-                <p>
-                  <Link to='/login'> &nbsp; -Login</Link>
-                </p>
-              </div>
+              <Button
+                type='submit'
+                variant='contained'
+                sx={{
+                  bgcolor: 'third.main',
+                  margin: '0.8em 0',
+                  padding: '0.8em 2em',
+                  fontWeight: 800,
+                  fontSize: '1.2rem',
+                  color: 'primary.dark',
+                  width: '100%',
+                  '&:hover': {
+                    background: '#ccc6b4',
+                  },
+                }}
+              >
+                Reset Password
+              </Button>
+              <PasswordStrength password={password} password2={password2} />
+              <FormBottomLinks />
             </form>
-          </div>
-        </Card>
+          </Box>
+        </Box>
       )}
-    </div>
+    </BodyWrapper>
   );
 }
 

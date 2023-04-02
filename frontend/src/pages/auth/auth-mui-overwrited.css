@@ -26,11 +26,10 @@
   padding: 0 !important;
 }
 
-
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
   background: var(--fourthlighter) !important;
   color: var(--primarydark) !important;
-  height: 0.6rem !important;
+  /* height: 0.6rem !important; */
   font-size: 1.2rem !important;
 }
 
@@ -44,10 +43,28 @@
   border: 1px solid var(--primarydark) !important;
 }
 
-
-
-
 /* Error Text */
 .css-1wc848c-MuiFormHelperText-root {
   font-size: 1em !important;
+}
+
+/* Password Field */
+
+.css-16mnyjw-MuiInputBase-root-MuiOutlinedInput-root {
+  background: var(--fourthlighter) !important;
+  color: var(--primarydark) !important;
+  /* height: 0.6rem !important; */
+  font-size: 1.2rem !important;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-top: 0em;
+}
+
+/*  ! Login Image */
+img {
+  width: 20%;
 }

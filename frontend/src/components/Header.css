@@ -1,0 +1,34 @@
+/*  ! Sidebar - */
+
+.header--logo {
+  width: 6% !important;
+}
+
+
+.css-lvucg2-MuiListItem-root:hover,
+.css-lvucg2-MuiListItem-root:focus {
+  background: #c5bef3 !important;
+}
+
+.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+  background: #c0deff !important;
+}
+
+/* ! Mui sidebare Icon */
+
+.css-cveggr-MuiListItemIcon-root {
+  min-width: 3rem !important;
+  cursor: pointer;
+}
+
+.css-10hburv-MuiTypography-root {
+  color: black !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+}
+
+
+.sidebar-icon {
+  width: 2.1em;
+}

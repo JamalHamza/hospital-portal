@@ -1,23 +1,31 @@
-import { Box, Button, IconButton, TextField } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import { ImCheckmark, ImCross } from 'react-icons/im';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import Card from '../../components/card/Card';
 import './auth-mui-overwrited.css';
-import styles from './auth.module.scss';
 
-import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
+import { toast } from 'react-toastify';
+import RegisterImg from '../../assets/authPage//register.png';
+import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { FormBottomLinksRegisterPage } from '../../components/formBottomLinks/FormBottomLinks';
+import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
+import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   register,
   RESET,
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
-import {validateEmail} from '../../redux/features/auth/authServices';
-import {toast} from 'react-toastify';
 
 const initialValues = {
   name: '',
@@ -40,8 +48,9 @@ const validationSchema = Yup.object().shape({
 
 const Register = () => {
   // ! Initial Values for form
-
   const [formData, setFormData] = useState(initialValues);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const { name, email, password, password2 } = formData;
   const navigate = useNavigate();
@@ -50,72 +59,19 @@ const Register = () => {
     (state) => state.auth
   );
 
+  const togglePassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     formik.setFieldValue(name, value);
     setFormData({ ...formData, [name]: value });
   };
-
-  // ! ------- Password Strength Indicator ------------
-  const [uCase, setUCase] = useState(false);
-  const [num, setNum] = useState(false);
-  const [sChar, setSChar] = useState(false);
-  const [passLength, setPassLength] = useState(false);
-  const [passMatch, setPassMatch] = useState(false);
-  // ! -----------------------------------------------
-
-  const timesIcon = <ImCross size={8} color='red' />;
-  const checkIcon = <ImCheckmark size={8} color='green' />;
-  ImCross;
-
-  // ! ----- Dynamic function for password strength----
-  const switchIcon = (codition) => {
-    if (codition) {
-      return checkIcon;
-    } else {
-      return timesIcon;
-    }
-  };
-
-  // ! ------- console.log form values --------
-  // const handleSubmit = (values, { resetForm }) => {
-  //   console.log(values);
-  //   resetForm();
-  // };
-
-  // ! ----- password & password2 check -------
-  useEffect(() => {
-    // Check Lower and Uppercase
-    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
-      setUCase(true);
-    } else {
-      setUCase(false);
-    }
-    // Check for numbers
-    if (password.match(/([0-9])/)) {
-      setNum(true);
-    } else {
-      setNum(false);
-    }
-    // Check for special character
-    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
-      setSChar(true);
-    } else {
-      setSChar(false);
-    }
-    // Check for PASSWORD LENGTH
-    if (password.length > 6) {
-      setPassLength(true);
-    } else {
-      setPassLength(false);
-    }
-    // Check for Password Match
-    if (password === password2 && password.length > 0 && password2.length > 0) {
-      setPassMatch(true);
-    } else {
-      setPassMatch(false);
-    }
-  }, [password, password2]);
 
   // ! ---- Register function ----------------
 
@@ -163,27 +119,33 @@ const Register = () => {
   });
 
   return (
-    <Box
-      sx={{
-        minHeight: '100vh',
-        width: '100vw',
-        bgcolor: 'secondary.main',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <BodyWrapper>
       <Box
+        className='boxxx'
         sx={{
           maxWidth: '30rem',
           width: '32rem',
-          minheight: '70vh',
+          minheight: '68vh',
           m: '0 auto',
-          p: '1em 2em',
-          bgcolor: '#fff',
+          p: '0.5em 2em',
+          bgcolor: 'form.main',
           borderRadius: '10px',
         }}
       >
+        <Box
+          className='register--box'
+          sx={{
+            p: '1.6em',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <img src={RegisterImg} alt='login' />
+          <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
+            Register
+          </Typography>
+        </Box>
         <form
           style={{
             display: 'flex',
@@ -217,26 +179,43 @@ const Register = () => {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
+          {/* ! Added Show and Hide Password */}
           <TextField
             name='password'
-            label='Password'
-            variant='outlined'
-            type='password'
-            value={formik.values.password}
+            type={showPassword ? 'text' : 'password'}
+            label='password'
             onChange={handleChange}
+            value={formik.values.password}
             style={{ margin: '8px', width: '100%' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={togglePassword}>
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             onBlur={formik.handleBlur}
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
           <TextField
             name='password2'
+            type={showPassword2 ? 'text' : 'password'}
             label='Confirm Password'
-            variant='outlined'
-            type='password'
-            value={formik.values.password2}
             onChange={handleChange}
+            value={formik.values.password2}
             style={{ margin: '8px', width: '100%' }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton onClick={togglePassword2}>
+                    {showPassword2 ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
             onBlur={formik.handleBlur}
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
@@ -258,64 +237,11 @@ const Register = () => {
           >
             Register
           </Button>
-
-          <Card cardclass={styles.group}>
-            <ul className='form-list'>
-              <li>
-                <span className={styles.indicator}>
-                  {switchIcon(uCase)}
-                  &nbsp; Lowercase & UpperCase
-                </span>
-              </li>
-              <li>
-                <span className={styles.indicator}>
-                  {switchIcon(num)}
-                  &nbsp; Number (0-9)
-                </span>
-              </li>
-              <li>
-                <span className={styles.indicator}>
-                  {switchIcon(sChar)}
-                  &nbsp; Special Character(!@#$%^&*)
-                </span>
-              </li>
-              <li>
-                <span className={styles.indicator}>
-                  {switchIcon(passLength)}
-                  &nbsp; At least 6 Character
-                </span>
-              </li>
-              <li>
-                <span className={styles.indicator}>
-                  {switchIcon(passMatch)}
-                  &nbsp; Password Match
-                </span>
-              </li>
-            </ul>
-          </Card>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              margin: '0.4em',
-            }}
-          >
-            <Link to='/'>
-              <IconButton>
-                <HomeIcon fontSize='large' sx={{ color: 'primary.main' }} />
-              </IconButton>
-            </Link>
-
-            <Link to='/login'>
-              <IconButton>
-                <LoginIcon fontSize='large' sx={{ color: 'primary.main' }} />
-              </IconButton>
-            </Link>
-          </Box>
+          <PasswordStrength password={password} password2={password2} />
+          <FormBottomLinksRegisterPage />
         </form>
       </Box>
-    </Box>
+    </BodyWrapper>
   );
 };
 

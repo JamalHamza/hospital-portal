@@ -1,10 +1,12 @@
+import { Box, Button, Typography } from '@mui/material';
+import { Stack } from '@mui/system';
 import React from 'react';
+import { FaUserTimes } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import {
   RESET,
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
-import './Notification.scss';
 
 const Notification = () => {
   const dispatch = useDispatch();
@@ -15,20 +17,55 @@ const Notification = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='alert'>
-        <p>
-          <b>Message:</b> &nbsp;
-        </p>
-        <p>
-          To verify your account, check your email for a verification link.
-          &nbsp;
-        </p>
-        <p className='v-link' onClick={sendVerEmail}>
-          <b>Resend Link</b>
-        </p>
-      </div>
-    </div>
+    <Box sx={{ maxWidth: '38rem', m: '1em auto' }}>
+      <Box
+        sx={{
+          bgcolor: 'third.main',
+          p: '1em 1.4em',
+          m: '0.3em',
+          textAlign: 'center',
+          borderRadius: '10px',
+        }}
+      >
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <FaUserTimes color='red' fontSize={24} />
+          <Typography
+            variant='h4'
+            sx={{ fontWeight: 700, color: 'red', m: '0.4em' }}
+          >
+            Account needs to verify
+          </Typography>
+        </Stack>
+        <Typography variant='body1'>
+          To verify your account, check your email for a verification link
+        </Typography>
+        <Button onClick={sendVerEmail}>
+          <Typography
+            variant='h4'
+            sx={{
+              bgcolor: 'primary.main',
+              padding: '0.4em 1em',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '4px',
+              color: 'red',
+              '&:hover': {
+                background: '#ccb7c0',
+              },
+            }}
+          >
+            Resend Link
+          </Typography>
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
