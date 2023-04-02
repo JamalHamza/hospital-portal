@@ -1,7 +1,7 @@
+import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import Card from '../../components/card/Card';
 import Loader from '../../components/loader/Loader';
 import Notification from '../../components/notification/Notification';
 import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
@@ -10,7 +10,7 @@ import {
   selectorUser,
   updateUser,
 } from '../../redux/features/auth/authSlice';
-import './Profile.scss';
+import './Profile.css';
 
 // ! Cloudinary
 const cloud_name = import.meta.env.VITE_REACT_APP_NAME;
@@ -120,82 +120,139 @@ function ProfileAdmin() {
       ) : (
         <>
           {!profile.isVerified && <Notification />}
-          <section>
-            <div>
-              <h4 className='head-pro'>Profile</h4>
-              <div className='--flex-start profile'>
-                <Card cardclass={'card'}>
-                  {!isLoading && user && (
-                    <>
-                      <div className='profile-photo'>
-                        <div>
-                          <img
-                            src={
-                              imagePreview === null ? user?.photo : imagePreview
-                            }
-                            alt='Profileimg'
-                          />
-                          <h3>Role: {profile?.role}</h3>
-                        </div>
-                      </div>
-                      <form onSubmit={handleSaveProfile}>
+          <Box
+            sx={{
+              bgcolor: 'form.main',
+              maxWidth: '38rem',
+              m: '0 auto',
+              borderRadius: '10px',
+            }}
+          >
+            <Typography
+              variant='h3'
+              sx={{ textAlign: 'center', color: 'primary.main', p: '0.6em' }}
+            >
+              Profile
+            </Typography>
+            <Box
+              className='profile--form'
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+              }}
+            >
+              {!isLoading && user && (
+                <>
+                  <Box>
+                    <Box
+                      sx={{
+                        maxWidth: '90vw',
+                        border: '1px solid red',
+                      }}
+                    >
+                      <img
+                        src={imagePreview === null ? user?.photo : imagePreview}
+                        alt='Profileimg'
+                        style={{
+                          height: '200px',
+                          width: '200px',
+                          borderRadius: '50%',
+                        }}
+                      />
+                      <Typography
+                        variant='h5'
+                        sx={{ textAlign: 'center', color: 'primary.main' }}
+                      >
+                        Role: {profile?.role}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box>
+                    <form onSubmit={handleSaveProfile}>
+                      <Box
+                        sx={{
+                          maxWidth: '32rem',
+                          width: '32rem',
+                          p: '0 1em',
+                          textAlign: 'center',
+                        }}
+                      >
                         <p>
-                          <label>Change Photo</label>
-                          <input
+                          <TextField
                             type='file'
                             accept='image/*'
                             name='image'
+                            size='small'
                             onChange={handleImageChange}
+                            style={{ margin: '4px 0', width: '100%' }}
                           />
                         </p>
                         <p>
-                          <label>Name: </label>
-                          <input
+                          <TextField
                             type='text'
                             name='name'
                             value={profile?.name}
                             onChange={handleInputChange}
+                            style={{ margin: '4px 0', width: '100%' }}
                           />
                         </p>
                         <p>
-                          <label>Email: </label>
-                          <input
+                          <TextField
                             type='text'
                             name='email'
                             value={profile?.email}
                             onChange={handleInputChange}
                             disabled
+                            style={{ margin: '4px 0', width: '100%' }}
                           />
                         </p>
                         <p>
-                          <label>Phone: </label>
-                          <input
+                          <TextField
                             type='text'
                             name='phone'
                             value={profile?.phone}
                             onChange={handleInputChange}
+                            style={{ margin: '4px 0', width: '100%' }}
                           />
                         </p>
                         <p>
-                          <label>Bio: </label>
-                          <textarea
-                            rows='3'
-                            cols='10'
+                          <TextField
+                            id='outlined-multiline-static'
+                            label='Bio'
                             name='bio'
                             value={profile?.bio}
+                            multiline
+                            rows={4}
                             onChange={handleInputChange}
-                          ></textarea>
+                            style={{ margin: '8px 0', width: '100%' }}
+                          />
                         </p>
-                        <button className='--btn --btn-primary --btn-block'>
+                        <Button
+                          type='submit'
+                          variant='contained'
+                          sx={{
+                            bgcolor: 'fourth.main',
+                            margin: '0.8em',
+                            padding: '0.4em 1em',
+                            fontWeight: 800,
+                            fontSize: '1.2rem',
+                            color: 'primary.dark',
+                            '&:hover': {
+                              background: '#ccc6b4',
+                            },
+                          }}
+                        >
                           Update Profile
-                        </button>
-                      </form>
-                    </>
-                  )}
-                </Card>
-              </div>
-            </div>
-          </section>
+                        </Button>
+                      </Box>
+                    </form>
+                  </Box>
+                </>
+              )}
+            </Box>
+          </Box>
         </>
       )}
     </>
@@ -206,7 +263,6 @@ export const UserName = () => {
   const user = useSelector(selectorUser);
 
   const username = user?.name || '...';
-
   return <p className='--color-white'>Hi, {shortenText(username, 9)} |</p>;
 };
 

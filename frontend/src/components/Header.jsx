@@ -172,16 +172,15 @@ const Header = () => {
             <Avatar
               alt='userPhoto'
               src={user?.photo}
-              sx={{ width: 56, height: 56 }}
+              sx={{ width: 70, height: 70 }}
             />
-            <Box sx={{ width: '40%', textAlign: 'center' }}>
+            <Box sx={{ width: '30%', textAlign: 'center' }}>
               <Typography
                 variant='h5'
                 sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
               >
                 {user?.name}
               </Typography>
-              {/* <Divider /> */}
               <Typography
                 variant='h6'
                 sx={{
