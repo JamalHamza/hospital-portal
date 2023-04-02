@@ -1,7 +1,11 @@
 /* ! Profile form */
 
-
-@media screen and (max-width: 400px) {
-  .profile--form {
+@media (max-width: 520px) {
+  .MuiBox-root .css-w7k9qt {
+    max-width: 32rem !important;
+  }
+  .MuiBox-root .css-9lvi0p {
+    align-items: center !important;
+    flex-direction: column !important;
   }
 }

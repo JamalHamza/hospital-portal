@@ -123,7 +123,7 @@ function ProfileAdmin() {
           <Box
             sx={{
               bgcolor: 'form.main',
-              maxWidth: '38rem',
+              maxWidth: '60rem',
               m: '0 auto',
               borderRadius: '10px',
             }}
@@ -138,9 +138,9 @@ function ProfileAdmin() {
               className='profile--form'
               sx={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
+                // alignItems: 'center',
+                justifyContent: 'space-evenly',
+                flexDirection: 'row',
               }}
             >
               {!isLoading && user && (
@@ -149,7 +149,6 @@ function ProfileAdmin() {
                     <Box
                       sx={{
                         maxWidth: '90vw',
-                        border: '1px solid red',
                       }}
                     >
                       <img
