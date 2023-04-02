@@ -22,6 +22,7 @@ const Notification = () => {
         sx={{
           bgcolor: 'third.main',
           p: '1em 1.4em',
+          m: '0.3em',
           textAlign: 'center',
           borderRadius: '10px',
         }}

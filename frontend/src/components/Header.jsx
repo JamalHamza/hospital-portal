@@ -176,16 +176,16 @@ const Header = () => {
             />
             <Box sx={{ width: '30%', textAlign: 'center' }}>
               <Typography
-                variant='h5'
+                variant='h4'
                 sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
               >
                 {user?.name}
               </Typography>
               <Typography
-                variant='h6'
+                variant='h5'
                 sx={{
-                  color: 'red',
-                  fontWeight: '700',
+                  color: 'primay.dark',
+                  fontWeight: '600',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
