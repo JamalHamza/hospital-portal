@@ -47,9 +47,7 @@ function ChangeRole({ id, email }) {
       >
         <select value={userRole} onChange={(e) => setUserRole(e.target.value)}>
           <option value=''>--Selecet--</option>
-          <option value='admin' disabled>
-            Admin
-          </option>
+          <option value='admin'>Admin</option>
           <option value='subscriber'>Doctor</option>
           <option value='subscriber'>Patient</option>
           <option value='suspended'>Suspended</option>
