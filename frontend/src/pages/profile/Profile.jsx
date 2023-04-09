@@ -124,7 +124,7 @@ function ProfileAdmin() {
             sx={{
               bgcolor: 'form.main',
               maxWidth: '60rem',
-              m: '0 auto',
+              m: '2em auto',
               borderRadius: '10px',
             }}
           >
@@ -138,7 +138,6 @@ function ProfileAdmin() {
               className='profile--form'
               sx={{
                 display: 'flex',
-                // alignItems: 'center',
                 justifyContent: 'space-evenly',
                 flexDirection: 'row',
               }}

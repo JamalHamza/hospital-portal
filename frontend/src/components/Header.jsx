@@ -32,7 +32,7 @@ import { RESET, logout } from '../redux/features/auth/authSlice';
 import './Header.css';
 // ! ----------------------------------------
 const Header = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
