@@ -5,11 +5,7 @@ import { toast } from 'react-toastify';
 import Loader from '../../components/loader/Loader';
 import Notification from '../../components/notification/Notification';
 import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
-import {
-  getUser,
-  selectorUser,
-  updateUser,
-} from '../../redux/features/auth/authSlice';
+import { getUser, updateUser } from '../../redux/features/auth/authSlice';
 import './Profile.css';
 
 // ! Cloudinary
@@ -120,6 +116,7 @@ function ProfileAdmin() {
       ) : (
         <>
           {!profile.isVerified && <Notification />}
+
           <Box
             sx={{
               bgcolor: 'form.main',
@@ -177,7 +174,7 @@ function ProfileAdmin() {
                           textAlign: 'center',
                         }}
                       >
-                        <p>
+                        <Box>
                           <TextField
                             type='file'
                             accept='image/*'
@@ -186,8 +183,8 @@ function ProfileAdmin() {
                             onChange={handleImageChange}
                             style={{ margin: '4px 0', width: '100%' }}
                           />
-                        </p>
-                        <p>
+                        </Box>
+                        <Box>
                           <TextField
                             type='text'
                             name='name'
@@ -195,8 +192,8 @@ function ProfileAdmin() {
                             onChange={handleInputChange}
                             style={{ margin: '4px 0', width: '100%' }}
                           />
-                        </p>
-                        <p>
+                        </Box>
+                        <Box>
                           <TextField
                             type='text'
                             name='email'
@@ -205,8 +202,8 @@ function ProfileAdmin() {
                             disabled
                             style={{ margin: '4px 0', width: '100%' }}
                           />
-                        </p>
-                        <p>
+                        </Box>
+                        <Box>
                           <TextField
                             type='text'
                             name='phone'
@@ -214,8 +211,8 @@ function ProfileAdmin() {
                             onChange={handleInputChange}
                             style={{ margin: '4px 0', width: '100%' }}
                           />
-                        </p>
-                        <p>
+                        </Box>
+                        <Box>
                           <TextField
                             id='outlined-multiline-static'
                             label='Bio'
@@ -226,7 +223,7 @@ function ProfileAdmin() {
                             onChange={handleInputChange}
                             style={{ margin: '8px 0', width: '100%' }}
                           />
-                        </p>
+                        </Box>
                         <Button
                           type='submit'
                           variant='contained'
