@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/layout/Layout';
+import AddDoctor from './pages/addDoctor/AddDoctor';
 import Forgot from './pages/auth/Forgot';
 import Login from './pages/auth/Login';
 import LoginWithCode from './pages/auth/LoginWithCode';
@@ -124,6 +125,14 @@ function App() {
               element={
                 <Layout>
                   <UserList />
+                </Layout>
+              }
+            />
+            <Route
+              path='/admin/addDoctor'
+              element={
+                <Layout>
+                  <AddDoctor />
                 </Layout>
               }
             />
