@@ -1,13 +1,24 @@
 import React from 'react';
-import DatePickerDoc from '../../components/dateRangePicker/DateRangePicker';
-
-
+import DatePickerDoc from '../../components/dateRangePicker/DatePicker';
+import TimePickerDoc from '../../components/timeRangePicker/TimePicker';
+import {Box} from '@mui/material';
 
 function AddDoctor() {
   return (
     <div>
-      <DatePickerDoc />
-      {/* <TimeRangePicker /> */}
+      <Box
+        sx={{
+          bgcolor: 'form.main',
+          width: '70vw',
+          minHeight: '10vh',
+          m: '2em auto',
+          p: '2em 3em',
+          borderRadius: '10px',
+        }}
+      >
+        <DatePickerDoc />
+        <TimePickerDoc />
+      </Box>
     </div>
   );
 }

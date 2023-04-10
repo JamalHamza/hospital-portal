@@ -3,9 +3,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import React, { useState } from 'react';
-import './DataRangePicker.css';
+import './DataPicker.css';
 
-function DateRangePicker() {
+function DatePickerDoc() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   console.log(startDate);
@@ -19,16 +19,7 @@ function DateRangePicker() {
   };
 
   return (
-    <Box
-      sx={{
-        bgcolor: 'form.main',
-        width: '70vw',
-        minHeight: '10vh',
-        m: '2em auto',
-        p: '2em 3em',
-        borderRadius: '10px',
-      }}
-    >
+
       <div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
@@ -47,8 +38,7 @@ function DateRangePicker() {
           />
         </LocalizationProvider>
       </div>
-    </Box>
   );
 }
 
-export default DateRangePicker;
+export default DatePickerDoc;
