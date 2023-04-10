@@ -1,16 +1,19 @@
-import { Box } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import moment from 'moment';
 import React, { useState } from 'react';
 import './DataPicker.css';
 
 function DatePickerDoc() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  console.log(startDate);
 
-  const handleStartDateChange = (date) => {
+  const formattedStartDate = startDate
+    ? moment(startDate).format('DD/MM/YYYY')
+    : '';
+
+  const handleStartDateChange = (date, Start) => {
     setStartDate(date);
   };
 
@@ -19,25 +22,26 @@ function DatePickerDoc() {
   };
 
   return (
+    <div>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker
+          label='Start Date'
+          value={startDate}
+          onChange={handleStartDateChange}
+          disablePast={true}
+          TextField={(params) => <TextField {...params} />}
+        />
 
-      <div>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label='Start Date'
-            format=''
-            value={startDate}
-            onChange={handleStartDateChange}
-            TextField={(params) => <TextField {...params} />}
-          />
-
-          <DatePicker
-            label='End Date'
-            value={endDate}
-            onChange={handleEndDateChange}
-            TextField={(params) => <TextField {...params} />}
-          />
-        </LocalizationProvider>
-      </div>
+        <DatePicker
+          label='End Date'
+          value={endDate}
+          disablePast={true}
+          onChange={handleEndDateChange}
+          TextField={(params) => <TextField {...params} />}
+        />
+        <div>Formatted Start Date: {formattedStartDate}</div>
+      </LocalizationProvider>
+    </div>
   );
 }
 

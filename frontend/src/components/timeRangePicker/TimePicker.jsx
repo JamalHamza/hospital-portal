@@ -2,14 +2,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import moment from 'moment';
 import * as React from 'react';
 
 export default function ResponsiveTimePickers() {
   const [startTime, setStartTime] = React.useState(null);
   const [endTime, setEndTime] = React.useState(null);
   console.log(startTime);
-  console.log(moment(endTime).format('LT'));
 
   const handleStartTimeChange = (time) => {
     setStartTime(time);
@@ -20,24 +18,23 @@ export default function ResponsiveTimePickers() {
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer
-        components={[
-          'TimePicker',
-          'MobileTimePicker',
-          'DesktopTimePicker',
-          'StaticTimePicker',
-        ]}
-      >
+      <DemoContainer components={['MobileTimePicker']}>
         <DemoItem label='Start'>
           <MobileTimePicker
             value={startTime}
             onChange={handleStartTimeChange}
-            // defaultValue={dayjs('2022-04-17T15:30')}
+            minutesStep={30}
+            ampm={false}
           />
           {startTime && <div>{`${startTime.format('HH:mm')}`}</div>}
         </DemoItem>
         <DemoItem label='End'>
-          <MobileTimePicker value={endTime} onChange={handleEndTimeChange} />
+          <MobileTimePicker
+            value={endTime}
+            onChange={handleEndTimeChange}
+            minutesStep={30}
+            ampm={false}
+          />
           {endTime && <div>{`${endTime.format('HH:mm')}`}</div>}
         </DemoItem>
       </DemoContainer>

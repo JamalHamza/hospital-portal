@@ -9,8 +9,7 @@ function AddDoctor() {
       <Box
         sx={{
           bgcolor: 'form.main',
-          width: '70vw',
-          minHeight: '10vh',
+          width: '94vw',
           m: '2em auto',
           p: '2em 3em',
           borderRadius: '10px',
