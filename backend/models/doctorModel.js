@@ -43,10 +43,18 @@ const doctorSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: false,
+    default: ture,
   },
   startDate: {
     type: Date,
+    required: true,
+  },
+  fee: {
+    type: Number,
+    required: true,
+  },
+  experience: {
+    type: Array,
     required: true,
   },
   endDate: {
