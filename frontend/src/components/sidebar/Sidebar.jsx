@@ -6,6 +6,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PersonIcon from '@mui/icons-material/Person';
 import {
   Avatar,
   Box,
@@ -154,13 +155,13 @@ const Sidebar = ({ open, setOpen }) => {
           />
           <Box sx={{ width: '30%', textAlign: 'center' }}>
             <Typography
-              variant='h4'
-              sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
+              variant='h6'
+              sx={{ color: 'menu.main', fontWeight: '700', p: '0.2em' }}
             >
               {user?.name}
             </Typography>
             <Typography
-              variant='h5'
+              variant='h6'
               sx={{
                 color: 'primay.dark',
                 fontWeight: '600',
