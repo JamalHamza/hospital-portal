@@ -8,10 +8,13 @@ import './DataPicker.css';
 function DatePickerDoc() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const ss = startDate?.toISOString();
 
   const formattedStartDate = startDate
     ? moment(startDate).format('DD/MM/YYYY')
     : '';
+
+  console.log(ss);
 
   const handleStartDateChange = (date, Start) => {
     setStartDate(date);

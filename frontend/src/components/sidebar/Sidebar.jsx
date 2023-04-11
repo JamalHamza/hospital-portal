@@ -3,7 +3,6 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
@@ -21,7 +20,6 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import doctors from '../../assets/drawerIcon/medical-assistance.png';
 // ! ----------------------------------------
 const Sidebar = ({ open, setOpen }) => {
   const navigate = useNavigate();
@@ -59,11 +57,18 @@ const Sidebar = ({ open, setOpen }) => {
         },
       ],
       [
+        // {
+        //   text: 'Doctors',
+        //   icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
         {
-          text: 'Doctors',
-          icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
+          text: 'Add Doctor',
+          icon: <GroupAddIcon fontSize='large' />,
           onClick: () => {
-            navigate('/users'), setOpen(false);
+            navigate('/admin/addDoctor'), setOpen(false);
           },
         },
         {
@@ -73,20 +78,14 @@ const Sidebar = ({ open, setOpen }) => {
             navigate('/users'), setOpen(false);
           },
         },
-        {
-          text: 'Add Doctor',
-          icon: <GroupAddIcon fontSize='large' />,
-          onClick: () => {
-            navigate('/admin/addDoctor'), setOpen(false);
-          },
-        },
-        {
-          text: 'Set Working Time',
-          icon: <HistoryToggleOffIcon fontSize='large' />,
-          onClick: () => {
-            navigate('/users'), setOpen(false);
-          },
-        },
+
+        // {
+        //   text: 'Set Working Time',
+        //   icon: <HistoryToggleOffIcon fontSize='large' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
       ],
     ];
   } else if (isDoctor) {
