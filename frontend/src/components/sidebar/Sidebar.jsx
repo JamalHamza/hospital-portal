@@ -93,14 +93,21 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+          icon: (
+            <ManageAccountsIcon
+              fontSize='large'
+              sx={{ color: 'primary.main' }}
+            />
+          ),
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' color='btn' />,
+          icon: (
+            <LockResetIcon fontSize='large' sx={{ color: 'primary.main' }} />
+          ),
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
@@ -155,14 +162,14 @@ const Sidebar = ({ open, setOpen }) => {
           <Box sx={{ width: '30%', textAlign: 'center' }}>
             <Typography
               variant='h6'
-              sx={{ color: 'menu.main', fontWeight: '700', p: '0.2em' }}
+              sx={{ color: 'form.main', fontWeight: '700', p: '0.2em' }}
             >
               {user?.name}
             </Typography>
             <Typography
               variant='h6'
               sx={{
-                color: 'primay.dark',
+                color: 'third.dark',
                 fontWeight: '600',
                 display: 'flex',
                 alignItems: 'center',

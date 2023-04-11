@@ -125,7 +125,7 @@ function AddDoctor() {
               spacing={2}
               sx={{ display: 'felx', justifyContent: 'center', mb: '1em' }}
             >
-              <Grid item xs={6} md={4}>
+              <Grid item xs={12} md={4}>
                 <TextField
                   name='name'
                   label='Name'
@@ -139,7 +139,7 @@ function AddDoctor() {
                   helperText={formik.touched.name && formik.errors.name}
                 />
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={12} md={4}>
                 <TextField
                   name='phone'
                   label='Phone'
@@ -153,7 +153,7 @@ function AddDoctor() {
                   helperText={formik.touched.phone && formik.errors.phone}
                 />
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={12} md={4}>
                 <TextField
                   name='email'
                   label='Email'
