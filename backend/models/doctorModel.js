@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const doctorSchema = new mongoose.Schema({
   userId: {
     type: String,
-    required: true,
+    // required: true,
   },
   name: {
     type: String,
@@ -37,24 +37,26 @@ const doctorSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    required: true,
+    // required: true,
     default: 'doctor',
     // subscriber, author, and admin (suspended)
   },
   isVerified: {
     type: Boolean,
-    default: ture,
-  },
-  startDate: {
-    type: Date,
-    required: true,
+    default: true,
   },
   fee: {
     type: Number,
     required: true,
   },
-  experience: {
-    type: Array,
+  experience: [
+    {
+      hospitalName: { type: String, required: true },
+      years: { type: Number, required: true },
+    },
+  ],
+  startDate: {
+    type: Date,
     required: true,
   },
   endDate: {

@@ -139,7 +139,7 @@ const verifyUser = asyncHandler(async (req, res) => {
   const hashedToken = hashToken(verificationToken);
 
   console.log(`hashToken: ${hashedToken}`);
-  console.log(`hashToken: ${typeof hashedToken}`);
+  // console.log(`hashToken: ${typeof hashedToken}`);
 
   const userToken = await Token.findOne({
     vToken: hashedToken,
