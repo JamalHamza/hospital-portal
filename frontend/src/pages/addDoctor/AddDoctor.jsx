@@ -2,6 +2,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Box,
+  Button,
   Grid,
   IconButton,
   InputAdornment,
@@ -10,6 +11,7 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { FaBookMedical } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 import * as Yup from 'yup';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
@@ -20,6 +22,9 @@ const initialValues = {
   phone: '',
   password: '',
   password2: '',
+  experience: '',
+  fee: '',
+  specialist: '',
 };
 
 // ! ------ Yup Validation ------------------
@@ -33,6 +38,9 @@ const validationSchema = Yup.object().shape({
   password2: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Confirm Password is required'),
+  specialist: Yup.string().required('Specialist is required'),
+  fee: Yup.number().required('Fee is required'),
+  experience: Yup.number().required('Experience is required'),
 });
 
 function AddDoctor() {
@@ -99,7 +107,7 @@ function AddDoctor() {
           }}
         >
           <form onSubmit={formik.handleSubmit}>
-            <hr color='blue' />
+            <hr color='#ccb7c0' />
             <Box
               sx={{
                 display: 'felx',
@@ -114,6 +122,7 @@ function AddDoctor() {
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  gap: '1em',
                 }}
               >
                 <ImProfile fontSize={26} />
@@ -242,12 +251,15 @@ function AddDoctor() {
                 />
               </Grid>
             </Grid>
-            <Grid container sx={{ display: 'felx', justifyContent: 'center' }}>
+            <Grid
+              container
+              sx={{ display: 'felx', justifyContent: 'center', mb: '1em' }}
+            >
               <Grid item xs={12} md={4}>
                 <PasswordStrength password={password} password2={password2} />
               </Grid>
             </Grid>
-            <hr color='blue' />
+            <hr color='#ccb7c0' />
             <Box
               sx={{
                 display: 'felx',
@@ -257,17 +269,93 @@ function AddDoctor() {
               <Typography
                 variant='h5'
                 sx={{
-                  color: 'menu.main',
+                  color: 'fourth.dark',
                   p: '1.2em',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
+                  gap: '1rem',
                 }}
               >
-                <ImProfile fontSize={26} />
-                Personal Information
+                <FaBookMedical fontSize={26} />
+                Experience & Specialist
               </Typography>
             </Box>
+            <Grid
+              container
+              spacing={2}
+              sx={{ display: 'felx', justifyContent: 'center', mb: '1em' }}
+            >
+              <Grid item xs={12} md={4}>
+                <TextField
+                  name='specialist'
+                  label='Specialist'
+                  type='text'
+                  variant='outlined'
+                  value={formik.values.specialist}
+                  onChange={handleChange}
+                  style={{ margin: '4px', width: '100%' }}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.specialist &&
+                    Boolean(formik.errors.specialist)
+                  }
+                  helperText={
+                    formik.touched.specialist && formik.errors.specialist
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  name='fee'
+                  label='Fee'
+                  variant='outlined'
+                  type='number'
+                  value={formik.values.fee}
+                  onChange={handleChange}
+                  style={{ margin: '4px', width: '100%' }}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.fee && Boolean(formik.errors.fee)}
+                  helperText={formik.touched.fee && formik.errors.fee}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  name='experience'
+                  label='Experience'
+                  variant='outlined'
+                  type='email'
+                  value={formik.values.experience}
+                  onChange={handleChange}
+                  style={{ margin: '4px', width: '100%' }}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.experience &&
+                    Boolean(formik.errors.experience)
+                  }
+                  helperText={
+                    formik.touched.experience && formik.errors.experience
+                  }
+                />
+              </Grid>
+            </Grid>
+            <Button
+              type='submit'
+              variant='contained'
+              sx={{
+                bgcolor: 'third.main',
+                margin: '0.8em',
+                padding: '0.8em 2em',
+                fontWeight: 800,
+                fontSize: '1.2rem',
+                color: 'primary.dark',
+                '&:hover': {
+                  background: '#ccb7c0',
+                },
+              }}
+            >
+              Register
+            </Button>
           </form>
         </Box>
       </Box>
