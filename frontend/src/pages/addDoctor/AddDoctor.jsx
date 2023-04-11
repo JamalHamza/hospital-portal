@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import { FaBookMedical } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 import * as Yup from 'yup';
@@ -22,7 +23,9 @@ const initialValues = {
   phone: '',
   password: '',
   password2: '',
-  experience: '',
+  work: '',
+  hotspitalName: '',
+  years: '',
   fee: '',
   specialist: '',
 };
@@ -40,14 +43,26 @@ const validationSchema = Yup.object().shape({
     .required('Confirm Password is required'),
   specialist: Yup.string().required('Specialist is required'),
   fee: Yup.number().required('Fee is required'),
-  experience: Yup.number().required('Experience is required'),
+  hotspitalName: Yup.string().required('Hospital is required'),
+  years: Yup.number().required('Years is required'),
 });
 
 function AddDoctor() {
   const [formData, setFormData] = useState(initialValues);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [experiences, setExperiences] = useState([]);
   const { name, email, password, password2 } = formData;
+
+  // ! Add Experince
+  function addExperience(hospitalName, years) {
+    setExperiences((prevExperiences) => [
+      ...prevExperiences,
+      { hospitalName, years },
+    ]);
+  }
+
+  console.log(experiences);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -120,9 +135,9 @@ function AddDoctor() {
                   color: 'menu.main',
                   p: '1.2em',
                   display: 'flex',
-                  justifyContent: 'center',
                   alignItems: 'center',
-                  gap: '1em',
+                  fontWeight: '700',
+                  gap: '0.4em',
                 }}
               >
                 <ImProfile fontSize={26} />
@@ -247,7 +262,7 @@ function AddDoctor() {
                   accept='image/*'
                   name='image'
                   onChange={handleImageChange}
-                  style={{ margin: '4px 0', width: '100%' }}
+                  style={{ margin: '4px', width: '100%' }}
                 />
               </Grid>
             </Grid>
@@ -272,21 +287,24 @@ function AddDoctor() {
                   color: 'fourth.dark',
                   p: '1.2em',
                   display: 'flex',
-                  justifyContent: 'center',
                   alignItems: 'center',
                   gap: '1rem',
+                  fontWeight: '700',
                 }}
               >
                 <FaBookMedical fontSize={26} />
                 Experience & Specialist
               </Typography>
             </Box>
+            {/* ------------------------------------ */}
             <Grid
               container
               spacing={2}
-              sx={{ display: 'felx', justifyContent: 'center', mb: '1em' }}
+              sx={{
+                mb: '1em',
+              }}
             >
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={3}>
                 <TextField
                   name='specialist'
                   label='Specialist'
@@ -305,7 +323,7 @@ function AddDoctor() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={3}>
                 <TextField
                   name='fee'
                   label='Fee'
@@ -319,26 +337,112 @@ function AddDoctor() {
                   helperText={formik.touched.fee && formik.errors.fee}
                 />
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={3}>
                 <TextField
-                  name='experience'
-                  label='Experience'
+                  name='hotspitalName'
+                  label='HotspitalName'
                   variant='outlined'
-                  type='email'
-                  value={formik.values.experience}
+                  type='text'
+                  value={formik.values.hotspitalName}
                   onChange={handleChange}
                   style={{ margin: '4px', width: '100%' }}
                   onBlur={formik.handleBlur}
                   error={
-                    formik.touched.experience &&
-                    Boolean(formik.errors.experience)
+                    formik.touched.hotspitalName &&
+                    Boolean(formik.errors.hotspitalName)
                   }
                   helperText={
-                    formik.touched.experience && formik.errors.experience
+                    formik.touched.hotspitalName && formik.errors.hotspitalName
                   }
                 />
               </Grid>
+              <Grid item xs={12} md={3}>
+                <TextField
+                  name='years'
+                  label='Years'
+                  variant='outlined'
+                  type='Number'
+                  value={formik.values.years}
+                  onChange={handleChange}
+                  style={{ margin: '4px', width: '100%' }}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.years && Boolean(formik.errors.years)}
+                  helperText={formik.touched.years && formik.errors.years}
+                />
+              </Grid>
+              <Grid item xs={12} md={10}>
+                <Grid item xs={12} md={2}>
+                  <Button
+                    onClick={() =>
+                      addExperience(
+                        formik.values.hotspitalName,
+                        formik.values.years
+                      )
+                    }
+                    sx={{
+                      bgcolor: 'third.main',
+                      padding: '0.1em 1em',
+                      fontWeight: 600,
+                      fontSize: '1rem',
+                      mb: '0.4em',
+                      color: 'primary.dark',
+                      '&:hover': {
+                        background: '#ccb7c0',
+                      },
+                    }}
+                  >
+                    Add Experience
+                  </Button>
+                </Grid>
+                <Box
+                  sx={{
+                    width: '100%',
+                    p: '0.4em 1em',
+                  }}
+                >
+                  <Typography
+                    variant='h6'
+                    sx={{ color: 'primary.main', fontSize: '1.4rem' }}
+                  >
+                    Added Work Experiences:
+                  </Typography>
+                  <Box
+                    sx={{ border: '1px solid green', p: '0.3em 1em' }}
+                  >
+                    {experiences.length > 0 ? (
+                      experiences.map((experience) => experience.hospitalName)
+                    ) : (
+                      <Typography variant='h6' sx={{ color: 'red' }}>
+                        No Experince added
+                      </Typography>
+                    )}
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
+            <hr color='#ccb7c0' />
+            <Box
+              sx={{
+                display: 'felx',
+                flexDirection: 'column',
+              }}
+            >
+              <Typography
+                variant='h5'
+                sx={{
+                  color: 'secondary.dark',
+                  p: '1.2em',
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  fontWeight: '700',
+                }}
+              >
+                <BsFillCalendar2WeekFill fontSize={26} />
+                Working day & Time
+              </Typography>
+            </Box>
             <Button
               type='submit'
               variant='contained'
