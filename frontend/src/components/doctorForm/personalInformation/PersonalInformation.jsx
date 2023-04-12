@@ -49,7 +49,7 @@ function PersonalInformation(props) {
           variant='h5'
           sx={{
             color: 'menu.main',
-            p: '1.2em',
+            p: '1.2em 0.2em',
             display: 'flex',
             alignItems: 'center',
             fontWeight: '700',
