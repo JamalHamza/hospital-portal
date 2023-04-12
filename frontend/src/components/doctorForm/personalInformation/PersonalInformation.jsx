@@ -1,11 +1,42 @@
-import { Box, Grid, TextField, Typography } from '@mui/material';
-import React from 'react';
-import { ImProfile } from 'react-icons/im';
-import PasswordStrength from '../../passwordStrength/PasswordStrength';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import {
+  Box,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
+import { ImProfile } from 'react-icons/im';
+import PasswordStrength from '../../passwordStrength/PasswordStrength';
 
-function PersonalInformation() {
+function PersonalInformation(props) {
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    touched,
+    password,
+    password2,
+    errors,
+    handleImageChange,
+  } = props;
+  // ! -----------------------
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  // ! -----------------------
+
+  //   ! Show hide password
+  const togglePassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <Box
@@ -40,12 +71,12 @@ function PersonalInformation() {
             label='Name'
             type='text'
             variant='outlined'
-            value={formik.values.name}
+            value={values.name}
             onChange={handleChange}
             style={{ margin: '4px', width: '100%' }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
+            onBlur={handleBlur}
+            error={touched.name && Boolean(errors.name)}
+            helperText={touched.name && errors.name}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -54,12 +85,12 @@ function PersonalInformation() {
             label='Phone'
             variant='outlined'
             type='text'
-            value={formik.values.phone}
+            value={values.phone}
             onChange={handleChange}
             style={{ margin: '4px', width: '100%' }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.phone && Boolean(formik.errors.phone)}
-            helperText={formik.touched.phone && formik.errors.phone}
+            onBlur={handleBlur}
+            error={touched.phone && Boolean(errors.phone)}
+            helperText={touched.phone && errors.phone}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -68,12 +99,12 @@ function PersonalInformation() {
             label='Email'
             variant='outlined'
             type='email'
-            value={formik.values.email}
+            value={values.email}
             onChange={handleChange}
             style={{ margin: '4px', width: '100%' }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
+            onBlur={handleBlur}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
           />
         </Grid>
       </Grid>
@@ -89,7 +120,7 @@ function PersonalInformation() {
             type={showPassword ? 'text' : 'password'}
             label='Password'
             onChange={handleChange}
-            value={formik.values.password}
+            value={values.password}
             style={{ margin: '4px', width: '100%' }}
             InputProps={{
               endAdornment: (
@@ -100,9 +131,9 @@ function PersonalInformation() {
                 </InputAdornment>
               ),
             }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
+            onBlur={handleBlur}
+            error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -111,7 +142,7 @@ function PersonalInformation() {
             type={showPassword2 ? 'text' : 'password'}
             label='Confirm Password'
             onChange={handleChange}
-            value={formik.values.password2}
+            value={values.password2}
             style={{ margin: '4px', width: '100%' }}
             InputProps={{
               endAdornment: (
@@ -122,9 +153,9 @@ function PersonalInformation() {
                 </InputAdornment>
               ),
             }}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password2 && Boolean(formik.errors.password2)}
-            helperText={formik.touched.password2 && formik.errors.password2}
+            onBlur={handleBlur}
+            error={touched.password2 && Boolean(errors.password2)}
+            helperText={touched.password2 && errors.password2}
           />
         </Grid>
         <Grid item xs={12} md={4}>

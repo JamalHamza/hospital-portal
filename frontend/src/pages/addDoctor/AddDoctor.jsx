@@ -1,11 +1,8 @@
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Box,
   Button,
   Grid,
   IconButton,
-  InputAdornment,
   Paper,
   Table,
   TableBody,
@@ -21,11 +18,12 @@ import React, { useState } from 'react';
 import { AiTwotoneExperiment } from 'react-icons/ai';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import { FaBookMedical } from 'react-icons/fa';
-import { ImProfile } from 'react-icons/im';
 import { MdDeleteForever } from 'react-icons/md';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 import * as Yup from 'yup';
-import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
+import PersonalInformation from '../../components/doctorForm/personalInformation/PersonalInformation';
 
 const initialValues = {
   name: '',
@@ -138,7 +136,7 @@ function AddDoctor() {
         >
           <form onSubmit={formik.handleSubmit}>
             <hr color='#ccb7c0' />
-            <Box
+            {/* <Box
               sx={{
                 display: 'felx',
                 flexDirection: 'column',
@@ -208,7 +206,7 @@ function AddDoctor() {
               </Grid>
             </Grid>
             {/* !------------------------------------- */}
-            <Grid
+            {/* <Grid
               container
               spacing={2}
               sx={{ display: 'felx', justifyContent: 'left', mb: '1em' }}
@@ -288,7 +286,18 @@ function AddDoctor() {
               <Grid item xs={12} md={4}>
                 <PasswordStrength password={password} password2={password2} />
               </Grid>
-            </Grid>
+            </Grid>  */}
+
+            <PersonalInformation
+              values={formik.values}
+              handleChange={handleChange}
+              handleBlur={formik.handleBlur}
+              touched={formik.touched}
+              errors={formik.errors}
+              password={password}
+              password2={password2}
+              handleImageChange={handleImageChange}
+            />
             <hr color='#ccb7c0' />
             <Box
               sx={{
@@ -485,8 +494,7 @@ function AddDoctor() {
                         </Table>
                       </TableContainer>
                     ) : (
-                      <Typography variant='h6' sx={{color
-                      : 'red'}}>
+                      <Typography variant='h6' sx={{ color: 'red' }}>
                         Experience is not added
                       </Typography>
                     )}
