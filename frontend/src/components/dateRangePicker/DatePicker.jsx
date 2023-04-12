@@ -1,51 +1,63 @@
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import moment from 'moment';
-import React, { useState } from 'react';
-import './DataPicker.css';
+// import { Grid, TextField } from '@mui/material';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import React from 'react';
+// // import './DataPicker.css';/
 
-function DatePickerDoc() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const ss = startDate?.toISOString();
+// function DatePickerDoc(props) {
+//   const { values, handleChange, startDate, touched, handleBlur, errors } =
+//     props;
 
-  const formattedStartDate = startDate
-    ? moment(startDate).format('DD/MM/YYYY')
-    : '';
+//   // const ss = startDate?.toISOString();
 
-  console.log(ss);
+//   // const formattedStartDate = startDate
+//   //   ? moment(startDate).format('DD/MM/YYYY')
+//   //   : '';
 
-  const handleStartDateChange = (date, Start) => {
-    setStartDate(date);
-  };
+//   // const handleStartDateChange = (date, Start) => {
+//   //   setStartDate(date);
+//   // };
 
-  const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
+//   // const handleEndDateChange = (date) => {
+//   //   setEndDate(date);
+//   // };
 
-  return (
-    <div>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label='Start Date'
-          value={startDate}
-          onChange={handleStartDateChange}
-          disablePast={true}
-          TextField={(params) => <TextField {...params} />}
-        />
+//   return (
+//     <LocalizationProvider dateAdapter={AdapterDayjs}>
+//       <Grid container spacing={2}>
+//         <Grid item xs={12} md={4}>
+//           <DatePicker
+//             sx={{ width: '100%' }}
+//             label='Start Date'
+//             name='startDate'
+//             value={values.startDate}
+//             onChange={handleChange}
+//             disablePast={true}
+//             TextField={(params) => <TextField {...params} />}
+//             onBlur={handleBlur}
+//             error={touched.startDate && Boolean(errors.startDate)}
+//             helperText={touched.startDate && errors.startDate}
+//           />
+//         </Grid>
+//         {/* <Grid item xs={12} md={4}>
+//           <DatePicker
+//             sx={{ width: '100%' }}
+//             label='End Date'
+//             name='endDate'
+//             value={values.endDate}
+//             disablePast={true}
+//             onChange={handleChange}
+//             // TextField={(params) => <TextField {...params} />}
+//             onBlur={handleBlur}
+//             error={touched.endDate && Boolean(errors.endDate)}
+//             helperText={touched.endDate && errors.endDate}
+//           />
+//         </Grid> */}
+//         {/* <div>Formatted Start Date: {formattedStartDate}</div> */}
+//       </Grid>
+//     </LocalizationProvider>
+//   );
+// }
 
-        <DatePicker
-          label='End Date'
-          value={endDate}
-          disablePast={true}
-          onChange={handleEndDateChange}
-          TextField={(params) => <TextField {...params} />}
-        />
-        <div>Formatted Start Date: {formattedStartDate}</div>
-      </LocalizationProvider>
-    </div>
-  );
-}
-
-export default DatePickerDoc;
+// export default DatePickerDoc;

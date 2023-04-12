@@ -180,7 +180,7 @@ function SpecialistAndExperience(props) {
           </Button>
         </Grid>
       </Grid>
-      <Grid itme xs={12} md={8}>
+      <Grid item xs={12} md={8}>
         <Box
           sx={{
             width: '100%',
@@ -195,7 +195,7 @@ function SpecialistAndExperience(props) {
             Added Work Experiencesdd:
           </Typography>
           <Box sx={{ p: '0.3em 0em' }}>
-            {experiences.length > 0 ? (
+            {experiences.length ? (
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>

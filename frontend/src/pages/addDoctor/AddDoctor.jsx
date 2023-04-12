@@ -1,11 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-
 import * as Yup from 'yup';
-import PersonalInformation from '../../components/doctorForm/personalInformation/PersonalInformation';
-import SpecialistAndExperience from '../../components/doctorForm/specialistAndExperience/SpecialistAndExperience';
-import WorkingDayAndTime from '../../components/doctorForm/workingDayAndTime/WorkingDayAndTime';
+import PersonalInformation from '../../components/doctorForm/personalInfo/PersonalInformation';
+import SpecialistAndExperience from '../../components/doctorForm/specialistInfo/SpecialistAndExperience';
+// import '../../dateRangePicker/DatePicker.css';
+import DatePickerForm from '../../components/doctorForm/timings/DatePickerForm';
 
 const initialValues = {
   name: '',
@@ -17,6 +17,10 @@ const initialValues = {
   years: '',
   fee: '',
   specialist: '',
+  startDate: '',
+  endDate: '',
+  startTime: '',
+  endTime: '',
 };
 
 // ! ------ Yup Validation ------------------
@@ -34,12 +38,14 @@ const validationSchema = Yup.object().shape({
   fee: Yup.number().required('Fee is required'),
   hospitalName: Yup.string().required('Hospital is required'),
   years: Yup.number().required('Years is required'),
+  startDate: Yup.date().required('Start Date is required'),
 });
 
 function AddDoctor() {
   const [formData, setFormData] = useState(initialValues);
   const [experiences, setExperiences] = useState([]);
-  const { name, email, password, password2, hospitalName, years } = formData;
+  const { password, password2, hospitalName, years, startDate, endDate } =
+    formData;
 
   // ! Add Experince -----------------
   function addExperience(hospitalName, years) {
@@ -55,6 +61,10 @@ function AddDoctor() {
     const { name, value } = event.target;
     formik.setFieldValue(name, value);
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFieldChange = (fieldName) => (value) => {
+    formik.setFieldValue(fieldName, value);
   };
 
   // ! ----------------
@@ -126,8 +136,32 @@ function AddDoctor() {
               addExperience={addExperience}
             />
             <hr color='#ccb7c0' />
-
-            <WorkingDayAndTime />
+            <DatePickerForm
+              values={formik.values}
+              handleChange={handleChange}
+              handleBlur={formik.handleBlur}
+              touched={formik.touched}
+              errors={formik.errors}
+              handleFieldChange={handleFieldChange}
+            />
+            {/* ! ------------------------------------ */}
+            <Button
+              type='submit'
+              variant='contained'
+              sx={{
+                m: '2rem',
+                bgcolor: 'third.main',
+                padding: '1.2em 2em',
+                fontWeight: 800,
+                fontSize: '1.2rem',
+                color: 'primary.dark',
+                '&:hover': {
+                  background: '#ccb7c0',
+                },
+              }}
+            >
+              Register
+            </Button>
           </form>
         </Box>
       </Box>
