@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import PersonalInformation from '../../components/doctorForm/personalInformation/PersonalInformation';
 import SpecialistAndExperience from '../../components/doctorForm/specialistAndExperience/SpecialistAndExperience';
-import WorkingDayAndTime from '../../components/doctorForm/workingDayAndTime/workingDayAndTime';
+import WorkingDayAndTime from '../../components/doctorForm/workingDayAndTime/WorkingDayAndTime';
 
 const initialValues = {
   name: '',
@@ -13,10 +13,8 @@ const initialValues = {
   phone: '',
   password: '',
   password2: '',
-
   hospitalName: '',
   years: '',
-
   fee: '',
   specialist: '',
 };

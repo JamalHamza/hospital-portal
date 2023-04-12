@@ -54,6 +54,7 @@ function PersonalInformation(props) {
             alignItems: 'center',
             fontWeight: '700',
             gap: '0.4em',
+            ml: '0.4rem',
           }}
         >
           <ImProfile fontSize={26} />

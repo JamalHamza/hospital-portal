@@ -145,7 +145,7 @@ function SpecialistAndExperience(props) {
             helperText={touched.hospitalName && errors.hospitalName}
           />
         </Grid>
-        <Grid item xs={8} md={4}>
+        <Grid item xs={12} md={4}>
           <TextField
             name='years'
             label='Years'

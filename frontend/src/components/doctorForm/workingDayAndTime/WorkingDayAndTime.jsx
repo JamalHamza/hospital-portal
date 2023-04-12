@@ -18,7 +18,8 @@ function WorkingDayAndTime() {
             p: '1.2em 0.2em',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.4rem',
+            gap: '0.4em',
+            ml: '0.4rem',
             fontWeight: '700',
           }}
         >
