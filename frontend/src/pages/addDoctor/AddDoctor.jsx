@@ -1,11 +1,11 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 
 import * as Yup from 'yup';
-import SpecialistAndExperience from '../../components/doctorForm/SpecialistAndExperience/SpecialistAndExperience';
 import PersonalInformation from '../../components/doctorForm/personalInformation/PersonalInformation';
+import SpecialistAndExperience from '../../components/doctorForm/specialistAndExperience/SpecialistAndExperience';
+import WorkingDayAndTime from '../../components/doctorForm/workingDayAndTime/workingDayAndTime';
 
 const initialValues = {
   name: '',
@@ -128,46 +128,8 @@ function AddDoctor() {
               addExperience={addExperience}
             />
             <hr color='#ccb7c0' />
-            {/* ! ---------------------------------------------- */}
-            <Box
-              sx={{
-                display: 'felx',
-                flexDirection: 'column',
-              }}
-            >
-              <Typography
-                variant='h5'
-                sx={{
-                  color: 'secondary.dark',
-                  p: '1.2em',
-                  display: 'flex',
-                  justifyContent: 'start',
-                  alignItems: 'center',
-                  gap: '1rem',
-                  fontWeight: '700',
-                }}
-              >
-                <BsFillCalendar2WeekFill fontSize={26} />
-                Working day & Time
-              </Typography>
-            </Box>
-            <Button
-              type='submit'
-              variant='contained'
-              sx={{
-                bgcolor: 'third.main',
-                margin: '0.8em',
-                padding: '0.8em 2em',
-                fontWeight: 800,
-                fontSize: '1.2rem',
-                color: 'primary.dark',
-                '&:hover': {
-                  background: '#ccb7c0',
-                },
-              }}
-            >
-              Register
-            </Button>
+
+            <WorkingDayAndTime />
           </form>
         </Box>
       </Box>

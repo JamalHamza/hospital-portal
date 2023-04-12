@@ -52,8 +52,8 @@ function SpecialistAndExperience(props) {
             p: '1.2em 0.2em',
             display: 'flex',
             alignItems: 'center',
-            gap: '1rem',
             fontWeight: '700',
+            gap: '0.4em',
           }}
         >
           <FaBookMedical fontSize={26} />
@@ -113,8 +113,8 @@ function SpecialistAndExperience(props) {
             p: '1.2em 0.2em',
             display: 'flex',
             alignItems: 'center',
-            gap: '1rem',
             fontWeight: '700',
+            gap: '0.4em',
           }}
         >
           <AiTwotoneExperiment fontSize={26} />
@@ -124,8 +124,11 @@ function SpecialistAndExperience(props) {
       <Grid
         container
         spacing={2}
+        gap='0.4rem'
         sx={{
           mb: '1em',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <Grid item xs={12} md={4}>
@@ -142,7 +145,7 @@ function SpecialistAndExperience(props) {
             helperText={touched.hospitalName && errors.hospitalName}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={8} md={4}>
           <TextField
             name='years'
             label='Years'
@@ -156,76 +159,74 @@ function SpecialistAndExperience(props) {
             helperText={touched.years && errors.years}
           />
         </Grid>
-        <Grid item xs={12} md={10}>
-          <Grid item xs={12} md={2}>
-            <Button
-              onClick={() => addExperience(values.hospitalName, values.years)}
-              disabled={!hospitalName || !years}
-              sx={{
-                bgcolor: 'third.main',
-                padding: '0.1em 1em',
-                fontWeight: 600,
-                fontSize: '1rem',
-                mb: '0.4em',
-                color: 'primary.dark',
-                '&:hover': {
-                  background: '#ccb7c0',
-                },
-              }}
-            >
-              Add Experience
-            </Button>
-          </Grid>
-
-          <Box
+        <Grid item xs={4} md={2}>
+          <Button
+            onClick={() => addExperience(values.hospitalName, values.years)}
+            disabled={!hospitalName || !years}
             sx={{
-              width: '100%',
-              p: '0.4em 1em',
-              bgcolor: 'third.light',
-              borderRadius: '10px',
-              //   ml: '1em',
+              bgcolor: 'third.main',
+              padding: '0.1em 1em',
+              fontWeight: 600,
+              fontSize: '1rem',
+              m: '0em 0.4em',
+              mb: '0.4em',
+              color: 'primary.dark',
+              '&:hover': {
+                background: '#ccb7c0',
+              },
             }}
           >
-            <Typography
-              variant='h6'
-              sx={{ color: 'primary.main', fontSize: '1.4rem' }}
-            >
-              Added Work Experiences:
-            </Typography>
-            <Box sx={{ p: '0.3em 0em' }}>
-              {experiences.length > 0 ? (
-                <TableContainer component={Paper}>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Hospital</TableCell>
-                        <TableCell>Years</TableCell>
-                        <TableCell></TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {experiences?.map((experience, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{experience.hospitalName}</TableCell>
-                          <TableCell>{experience.years}</TableCell>
-                          <TableCell>
-                            <IconButton onClick={() => handleDelete(index)}>
-                              <MdDeleteForever />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              ) : (
-                <Typography variant='h6' sx={{ color: 'red' }}>
-                  Experience is not added
-                </Typography>
-              )}
-            </Box>
-          </Box>
+            Add
+          </Button>
         </Grid>
+      </Grid>
+      <Grid itme xs={12} md={8}>
+        <Box
+          sx={{
+            width: '100%',
+            p: '0.4em 0.2em',
+            borderRadius: '10px',
+          }}
+        >
+          <Typography
+            variant='h6'
+            sx={{ color: 'primary.main', fontSize: '1.4rem' }}
+          >
+            Added Work Experiencesdd:
+          </Typography>
+          <Box sx={{ p: '0.3em 0em' }}>
+            {experiences.length > 0 ? (
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Hospital</TableCell>
+                      <TableCell>Years</TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {experiences?.map((experience, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{experience.hospitalName}</TableCell>
+                        <TableCell>{experience.years}</TableCell>
+                        <TableCell>
+                          <IconButton onClick={() => handleDelete(index)}>
+                            <MdDeleteForever />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            ) : (
+              <Typography variant='h6' sx={{ color: 'red' }}>
+                Experience is not added
+              </Typography>
+            )}
+          </Box>
+        </Box>
       </Grid>
     </>
   );
