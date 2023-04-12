@@ -6,14 +6,24 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
   Typography,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { AiTwotoneExperiment } from 'react-icons/ai';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import { FaBookMedical } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
+import { MdDeleteForever } from 'react-icons/md';
+
 import * as Yup from 'yup';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
 
@@ -24,8 +34,10 @@ const initialValues = {
   password: '',
   password2: '',
   work: '',
-  hotspitalName: '',
+
+  hospitalName: '',
   years: '',
+
   fee: '',
   specialist: '',
 };
@@ -43,7 +55,7 @@ const validationSchema = Yup.object().shape({
     .required('Confirm Password is required'),
   specialist: Yup.string().required('Specialist is required'),
   fee: Yup.number().required('Fee is required'),
-  hotspitalName: Yup.string().required('Hospital is required'),
+  hospitalName: Yup.string().required('Hospital is required'),
   years: Yup.number().required('Years is required'),
 });
 
@@ -52,7 +64,7 @@ function AddDoctor() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const [experiences, setExperiences] = useState([]);
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, password2, hospitalName, years } = formData;
 
   // ! Add Experince
   function addExperience(hospitalName, years) {
@@ -62,7 +74,11 @@ function AddDoctor() {
     ]);
   }
 
-  console.log(experiences);
+  function handleDelete(index) {
+    setExperiences((prevExperiences) =>
+      prevExperiences.filter((_, i) => i !== index)
+    );
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -91,7 +107,6 @@ function AddDoctor() {
     onSubmit: (values, { setSubmitting }) => {
       // Handle form submission here
       console.log(values);
-      RegisterUser(values);
     },
   });
 
@@ -284,7 +299,7 @@ function AddDoctor() {
               <Typography
                 variant='h5'
                 sx={{
-                  color: 'fourth.dark',
+                  color: 'third.dark',
                   p: '1.2em',
                   display: 'flex',
                   alignItems: 'center',
@@ -293,7 +308,7 @@ function AddDoctor() {
                 }}
               >
                 <FaBookMedical fontSize={26} />
-                Experience & Specialist
+                Specialist & Fee
               </Typography>
             </Box>
             {/* ------------------------------------ */}
@@ -304,7 +319,7 @@ function AddDoctor() {
                 mb: '1em',
               }}
             >
-              <Grid item xs={12} md={3}>
+              <Grid item xs={12} md={4}>
                 <TextField
                   name='specialist'
                   label='Specialist'
@@ -323,7 +338,7 @@ function AddDoctor() {
                   }
                 />
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid item xs={12} md={4}>
                 <TextField
                   name='fee'
                   label='Fee'
@@ -337,26 +352,58 @@ function AddDoctor() {
                   helperText={formik.touched.fee && formik.errors.fee}
                 />
               </Grid>
-              <Grid item xs={12} md={3}>
+            </Grid>
+
+            {/* ! ------------------------------------- */}
+
+            <Box
+              sx={{
+                display: 'felx',
+                flexDirection: 'column',
+              }}
+            >
+              <Typography
+                variant='h5'
+                sx={{
+                  color: 'fourth.dark',
+                  p: '1.2em',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  fontWeight: '700',
+                }}
+              >
+                <AiTwotoneExperiment fontSize={26} />
+                Experience
+              </Typography>
+            </Box>
+            <Grid
+              container
+              spacing={2}
+              sx={{
+                mb: '1em',
+              }}
+            >
+              <Grid item xs={12} md={4}>
                 <TextField
-                  name='hotspitalName'
-                  label='HotspitalName'
+                  name='hospitalName'
+                  label='Hospital Name'
                   variant='outlined'
                   type='text'
-                  value={formik.values.hotspitalName}
+                  value={formik.values.hospitalName}
                   onChange={handleChange}
                   style={{ margin: '4px', width: '100%' }}
                   onBlur={formik.handleBlur}
                   error={
-                    formik.touched.hotspitalName &&
-                    Boolean(formik.errors.hotspitalName)
+                    formik.touched.hospitalName &&
+                    Boolean(formik.errors.hospitalName)
                   }
                   helperText={
-                    formik.touched.hotspitalName && formik.errors.hotspitalName
+                    formik.touched.hospitalName && formik.errors.hospitalName
                   }
                 />
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid item xs={12} md={4}>
                 <TextField
                   name='years'
                   label='Years'
@@ -375,12 +422,14 @@ function AddDoctor() {
                   <Button
                     onClick={() =>
                       addExperience(
-                        formik.values.hotspitalName,
+                        formik.values.hospitalName,
                         formik.values.years
                       )
                     }
+                    disabled={!hospitalName || !years}
                     sx={{
                       bgcolor: 'third.main',
+                      ml: '1em',
                       padding: '0.1em 1em',
                       fontWeight: 600,
                       fontSize: '1rem',
@@ -394,6 +443,7 @@ function AddDoctor() {
                     Add Experience
                   </Button>
                 </Grid>
+
                 <Box
                   sx={{
                     width: '100%',
@@ -406,21 +456,46 @@ function AddDoctor() {
                   >
                     Added Work Experiences:
                   </Typography>
-                  <Box
-                    sx={{ border: '1px solid green', p: '0.3em 1em' }}
-                  >
+                  <Box sx={{ p: '0.3em 0em' }}>
                     {experiences.length > 0 ? (
-                      experiences.map((experience) => experience.hospitalName)
+                      <TableContainer component={Paper}>
+                        <Table>
+                          <TableHead>
+                            <TableRow>
+                              <TableCell>Hospital</TableCell>
+                              <TableCell>Years</TableCell>
+                              <TableCell></TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {experiences?.map((experience, index) => (
+                              <TableRow key={index}>
+                                <TableCell>{experience.hospitalName}</TableCell>
+                                <TableCell>{experience.years}</TableCell>
+                                <TableCell>
+                                  <IconButton
+                                    onClick={() => handleDelete(index)}
+                                  >
+                                    <MdDeleteForever />
+                                  </IconButton>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
                     ) : (
-                      <Typography variant='h6' sx={{ color: 'red' }}>
-                        No Experince added
+                      <Typography variant='h6' sx={{color
+                      : 'red'}}>
+                        Experience is not added
                       </Typography>
                     )}
                   </Box>
                 </Box>
               </Grid>
             </Grid>
-            <hr color='#ccb7c0' />
+
+            {/* ! ---------------------------------------------- */}
             <Box
               sx={{
                 display: 'felx',
