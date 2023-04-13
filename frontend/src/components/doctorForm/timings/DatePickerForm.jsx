@@ -11,13 +11,11 @@ import './DatePickerForm.css';
 function DatePickerForm(props) {
   const {
     values,
-    startDate,
-    endDate,
-    handleChange,
     handleBlur,
     errors,
     touched,
     handleFieldChange,
+    handleFieldChangeEnd,
   } = props;
 
   return (
@@ -44,21 +42,12 @@ function DatePickerForm(props) {
           Workday & Work hours
         </Typography>
       </Box>
-      <Grid
-        container
-        spacing={2}
-        gap='0.4rem'
-        sx={{
-          mb: '1em',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      <Grid container spacing={2} gap='0.4rem'>
         <Grid item xs={12} md={4}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ width: '100%' }}>
               <DatePicker
-                label='Select a date'
+                label='Start Date'
                 name='startDate'
                 inputFormat='DD/MM/YYYY'
                 value={values.startDate}
@@ -70,7 +59,7 @@ function DatePickerForm(props) {
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
                 {errors.startDate && touched.startDate ? (
-                  <div>{errors.startDate}</div>
+                  <>{errors.startDate}</>
                 ) : null}
               </Typography>
             </Box>
@@ -80,19 +69,19 @@ function DatePickerForm(props) {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ width: '100%' }}>
               <DatePicker
-                label='Select a date'
-                name='startDate'
+                label='End Date'
+                name='endDate'
                 inputFormat='DD/MM/YYYY'
-                value={values.startDate}
-                onChange={handleFieldChange('startDate')}
+                value={values.endDate}
+                onChange={handleFieldChangeEnd('endDate')}
                 onBlur={handleBlur}
-                error={touched.startDate && Boolean(errors.startDate)}
-                helperText={touched.startDate && errors.startDate}
+                error={touched.endDate && Boolean(errors.endDate)}
+                helperText={touched.endDate && errors.endDate}
                 sx={{ width: '100%', m: '4px' }}
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
-                {errors.startDate && touched.startDate ? (
-                  <div>{errors.startDate}</div>
+                {errors.endDate && touched.endDate ? (
+                  <>{errors.endDate}</>
                 ) : null}
               </Typography>
             </Box>

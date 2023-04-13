@@ -125,11 +125,13 @@ function SpecialistAndExperience(props) {
         container
         spacing={2}
         gap='0.4rem'
-        sx={{
-          mb: '1em',
-          display: 'flex',
-          alignItems: 'center',
-        }}
+        sx={
+          {
+            // mb: '1em',
+            // display: 'flex',
+            // alignItems: 'center',
+          }
+        }
       >
         <Grid item xs={12} md={4}>
           <TextField
@@ -165,10 +167,10 @@ function SpecialistAndExperience(props) {
             disabled={!hospitalName || !years}
             sx={{
               bgcolor: 'third.main',
-              padding: '0.1em 1em',
+              padding: '1.4em 3em',
               fontWeight: 600,
               fontSize: '1rem',
-              m: '0em 0.4em',
+              m: '0.5em 0.4em',
               mb: '0.4em',
               color: 'primary.dark',
               '&:hover': {
@@ -186,33 +188,50 @@ function SpecialistAndExperience(props) {
             width: '100%',
             p: '0.4em 0.2em',
             borderRadius: '10px',
+            mb: '2em',
           }}
         >
           <Typography
             variant='h6'
-            sx={{ color: 'primary.main', fontSize: '1.4rem' }}
+            sx={{
+              color: 'primary.main',
+              fontSize: '1.4rem',
+              ml: '0.4em',
+            }}
           >
-            Added Work Experiencesdd:
+            Added Work Experiencesd:
           </Typography>
           <Box sx={{ p: '0.3em 0em' }}>
             {experiences.length ? (
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead>
-                    <TableRow>
-                      <TableCell>Hospital</TableCell>
-                      <TableCell>Years</TableCell>
+                    <TableRow sx={{ bgcolor: 'third.main' }}>
+                      <TableCell sx={{ fontSize: '1.5rem', fontWeight: '700' }}>
+                        Hospital
+                      </TableCell>
+                      <TableCell sx={{ fontSize: '1.5rem', fontWeight: '700' }}>
+                        Years
+                      </TableCell>
                       <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {experiences?.map((experience, index) => (
-                      <TableRow key={index}>
-                        <TableCell>{experience.hospitalName}</TableCell>
-                        <TableCell>{experience.years}</TableCell>
+                      <TableRow key={index} sx={{ bgcolor: 'fourth.light' }}>
+                        <TableCell
+                          sx={{ fontSize: '1.3em', fontWeight: '700' }}
+                        >
+                          {experience.hospitalName}
+                        </TableCell>
+                        <TableCell
+                          sx={{ fontSize: '1.3em', fontWeight: '700' }}
+                        >
+                          {experience.years}
+                        </TableCell>
                         <TableCell>
                           <IconButton onClick={() => handleDelete(index)}>
-                            <MdDeleteForever />
+                            <MdDeleteForever fontSize={24} />
                           </IconButton>
                         </TableCell>
                       </TableRow>
@@ -221,7 +240,7 @@ function SpecialistAndExperience(props) {
                 </Table>
               </TableContainer>
             ) : (
-              <Typography variant='h6' sx={{ color: 'red' }}>
+              <Typography variant='h6' sx={{ color: 'red', ml: '0.4em' }}>
                 Experience is not added
               </Typography>
             )}

@@ -39,6 +39,7 @@ const validationSchema = Yup.object().shape({
   hospitalName: Yup.string().required('Hospital is required'),
   years: Yup.number().required('Years is required'),
   startDate: Yup.date().required('Start Date is required'),
+  endDate: Yup.date().required('Start Date is required'),
 });
 
 function AddDoctor() {
@@ -64,6 +65,9 @@ function AddDoctor() {
   };
 
   const handleFieldChange = (fieldName) => (value) => {
+    formik.setFieldValue(fieldName, value);
+  };
+  const handleFieldChangeEnd = (fieldName) => (value) => {
     formik.setFieldValue(fieldName, value);
   };
 
@@ -143,6 +147,7 @@ function AddDoctor() {
               touched={formik.touched}
               errors={formik.errors}
               handleFieldChange={handleFieldChange}
+              handleFieldChangeEnd={handleFieldChangeEnd}
             />
             {/* ! ------------------------------------ */}
             <Button
