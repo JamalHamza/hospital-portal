@@ -1,22 +1,13 @@
 import { Box, Grid, Typography } from '@mui/material';
-import React from 'react';
-// import '../../dateRangePicker/DatePicker.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/';
-// import { LocalizationProvider } from '@mui/lab/LocalizationProvider/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import React from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import './DatePickerForm.css';
 
 function DatePickerForm(props) {
-  const {
-    values,
-    handleBlur,
-    errors,
-    touched,
-    handleFieldChange,
-    handleFieldChangeEnd,
-  } = props;
+  const { values, handleBlur, errors, touched, handleFieldChange } = props;
 
   return (
     <>
@@ -52,9 +43,9 @@ function DatePickerForm(props) {
                 inputFormat='DD/MM/YYYY'
                 value={values.startDate}
                 onChange={handleFieldChange('startDate')}
-                onBlur={handleBlur}
-                error={touched.startDate && Boolean(errors.startDate)}
-                helperText={touched.startDate && errors.startDate}
+                // onBlur={handleBlur}
+                // error={touched.startDate && Boolean(errors.startDate)}
+                // helperText={touched.startDate && errors.startDate}
                 sx={{ width: '100%', m: '4px' }}
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
@@ -73,10 +64,10 @@ function DatePickerForm(props) {
                 name='endDate'
                 inputFormat='DD/MM/YYYY'
                 value={values.endDate}
-                onChange={handleFieldChangeEnd('endDate')}
-                onBlur={handleBlur}
-                error={touched.endDate && Boolean(errors.endDate)}
-                helperText={touched.endDate && errors.endDate}
+                onChange={handleFieldChange('endDate')}
+                // onBlur={handleBlur}
+                // error={touched.endDate && Boolean(errors.endDate)}
+                // helperText={touched.endDate && errors.endDate}
                 sx={{ width: '100%', m: '4px' }}
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>

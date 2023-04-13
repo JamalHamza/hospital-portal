@@ -125,13 +125,6 @@ function SpecialistAndExperience(props) {
         container
         spacing={2}
         gap='0.4rem'
-        sx={
-          {
-            // mb: '1em',
-            // display: 'flex',
-            // alignItems: 'center',
-          }
-        }
       >
         <Grid item xs={12} md={4}>
           <TextField

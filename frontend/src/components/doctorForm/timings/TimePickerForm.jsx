@@ -1,52 +1,84 @@
-import { Grid } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import * as React from 'react';
 
-export default function TimePicker() {
-  const [startTime, setStartTime] = React.useState(null);
-  const [endTime, setEndTime] = React.useState(null);
-  console.log(startTime);
+export default function TimePicker(props) {
+  const {
+    values,
+    handleBlur,
+    errors,
+    touched,
+    handleChange,
+    handleTimeChange,
+  } = props;
 
-  const handleStartTimeChange = (time) => {
-    setStartTime(time);
-  };
-
-  const handleEndTimeChange = (time) => {
-    setEndTime(time);
-  };
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['MobileTimePicker']}>
-        <Grid container spacing={2}>
+    <>
+      <Box
+        sx={{
+          display: 'felx',
+          flexDirection: 'column',
+        }}
+      >
+        <Grid
+          container
+          spacing={2}
+          gap='0.4rem'
+          sx={{
+            mt: '2em',
+            // width: '100%',
+          }}
+        >
           <Grid item xs={12} md={4}>
-            <MobileTimePicker
-              sx={{ width: '100%',  }}
-              style={{ margin: '4px', width: '100%' }}
-              label='Start Time'
-              value={startTime}
-              onChange={handleStartTimeChange}
-              minutesStep={30}
-              ampm={false}
-            />
-            {startTime && <div>{`${startTime.format('HH:mm')}`}</div>}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Box sx={{ width: '100%' }}>
+                <MobileTimePicker
+                  sx={{ width: '100%', margin: '4px' }}
+                  label='Start Time'
+                  minutesStep={30}
+                  ampm={false}
+                  name='startTime'
+                  inputFormat='DD/MM/YYYY'
+                  value={values.startTime}
+                  onChange={handleTimeChange('startTime')}
+                  onBlur={handleBlur}
+                  error={touched.startTime && Boolean(errors.startTime)}
+                  helperText={touched.startTime && errors.startTime}
+                />
+                <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
+                  {errors.startTime && touched.startTime ? (
+                    <>{errors.startTime}</>
+                  ) : null}
+                </Typography>
+              </Box>
+            </LocalizationProvider>
           </Grid>
           <Grid item xs={12} md={4}>
-            <MobileTimePicker
-              sx={{ width: '100%', margin: '4px' }}
-              //   style={{ margin: '4px', width: '100%' }}
-              label='End Time'
-              value={endTime}
-              onChange={handleEndTimeChange}
-              minutesStep={30}
-              ampm={false}
-            />
-            {endTime && <div>{`${endTime.format('HH:mm')}`}</div>}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <MobileTimePicker
+                sx={{ width: '100%', margin: '4px' }}
+                label='End Time'
+                minutesStep={30}
+                ampm={false}
+                name='endTime'
+                inputFormat='DD/MM/YYYY'
+                value={values.endTime}
+                onChange={handleTimeChange('endTime')}
+                onBlur={handleBlur}
+                error={touched.endDate && Boolean(errors.endDate)}
+                helperText={touched.endDate && errors.endDate}
+              />
+              <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
+                {errors.endTime && touched.endTime ? (
+                  <>{errors.endTime}</>
+                ) : null}
+              </Typography>
+            </LocalizationProvider>
           </Grid>
         </Grid>
-      </DemoContainer>
-    </LocalizationProvider>
+      </Box>
+    </>
   );
 }

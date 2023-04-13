@@ -6,6 +6,7 @@ import PersonalInformation from '../../components/doctorForm/personalInfo/Person
 import SpecialistAndExperience from '../../components/doctorForm/specialistInfo/SpecialistAndExperience';
 // import '../../dateRangePicker/DatePicker.css';
 import DatePickerForm from '../../components/doctorForm/timings/DatePickerForm';
+import TimePickerForm from '../../components/doctorForm/timings/TimePickerForm';
 
 const initialValues = {
   name: '',
@@ -40,6 +41,8 @@ const validationSchema = Yup.object().shape({
   years: Yup.number().required('Years is required'),
   startDate: Yup.date().required('Start Date is required'),
   endDate: Yup.date().required('Start Date is required'),
+  startTime: Yup.string().required('Start Time is required'),
+  endTime: Yup.string().required('End Time is required'),
 });
 
 function AddDoctor() {
@@ -67,9 +70,11 @@ function AddDoctor() {
   const handleFieldChange = (fieldName) => (value) => {
     formik.setFieldValue(fieldName, value);
   };
-  const handleFieldChangeEnd = (fieldName) => (value) => {
-    formik.setFieldValue(fieldName, value);
+
+  const handleTimeChange = (fieldName) => (time) => {
+    formik.setFieldValue(fieldName, time);
   };
+
 
   // ! ----------------
   const handleImageChange = (e) => {
@@ -147,7 +152,14 @@ function AddDoctor() {
               touched={formik.touched}
               errors={formik.errors}
               handleFieldChange={handleFieldChange}
-              handleFieldChangeEnd={handleFieldChangeEnd}
+            />
+            <TimePickerForm
+              values={formik.values}
+              handleChange={handleChange}
+              handleBlur={formik.handleBlur}
+              touched={formik.touched}
+              errors={formik.errors}
+              handleTimeChange={handleTimeChange}
             />
             {/* ! ------------------------------------ */}
             <Button
