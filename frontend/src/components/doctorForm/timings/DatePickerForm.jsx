@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 // import '../../dateRangePicker/DatePicker.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/';
@@ -19,7 +19,7 @@ function DatePickerForm(props) {
     touched,
     handleFieldChange,
   } = props;
-  console.log(values);
+
   return (
     <>
       <Box
@@ -41,28 +41,64 @@ function DatePickerForm(props) {
           }}
         >
           <BsFillCalendar2WeekFill fontSize={26} />
-          Working day & Time
+          Workday & Work hours
         </Typography>
       </Box>
-      <Box>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
-            label='Select a date'
-            name='startDate'
-            inputFormat='DD/MM/YYYY'
-            value={values.startDate}
-            onChange={handleFieldChange('startDate')}
-            onBlur={handleBlur}
-            error={touched.startDate && Boolean(errors.startDate)}
-            helperText={touched.startDate && errors.startDate}
-          />
-          <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
-            {errors.startDate && touched.startDate ? (
-              <div>{errors.startDate}</div>
-            ) : null}
-          </Typography>
-        </LocalizationProvider>
-      </Box>
+      <Grid
+        container
+        spacing={2}
+        gap='0.4rem'
+        sx={{
+          mb: '1em',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Grid item xs={12} md={4}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Box sx={{ width: '100%' }}>
+              <DatePicker
+                label='Select a date'
+                name='startDate'
+                inputFormat='DD/MM/YYYY'
+                value={values.startDate}
+                onChange={handleFieldChange('startDate')}
+                onBlur={handleBlur}
+                error={touched.startDate && Boolean(errors.startDate)}
+                helperText={touched.startDate && errors.startDate}
+                sx={{ width: '100%', m: '4px' }}
+              />
+              <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
+                {errors.startDate && touched.startDate ? (
+                  <div>{errors.startDate}</div>
+                ) : null}
+              </Typography>
+            </Box>
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Box sx={{ width: '100%' }}>
+              <DatePicker
+                label='Select a date'
+                name='startDate'
+                inputFormat='DD/MM/YYYY'
+                value={values.startDate}
+                onChange={handleFieldChange('startDate')}
+                onBlur={handleBlur}
+                error={touched.startDate && Boolean(errors.startDate)}
+                helperText={touched.startDate && errors.startDate}
+                sx={{ width: '100%', m: '4px' }}
+              />
+              <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
+                {errors.startDate && touched.startDate ? (
+                  <div>{errors.startDate}</div>
+                ) : null}
+              </Typography>
+            </Box>
+          </LocalizationProvider>
+        </Grid>
+      </Grid>
     </>
   );
 }
