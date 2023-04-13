@@ -31,8 +31,8 @@ export default function TimePicker(props) {
             // width: '100%',
           }}
         >
-          <Grid item xs={12} md={4}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <Grid item xs={12} md={4}>
               <Box sx={{ width: '100%' }}>
                 <MobileTimePicker
                   sx={{ width: '100%', margin: '4px' }}
@@ -53,10 +53,10 @@ export default function TimePicker(props) {
                   ) : null}
                 </Typography>
               </Box>
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {/* </LocalizationProvider> */}
+            </Grid>
+            <Grid item xs={12} md={4}>
+              {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
               <MobileTimePicker
                 sx={{ width: '100%', margin: '4px' }}
                 label='End Time'
@@ -75,8 +75,8 @@ export default function TimePicker(props) {
                   <>{errors.endTime}</>
                 ) : null}
               </Typography>
-            </LocalizationProvider>
-          </Grid>
+            </Grid>
+          </LocalizationProvider>
         </Grid>
       </Box>
     </>

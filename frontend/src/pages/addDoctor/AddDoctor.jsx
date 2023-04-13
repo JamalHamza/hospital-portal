@@ -88,7 +88,6 @@ function AddDoctor() {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      // Handle form submission here
       console.log(values);
     },
   });
