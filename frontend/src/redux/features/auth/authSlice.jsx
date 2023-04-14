@@ -324,7 +324,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     RESET(state) {
-      state.towFactor = false;
+      state.towFactors = false;
       state.isError = false;
       state.isSuccess = false;
       state.isLoading = false;

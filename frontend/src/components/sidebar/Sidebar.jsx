@@ -57,13 +57,6 @@ const Sidebar = ({ open, setOpen }) => {
         },
       ],
       [
-        // {
-        //   text: 'Doctors',
-        //   icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
-        //   onClick: () => {
-        //     navigate('/users'), setOpen(false);
-        //   },
-        // },
         {
           text: 'Add Doctor',
           icon: <GroupAddIcon fontSize='large' />,
@@ -82,6 +75,13 @@ const Sidebar = ({ open, setOpen }) => {
         // {
         //   text: 'Set Working Time',
         //   icon: <HistoryToggleOffIcon fontSize='large' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
+        // {
+        //   text: 'Doctors',
+        //   icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
         //   onClick: () => {
         //     navigate('/users'), setOpen(false);
         //   },

@@ -75,7 +75,6 @@ function AddDoctor() {
     formik.setFieldValue(fieldName, time);
   };
 
-
   // ! ----------------
   const handleImageChange = (e) => {
     setProfileImage(e.target.files[0]);
