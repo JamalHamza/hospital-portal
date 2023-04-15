@@ -212,6 +212,7 @@ function AddDoctor() {
             <Button
               type='submit'
               variant='contained'
+              
               sx={{
                 m: '2rem',
                 bgcolor: 'third.main',
@@ -224,7 +225,7 @@ function AddDoctor() {
                 },
               }}
             >
-              Register
+              Add Doctor
             </Button>
           </form>
         </Box>

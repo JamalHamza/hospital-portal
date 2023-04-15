@@ -63,6 +63,7 @@ export default function TimePicker(props) {
                 ampm={false}
                 name='endTime'
                 value={values.endTime}
+                minTime={values.startTime}
                 onChange={handleTimeChange('endTime')}
                 onBlur={handleBlur}
                 error={touched.endDate && Boolean(errors.endDate)}

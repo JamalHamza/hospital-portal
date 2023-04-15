@@ -73,6 +73,7 @@ function DatePickerForm(props) {
                 inputFormat='DD/MM/YYYY'
                 value={values.endDate}
                 disablePast={true}
+                minDate={values.startDate}
                 onChange={handleFieldChange('endDate')}
                 // onBlur={handleBlur}
                 // error={touched.endDate && Boolean(errors.endDate)}
