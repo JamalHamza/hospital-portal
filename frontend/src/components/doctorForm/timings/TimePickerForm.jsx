@@ -40,7 +40,6 @@ export default function TimePicker(props) {
                   minutesStep={30}
                   ampm={false}
                   name='startTime'
-                  inputFormat='DD/MM/YYYY'
                   value={values.startTime}
                   onChange={handleTimeChange('startTime')}
                   onBlur={handleBlur}
@@ -63,7 +62,6 @@ export default function TimePicker(props) {
                 minutesStep={30}
                 ampm={false}
                 name='endTime'
-                inputFormat='DD/MM/YYYY'
                 value={values.endTime}
                 onChange={handleTimeChange('endTime')}
                 onBlur={handleBlur}

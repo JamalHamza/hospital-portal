@@ -1,20 +1,21 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import bookingService from './bookingServices';
 
 const initialState = {
   isLoggedIn: false,
   doctor: null,
   doctors: [],
-  towFactors: false,
   isError: false,
   isSuccess: false,
   is: false,
-  isLoading: false,
+  // towFactors: false,
+  // isLoading: false,
   message: '',
 };
 
-// ! Register User ----------------
-export const register = createAsyncThunk(
+// ! Add Doctor ----------------
+export const addDoctor = createAsyncThunk(
   'booking/addDoctor',
   async (userData, thunkAPI) => {
     try {
@@ -41,22 +42,22 @@ const bookingSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // ! ADD NEW DOCTOR
-      .addCase(register.pending, (state) => {
+      .addCase(addDoctor.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(addDoctor.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isLoggedIn = true;
+        // state.isLoggedIn = true;
         state.doctor = action.payload;
         console.log(action.payload);
         toast.success('New Doctor Added');
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(addDoctor.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.user = null;
+        state.doctor = null;
         toast.error(action.payload);
       });
   },

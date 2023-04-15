@@ -15,12 +15,13 @@ const addDoctor = asyncHandler(async (req, res) => {
     email,
     password,
     phone,
-    experience,
+    experiences,
     fee,
     startDate,
     endDate,
     startTime,
     endTime,
+    specialist,
   } = req.body;
 
   //! validation
@@ -29,12 +30,13 @@ const addDoctor = asyncHandler(async (req, res) => {
     !email ||
     !password ||
     !phone ||
-    !experience ||
+    !experiences ||
     !fee ||
     !startDate ||
     !endDate ||
     !startTime ||
-    !endTime
+    !endTime ||
+    !specialist
   ) {
     res.status(400);
     throw new Error('Please fill in all the required fields ');
@@ -66,6 +68,8 @@ const addDoctor = asyncHandler(async (req, res) => {
   });
   // * -----------------------------
 
+  const experienceArray = experiences;
+
   // ! Create new Doctor
   const doctor = await Doctor.create({
     userId: user._id,
@@ -73,12 +77,13 @@ const addDoctor = asyncHandler(async (req, res) => {
     email,
     password,
     phone,
-    experience,
+    experiences: experienceArray,
     fee,
     startDate,
     endDate,
     startTime,
     endTime,
+    specialist,
   });
 
   // * -----------------------------

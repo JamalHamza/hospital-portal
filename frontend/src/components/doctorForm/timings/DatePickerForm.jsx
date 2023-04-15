@@ -7,7 +7,14 @@ import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import './DatePickerForm.css';
 
 function DatePickerForm(props) {
-  const { values, errors, touched, handleFieldChange, handleBlur } = props;
+  const {
+    values,
+    errors,
+    touched,
+    handleFieldChange,
+    handleBlur,
+    handleChange,
+  } = props;
 
   return (
     <>
@@ -45,14 +52,12 @@ function DatePickerForm(props) {
                 disablePast={true}
                 onChange={handleFieldChange('startDate')}
                 // onBlur={handleBlur}
-                // error={
-                //   (touched.startDate && Boolean(errors.startDate)) || false
-                // }
-                // helperText={(touched.startDate && errors.startDate)}
+                error={touched.startDate && Boolean(errors.startDate) && false}
+                // helperText={touched.startDate && errors.startDate}
                 sx={{ width: '100%', m: '4px' }}
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
-                {(errors.startDate && touched.startDate) || false ? (
+                {errors.startDate && touched.startDate ? (
                   <>{errors.startDate}</>
                 ) : null}
               </Typography>
@@ -65,7 +70,6 @@ function DatePickerForm(props) {
               <DatePicker
                 label='End Date'
                 name='endDate'
-                defaultValue={new Date()}
                 inputFormat='DD/MM/YYYY'
                 value={values.endDate}
                 disablePast={true}

@@ -5,8 +5,11 @@ import * as Yup from 'yup';
 import PersonalInformation from '../../components/doctorForm/personalInfo/PersonalInformation';
 import SpecialistAndExperience from '../../components/doctorForm/specialistInfo/SpecialistAndExperience';
 // import '../../dateRangePicker/DatePicker.css';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import DatePickerForm from '../../components/doctorForm/timings/DatePickerForm';
 import TimePickerForm from '../../components/doctorForm/timings/TimePickerForm';
+import { addDoctor } from '../../redux/features/booking/bookingSlice';
 
 const initialValues = {
   name: '',
@@ -48,8 +51,24 @@ const validationSchema = Yup.object().shape({
 function AddDoctor() {
   const [formData, setFormData] = useState(initialValues);
   const [experiences, setExperiences] = useState([]);
-  const { password, password2, hospitalName, years, startDate, endDate } =
-    formData;
+  console.log(experiences)
+  const dispatch = useDispatch();
+  const {
+    password,
+    password2,
+    hospitalName,
+    years,
+    startDate,
+    endDate,
+    name,
+    email,
+    phone,
+    fee,
+    startTime,
+    endTime,
+    specialist,
+  } = formData;
+  console.log(formData)
 
   // ! Add Experince -----------------
   function addExperience(hospitalName, years) {
@@ -58,21 +77,32 @@ function AddDoctor() {
       { hospitalName, years },
     ]);
   }
-
   // ! -----------------------------
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     formik.setFieldValue(name, value);
     setFormData({ ...formData, [name]: value });
   };
 
+  // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
+    const formatedDate = value?.toISOString();
+    // ! this just for formik validation
     formik.setFieldValue(fieldName, value);
+    // ! bug fixed after 6 hours I forgot to setFormData
+    setFormData({ ...formData, [fieldName]: formatedDate });
   };
 
+  // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
+    const hour = moment(time.$d).format('HH');
+    const min = moment(time.$d).format('mm');
+    const formatedTime = `${hour}:${min}`;
+    // console.log(`${hour}:${min}`);
+
     formik.setFieldValue(fieldName, time);
+    // ! bug fixed after 6 hours I forgot to setFormData
+    setFormData({ ...formData, [fieldName]: formatedTime });
   };
 
   // ! ----------------
@@ -81,16 +111,36 @@ function AddDoctor() {
     setImagePreview(URL.createObjectURL(e.target.files[0]));
   };
 
-  // ! -----useFormik -----------------
+  // ! ----- Add Doctor function -----
+  const AddDoctor = async () => {
+    const userData = {
+      name,
+      password,
+      startDate,
+      endDate,
+      email,
+      phone,
+      fee,
+      startTime,
+      endTime,
+      specialist,
+      
+      experiences,
+    };
 
+    await dispatch(addDoctor(userData));
+  };
+
+  // ! -----useFormik -----------------
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
+      // console.log(`form data formik validation`);
+      // console.log(values);
+      AddDoctor(values);
     },
   });
-
   return (
     <div>
       <Box

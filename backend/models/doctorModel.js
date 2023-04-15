@@ -53,7 +53,7 @@ const doctorSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  experience: [
+  experiences: [
     {
       hospitalName: { type: String, required: true },
       years: { type: Number, required: true },
