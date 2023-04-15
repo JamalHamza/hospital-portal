@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcryptjs = require('bcryptjs');
 
 const doctorSchema = new mongoose.Schema({
   userId: {
@@ -76,6 +77,20 @@ const doctorSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+// ! Encrupt password before saving user.
+doctorSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    return next();
+  }
+  // ! Hash password
+  const salt = await bcryptjs.genSalt(10);
+  const hashedPassword = await bcryptjs.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
+});
+
+// ! --------------------------------
 
 const DoctorModel = mongoose.model('Doctor', doctorSchema);
 
