@@ -43,7 +43,7 @@ const doctorSchema = new mongoose.Schema({
   },
   isVerified: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   specialist: {
     type: String,

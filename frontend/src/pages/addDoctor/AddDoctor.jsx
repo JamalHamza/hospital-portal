@@ -9,6 +9,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import DatePickerForm from '../../components/doctorForm/timings/DatePickerForm';
 import TimePickerForm from '../../components/doctorForm/timings/TimePickerForm';
+import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
 import { addDoctor } from '../../redux/features/booking/bookingSlice';
 
 const initialValues = {
@@ -49,9 +50,9 @@ const validationSchema = Yup.object().shape({
 });
 
 function AddDoctor() {
+  useRedirectLoggedOutUser('/login');
   const [formData, setFormData] = useState(initialValues);
   const [experiences, setExperiences] = useState([]);
-  console.log(experiences)
   const dispatch = useDispatch();
   const {
     password,
@@ -68,7 +69,7 @@ function AddDoctor() {
     endTime,
     specialist,
   } = formData;
-  console.log(formData)
+  console.log(formData);
 
   // ! Add Experince -----------------
   function addExperience(hospitalName, years) {
@@ -124,7 +125,7 @@ function AddDoctor() {
       startTime,
       endTime,
       specialist,
-      
+
       experiences,
     };
 
