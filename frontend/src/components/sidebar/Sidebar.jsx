@@ -1,6 +1,6 @@
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import LockResetIcon from '@mui/icons-material/LockReset';
@@ -50,7 +50,7 @@ const Sidebar = ({ open, setOpen }) => {
         },
         {
           text: 'Users',
-          icon: <GroupIcon fontSize='large' color='red' />,
+          icon: <GroupIcon fontSize='large' />,
           onClick: () => {
             navigate('/users'), setOpen(false);
           },
@@ -65,12 +65,19 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Appointments',
-          icon: <CalendarMonthIcon fontSize='large' />,
+          text: 'Doctors',
+          icon: <Diversity1Icon fontSize='large' />,
           onClick: () => {
-            navigate('/users'), setOpen(false);
+            navigate('/admin/doctors'), setOpen(false);
           },
         },
+        // {
+        //   text: 'Appointments',
+        //   icon: <CalendarMonthIcon fontSize='large' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
 
         // {
         //   text: 'Set Working Time',
@@ -93,21 +100,14 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: (
-            <ManageAccountsIcon
-              fontSize='large'
-              sx={{ color: 'primary.main' }}
-            />
-          ),
+          icon: <ManageAccountsIcon fontSize='large' />,
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: (
-            <LockResetIcon fontSize='large' sx={{ color: 'primary.main' }} />
-          ),
+          icon: <LockResetIcon fontSize='large' />,
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
@@ -119,14 +119,14 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+          icon: <ManageAccountsIcon fontSize='large' />,
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' color='btn' />,
+          icon: <LockResetIcon fontSize='large' />,
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },

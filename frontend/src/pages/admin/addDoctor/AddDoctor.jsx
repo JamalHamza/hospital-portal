@@ -2,15 +2,15 @@ import { Box, Button, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
-import PersonalInformation from '../../components/doctorForm/personalInfo/PersonalInformation';
-import SpecialistAndExperience from '../../components/doctorForm/specialistInfo/SpecialistAndExperience';
+import PersonalInformation from '../../../components/doctorForm/personalInfo/PersonalInformation';
+import SpecialistAndExperience from '../../../components/doctorForm/specialistInfo/SpecialistAndExperience';
 // import '../../dateRangePicker/DatePicker.css';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import DatePickerForm from '../../components/doctorForm/timings/DatePickerForm';
-import TimePickerForm from '../../components/doctorForm/timings/TimePickerForm';
-import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
-import { addDoctor } from '../../redux/features/booking/bookingSlice';
+import DatePickerForm from '../../../components/doctorForm/timings/DatePickerForm';
+import TimePickerForm from '../../../components/doctorForm/timings/TimePickerForm';
+import useRedirectLoggedOutUser from '../../../customHooks/useRedirectLoggedOutUser';
+import { addDoctor } from '../../../redux/features/booking/bookingSlice';
 
 const initialValues = {
   name: '',
@@ -69,7 +69,6 @@ function AddDoctor() {
     endTime,
     specialist,
   } = formData;
-  console.log(formData);
 
   // ! Add Experince -----------------
   function addExperience(hospitalName, years) {
@@ -106,12 +105,6 @@ function AddDoctor() {
     setFormData({ ...formData, [fieldName]: formatedTime });
   };
 
-  // ! ----------------
-  const handleImageChange = (e) => {
-    setProfileImage(e.target.files[0]);
-    setImagePreview(URL.createObjectURL(e.target.files[0]));
-  };
-
   // ! ----- Add Doctor function -----
   const AddDoctor = async () => {
     const userData = {
@@ -125,7 +118,6 @@ function AddDoctor() {
       startTime,
       endTime,
       specialist,
-
       experiences,
     };
 
@@ -176,7 +168,6 @@ function AddDoctor() {
               errors={formik.errors}
               password={password}
               password2={password2}
-              handleImageChange={handleImageChange}
             />
             <hr color='#ccb7c0' />
             <SpecialistAndExperience
@@ -208,11 +199,9 @@ function AddDoctor() {
               errors={formik.errors}
               handleTimeChange={handleTimeChange}
             />
-            {/* ! ------------------------------------ */}
             <Button
               type='submit'
               variant='contained'
-              
               sx={{
                 m: '2rem',
                 bgcolor: 'third.main',
