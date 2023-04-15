@@ -64,6 +64,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     email,
     password,
     userAgent,
+    phone,
     role: 'doctor',
   });
   // * -----------------------------
