@@ -136,8 +136,6 @@ function AddDoctor() {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      // console.log(`form data formik validation`);
-      // console.log(values);
       AddDoctor(values);
     },
   });
