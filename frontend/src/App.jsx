@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SingleDoctor from './components/doctors/singleDoctor/SingleDoctor';
 import Layout from './components/layout/Layout';
 import AddDoctor from './pages/admin/addDoctor/AddDoctor';
 import Doctors from './pages/admin/doctors/Doctors';
@@ -144,6 +145,14 @@ function App() {
               element={
                 <Layout>
                   <Doctors />
+                </Layout>
+              }
+            />
+            <Route
+              path='/admin/doctors/:id'
+              element={
+                <Layout>
+                  <SingleDoctor />
                 </Layout>
               }
             />

@@ -11,13 +11,18 @@ import {
 import Card from '@mui/material/Card';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getDoctors } from '../../../redux/features/booking/bookingSlice';
 import Loader from '../../loader/Loader';
 import './DoctorList.css';
 
 function DoctorList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isLoading, doctors } = useSelector((state) => state.booking);
+  const handleClick = (id) => {
+    navigate(`/admin/doctors/${id}`);
+  };
   //  ! -------------
   useEffect(() => {
     dispatch(getDoctors());
@@ -98,6 +103,7 @@ function DoctorList() {
                       {doctor?.specialist}
                     </Typography>
                     <Button
+                      onClick={() => handleClick(doctor._id)}
                       variant='contained'
                       sx={{
                         mt: '2em',
@@ -105,7 +111,6 @@ function DoctorList() {
                         padding: '0.4em 0.5em',
                         fontWeight: 800,
                         fontSize: '1rem',
-                        // alignSelf: 'end',
                         color: 'primary.dark',
                         '&:hover': {
                           background: '#ccb7c0',
