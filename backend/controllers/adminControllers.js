@@ -57,7 +57,7 @@ const addDoctor = asyncHandler(async (req, res) => {
   const ua = parser(req.headers['user-agent']);
   const userAgent = [ua.ua];
 
-  // * -----------------------------
+  // ! ---------------
   // ! Create new User
   const user = await User.create({
     name,
@@ -67,7 +67,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     phone,
     role: 'doctor',
   });
-  // * -----------------------------
+  // ! ----------------
 
   const experienceArray = experiences;
 
@@ -87,7 +87,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     specialist,
   });
 
-  // * -----------------------------
+  // ! ------------------
   // ! Generate Token
   const token = genereteteToken(user._id);
   // ! Send  HTTP-only cookie
@@ -110,6 +110,17 @@ const addDoctor = asyncHandler(async (req, res) => {
   }
 });
 
+// * --------------------------------------
+const getDoctors = asyncHandler(async (req, res) => {
+  const doctors = await Doctor.find().sort('-createAt').select('-password');
+  if (!doctors) {
+    res.status(500);
+    throw new Error('Something went wrong, please try again');
+  }
+  res.status(200).json(doctors);
+});
+
 module.exports = {
   addDoctor,
+  getDoctors,
 };

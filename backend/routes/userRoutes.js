@@ -18,7 +18,7 @@ const {
   changePassword,
   sendLoginCode,
   loginWithCode,
-  loginWithGoogle
+  loginWithGoogle,
 } = require('../controllers/userControllers');
 
 const {
