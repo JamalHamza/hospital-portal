@@ -104,7 +104,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     const { _id, name, email, phone, bio, photo, role, isVerified } = user;
     res
       .status(201)
-      .json({ _id, name, email, phone, bio, photo, role, isVerified, token });
+      .json({ _id, name, email, phone, bio, photo, role, isVerified });
   } else {
     res.status(400);
     throw new Error('Invalid user data');

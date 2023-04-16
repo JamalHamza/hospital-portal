@@ -10,7 +10,7 @@
 }
 
 .css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
-  background: #537fe7 !important;
+  background: #454066 !important;
 }
 
 /* ! Mui sidebare Icon */
@@ -30,4 +30,9 @@
 
 .sidebar-icon {
   width: 2.1em;
+}
+
+.app-header-logo {
+  width: 25px;
+  height: 25px;
 }

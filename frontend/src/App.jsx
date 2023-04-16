@@ -37,6 +37,7 @@ const theme = createTheme({
       main: '#fff',
     },
     primary: {
+      dart: '#454066',
       main: '#ADA2FF',
       light: '#dcd7ff',
     },
