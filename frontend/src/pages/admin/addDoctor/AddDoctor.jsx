@@ -1,15 +1,15 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
-import PersonalInformation from '../../../components/doctorForm/personalInfo/PersonalInformation';
-import SpecialistAndExperience from '../../../components/doctorForm/specialistInfo/SpecialistAndExperience';
+import PersonalInformation from '../../../components/doctorAddForm/personalInfo/PersonalInformation';
+import SpecialistAndExperience from '../../../components/doctorAddForm/specialistInfo/SpecialistAndExperience';
 // import '../../dateRangePicker/DatePicker.css';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import AddNewDoctor from '../../../assets/admin/logo2.png';
-import DatePickerForm from '../../../components/doctorForm/timings/DatePickerForm';
-import TimePickerForm from '../../../components/doctorForm/timings/TimePickerForm';
+import DatePickerForm from '../../../components/doctorAddForm/timings/DatePickerForm';
+import TimePickerForm from '../../../components/doctorAddForm/timings/TimePickerForm';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import useRedirectLoggedOutUser from '../../../customHooks/useRedirectLoggedOutUser';
 import { addDoctor } from '../../../redux/features/booking/bookingSlice';
@@ -139,71 +139,71 @@ function AddDoctor() {
       img={AddNewDoctor}
       altImg={'Add new Doctor'}
     >
-        <Box
-          sx={{
-            width: '100%',
-          }}
-        >
-          <form onSubmit={formik.handleSubmit}>
-            <hr color='#ccb7c0' />
-            <PersonalInformation
-              values={formik.values}
-              handleChange={handleChange}
-              handleBlur={formik.handleBlur}
-              touched={formik.touched}
-              errors={formik.errors}
-              password={password}
-              password2={password2}
-            />
-            <hr color='#ccb7c0' />
-            <SpecialistAndExperience
-              values={formik.values}
-              handleChange={handleChange}
-              handleBlur={formik.handleBlur}
-              touched={formik.touched}
-              errors={formik.errors}
-              hospitalName={hospitalName}
-              years={years}
-              experiences={experiences}
-              setExperiences={setExperiences}
-              addExperience={addExperience}
-            />
-            <hr color='#ccb7c0' />
-            <DatePickerForm
-              values={formik.values}
-              handleChange={handleChange}
-              handleBlur={formik.handleBlur}
-              touched={formik.touched}
-              errors={formik.errors}
-              handleFieldChange={handleFieldChange}
-            />
-            <TimePickerForm
-              values={formik.values}
-              handleChange={handleChange}
-              handleBlur={formik.handleBlur}
-              touched={formik.touched}
-              errors={formik.errors}
-              handleTimeChange={handleTimeChange}
-            />
-            <Button
-              type='submit'
-              variant='contained'
-              sx={{
-                m: '2rem',
-                bgcolor: 'third.main',
-                padding: '1.2em 2em',
-                fontWeight: 800,
-                fontSize: '1.2rem',
-                color: 'primary.dark',
-                '&:hover': {
-                  background: '#ccb7c0',
-                },
-              }}
-            >
-              Add Doctor
-            </Button>
-          </form>
-        </Box>
+      <Box
+        sx={{
+          width: '100%',
+        }}
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <hr color='#ccb7c0' />
+          <PersonalInformation
+            values={formik.values}
+            handleChange={handleChange}
+            handleBlur={formik.handleBlur}
+            touched={formik.touched}
+            errors={formik.errors}
+            password={password}
+            password2={password2}
+          />
+          <hr color='#ccb7c0' />
+          <SpecialistAndExperience
+            values={formik.values}
+            handleChange={handleChange}
+            handleBlur={formik.handleBlur}
+            touched={formik.touched}
+            errors={formik.errors}
+            hospitalName={hospitalName}
+            years={years}
+            experiences={experiences}
+            setExperiences={setExperiences}
+            addExperience={addExperience}
+          />
+          <hr color='#ccb7c0' />
+          <DatePickerForm
+            values={formik.values}
+            handleChange={handleChange}
+            handleBlur={formik.handleBlur}
+            touched={formik.touched}
+            errors={formik.errors}
+            handleFieldChange={handleFieldChange}
+          />
+          <TimePickerForm
+            values={formik.values}
+            handleChange={handleChange}
+            handleBlur={formik.handleBlur}
+            touched={formik.touched}
+            errors={formik.errors}
+            handleTimeChange={handleTimeChange}
+          />
+          <Button
+            type='submit'
+            variant='contained'
+            sx={{
+              m: '2rem',
+              bgcolor: 'third.main',
+              padding: '1.2em 2em',
+              fontWeight: 800,
+              fontSize: '1.2rem',
+              color: 'primary.dark',
+              '&:hover': {
+                background: '#ccb7c0',
+              },
+            }}
+          >
+            Add Doctor
+          </Button>
+        </form>
+      </Box>
     </FormWrapper>
   );
 }
