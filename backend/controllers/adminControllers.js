@@ -78,6 +78,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     email,
     password,
     phone,
+    photo: user.photo,
     experiences: experienceArray,
     fee,
     startDate,
@@ -88,16 +89,16 @@ const addDoctor = asyncHandler(async (req, res) => {
   });
 
   // ! ------------------
-  // ! Generate Token
-  const token = genereteteToken(user._id);
-  // ! Send  HTTP-only cookie
-  res.cookie('token', token, {
-    path: '/',
-    httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 86400), // one day
-    sameSite: 'none',
-    secure: true,
-  });
+  // // ! Generate Token
+  // const token = genereteteToken(user._id);
+  // // ! Send  HTTP-only cookie
+  // res.cookie('token', token, {
+  //   path: '/',
+  //   httpOnly: true,
+  //   expires: new Date(Date.now() + 1000 * 86400), // one day
+  //   sameSite: 'none',
+  //   secure: true,
+  // });
   // ! if user created successfuly & SEND to frontend
   if (user && doctor) {
     const { _id, name, email, phone, bio, photo, role, isVerified } = user;

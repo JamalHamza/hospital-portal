@@ -7,6 +7,7 @@ import SpecialistAndExperience from '../../../components/doctorAddForm/specialis
 // import '../../dateRangePicker/DatePicker.css';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import AddNewDoctor from '../../../assets/admin/logo2.png';
 import DatePickerForm from '../../../components/doctorAddForm/timings/DatePickerForm';
 import TimePickerForm from '../../../components/doctorAddForm/timings/TimePickerForm';
@@ -55,6 +56,7 @@ function AddDoctor() {
   const [formData, setFormData] = useState(initialValues);
   const [experiences, setExperiences] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     password,
     password2,
@@ -123,6 +125,7 @@ function AddDoctor() {
     };
 
     await dispatch(addDoctor(userData));
+    navigate('/admin/doctors');
   };
 
   // ! -----useFormik -----------------

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import './FormWrapper.css'
+import './FormWrapper.css';
 
 function FormWrapper(props) {
   const { title, img, altImg } = props;
@@ -27,7 +27,10 @@ function FormWrapper(props) {
           }}
         >
           <img src={img} alt={altImg} className='add-new-doctor-logo' />
-          <Typography variant='h4' sx={{ color: 'primary.main', p: '0.2em', fontWeight: 800 }}>
+          <Typography
+            variant='h4'
+            sx={{ color: 'primary.main', p: '0.2em', fontWeight: 800 }}
+          >
             {title}
           </Typography>
         </Box>
