@@ -36,21 +36,28 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' color='secondary.main' />,
+          icon: (
+            <ManageAccountsIcon
+              fontSize='large'
+              sx={{ color: 'primary.light' }}
+            />
+          ),
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' color='secondary.main' />,
+          icon: (
+            <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
         },
         {
           text: 'Users',
-          icon: <GroupIcon fontSize='large' />,
+          icon: <GroupIcon fontSize='large' sx={{ color: 'primary.light' }} />,
           onClick: () => {
             navigate('/users'), setOpen(false);
           },
@@ -59,14 +66,18 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Add Doctor',
-          icon: <GroupAddIcon fontSize='large' />,
+          icon: (
+            <GroupAddIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/admin/addDoctor'), setOpen(false);
           },
         },
         {
           text: 'Doctors',
-          icon: <Diversity1Icon fontSize='large' />,
+          icon: (
+            <Diversity1Icon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/admin/doctors'), setOpen(false);
           },
