@@ -33,6 +33,25 @@ export const addDoctor = createAsyncThunk(
   }
 );
 
+// ! Get Doctors ---------------
+export const getDoctors = createAsyncThunk(
+  'auth/getDoctors',
+  async (_, thunkAPI) => {
+    try {
+      return await bookingService.getDoctors();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // * ---------------------------------------
 
 const bookingSlice = createSlice({
@@ -41,14 +60,14 @@ const bookingSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // ! ADD NEW DOCTOR
+      // ! Add New Doctor -----------
       .addCase(addDoctor.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(addDoctor.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        // state.isLoggedIn = true;
+        state.isLoggedIn = true;
         state.doctor = action.payload;
         console.log(action.payload);
         toast.success('New Doctor Added');
@@ -58,6 +77,22 @@ const bookingSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.doctor = null;
+        toast.error(action.payload);
+      })
+      // ! Get All Doctors
+      .addCase(getDoctors.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getDoctors.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.doctors = action.payload;
+      })
+      .addCase(getDoctors.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
         toast.error(action.payload);
       });
   },

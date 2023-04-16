@@ -9,8 +9,15 @@ const addDcotor = async (userData) => {
   return response.data;
 };
 
+// ! Get All Doctors --------------------------
+const getDoctors = async () => {
+  const response = await axios.get(API_URL + '/getDoctors');
+  return response.data;
+};
+
 const bookingService = {
   addDcotor,
+  getDoctors,
 };
 
 export default bookingService;
