@@ -7,11 +7,12 @@ import SpecialistAndExperience from '../../../components/doctorForm/specialistIn
 // import '../../dateRangePicker/DatePicker.css';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import AddNewDoctor from '../../../assets/admin/logo2.png';
 import DatePickerForm from '../../../components/doctorForm/timings/DatePickerForm';
 import TimePickerForm from '../../../components/doctorForm/timings/TimePickerForm';
+import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import useRedirectLoggedOutUser from '../../../customHooks/useRedirectLoggedOutUser';
 import { addDoctor } from '../../../redux/features/booking/bookingSlice';
-
 const initialValues = {
   name: '',
   email: '',
@@ -133,26 +134,11 @@ function AddDoctor() {
     },
   });
   return (
-    <div>
-      <Box
-        sx={{
-          bgcolor: 'form.main',
-          width: '96%',
-          maxWidth: '100rem',
-          m: '2em auto',
-          p: '2em 2em',
-          borderRadius: '10px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0.5em',
-        }}
-      >
-        <Typography
-          variant='h4'
-          sx={{ color: 'primary.main', textAlign: 'center', p: '0.2em' }}
-        >
-          Add New Doctor
-        </Typography>
+    <FormWrapper
+      title={'Add New Doctor'}
+      img={AddNewDoctor}
+      altImg={'Add new Doctor'}
+    >
         <Box
           sx={{
             width: '100%',
@@ -218,8 +204,7 @@ function AddDoctor() {
             </Button>
           </form>
         </Box>
-      </Box>
-    </div>
+    </FormWrapper>
   );
 }
 
