@@ -15,14 +15,14 @@ function PersonalInfo(props) {
   const { doctor } = props;
   const formatedDate = moment.utc(doctor?.createdAt).format('YYYY-MM-DD');
   // ! experinece
-  const experienceDoctor = doctor?.experiences.reduce((total, exp) => {
+  const experienceDoctor = doctor?.experiences?.reduce((total, exp) => {
     return total + exp.years;
   }, 0);
   return (
     <>
       <Box>
         <Grid container>
-          <Grid item xs={12} md={2.5} sx={{ borderBottom: '1px solid blue' }}>
+          <Grid item xs={12} md={2.5}>
             <Box
               sx={{
                 display: 'flex',
