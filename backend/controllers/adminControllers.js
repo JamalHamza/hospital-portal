@@ -66,7 +66,6 @@ const addDoctor = asyncHandler(async (req, res) => {
     userAgent,
     phone,
     role: 'doctor',
-    isVerified: true,
   });
   // ! ----------------
 
@@ -116,24 +115,25 @@ const getDoctor = asyncHandler(async (req, res) => {
   // ! req.user is comming from AuthMiddleWare
   const id = req.params.id;
   const doctor = await Doctor.findById(id);
-  console.log(id);
-  console.log(doctor);
-  if (doctor) {
-    const {
-      name,
-      email,
-      specialist,
-      fee,
-      experiences,
-      startDate,
-      endDate,
-      startTime,
-      endTime,
-      phone,
-      isVerified,
-      photo,
-      createdAt,
-    } = doctor;
+  const {
+    name,
+    email,
+    specialist,
+    fee,
+    experiences,
+    startDate,
+    endDate,
+    startTime,
+    endTime,
+    phone,
+    photo,
+    createdAt,
+    userId,
+  } = doctor;
+  const user = await User.findById(userId);
+
+  if (doctor && user) {
+    const { isVerified } = user;
     res.status(200).json({
       name,
       email,
