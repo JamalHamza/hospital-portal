@@ -66,6 +66,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     userAgent,
     phone,
     role: 'doctor',
+    isVerified: true,
   });
   // ! ----------------
 
@@ -88,17 +89,6 @@ const addDoctor = asyncHandler(async (req, res) => {
     specialist,
   });
 
-  // ! ------------------
-  // // ! Generate Token
-  // const token = genereteteToken(user._id);
-  // // ! Send  HTTP-only cookie
-  // res.cookie('token', token, {
-  //   path: '/',
-  //   httpOnly: true,
-  //   expires: new Date(Date.now() + 1000 * 86400), // one day
-  //   sameSite: 'none',
-  //   secure: true,
-  // });
   // ! if user created successfuly & SEND to frontend
   if (user && doctor) {
     const { _id, name, email, phone, bio, photo, role, isVerified } = user;
@@ -121,7 +111,49 @@ const getDoctors = asyncHandler(async (req, res) => {
   res.status(200).json(doctors);
 });
 
+// * -------------------------------------
+const getDoctor = asyncHandler(async (req, res) => {
+  // ! req.user is comming from AuthMiddleWare
+  const id = req.params.id;
+  const doctor = await Doctor.findOne({ userId: id });
+  if (doctor) {
+    const {
+      name,
+      email,
+      specialist,
+      fee,
+      experiences,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      isVerified,
+      photo,
+      createdAt,
+    } = doctor;
+    console.log(createdAt);
+    res.status(200).json({
+      name,
+      email,
+      specialist,
+      fee,
+      experiences,
+      startDate,
+      endDate,
+      startTime,
+      endTime,
+      isVerified,
+      photo,
+      createdAt,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
+
 module.exports = {
   addDoctor,
   getDoctors,
+  getDoctor,
 };
