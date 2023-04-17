@@ -129,6 +129,7 @@ const getDoctor = asyncHandler(async (req, res) => {
       endDate,
       startTime,
       endTime,
+      phone,
       isVerified,
       photo,
       createdAt,
@@ -136,6 +137,7 @@ const getDoctor = asyncHandler(async (req, res) => {
     res.status(200).json({
       name,
       email,
+      phone,
       specialist,
       fee,
       experiences,

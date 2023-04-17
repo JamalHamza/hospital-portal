@@ -62,7 +62,6 @@ function DoctorList() {
                     }}
                   >
                     <Typography
-                      component='div'
                       variant='h5'
                       sx={{
                         color: 'primary.dark',

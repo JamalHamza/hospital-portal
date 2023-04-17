@@ -10,7 +10,7 @@ function FormWrapper(props) {
         sx={{
           bgcolor: 'form.main',
           width: '96%',
-          maxWidth: '100rem',
+          maxWidth: '110rem',
           m: '2em auto',
           p: '2em 2em',
           borderRadius: '10px',

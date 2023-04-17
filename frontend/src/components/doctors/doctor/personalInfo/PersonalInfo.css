@@ -1,0 +1,12 @@
+.doctor-profile-img {
+  width: 140px;
+  height: 140px;
+}
+
+@media only screen and (max-width: 400px) {
+  /*Big smartphones [426px -> 600px]*/
+
+  .css-167g1rt-MuiGrid-root {
+    flex-direction: column !important;
+  }
+}
