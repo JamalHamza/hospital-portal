@@ -115,7 +115,9 @@ const getDoctors = asyncHandler(async (req, res) => {
 const getDoctor = asyncHandler(async (req, res) => {
   // ! req.user is comming from AuthMiddleWare
   const id = req.params.id;
-  const doctor = await Doctor.findOne({ userId: id });
+  const doctor = await Doctor.findById(id);
+  console.log(id);
+  console.log(doctor);
   if (doctor) {
     const {
       name,
@@ -131,7 +133,6 @@ const getDoctor = asyncHandler(async (req, res) => {
       photo,
       createdAt,
     } = doctor;
-    console.log(createdAt);
     res.status(200).json({
       name,
       email,

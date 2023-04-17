@@ -15,9 +15,16 @@ const getDoctors = async () => {
   return response.data;
 };
 
+// ! Get Single Doctor -----------------------
+const getDoctor = async (id) => {
+  const response = await axios.get(API_URL + `/getDoctors/${id}`);
+  return response.data;
+};
+
 const bookingService = {
   addDcotor,
   getDoctors,
+  getDoctor,
 };
 
 export default bookingService;

@@ -52,6 +52,25 @@ export const getDoctors = createAsyncThunk(
   }
 );
 
+// ! Get Doctors ---------------
+export const getDoctor = createAsyncThunk(
+  'auth/getDoctor',
+  async (id, thunkAPI) => {
+    try {
+      return await bookingService.getDoctor(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // * ---------------------------------------
 
 const bookingSlice = createSlice({
@@ -69,7 +88,6 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.doctor = action.payload;
-        console.log(action.payload);
         toast.success('New Doctor Added');
       })
       .addCase(addDoctor.rejected, (state, action) => {
@@ -79,7 +97,7 @@ const bookingSlice = createSlice({
         state.doctor = null;
         toast.error(action.payload);
       })
-      // ! Get All Doctors
+      // ! Get All Doctors --------
       .addCase(getDoctors.pending, (state) => {
         state.isLoading = true;
       })
@@ -90,6 +108,22 @@ const bookingSlice = createSlice({
         state.doctors = action.payload;
       })
       .addCase(getDoctors.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Doctor ------------
+      .addCase(getDoctor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.doctor = action.payload;
+      })
+      .addCase(getDoctor.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
