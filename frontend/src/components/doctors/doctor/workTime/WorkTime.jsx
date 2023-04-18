@@ -48,7 +48,7 @@ function WorkTime(props) {
       <Box
         sx={{
           mt: '2rem',
-          ml: '5px',
+          ml: '4px',
         }}
       >
         <TableContainer>
@@ -61,7 +61,7 @@ function WorkTime(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{doctor.startTime}</TableCell>
+                <TableCell>{doctor?.startTime}</TableCell>
                 <TableCell>{doctor?.endTime}</TableCell>
               </TableRow>
             </TableBody>

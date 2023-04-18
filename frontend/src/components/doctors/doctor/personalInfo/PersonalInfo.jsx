@@ -25,13 +25,19 @@ function PersonalInfo(props) {
     <>
       <Box>
         <Grid container>
-          <Grid item xs={12} md={12}>
-            <IconButton onClick={() => navigate('/admin/doctors')}>
-              <ArrowBackIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
-            </IconButton>
+          <Grid container xs={12} md={12}>
+            <Grid item xs={10} md={11.5}>
+              <IconButton onClick={() => navigate('/admin/doctors')}>
+                <ArrowBackIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
+              </IconButton>
+            </Grid>
+            <Grid item xs={2} md={0.5}>
+              <IconButton>
+                <AiFillDelete fontSize={24} color='red' />
+              </IconButton>
+            </Grid>
           </Grid>
-
-          <Grid item xs={12} md={2.5}>
+          <Grid item xs={12} md={6}>
             <Box
               sx={{
                 display: 'flex',
@@ -74,8 +80,8 @@ function PersonalInfo(props) {
               >{`Created at ${formatedDate}`}</Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={9.5} sx={{ display: 'flex' }}>
-            <Grid item xs={12} md={11}>
+          <Grid item xs={12} md={4} sx={{ m: '0 auto' }}>
+            <Grid item xs={12} md={12}>
               <Box p={2}>
                 <Typography
                   variant='h4'
@@ -173,11 +179,11 @@ function PersonalInfo(props) {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={2} md={1} mt={1}>
+            {/* <Grid item xs={2} md={1} mt={1}>
               <IconButton>
                 <AiFillDelete fontSize={24} color='red' />
               </IconButton>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Box>
