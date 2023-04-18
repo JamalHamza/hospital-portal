@@ -13,24 +13,25 @@ import {
   Typography,
 } from '@mui/material';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import '../Doctor.css';
 
 function Workday(props) {
+  const [date, setDate] = useState(false);
   const { doctor } = props;
   const today = new Date().toISOString();
   const formatedStartDate = moment.utc(doctor?.startDate).format('YYYY-MM-DD');
   const formatedEndDate = moment.utc(doctor?.endDate).format('YYYY-MM-DD');
   const formatedToday = moment.utc(today).format('YYYY-MM-DD');
 
-  if (formatedEndDate >= formatedToday) {
+  if (formatedEndDate > formatedToday) {
     console.log(false);
   } else {
     console.log(true);
   }
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} md={5}>
       <Box
         sx={{
           display: 'flex',
@@ -52,13 +53,13 @@ function Workday(props) {
             Working Date
           </Typography>
         </Box>
-        <IconButton>
+        <IconButton disabled={formatedEndDate > formatedToday}>
           <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
         </IconButton>
       </Box>
       <Box
         sx={{
-          mt: '2rem',
+          mt: '0.8rem',
         }}
       >
         <TableContainer>

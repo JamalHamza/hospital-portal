@@ -8,4 +8,10 @@
   .css-167g1rt-MuiGrid-root {
     flex-direction: column !important;
   }
+
+
+.css-1idn90j-MuiGrid-root {
+    width: 80%;
+    margin: 0 auto !important;
+  }
 }

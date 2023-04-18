@@ -11,6 +11,7 @@ import { AiFillDelete } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
+import LiveDate from '../liveDate/LiveDate';
 import './PersonalInfo.css';
 
 function PersonalInfo(props) {
@@ -37,7 +38,7 @@ function PersonalInfo(props) {
               </IconButton>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} sm={6} md={6}>
             <Box
               sx={{
                 display: 'flex',
@@ -80,9 +81,15 @@ function PersonalInfo(props) {
               >{`Created at ${formatedDate}`}</Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4} sx={{ m: '0 auto' }}>
-            <Grid item xs={12} md={12}>
-              <Box p={2}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={12} md={12}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                }}
+              >
                 <Typography
                   variant='h4'
                   sx={{ color: 'primary.main', fontWeight: '600', mb: '0.5em' }}
@@ -99,7 +106,10 @@ function PersonalInfo(props) {
                   <EmailIcon fontSize='large' sx={{ color: 'primary.main' }} />
                   <Typography
                     variant='h5'
-                    sx={{ ml: '0.5em', color: 'secondary.dark' }}
+                    sx={{
+                      ml: '0.5em',
+                      color: 'secondary.dark',
+                    }}
                   >
                     {doctor?.email}
                   </Typography>
@@ -179,11 +189,9 @@ function PersonalInfo(props) {
                 </Box>
               </Box>
             </Grid>
-            {/* <Grid item xs={2} md={1} mt={1}>
-              <IconButton>
-                <AiFillDelete fontSize={24} color='red' />
-              </IconButton>
-            </Grid> */}
+            <Grid item xs={12} md={12}>
+              <LiveDate />
+            </Grid>
           </Grid>
         </Grid>
       </Box>

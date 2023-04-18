@@ -19,7 +19,7 @@ function WorkTime(props) {
   const { doctor } = props;
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} md={5}>
       <Box
         sx={{
           display: 'flex',
@@ -47,7 +47,7 @@ function WorkTime(props) {
       </Box>
       <Box
         sx={{
-          mt: '2rem',
+          mt: '0.8rem',
           ml: '4px',
         }}
       >
