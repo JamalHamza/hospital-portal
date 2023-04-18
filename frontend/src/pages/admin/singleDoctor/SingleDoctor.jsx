@@ -20,8 +20,9 @@ function SingleDoctor() {
 
   return (
     <>
-      {isLoading && <Loader />}
-      <>
+      {isLoading ? (
+        <Loader />
+      ) : (
         <FormWrapper>
           <PersonalInfo doctor={doctor} />
           <hr color='#C0DEFF' />
@@ -30,7 +31,7 @@ function SingleDoctor() {
             <WorkTime doctor={doctor} />
           </Grid>
         </FormWrapper>
-      </>
+      )}
     </>
   );
 }

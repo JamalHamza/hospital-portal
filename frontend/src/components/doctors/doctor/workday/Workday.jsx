@@ -1,7 +1,20 @@
+import AddIcon from '@mui/icons-material/Add';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { Box, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Grid,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import moment from 'moment';
 import React from 'react';
+import '../Doctor.css';
 
 function Workday(props) {
   const { doctor } = props;
@@ -17,16 +30,53 @@ function Workday(props) {
   }
 
   return (
-    <Grid item xs={12} md={6} sx={{ border: '1px solid red' }}>
+    <Grid item xs={12} md={6}>
       <Box
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+        }}
       >
-        <CalendarMonthIcon
-          sx={{ color: 'secondary.dark', fontSize: '3rem', mr: '0.5em' }}
-        />
-        <Typography variant='h4' sx={{ color: 'primary.dark' }}>
-          Working Date
-        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+          }}
+        >
+          <CalendarMonthIcon
+            sx={{ color: 'secondary.dark', fontSize: '3rem', mr: '0.5em' }}
+          />
+          <Typography variant='h4' sx={{ color: 'primary.dark' }}>
+            Working Date
+          </Typography>
+        </Box>
+        <IconButton>
+          <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
+        </IconButton>
+      </Box>
+      <Box
+        sx={{
+          mt: '2rem',
+        }}
+      >
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Start Date</TableCell>
+                <TableCell>End Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>{formatedStartDate}</TableCell>
+                <TableCell>{formatedEndDate}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Grid>
   );

@@ -159,15 +159,6 @@ function PersonalInformation(props) {
             helperText={touched.password2 && errors.password2}
           />
         </Grid>
-        {/* <Grid item xs={12} md={4}>
-          <TextField
-            type='file'
-            accept='image/*'
-            name='image'
-            onChange={handleImageChange}
-            style={{ margin: '4px', width: '100%' }}
-          />
-        </Grid> */}
       </Grid>
       <Grid
         container
