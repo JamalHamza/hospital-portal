@@ -1,3 +1,4 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
@@ -9,12 +10,15 @@ import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import './PersonalInfo.css';
 
 function PersonalInfo(props) {
   const { doctor } = props;
+  const navigate = useNavigate();
+
   const formatedDate = moment.utc(doctor?.createdAt).format('YYYY-MM-DD');
-  // ! experinece
+  // ! Count Doctor experinces from array
   const experienceDoctor = doctor?.experiences?.reduce((total, exp) => {
     return total + exp.years;
   }, 0);
@@ -22,6 +26,12 @@ function PersonalInfo(props) {
     <>
       <Box>
         <Grid container>
+          <Grid item xs={12} md={12}>
+            <IconButton onClick={() => navigate('/admin/doctors')}>
+              <ArrowBackIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
+            </IconButton>
+          </Grid>
+
           <Grid item xs={12} md={2.5}>
             <Box
               sx={{
@@ -159,7 +169,7 @@ function PersonalInfo(props) {
                       fontWeight: '700',
                     }}
                   >
-                    {experienceDoctor}
+                    {experienceDoctor} Years Experience
                   </Typography>
                 </Box>
               </Box>
