@@ -5,6 +5,7 @@ const {
   getDoctors,
   getDoctor,
   deleteDoctor,
+  updateDoctorShift,
 } = require('../controllers/adminControllers');
 const { protect, adminOnly } = require('../middleware/AuthMiddleware');
 
@@ -14,5 +15,6 @@ router.get('/getDoctors', protect, adminOnly, getDoctors);
 // ! may be I dont need protect here but I am not sure
 router.get('/getDoctors/:id', protect, adminOnly, getDoctor);
 router.delete('/getDoctors/:id', protect, adminOnly, deleteDoctor);
+router.patch('/getDoctors/:id', protect, adminOnly, updateDoctorShift);
 
 module.exports = router;

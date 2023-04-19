@@ -41,6 +41,7 @@ function PersonalInfo(props) {
     <>
       <Box>
         <Grid container>
+          {/*------- Personal Info Avatar ------------------ */}
           <Grid container>
             <Grid item xs={10} md={11.5}>
               <IconButton onClick={() => navigate('/admin/doctors')}>
@@ -96,7 +97,9 @@ function PersonalInfo(props) {
               >{`Created at ${formatedDate}`}</Typography>
             </Box>
           </Grid>
+          {/* -------------Personal InfoBody--------------------- */}
           <Grid item xs={12} sm={6} md={4}>
+            {/* ---------------------------------------------- */}
             <Grid item xs={12} sm={12} md={12}>
               <Box
                 sx={{
@@ -208,6 +211,7 @@ function PersonalInfo(props) {
               <LiveDate />
             </Grid>
           </Grid>
+          {/* ------------------------------------------------ */}
         </Grid>
       </Box>
     </>
