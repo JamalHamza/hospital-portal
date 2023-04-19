@@ -10,30 +10,45 @@ import React from 'react';
 import { AiFillDelete } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import { RiErrorWarningLine } from 'react-icons/ri';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  deleteDoctor,
+  getDoctors,
+} from '../../../../redux/features/booking/bookingSlice';
 import LiveDate from '../liveDate/LiveDate';
 import './PersonalInfo.css';
 
 function PersonalInfo(props) {
   const { doctor } = props;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  console.log(id);
   const formatedDate = moment.utc(doctor?.createdAt).format('YYYY-MM-DD');
   // ! Count Doctor experinces from array
   const experienceDoctor = doctor?.experiences?.reduce((total, exp) => {
     return total + exp.years;
   }, 0);
+
+  const handleDelete = (id) => {
+    dispatch(deleteDoctor(id));
+    dispatch(getDoctors());
+    navigate('/admin/doctors');
+  };
+
   return (
     <>
       <Box>
         <Grid container>
-          <Grid container xs={12} md={12}>
+          <Grid container>
             <Grid item xs={10} md={11.5}>
               <IconButton onClick={() => navigate('/admin/doctors')}>
                 <ArrowBackIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
               </IconButton>
             </Grid>
             <Grid item xs={2} md={0.5}>
-              <IconButton>
+              <IconButton onClick={() => handleDelete(id)}>
                 <AiFillDelete fontSize={24} color='red' />
               </IconButton>
             </Grid>
