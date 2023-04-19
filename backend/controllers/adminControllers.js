@@ -160,6 +160,7 @@ const deleteDoctor = asyncHandler(async (req, res) => {
   // ! req.user is comming from AuthMiddleWare
   const id = req.params.id;
   const doctor = await Doctor.findById(id);
+  console.log(id);
   const { userId } = doctor;
   const user = await User.findById(userId);
 
@@ -172,7 +173,6 @@ const deleteDoctor = asyncHandler(async (req, res) => {
     throw new Error('Doctor not found');
   }
 });
-
 
 module.exports = {
   addDoctor,

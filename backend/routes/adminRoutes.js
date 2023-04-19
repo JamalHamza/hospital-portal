@@ -13,6 +13,6 @@ router.get('/getDoctors', protect, adminOnly, getDoctors);
 // TODO LATER
 // ! may be I dont need protect here but I am not sure
 router.get('/getDoctors/:id', protect, adminOnly, getDoctor);
-router.get('/getDoctors/:id', protect, adminOnly, deleteDoctor);
+router.delete('/getDoctors/:id', protect, adminOnly, deleteDoctor);
 
 module.exports = router;
