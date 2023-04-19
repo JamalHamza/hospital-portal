@@ -35,7 +35,7 @@ export const addDoctor = createAsyncThunk(
 
 // ! Get Doctors ---------------
 export const getDoctors = createAsyncThunk(
-  'auth/getDoctors',
+  'booking/getDoctors',
   async (_, thunkAPI) => {
     try {
       return await bookingService.getDoctors();
@@ -54,10 +54,29 @@ export const getDoctors = createAsyncThunk(
 
 // ! Get Doctors ---------------
 export const getDoctor = createAsyncThunk(
-  'auth/getDoctor',
+  'booking/getDoctor',
   async (id, thunkAPI) => {
     try {
       return await bookingService.getDoctor(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// ! Delete Doctor ------------
+export const deleteDoctor = createAsyncThunk(
+  'booking/delete',
+  async (id, thunkAPI) => {
+    try {
+      return await bookingService.deleteDoctor(id);
     } catch (error) {
       const message =
         (error.response &&
@@ -128,9 +147,26 @@ const bookingSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      // ! Delete Doctor ---------
+      .addCase(deleteDoctor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+        toast.success(action.payload);
+      })
+      .addCase(deleteDoctor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
+
 
 // ~ ------------------------------------------
 export const {} = bookingSlice.actions;

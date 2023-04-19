@@ -21,10 +21,17 @@ const getDoctor = async (id) => {
   return response.data;
 };
 
+// ! Delete Doctor ---------------------------
+const deleteDoctor = async (id) => {
+  const response = await axios.delete(API_URL + `/getDoctors/${id}`);
+  return response.data;
+};
+
 const bookingService = {
   addDcotor,
   getDoctors,
   getDoctor,
+  deleteDoctor,
 };
 
 export default bookingService;
