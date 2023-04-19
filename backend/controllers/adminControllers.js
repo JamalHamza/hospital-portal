@@ -155,8 +155,28 @@ const getDoctor = asyncHandler(async (req, res) => {
   }
 });
 
+// * -------------------------------------
+const deleteDoctor = asyncHandler(async (req, res) => {
+  // ! req.user is comming from AuthMiddleWare
+  const id = req.params.id;
+  const doctor = await Doctor.findById(id);
+  const { userId } = doctor;
+  const user = await User.findById(userId);
+
+  if (doctor && user) {
+    await doctor.remove();
+    await user.remove();
+    res.status(200).json({ message: 'Doctor Account deleted successfully' });
+  } else {
+    res.status(404);
+    throw new Error('Doctor not found');
+  }
+});
+
+
 module.exports = {
   addDoctor,
   getDoctors,
   getDoctor,
+  deleteDoctor,
 };
