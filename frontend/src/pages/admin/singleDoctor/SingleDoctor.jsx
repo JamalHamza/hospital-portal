@@ -57,8 +57,18 @@ function SingleDoctor() {
             container
             sx={{ mt: '1em', display: 'flex', justifyContent: 'space-between' }}
           >
-            <Workday doctor={doctor} />
-            <WorkTime doctor={doctor} />
+            <Workday
+              doctor={doctor}
+              formatedEndDate={formatedEndDate}
+              formatedToday={formatedToday}
+              formatedStartDate={formatedStartDate}
+            />
+            <WorkTime
+              doctor={doctor}
+              formatedEndDate={formatedEndDate}
+              formatedToday={formatedToday}
+              formatedStartDate={formatedStartDate}
+            />
           </Grid>
         </FormWrapper>
       )}

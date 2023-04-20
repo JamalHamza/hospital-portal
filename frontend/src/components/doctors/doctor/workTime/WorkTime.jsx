@@ -16,7 +16,7 @@ import React from 'react';
 import '../Doctor.css';
 
 function WorkTime(props) {
-  const { doctor } = props;
+  const { doctor, formatedEndDate, formatedToday, formatedStartDate } = props;
 
   return (
     <Grid item xs={12} md={5}>
@@ -41,9 +41,15 @@ function WorkTime(props) {
             Working Date
           </Typography>
         </Box>
-        <IconButton>
-          <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
-        </IconButton>
+        <Box>
+          {formatedEndDate > formatedToday ? (
+            ''
+          ) : (
+            <IconButton disabled={formatedEndDate > formatedToday}>
+              <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
+            </IconButton>
+          )}
+        </Box>
       </Box>
       <Box
         sx={{
