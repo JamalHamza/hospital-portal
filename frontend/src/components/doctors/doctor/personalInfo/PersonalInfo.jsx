@@ -20,6 +20,7 @@ function PersonalInfo(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+  
   const formatedDate = moment.utc(doctor?.createdAt).format('YYYY-MM-DD');
   // ! Count Doctor experinces from array
   const experienceDoctor = doctor?.experiences?.reduce((total, exp) => {

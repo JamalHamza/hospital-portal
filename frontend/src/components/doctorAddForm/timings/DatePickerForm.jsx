@@ -19,10 +19,10 @@ function DatePickerForm(props) {
   return (
     <>
       <Box
-        sx={{
-          display: 'felx',
-          flexDirection: 'column',
-        }}
+        // sx={{
+        //   display: 'flex',
+        //   flexDirection: 'column',
+        // }}
       >
         <Typography
           variant='h5'
@@ -47,13 +47,10 @@ function DatePickerForm(props) {
               <DatePicker
                 label='Start Date'
                 name='startDate'
-                inputFormat='DD/MM/YYYY'
+                inputFormat='DD/MM/yyyy'
                 value={values.startDate}
                 disablePast={true}
                 onChange={handleFieldChange('startDate')}
-                // onBlur={handleBlur}
-                error={touched.startDate && Boolean(errors.startDate) && false}
-                // helperText={touched.startDate && errors.startDate}
                 sx={{ width: '100%', m: '4px' }}
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
@@ -75,9 +72,6 @@ function DatePickerForm(props) {
                 disablePast={true}
                 minDate={values.startDate}
                 onChange={handleFieldChange('endDate')}
-                // onBlur={handleBlur}
-                // error={touched.endDate && Boolean(errors.endDate)}
-                // helperText={touched.endDate && errors.endDate}
                 sx={{ width: '100%', m: '4px' }}
               />
               <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>

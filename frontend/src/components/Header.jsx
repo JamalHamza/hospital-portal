@@ -1,5 +1,6 @@
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -63,22 +64,12 @@ const Header = () => {
               <img src={AppleLogo} alt='logo' className='app-header-logo' />
             </Box>
 
-            <Button
-              variant='contained'
-              sx={{
-                bgcolor: 'third.main',
-                padding: '0.4em 1em',
-                fontWeight: 800,
-                fontSize: '1rem',
-                color: 'primary.dark',
-                '&:hover': {
-                  background: '#ccb7c0',
-                },
-              }}
-              onClick={() => logoutUser()}
-            >
-              LogOut
-            </Button>
+            <IconButton onClick={() => logoutUser()}>
+              <LogoutIcon
+                fontSize='large'
+                sx={{ color: 'form.main', fontSize: '2.4rem' }}
+              />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>

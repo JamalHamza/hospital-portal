@@ -9,7 +9,6 @@ import '../PersonalInfo.css';
 function PersonalInfoAvatar(props) {
   const { doctor, formatedDate, handleOpen } = props;
   const navigate = useNavigate();
-  console.log(doctor);
   return (
     <>
       <Grid container>

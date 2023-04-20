@@ -194,7 +194,7 @@ const Sidebar = ({ open, setOpen }) => {
             </Typography>
           </Box>
         </Box>
-        <Divider />
+        <Divider sx={{ bgcolor: 'primary.main' }} />
         <div style={{ width: 250 }}>
           <List>
             {itemsList[0]?.map((item, index) => {
@@ -207,16 +207,20 @@ const Sidebar = ({ open, setOpen }) => {
               );
             })}
           </List>
-          <Divider />
+          <Divider sx={{ bgcolor: 'primary.main' }} />
           <List>
-            {itemsList[1] && <Typography variant='h5' sx={{color: 'red'}}>asdfasf</Typography>}
+            {/* {itemsList[1] && isAdmin && (
+              <Typography variant='h5' sx={{ color: 'secondary.main', m: '0.2em 1.2em', fontWeight: '700' }}>
+                Doctor
+              </Typography>
+            )} */}
             {itemsList[1]?.map((item, index) => {
               const { text, icon, onClick } = item;
               return (
-                  <ListItem key={text} onClick={onClick}>
-                    <ListItemIcon>{icon}</ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItem>
+                <ListItem key={text} onClick={onClick}>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
               );
             })}
           </List>

@@ -14,7 +14,7 @@ function LiveDate() {
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Box sx={{ display: 'flex' }}>
-        <Typography variant='h5' sx={{ color: 'primary.main' }}>
+        <Typography variant='h5' sx={{ color: 'primary.dark' }}>
           Date:
         </Typography>
         <Typography variant='h6' sx={{ color: 'secondary.dark', ml: '0.5em' }}>
@@ -22,7 +22,7 @@ function LiveDate() {
         </Typography>
       </Box>
       <Box sx={{ display: 'flex' }}>
-        <Typography variant='h5' sx={{ color: 'primary.main' }}>
+        <Typography variant='h5' sx={{ color: 'primary.dark' }}>
           Time:
         </Typography>
         <Typography variant='h6' sx={{ color: 'secondary.dark', ml: '0.5em' }}>
