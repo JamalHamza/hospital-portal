@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import '../PersonalInfo.css';
 
 function PersonalInfoAvatar(props) {
-  const { doctor, formatedDate, handleDelete, doctorId } = props;
+  const { doctor, formatedDate, handleDelete, doctorId, handleOpen } = props;
   const navigate = useNavigate();
   return (
     <>
@@ -18,7 +18,7 @@ function PersonalInfoAvatar(props) {
           </IconButton>
         </Grid>
         <Grid item xs={2} md={0.5}>
-          <IconButton onClick={() => handleDelete(doctorId)}>
+          <IconButton onClick={() => handleOpen()}>
             <AiFillDelete fontSize={24} color='red' />
           </IconButton>
         </Grid>
