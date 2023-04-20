@@ -3,9 +3,12 @@ import { Box, Grid, IconButton, Typography } from '@mui/material';
 import { AiFillDelete } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { useNavigate } from 'react-router-dom';
 import '../PersonalInfo.css';
 
-function PersonalInfoAvatar({ doctor, formatedDate }) {
+function PersonalInfoAvatar(props) {
+  const { doctor, formatedDate, handleDelete, doctorId } = props;
+  const navigate = useNavigate();
   return (
     <>
       <Grid container>
@@ -15,7 +18,7 @@ function PersonalInfoAvatar({ doctor, formatedDate }) {
           </IconButton>
         </Grid>
         <Grid item xs={2} md={0.5}>
-          <IconButton onClick={() => handleDelete(id)}>
+          <IconButton onClick={() => handleDelete(doctorId)}>
             <AiFillDelete fontSize={24} color='red' />
           </IconButton>
         </Grid>

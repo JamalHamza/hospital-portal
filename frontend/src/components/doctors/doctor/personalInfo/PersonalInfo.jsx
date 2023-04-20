@@ -37,7 +37,12 @@ function PersonalInfo(props) {
     <>
       <Box>
         <Grid container>
-          <PersonalInfoAvatar doctor={doctor} formatedDate={formatedDate} />
+          <PersonalInfoAvatar
+            doctor={doctor}
+            formatedDate={formatedDate}
+            handleDelete={handleDelete}
+            doctorId={id}
+          />
           {/* -------------Personal InfoBody--------------------- */}
           <Grid item xs={12} sm={6} md={4}>
             {/* ---------------------------------------------- */}
