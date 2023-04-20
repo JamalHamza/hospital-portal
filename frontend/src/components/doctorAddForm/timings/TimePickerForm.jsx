@@ -28,7 +28,6 @@ export default function TimePicker(props) {
           gap='0.4rem'
           sx={{
             mt: '2em',
-            // width: '100%',
           }}
         >
           <LocalizationProvider dateAdapter={AdapterDayjs}>

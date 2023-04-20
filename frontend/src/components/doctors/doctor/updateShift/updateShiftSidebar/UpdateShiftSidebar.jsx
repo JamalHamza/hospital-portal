@@ -10,17 +10,29 @@ import {
   Typography,
 } from '@mui/material';
 import moment from 'moment';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getDoctor } from '../../../../../redux/features/booking/bookingSlice';
 import LiveDate from '../../liveDate/LiveDate';
 
 function UpdateShiftSidebar() {
   const { isLoading, doctor } = useSelector((state) => state.booking);
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
   const formattedStartDate = moment.utc(doctor?.startDate).format('YYYY-MM-DD');
   const formattedEndDate = moment.utc(doctor?.endDate).format('YYYY-MM-DD');
+
+
   return (
     <>
-      <Grid item xs={12} md={4.8} mr='1em'>
+      <Grid
+        item
+        xs={12}
+        md={5}
+        sx={{  m: '0 auto' }}
+      >
         <LiveDate />
         <Box sx={{ display: 'flex' }}>
           <Typography

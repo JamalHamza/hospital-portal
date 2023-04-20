@@ -162,7 +162,7 @@ function PersonalInformation(props) {
       </Grid>
       <Grid
         container
-        sx={{ display: 'felx', justifyContent: 'center', mb: '1em' }}
+        sx={{ display: 'flex', justifyContent: 'center', mb: '1em' }}
       >
         <Grid item xs={12} md={3}>
           <PasswordStrength password={password} password2={password2} />
