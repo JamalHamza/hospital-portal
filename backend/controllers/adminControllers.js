@@ -129,6 +129,7 @@ const getDoctor = asyncHandler(async (req, res) => {
     photo,
     createdAt,
     userId,
+    _id,
   } = doctor;
   const user = await User.findById(userId);
 
@@ -148,6 +149,7 @@ const getDoctor = asyncHandler(async (req, res) => {
       isVerified,
       photo,
       createdAt,
+      _id,
     });
   } else {
     res.status(404);

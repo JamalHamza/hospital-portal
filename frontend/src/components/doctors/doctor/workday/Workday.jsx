@@ -13,10 +13,12 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Doctor.css';
 
 function Workday(props) {
   const { doctor, formatedEndDate, formatedToday, formatedStartDate } = props;
+  const navigate = useNavigate();
 
   if (formatedEndDate > formatedToday) {
     console.log(false);
@@ -51,7 +53,11 @@ function Workday(props) {
           {formatedEndDate > formatedToday ? (
             ''
           ) : (
-            <IconButton disabled={formatedEndDate > formatedToday}>
+            <IconButton
+              onClick={() =>
+                navigate(`/admin/doctors/updateShift/${doctor?._id}`)
+              }
+            >
               <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
             </IconButton>
           )}

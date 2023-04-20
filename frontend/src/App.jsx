@@ -10,6 +10,7 @@ import Layout from './components/layout/Layout';
 import AddDoctor from './pages/admin/addDoctor/AddDoctor';
 import Doctors from './pages/admin/doctors/Doctors';
 import SingleDoctor from './pages/admin/singleDoctor/SingleDoctor';
+import UpdateDoctorShift from './pages/admin/updateDoctorShift/UpdateDoctorShift';
 import Forgot from './pages/auth/Forgot';
 import Login from './pages/auth/Login';
 import LoginWithCode from './pages/auth/LoginWithCode';
@@ -85,7 +86,7 @@ function App() {
           pauseOnHover='false'
           hideProgressBar
           autoClose={400}
-          position='top-left'
+          position='center'
           theme='colored'
           bodyClassName='toast'
         />
@@ -153,6 +154,14 @@ function App() {
               element={
                 <Layout>
                   <SingleDoctor />
+                </Layout>
+              }
+            />
+            <Route
+              path='/admin/doctors/updateShift/:id'
+              element={
+                <Layout>
+                  <UpdateDoctorShift />
                 </Layout>
               }
             />
