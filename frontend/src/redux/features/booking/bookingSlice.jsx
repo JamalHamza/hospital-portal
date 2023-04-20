@@ -19,7 +19,7 @@ export const addDoctor = createAsyncThunk(
   'booking/addDoctor',
   async (userData, thunkAPI) => {
     try {
-      return await bookingService.addDcotor(userData);
+      return await bookingService.addDoctor(userData);
     } catch (error) {
       const message =
         (error.response &&
@@ -77,6 +77,24 @@ export const deleteDoctor = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       return await bookingService.deleteDoctor(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Update Doctor Shift -----------------
+export const updateDoctorShift = createAsyncThunk(
+  'booking/updateDoctorShift',
+  async (userData, thunkAPI) => {
+    try {
+      return await authService.updateDoctorShift(userData);
     } catch (error) {
       const message =
         (error.response &&
@@ -163,10 +181,26 @@ const bookingSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      // ! Update User ---------------
+      .addCase(updateDoctorShift.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateDoctorShift.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.message = action.payload;
+        toast.success(action.payload);
+      })
+      .addCase(updateDoctorShift.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
-
 
 // ~ ------------------------------------------
 export const {} = bookingSlice.actions;

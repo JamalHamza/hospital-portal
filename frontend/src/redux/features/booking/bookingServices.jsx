@@ -4,7 +4,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const API_URL = `${BACKEND_URL}/api/admin`;
 
 // ! Register(Add Doctor) ---------------------
-const addDcotor = async (userData) => {
+const addDoctor = async (userData) => {
   const response = await axios.post(API_URL + '/addDoctor', userData);
   return response.data;
 };
@@ -26,12 +26,18 @@ const deleteDoctor = async (id) => {
   const response = await axios.delete(API_URL + `/getDoctors/${id}`);
   return response.data;
 };
+// ! Delete Doctor ---------------------------
+const updateDoctorShift = async (id) => {
+  const response = await axios.patch(API_URL + `/getDoctors/${id}`);
+  return response.data;
+};
 
 const bookingService = {
-  addDcotor,
+  addDoctor,
   getDoctors,
   getDoctor,
   deleteDoctor,
+  updateDoctorShift,
 };
 
 export default bookingService;

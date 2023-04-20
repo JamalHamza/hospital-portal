@@ -84,7 +84,7 @@ export const loginStatus = createAsyncThunk(
     }
   }
 );
-// ! Get User Prfile -----------------
+// ! Get User Profile -----------------
 export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
   try {
     return await authService.getUser();

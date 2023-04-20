@@ -28,8 +28,6 @@ function UpdateShiftForm() {
   const { id } = useParams();
   const [formData, setFormData] = useState(initialValues);
   const { endDate } = formData;
-  console.log(formData);
-
   // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
     const hour = moment(time.$d).format('HH');
