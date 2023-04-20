@@ -93,7 +93,7 @@ function AddDoctor() {
     // ! this just for formik validation
     formik.setFieldValue(fieldName, value);
     // ! bug fixed after 6 hours I forgot to setFormData
-    setFormData({ ...formData, [fieldName]: formatedDate });
+    setFormData({ ...formData, [fieldName]: value });
   };
 
   // ! handleChange for TimerPicker
@@ -102,7 +102,6 @@ function AddDoctor() {
     const min = moment(time.$d).format('mm');
     const formatedTime = `${hour}:${min}`;
     // console.log(`${hour}:${min}`);
-
     formik.setFieldValue(fieldName, time);
     // ! bug fixed after 6 hours I forgot to setFormData
     setFormData({ ...formData, [fieldName]: formatedTime });
@@ -134,6 +133,7 @@ function AddDoctor() {
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
       AddDoctor(values);
+      console.log(values);
     },
   });
   return (

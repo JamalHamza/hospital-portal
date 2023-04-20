@@ -94,7 +94,7 @@ export const updateDoctorShift = createAsyncThunk(
   'booking/updateDoctorShift',
   async (userData, thunkAPI) => {
     try {
-      return await authService.updateDoctorShift(userData);
+      return await bookingService.updateDoctorShift(userData);
     } catch (error) {
       const message =
         (error.response &&

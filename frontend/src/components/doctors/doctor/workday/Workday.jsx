@@ -21,9 +21,9 @@ function Workday(props) {
   const navigate = useNavigate();
 
   if (formatedEndDate > formatedToday) {
-    console.log(false);
+    // console.log(false);
   } else {
-    console.log(true);
+    // console.log(true);
   }
 
   return (

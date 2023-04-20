@@ -2,8 +2,10 @@ import { Button, Grid } from '@mui/material';
 import { useFormik } from 'formik';
 import moment from 'moment';
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
+import { updateDoctorShift } from '../../../../../redux/features/booking/bookingSlice';
 import DatePickerForm from '../../../../doctorAddForm/timings/DatePickerForm';
 import TimePickerForm from '../../../../doctorAddForm/timings/TimePickerForm';
 
@@ -27,7 +29,9 @@ const initialValues = {
 function UpdateShiftForm() {
   const { id } = useParams();
   const [formData, setFormData] = useState(initialValues);
-  const { endDate } = formData;
+  const { startDate, endDate, startTime, endTime } = formData;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
     const hour = moment(time.$d).format('HH');
@@ -38,9 +42,23 @@ function UpdateShiftForm() {
   };
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
-    const formatedDate = value?.toISOString();
+    const formattedDate = value?.toISOString();
     formik.setFieldValue(fieldName, value);
-    setFormData({ ...formData, [fieldName]: formatedDate });
+    setFormData({ ...formData, [fieldName]: formattedDate });
+  };
+
+  // ! ------ Update Doctor Shift -------------
+  const UpdateDoctorShift = async () => {
+    const userData = {
+      startTime,
+      endTime,
+      startDate,
+      endDate,
+      id,
+    };
+
+    await dispatch(updateDoctorShift(userData));
+    // navigate(`/admin/doctors/${id}`);
   };
 
   // !----------- userFormik ------------------
@@ -48,7 +66,7 @@ function UpdateShiftForm() {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      UpdateDoctorShift(values);
     },
   });
 

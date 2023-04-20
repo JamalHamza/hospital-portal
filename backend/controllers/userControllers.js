@@ -278,7 +278,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 // * -----------------------------------
 
 const getUser = asyncHandler(async (req, res) => {
-  // ! req.user is comming from AuthMiddleWare
+  // ! req.user is coming from AuthMiddleWare
   const user = await User.findById(req.user._id);
   if (user) {
     const { _id, name, email, phone, bio, photo, role, isVerified } = user;
@@ -301,7 +301,7 @@ const getUser = asyncHandler(async (req, res) => {
 // * ------------------------------------
 
 const updateUser = asyncHandler(async (req, res) => {
-  // ! req.user is comming from AuthMiddleWare
+  // ! req.user is coming from AuthMiddleWare
   const user = await User.findById(req.user._id);
   const doctor = await Doctor.findOne({ userId: req.user._id });
   console.log(doctor);

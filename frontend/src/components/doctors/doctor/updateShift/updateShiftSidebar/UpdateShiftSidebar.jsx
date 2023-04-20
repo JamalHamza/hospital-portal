@@ -93,8 +93,8 @@ function UpdateShiftSidebar() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell>{formattedEndDate}</TableCell>
                     <TableCell>{formattedStartDate}</TableCell>
+                    <TableCell>{formattedEndDate}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

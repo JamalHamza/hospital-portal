@@ -159,7 +159,7 @@ const getDoctor = asyncHandler(async (req, res) => {
 
 // * -------------------------------------
 const deleteDoctor = asyncHandler(async (req, res) => {
-  // ! req.user is comming from AuthMiddleWare
+  // ! req.user is coming from AuthMiddleWare
   const id = req.params.id;
   const doctor = await Doctor.findById(id);
   console.log(id);
@@ -182,6 +182,8 @@ const updateDoctorShift = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const { startDate, endDate, startTime, endTime } = req.body;
   const doctor = await Doctor.findById(id);
+  console.log(id);
+  console.log(doctor);
 
   //! validation
   if (!startDate || !endDate || !startTime || !endTime) {
