@@ -39,7 +39,7 @@ function DoctorList() {
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
-                  bgcolor: 'secondary.light',
+                  bgcolor: 'fourth.light',
                   maxHeight: '17rem',
                   height: '100%',
                 }}

@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import '../PersonalInfo.css';
 
 function PersonalInfoAvatar(props) {
-  const { doctor, formatedDate, handleDelete, doctorId, handleOpen } = props;
+  const { doctor, formatedDate, handleOpen } = props;
   const navigate = useNavigate();
+  console.log(doctor);
   return (
     <>
       <Grid container>
@@ -23,7 +24,7 @@ function PersonalInfoAvatar(props) {
           </IconButton>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={6} md={6}>
+      <Grid item xs={12} sm={6} md={3}>
         <Box
           sx={{
             display: 'flex',
@@ -39,7 +40,7 @@ function PersonalInfoAvatar(props) {
             src={doctor?.photo}
             alt={doctor?.name}
           />
-          <Box>
+          <Box sx={{ textAlign: 'center' }}>
             {doctor?.isVerified ? (
               <Box
                 sx={{
@@ -52,9 +53,13 @@ function PersonalInfoAvatar(props) {
                 </Typography>
               </Box>
             ) : (
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                }}
+              >
                 <RiErrorWarningLine fontSize={20} color='red' />
-                <Typography variant='h6' sx={{ color: 'third.dark' }}>
+                <Typography variant='h6' sx={{ color: 'red' }}>
                   Not Verified
                 </Typography>
               </Box>

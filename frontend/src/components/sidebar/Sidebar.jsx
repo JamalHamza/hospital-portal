@@ -209,13 +209,14 @@ const Sidebar = ({ open, setOpen }) => {
           </List>
           <Divider />
           <List>
+            {itemsList[1] && <Typography variant='h5' sx={{color: 'red'}}>asdfasf</Typography>}
             {itemsList[1]?.map((item, index) => {
               const { text, icon, onClick } = item;
               return (
-                <ListItem key={text} onClick={onClick}>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
+                  <ListItem key={text} onClick={onClick}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText primary={text} />
+                  </ListItem>
               );
             })}
           </List>

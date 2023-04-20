@@ -13,10 +13,12 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Doctor.css';
 
 function WorkTime(props) {
-  const { doctor, formatedEndDate, formatedToday, formatedStartDate } = props;
+  const navigate = useNavigate();
+  const { doctor, formatedEndDate, formatedToday } = props;
 
   return (
     <Grid item xs={12} md={5}>
@@ -38,14 +40,18 @@ function WorkTime(props) {
             sx={{ color: 'secondary.dark', fontSize: '3rem', mr: '0.5em' }}
           />
           <Typography variant='h4' sx={{ color: 'primary.dark' }}>
-            Working Date
+            Working Time
           </Typography>
         </Box>
         <Box>
           {formatedEndDate > formatedToday ? (
             ''
           ) : (
-            <IconButton disabled={formatedEndDate > formatedToday}>
+            <IconButton
+              onClick={() =>
+                navigate(`/admin/doctors/updateShift/${doctor?._id}`)
+              }
+            >
               <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
             </IconButton>
           )}

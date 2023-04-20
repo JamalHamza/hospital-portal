@@ -115,7 +115,7 @@ function ProfileAdmin() {
         <Loader />
       ) : (
         <>
-          {!profile.isVerified && <Notification />}
+          {isLoading ? '' : !profile.isVerified && <Notification />}
 
           <Box
             sx={{
@@ -149,7 +149,7 @@ function ProfileAdmin() {
                     >
                       <img
                         src={imagePreview === null ? user?.photo : imagePreview}
-                        alt='Profileimg'
+                        alt='Profile-img'
                         style={{
                           height: '200px',
                           width: '200px',

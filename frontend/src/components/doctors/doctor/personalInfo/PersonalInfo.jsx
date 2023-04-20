@@ -35,7 +35,7 @@ function PersonalInfo(props) {
   return (
     <>
       <Box>
-        <Grid container>
+        <Grid container >
           <PersonalInfoAvatar
             doctor={doctor}
             formatedDate={formatedDate}

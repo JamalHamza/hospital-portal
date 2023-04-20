@@ -85,8 +85,8 @@ function App() {
         <ToastContainer
           pauseOnHover='false'
           hideProgressBar
-          autoClose={400}
-          position='center'
+          autoClose={200}
+          position='top-center'
           theme='colored'
           bodyClassName='toast'
         />

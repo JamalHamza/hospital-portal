@@ -12,7 +12,7 @@ function LiveDate() {
   }, []);
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: '1em' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Box sx={{ display: 'flex' }}>
         <Typography variant='h5' sx={{ color: 'primary.main' }}>
           Date:
