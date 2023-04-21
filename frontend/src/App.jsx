@@ -56,6 +56,7 @@ const theme = createTheme({
       dark: '#ccc6b4',
       main: '#FFF8E1',
       light: '#fffaea',
+      lighter: '#fffcf6',
     },
     btn: {
       main: '#000205',
