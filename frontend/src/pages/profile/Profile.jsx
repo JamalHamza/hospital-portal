@@ -228,14 +228,18 @@ function ProfileAdmin() {
                           type='submit'
                           variant='contained'
                           sx={{
-                            bgcolor: 'fourth.main',
-                            margin: '0.8em',
-                            padding: '0.4em 1em',
-                            fontWeight: 800,
+                            borderRadius: '10px',
+                            padding: '8px 20px',
+                            fontWeight: 'bold',
                             fontSize: '1.2rem',
                             color: 'primary.dark',
+                            minWidth: '8em',
+                            bgcolor: 'fourth.main',
+                            textTransform: 'uppercase',
+                            m: '1em 0',
                             '&:hover': {
-                              background: '#ccc6b4',
+                              backgroundColor: '#ccc6b4',
+                              color: '#fff',
                             },
                           }}
                         >
