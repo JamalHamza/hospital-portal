@@ -105,18 +105,22 @@ function DoctorList() {
                       onClick={() => handleClick(doctor._id)}
                       variant='contained'
                       sx={{
-                        mt: '2em',
+                        borderRadius: '10px',
+                        padding: '6px 16px',
+                        fontWeight: 'bold',
+                        fontSize: '1.2rem',
+                        width: '12rem',
+                        color: 'primary.main',
                         bgcolor: 'third.main',
-                        padding: '0.4em 0.5em',
-                        fontWeight: 800,
-                        fontSize: '1rem',
-                        color: 'primary.dark',
+                        textTransform: 'capitalize',
+                        m: '1em 0',
                         '&:hover': {
-                          background: '#ccb7c0',
+                          backgroundColor: '#ccb7c0',
+                          color: '#fff',
                         },
                       }}
                     >
-                      Explore Details
+                      More details
                     </Button>
                   </CardContent>
                 </Box>

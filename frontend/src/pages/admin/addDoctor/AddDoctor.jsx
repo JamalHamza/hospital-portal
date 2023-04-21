@@ -188,18 +188,23 @@ function AddDoctor() {
             errors={formik.errors}
             handleTimeChange={handleTimeChange}
           />
+
           <Button
             type='submit'
             variant='contained'
             sx={{
-              m: '2rem',
-              bgcolor: 'third.main',
-              padding: '1.2em 2em',
-              fontWeight: 800,
-              fontSize: '1.2rem',
+              borderRadius: '10px',
+              padding: '8px 20px',
+              fontWeight: 'bold',
+              fontSize: '1.4rem',
+              minWidth: '8dem',
               color: 'primary.dark',
+              bgcolor: 'third.main',
+              textTransform: 'uppercase',
+              m: '1em',
               '&:hover': {
-                background: '#ccb7c0',
+                backgroundColor: '#ccb7c0',
+                color: '#fff',
               },
             }}
           >

@@ -58,7 +58,7 @@ function UpdateShiftForm() {
     };
 
     await dispatch(updateDoctorShift(userData));
-    // navigate(`/admin/doctors/${id}`);
+    navigate(`/admin/doctors/${id}`);
   };
 
   // !----------- userFormik ------------------
@@ -93,14 +93,18 @@ function UpdateShiftForm() {
           type='submit'
           variant='contained'
           sx={{
-            m: '2rem',
-            bgcolor: 'third.main',
-            padding: '0.4em 2em',
-            fontWeight: 700,
-            fontSize: '1.2rem',
+            borderRadius: '10px',
+            padding: '8px 20px',
+            fontWeight: 'bold',
+            fontSize: '1.4rem',
             color: 'primary.dark',
+            minWidth: '8em',
+            bgcolor: 'fourth.main',
+            textTransform: 'uppercase',
+            m: '1em 0',
             '&:hover': {
-              background: '#ccb7c0',
+              backgroundColor: '#ccc6b4',
+              color: '#fff',
             },
           }}
         >
