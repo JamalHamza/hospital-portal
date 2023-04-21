@@ -20,7 +20,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useFormik } from 'formik';
 import resetImg from '../../assets/authPage/reset-password.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
-import {FormBottomLinks} from '../../components/formBottomLinks/FormBottomLinks';
+import { FormBottomLinks } from '../../components/formBottomLinks/FormBottomLinks';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
 
 const initialValues = {
@@ -196,24 +196,29 @@ function Reset() {
                 helperText={formik.touched.password2 && formik.errors.password2}
               />
 
-              <Button
-                type='submit'
-                variant='contained'
-                sx={{
-                  bgcolor: 'third.main',
-                  margin: '0.8em 0',
-                  padding: '0.8em 2em',
-                  fontWeight: 800,
-                  fontSize: '1.2rem',
-                  color: 'primary.dark',
-                  width: '100%',
-                  '&:hover': {
-                    background: '#ccc6b4',
-                  },
-                }}
-              >
-                Reset Password
-              </Button>
+              <Box textAlign='center'>
+                <Button
+                  type='submit'
+                  variant='contained'
+                  sx={{
+                    borderRadius: '10px',
+                    padding: '8px 20px',
+                    fontWeight: 'bold',
+                    fontSize: '1.4rem',
+                    minWidth: '8dem',
+                    color: 'primary.dark',
+                    bgcolor: 'third.main',
+                    textTransform: 'uppercase',
+                    m: '1em auto',
+                    '&:hover': {
+                      backgroundColor: '#ccb7c0',
+                      color: '#fff',
+                    },
+                  }}
+                >
+                  Reset Password
+                </Button>
+              </Box>
               <PasswordStrength password={password} password2={password2} />
               <FormBottomLinks />
             </form>

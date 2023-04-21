@@ -1,15 +1,14 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/HomePageLogo.png';
 import './Home.scss';
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <Box sx={{ bgcolor: 'secondary.main', minHeight: '100vh' }}>
-      <Box
-        className='container hero'
-      >
+      <Box className='container hero'>
         <div className='hero-text'>
           <h1>Vita Health Center</h1>
           <p>Instant appointment with doctors-Guaranteed.</p>
@@ -19,42 +18,51 @@ function Home() {
           </p>
           <div className='hero-buttons --flex-start'>
             <Button
+              onClick={() => navigate('/register')}
+              variant='contained'
               sx={{
+                borderRadius: '10px',
+                padding: '8px 20px',
+                fontWeight: 'bold',
+                fontSize: '1.4rem',
+                minWidth: '8dem',
+                color: 'primary.dark',
                 bgcolor: 'third.main',
-                padding: '1em 1.8em',
-                marginRight: '1em',
+                textTransform: 'uppercase',
                 '&:hover': {
-                  background: '#ffeff6',
+                  backgroundColor: '#ccb7c0',
+                  color: '#fff',
                 },
               }}
             >
-              <Link to='/register'>
-                <Typography variant='h5' sx={{ color: 'btn.main' }}>
-                  Register
-                </Typography>
-              </Link>
+              Register
             </Button>
             <Button
+              onClick={() => navigate('/login')}
+              variant='contained'
               sx={{
+                borderRadius: '10px',
+                padding: '8px 20px',
+                fontWeight: 'bold',
+                fontSize: '1.4rem',
+                color: 'primary.dark',
+                minWidth: '8em',
                 bgcolor: 'fourth.main',
-                padding: '1em 1.8em',
-                marginRight: '1em',
+                textTransform: 'uppercase',
+                ml: '1em',
                 '&:hover': {
-                  background: '#fffaea',
+                  backgroundColor: '#ccc6b4',
+                  color: '#fff',
                 },
               }}
             >
-              <Link to='/login'>
-                <Typography variant='h5' sx={{ color: 'btn.main' }}>
-                  Login
-                </Typography>
-              </Link>
+              Login
             </Button>
           </div>
         </div>
 
         <div className='hero-image'>
-          <img src={loginImg} alt='Auth'  />
+          <img src={loginImg} alt='Auth' />
         </div>
       </Box>
     </Box>

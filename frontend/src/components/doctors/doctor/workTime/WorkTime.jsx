@@ -16,7 +16,7 @@ import '../Doctor.css';
 
 function WorkTime(props) {
   const navigate = useNavigate();
-  const { formattedStartShiftTime, formattedEndShiftTime } = props;
+  const { doctor } = props;
 
   return (
     <Grid item xs={12} md={5}>
@@ -58,8 +58,8 @@ function WorkTime(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{formattedStartShiftTime}</TableCell>
-                <TableCell>{formattedEndShiftTime}</TableCell>
+                <TableCell>{doctor?.startTime}</TableCell>
+                <TableCell>{doctor?.endTime}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

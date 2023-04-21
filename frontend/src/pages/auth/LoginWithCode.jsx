@@ -15,8 +15,8 @@ import passCode from '../../assets/authPage/password-code.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import Loader from '../../components/loader/Loader';
 import {
-  loginWithCode,
   RESET,
+  loginWithCode,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
 
@@ -104,21 +104,24 @@ function LoginWithCode() {
             >
               <Button
                 type='submit'
+                variant='contained'
                 sx={{
-                  bgcolor: 'fourth.main',
-                  width: '100%',
-                  p: '0.8em 1em',
-                  m: '1.2em 0',
-                  fontWeight: 800,
+                  borderRadius: '10px',
+                  padding: '8px 20px',
+                  fontWeight: 'bold',
+                  fontSize: '1.4rem',
                   color: 'primary.dark',
-                  border: '1px #ccc6b4 solid',
-                  fontSize: '1.2rem',
+                  minWidth: '8em',
+                  bgcolor: 'fourth.main',
+                  textTransform: 'uppercase',
+                  m: '1em 0',
                   '&:hover': {
-                    background: '#ccc6b4',
+                    backgroundColor: '#ccc6b4',
+                    color: '#fff',
                   },
                 }}
               >
-                Proceed To Login
+                Login
               </Button>
               <Typography sx={{ color: 'orange' }}>
                 Check your email for login access code
