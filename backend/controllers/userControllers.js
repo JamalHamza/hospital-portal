@@ -306,7 +306,7 @@ const updateUser = asyncHandler(async (req, res) => {
   const doctor = await Doctor.findOne({ userId: req.user._id });
   console.log(doctor);
   console.log(user);
-  if (user && doctor) {
+  if (user) {
     const { name, email, phone, bio, photo, role, isVerified } = user;
     user.email = email;
     user.name = req.body.name || name;
