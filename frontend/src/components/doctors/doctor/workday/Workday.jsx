@@ -17,10 +17,11 @@ import { useNavigate } from 'react-router-dom';
 import '../Doctor.css';
 
 function Workday(props) {
-  const { doctor, formatedEndDate, formatedToday, formatedStartDate } = props;
+  const { doctor, formattedEndShiftTime, todayDate, formattedStartShiftTime } =
+    props;
   const navigate = useNavigate();
 
-  if (formatedEndDate > formatedToday) {
+  if (formattedEndShiftTime > todayDate) {
     // console.log(false);
   } else {
     // console.log(true);
@@ -50,7 +51,7 @@ function Workday(props) {
           </Typography>
         </Box>
         <Box>
-          {formatedEndDate > formatedToday ? (
+          {formattedEndShiftTime > todayDate ? (
             ''
           ) : (
             <IconButton
@@ -78,8 +79,8 @@ function Workday(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{formatedStartDate}</TableCell>
-                <TableCell>{formatedEndDate}</TableCell>
+                <TableCell>{formattedStartShiftTime}</TableCell>
+                <TableCell>{formattedEndShiftTime}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

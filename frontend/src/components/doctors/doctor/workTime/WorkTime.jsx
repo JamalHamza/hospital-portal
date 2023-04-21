@@ -1,9 +1,7 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import AddIcon from '@mui/icons-material/Add';
 import {
   Box,
   Grid,
-  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -18,7 +16,7 @@ import '../Doctor.css';
 
 function WorkTime(props) {
   const navigate = useNavigate();
-  const { doctor, formatedEndDate, formatedToday } = props;
+  const { formattedStartShiftTime, formattedEndShiftTime } = props;
 
   return (
     <Grid item xs={12} md={5}>
@@ -43,19 +41,6 @@ function WorkTime(props) {
             Working Time
           </Typography>
         </Box>
-        <Box>
-          {formatedEndDate > formatedToday ? (
-            ''
-          ) : (
-            <IconButton
-              onClick={() =>
-                navigate(`/admin/doctors/updateShift/${doctor?._id}`)
-              }
-            >
-              <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
-            </IconButton>
-          )}
-        </Box>
       </Box>
       <Box
         sx={{
@@ -73,8 +58,8 @@ function WorkTime(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{doctor?.startTime}</TableCell>
-                <TableCell>{doctor?.endTime}</TableCell>
+                <TableCell>{formattedStartShiftTime}</TableCell>
+                <TableCell>{formattedEndShiftTime}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

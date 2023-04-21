@@ -29,7 +29,6 @@ const deleteDoctor = async (id) => {
 // ! Delete Doctor ---------------------------
 const updateDoctorShift = async (userData) => {
   const { id } = userData;
-  console.log(id);
   const response = await axios.patch(API_URL + `/getDoctors/${id}`, userData);
   return response.data;
 };

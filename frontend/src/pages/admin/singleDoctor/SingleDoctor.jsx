@@ -14,24 +14,27 @@ import { getDoctor } from '../../../redux/features/booking/bookingSlice';
 function SingleDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { isLoading, doctor } = useSelector((state) => state.booking);
+  const { isLoading, doctor, startDoctorShiftDate } = useSelector(
+    (state) => state.booking
+  );
   //  ! ----------------------
   const today = new Date().toISOString();
-  const formatedStartDate = moment.utc(doctor?.startDate).format('YYYY-MM-DD');
-  const formatedEndDate = moment.utc(doctor?.endDate).format('YYYY-MM-DD');
-  const formatedToday = moment.utc(today).format('YYYY-MM-DD');
+  const todayDate = moment.utc(today).format('YYYY-MM-DD');
+  // ! This code creates a new Date object from the UTC value retrieved from the database, and then uses the toLocaleString method to convert the UTC date to the Moscow timezone. The resulting moscowDate object can then be displayed to the user in the correct timezone.
+  const utcStartShiftTime = new Date(doctor?.startDate);
+  const utcEndShiftTime = new Date(doctor?.endDate);
+  // const moscowDate = new Date(
+  //   utcStartShiftTime.toLocaleString('en-US', { timeZone: 'Europe/Moscow' })
+  // );
+  // const formattedDate = moment(utcEndShiftTime).format('YYYY-MM-DD');
+  const formattedStartShiftTime =
+    moment(utcStartShiftTime).format('YYYY-MM-DD');
+  const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
 
-  const utcDate = new Date(doctor?.startDate);
-  console.log(utcDate);
-  const moscowDate = new Date(
-    utcDate.toLocaleString('en-US', { timeZone: 'Europe/Moscow' })
-  ); // Convert the UTC date to the Moscow timezone
-  console.log(moscowDate); // Display the date in the Moscow timezone
-
-  // ! ----------------------
+  // ! ---------------------------------------------------
   useEffect(() => {
     dispatch(getDoctor(id));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -41,7 +44,7 @@ function SingleDoctor() {
         <FormWrapper>
           <PersonalInfo doctor={doctor} />
           <hr color='#C0DEFF' />
-          {formatedEndDate <= formatedToday ? (
+          {formattedEndShiftTime < todayDate ? (
             <Box
               sx={{
                 display: 'flex',
@@ -66,15 +69,15 @@ function SingleDoctor() {
           >
             <Workday
               doctor={doctor}
-              formatedEndDate={formatedEndDate}
-              formatedToday={formatedToday}
-              formatedStartDate={formatedStartDate}
+              todayDate={todayDate}
+              formattedStartShiftTime={formattedStartShiftTime}
+              formattedEndShiftTime={formattedEndShiftTime}
             />
             <WorkTime
               doctor={doctor}
-              formatedEndDate={formatedEndDate}
-              formatedToday={formatedToday}
-              formatedStartDate={formatedStartDate}
+              todayDate={todayDate}
+              formattedStartShiftTime={formattedStartShiftTime}
+              formattedEndShiftTime={formattedEndShiftTime}
             />
           </Grid>
         </FormWrapper>

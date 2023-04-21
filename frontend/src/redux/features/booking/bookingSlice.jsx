@@ -9,8 +9,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   is: false,
-  // towFactors: false,
-  // isLoading: false,
+  isLoading: false,
   message: '',
 };
 
@@ -203,5 +202,5 @@ const bookingSlice = createSlice({
 });
 
 // ~ ------------------------------------------
-export const {} = bookingSlice.actions;
+export const {  } = bookingSlice.actions;
 export default bookingSlice.reducer;
