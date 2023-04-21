@@ -1,6 +1,6 @@
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,8 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const userRole = user?.role;
+  const capitalizedUserRole = userRole ? userRole.toUpperCase() : '';
 
   // ! --- Drawer --------------------------
   const handleOpen = () => {
@@ -60,16 +62,22 @@ const Header = () => {
               >
                 <MenuIcon sx={{ color: '#fff', fontSize: '1.8em' }} />
               </IconButton>
-              {/* <GiHospitalCross fontSize={26} color='white' /> */}
               <img src={AppleLogo} alt='logo' className='app-header-logo' />
             </Box>
-
-            <IconButton onClick={() => logoutUser()}>
-              <LogoutIcon
-                fontSize='large'
-                sx={{ color: 'form.main', fontSize: '2.4rem' }}
-              />
-            </IconButton>
+            <Box sx={{ display: 'flex', alignItems:'center' }}>
+              <Typography
+                variant='h6'
+                sx={{ color: 'fourth.main', m: '0.5em 1em' }}
+              >
+                {capitalizedUserRole}
+              </Typography>
+              <IconButton onClick={() => logoutUser()}>
+                <LogoutIcon
+                  fontSize='large'
+                  sx={{ color: 'form.main', fontSize: '2.4rem' }}
+                />
+              </IconButton>
+            </Box>
           </Box>
         </Toolbar>
       </AppBar>

@@ -1,7 +1,8 @@
 import React from 'react';
+import FormWrapper from '../../../components/formWrapper/FormWrapper';
 
 function AllDoctors() {
-  return <h1>AllDoctors</h1>;
+  return <FormWrapper>AllDoctors</FormWrapper>;
 }
 
 export default AllDoctors;
