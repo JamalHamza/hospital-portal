@@ -10,7 +10,7 @@ import forgotImg from '../../assets/authPage/forgotPassword.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import Loader from '../../components/loader/Loader';
 import { validateEmail } from '../../redux/features/auth/authServices';
-import { forgotPassword, RESET } from '../../redux/features/auth/authSlice';
+import { RESET, forgotPassword } from '../../redux/features/auth/authSlice';
 
 function Forgot() {
   const [email, setEmail] = useState('');
@@ -84,20 +84,22 @@ function Forgot() {
               style={{ margin: '8px', width: '100%' }}
               onChange={(e) => setEmail(e.target.value)}
             />
-
             <Button
               type='submit'
               variant='contained'
               sx={{
-                bgcolor: 'fourth.main',
-                margin: '0.8em',
-                padding: '0.8em 2em',
-                fontWeight: 800,
-                fontSize: '1.2rem',
+                borderRadius: '10px',
+                padding: '8px 20px',
+                fontWeight: 'bold',
+                fontSize: '1.4rem',
                 color: 'primary.dark',
-                width: '100%',
+                minWidth: '8em',
+                bgcolor: 'fourth.main',
+                textTransform: 'uppercase',
+                m: '1em 0',
                 '&:hover': {
-                  background: '#ccc6b4',
+                  backgroundColor: '#ccc6b4',
+                  color: '#fff',
                 },
               }}
             >

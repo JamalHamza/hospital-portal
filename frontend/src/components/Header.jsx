@@ -1,9 +1,10 @@
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 import React, { useState } from 'react';
-import { GiHospitalCross } from 'react-icons/gi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AppleLogo from '../../../frontend/src/assets/logo/apple-white.png';
 import Sidebar from '../components/sidebar/Sidebar';
 import { RESET, logout } from '../redux/features/auth/authSlice';
 import './Header.css';
@@ -33,7 +34,7 @@ const Header = () => {
       </Box>
       {/* Open Appbar */}
       <AppBar position='static'>
-        <Toolbar sx={{ bgcolor: 'menu.main' }}>
+        <Toolbar sx={{ bgcolor: 'primary.dark' }}>
           <Box
             sx={{
               display: 'flex',
@@ -59,25 +60,16 @@ const Header = () => {
               >
                 <MenuIcon sx={{ color: '#fff', fontSize: '1.8em' }} />
               </IconButton>
-              <GiHospitalCross fontSize={26} color='white' />
+              {/* <GiHospitalCross fontSize={26} color='white' /> */}
+              <img src={AppleLogo} alt='logo' className='app-header-logo' />
             </Box>
 
-            <Button
-              variant='contained'
-              sx={{
-                bgcolor: 'third.main',
-                padding: '0.4em 1em',
-                fontWeight: 800,
-                fontSize: '1rem',
-                color: 'primary.dark',
-                '&:hover': {
-                  background: '#ccb7c0',
-                },
-              }}
-              onClick={() => logoutUser()}
-            >
-              LogOut
-            </Button>
+            <IconButton onClick={() => logoutUser()}>
+              <LogoutIcon
+                fontSize='large'
+                sx={{ color: 'form.main', fontSize: '2.4rem' }}
+              />
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>

@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
+const Doctor = require('../models/doctorModel');
 const { genereteteToken, hashToken } = require('../utils/index');
 const bcryptjs = require('bcryptjs');
 const parser = require('ua-parser-js');
@@ -139,7 +140,7 @@ const verifyUser = asyncHandler(async (req, res) => {
   const hashedToken = hashToken(verificationToken);
 
   console.log(`hashToken: ${hashedToken}`);
-  console.log(`hashToken: ${typeof hashedToken}`);
+  // console.log(`hashToken: ${typeof hashedToken}`);
 
   const userToken = await Token.findOne({
     vToken: hashedToken,
@@ -277,7 +278,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 // * -----------------------------------
 
 const getUser = asyncHandler(async (req, res) => {
-  // ! req.user is comming from AuthMiddleWare
+  // ! req.user is coming from AuthMiddleWare
   const user = await User.findById(req.user._id);
   if (user) {
     const { _id, name, email, phone, bio, photo, role, isVerified } = user;
@@ -300,8 +301,11 @@ const getUser = asyncHandler(async (req, res) => {
 // * ------------------------------------
 
 const updateUser = asyncHandler(async (req, res) => {
-  // ! req.user is comming from AuthMiddleWare
+  // ! req.user is coming from AuthMiddleWare
   const user = await User.findById(req.user._id);
+  const doctor = await Doctor.findOne({ userId: req.user._id });
+  console.log(doctor);
+  console.log(user);
   if (user) {
     const { name, email, phone, bio, photo, role, isVerified } = user;
     user.email = email;
@@ -311,6 +315,17 @@ const updateUser = asyncHandler(async (req, res) => {
     user.photo = req.body.photo || photo;
 
     const updateUser = await user.save();
+
+    // !  If the user Is doctor, the info in Doctor Model should change too.
+
+    doctor.email = email;
+    doctor.name = req.body.name || name;
+    doctor.phone = req.body.phone || phone;
+    doctor.bio = req.body.bio || bio;
+    doctor.photo = req.body.photo || photo;
+
+    await doctor.save();
+
     res.status(201).json({
       // _id,
       name: updateUser.name,

@@ -20,6 +20,7 @@ function UserStats() {
   const { verifiedUsers, users, suspendedUsers } = useSelector(
     (state) => state.auth
   );
+  console.log(verifiedUsers);
 
   useEffect(() => {
     dispatch(CALC_VERIFIED_USER());

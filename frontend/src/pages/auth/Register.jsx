@@ -220,18 +220,23 @@ const Register = () => {
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
           />
+
           <Button
             type='submit'
             variant='contained'
             sx={{
-              bgcolor: 'third.main',
-              margin: '0.8em',
-              padding: '0.8em 2em',
-              fontWeight: 800,
-              fontSize: '1.2rem',
+              borderRadius: '10px',
+              padding: '8px 20px',
+              fontWeight: 'bold',
+              fontSize: '1.4rem',
+              minWidth: '8em',
               color: 'primary.dark',
+              bgcolor: 'third.main',
+              textTransform: 'uppercase',
+              m: '1em 0',
               '&:hover': {
-                background: '#ccb7c0',
+                backgroundColor: '#ccb7c0',
+                color: '#fff',
               },
             }}
           >

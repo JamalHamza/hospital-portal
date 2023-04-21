@@ -29,31 +29,35 @@ function PasswordStrength({ password, password2 }) {
   // ! ----- password & password2 check -------
   useEffect(() => {
     // Check Lower and Uppercase
-    if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
+    if (password?.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) {
       setUCase(true);
     } else {
       setUCase(false);
     }
     // Check for numbers
-    if (password.match(/([0-9])/)) {
+    if (password?.match(/([0-9])/)) {
       setNum(true);
     } else {
       setNum(false);
     }
     // Check for special character
-    if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
+    if (password?.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) {
       setSChar(true);
     } else {
       setSChar(false);
     }
     // Check for PASSWORD LENGTH
-    if (password.length > 6) {
+    if (password?.length > 6) {
       setPassLength(true);
     } else {
       setPassLength(false);
     }
     // Check for Password Match
-    if (password === password2 && password.length > 0 && password2.length > 0) {
+    if (
+      password === password2 &&
+      password?.length > 0 &&
+      password2?.length > 0
+    ) {
       setPassMatch(true);
     } else {
       setPassMatch(false);

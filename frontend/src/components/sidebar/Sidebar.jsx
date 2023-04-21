@@ -1,11 +1,11 @@
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PersonIcon from '@mui/icons-material/Person';
 import {
   Avatar,
   Box,
@@ -20,7 +20,6 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import doctors from '../../assets/drawerIcon/medical-assistance.png';
 // ! ----------------------------------------
 const Sidebar = ({ open, setOpen }) => {
   const navigate = useNavigate();
@@ -37,21 +36,28 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' color='secondary.main' />,
+          icon: (
+            <ManageAccountsIcon
+              fontSize='large'
+              sx={{ color: 'primary.light' }}
+            />
+          ),
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' color='secondary.main' />,
+          icon: (
+            <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
         },
         {
           text: 'Users',
-          icon: <GroupIcon fontSize='large' color='red' />,
+          icon: <GroupIcon fontSize='large' sx={{ color: 'primary.light' }} />,
           onClick: () => {
             navigate('/users'), setOpen(false);
           },
@@ -59,33 +65,45 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Doctors',
-          icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
-          onClick: () => {
-            navigate('/users'), setOpen(false);
-          },
-        },
-        {
-          text: 'Appointments',
-          icon: <CalendarMonthIcon fontSize='large' />,
-          onClick: () => {
-            navigate('/users'), setOpen(false);
-          },
-        },
-        {
           text: 'Add Doctor',
-          icon: <GroupAddIcon fontSize='large' />,
+          icon: (
+            <GroupAddIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/admin/addDoctor'), setOpen(false);
           },
         },
         {
-          text: 'Set Working Time',
-          icon: <HistoryToggleOffIcon fontSize='large' />,
+          text: 'Doctors',
+          icon: (
+            <Diversity1Icon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
-            navigate('/users'), setOpen(false);
+            navigate('/admin/doctors'), setOpen(false);
           },
         },
+        // {
+        //   text: 'Appointments',
+        //   icon: <CalendarMonthIcon fontSize='large' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
+
+        // {
+        //   text: 'Set Working Time',
+        //   icon: <HistoryToggleOffIcon fontSize='large' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
+        // {
+        //   text: 'Doctors',
+        //   icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
+        //   onClick: () => {
+        //     navigate('/users'), setOpen(false);
+        //   },
+        // },
       ],
     ];
   } else if (isDoctor) {
@@ -93,14 +111,14 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+          icon: <ManageAccountsIcon fontSize='large' />,
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' color='btn' />,
+          icon: <LockResetIcon fontSize='large' />,
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
@@ -112,14 +130,14 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' color='btn' />,
+          icon: <ManageAccountsIcon fontSize='large' />,
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' color='btn' />,
+          icon: <LockResetIcon fontSize='large' />,
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
@@ -154,15 +172,15 @@ const Sidebar = ({ open, setOpen }) => {
           />
           <Box sx={{ width: '30%', textAlign: 'center' }}>
             <Typography
-              variant='h4'
-              sx={{ color: 'menu.main', fontWeight: '700', p: '0.4em' }}
+              variant='h6'
+              sx={{ color: 'form.main', fontWeight: '700', p: '0.2em' }}
             >
               {user?.name}
             </Typography>
             <Typography
-              variant='h5'
+              variant='h6'
               sx={{
-                color: 'primay.dark',
+                color: 'third.dark',
                 fontWeight: '600',
                 display: 'flex',
                 alignItems: 'center',
@@ -176,7 +194,7 @@ const Sidebar = ({ open, setOpen }) => {
             </Typography>
           </Box>
         </Box>
-        <Divider />
+        <Divider sx={{ bgcolor: 'primary.main' }} />
         <div style={{ width: 250 }}>
           <List>
             {itemsList[0]?.map((item, index) => {
@@ -189,8 +207,13 @@ const Sidebar = ({ open, setOpen }) => {
               );
             })}
           </List>
-          <Divider />
+          <Divider sx={{ bgcolor: 'primary.main' }} />
           <List>
+            {/* {itemsList[1] && isAdmin && (
+              <Typography variant='h5' sx={{ color: 'secondary.main', m: '0.2em 1.2em', fontWeight: '700' }}>
+                Doctor
+              </Typography>
+            )} */}
             {itemsList[1]?.map((item, index) => {
               const { text, icon, onClick } = item;
               return (

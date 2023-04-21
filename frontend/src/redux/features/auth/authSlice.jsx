@@ -84,7 +84,7 @@ export const loginStatus = createAsyncThunk(
     }
   }
 );
-// ! Get User Prfile -----------------
+// ! Get User Profile -----------------
 export const getUser = createAsyncThunk('auth/getUser', async (_, thunkAPI) => {
   try {
     return await authService.getUser();
@@ -324,7 +324,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     RESET(state) {
-      state.towFactor = false;
+      state.towFactors = false;
       state.isError = false;
       state.isSuccess = false;
       state.isLoading = false;

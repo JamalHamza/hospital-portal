@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Please add a passwrod'],
+      required: [true, 'Please add a password'],
     },
     photo: {
       type: String,
@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
-// ! Encrupt password before saving user.
+// ! Encrypt password before saving user.
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();

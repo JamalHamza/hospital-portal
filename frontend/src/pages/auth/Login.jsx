@@ -20,9 +20,9 @@ import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import { FormBottomLinksLoginPage } from '../../components/formBottomLinks/FormBottomLinks';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
+  RESET,
   login,
   loginWithGoogle,
-  RESET,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
 
@@ -53,8 +53,6 @@ function Login() {
     towFactors,
     user,
   } = useSelector((state) => state.auth);
-
-
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
@@ -193,14 +191,18 @@ function Login() {
             type='submit'
             variant='contained'
             sx={{
-              bgcolor: 'fourth.main',
-              margin: '0.8em',
-              padding: '0.8em 2em',
-              fontWeight: 800,
-              fontSize: '1.2rem',
+              borderRadius: '10px',
+              padding: '8px 20px',
+              fontWeight: 'bold',
+              fontSize: '1.4rem',
               color: 'primary.dark',
+              minWidth: '8em',
+              bgcolor: 'fourth.main',
+              textTransform: 'uppercase',
+              margin: '0.8em',
               '&:hover': {
-                background: '#ccc6b4',
+                backgroundColor: '#ccc6b4',
+                color: '#fff',
               },
             }}
           >

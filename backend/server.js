@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorMiddleware');
+const adminRoutes = require('./routes/adminRoutes');
 
 // ! Middleware -----------
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use(
 
 // ! Routes  ------------
 app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/', (req, res) => {
   res.send('Home Page');

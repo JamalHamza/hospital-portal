@@ -7,7 +7,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/layout/Layout';
-import AddDoctor from './pages/addDoctor/AddDoctor';
+import AddDoctor from './pages/admin/addDoctor/AddDoctor';
+import Doctors from './pages/admin/doctors/Doctors';
+import SingleDoctor from './pages/admin/singleDoctor/SingleDoctor';
+import UpdateDoctorShift from './pages/admin/updateDoctorShift/UpdateDoctorShift';
 import Forgot from './pages/auth/Forgot';
 import Login from './pages/auth/Login';
 import LoginWithCode from './pages/auth/LoginWithCode';
@@ -36,6 +39,7 @@ const theme = createTheme({
       main: '#fff',
     },
     primary: {
+      dart: '#454066',
       main: '#ADA2FF',
       light: '#dcd7ff',
     },
@@ -52,6 +56,7 @@ const theme = createTheme({
       dark: '#ccc6b4',
       main: '#FFF8E1',
       light: '#fffaea',
+      lighter: '#fffcf6',
     },
     btn: {
       main: '#000205',
@@ -81,8 +86,8 @@ function App() {
         <ToastContainer
           pauseOnHover='false'
           hideProgressBar
-          autoClose={200}
-          position='top-left'
+          autoClose={700}
+          position='top-center'
           theme='colored'
           bodyClassName='toast'
         />
@@ -128,11 +133,36 @@ function App() {
                 </Layout>
               }
             />
+            {/* ________________ */}
             <Route
               path='/admin/addDoctor'
               element={
                 <Layout>
                   <AddDoctor />
+                </Layout>
+              }
+            />
+            <Route
+              path='/admin/doctors'
+              element={
+                <Layout>
+                  <Doctors />
+                </Layout>
+              }
+            />
+            <Route
+              path='/admin/doctors/:id'
+              element={
+                <Layout>
+                  <SingleDoctor />
+                </Layout>
+              }
+            />
+            <Route
+              path='/admin/doctors/updateShift/:id'
+              element={
+                <Layout>
+                  <UpdateDoctorShift />
                 </Layout>
               }
             />

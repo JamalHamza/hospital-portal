@@ -68,10 +68,10 @@ function UserList() {
   useEffect(() => {
     dispatch(FILTER_USERS({ users, search }));
   }, [dispatch, users, search]);
+  
   return (
     <section>
       <div className='container'>
-        {/* <PageMenu /> */}
         <UserStats />
         <div className='user-list'>
           {isLoading && <Spinner />}
