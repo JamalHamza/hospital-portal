@@ -19,6 +19,8 @@ import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
 import Home from './pages/home/Home';
+import AllDoctors from './pages/patient/doctors/AllDoctors';
+import HistoryAppointment from './pages/patient/historyAppointment/HistoryAppointment';
 import ProfileAdmin from './pages/profile/Profile';
 import UserList from './pages/userList/UserList';
 import {
@@ -163,6 +165,23 @@ function App() {
               element={
                 <Layout>
                   <UpdateDoctorShift />
+                </Layout>
+              }
+            />
+            {/* ________________ */}
+            <Route
+              path='/patient/allDoctors'
+              element={
+                <Layout>
+                  <AllDoctors />
+                </Layout>
+              }
+            />
+            <Route
+              path='/patient/historyApp'
+              element={
+                <Layout>
+                  <HistoryAppointment />
                 </Layout>
               }
             />

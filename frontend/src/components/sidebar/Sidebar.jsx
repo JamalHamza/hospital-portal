@@ -6,6 +6,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
+import UpdateIcon from '@mui/icons-material/Update';
 import {
   Avatar,
   Box,
@@ -82,28 +83,6 @@ const Sidebar = ({ open, setOpen }) => {
             navigate('/admin/doctors'), setOpen(false);
           },
         },
-        // {
-        //   text: 'Appointments',
-        //   icon: <CalendarMonthIcon fontSize='large' />,
-        //   onClick: () => {
-        //     navigate('/users'), setOpen(false);
-        //   },
-        // },
-
-        // {
-        //   text: 'Set Working Time',
-        //   icon: <HistoryToggleOffIcon fontSize='large' />,
-        //   onClick: () => {
-        //     navigate('/users'), setOpen(false);
-        //   },
-        // },
-        // {
-        //   text: 'Doctors',
-        //   icon: <img src={doctors} alt='doctors' className='sidebar-icon' />,
-        //   onClick: () => {
-        //     navigate('/users'), setOpen(false);
-        //   },
-        // },
       ],
     ];
   } else if (isDoctor) {
@@ -111,14 +90,21 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' />,
+          icon: (
+            <ManageAccountsIcon
+              fontSize='large'
+              sx={{ color: 'primary.light' }}
+            />
+          ),
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' />,
+          icon: (
+            <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
           },
@@ -130,16 +116,44 @@ const Sidebar = ({ open, setOpen }) => {
       [
         {
           text: 'Profile',
-          icon: <ManageAccountsIcon fontSize='large' />,
+          icon: (
+            <ManageAccountsIcon
+              fontSize='large'
+              sx={{ color: 'primary.light' }}
+            />
+          ),
           onClick: () => {
             navigate('/profile'), setOpen(false);
           },
         },
         {
           text: 'Change Password',
-          icon: <LockResetIcon fontSize='large' />,
+          icon: (
+            <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
           onClick: () => {
             navigate('/changePassword'), setOpen(false);
+          },
+        },
+      ],
+      [
+        {
+          text: 'Doctors',
+          icon: (
+            <ManageAccountsIcon
+              fontSize='large'
+              sx={{ color: 'primary.light' }}
+            />
+          ),
+          onClick: () => {
+            navigate('/patient/allDoctors'), setOpen(false);
+          },
+        },
+        {
+          text: 'History',
+          icon: <UpdateIcon fontSize='large' sx={{ color: 'primary.light' }} />,
+          onClick: () => {
+            navigate('/patient/historyApp'), setOpen(false);
           },
         },
       ],
