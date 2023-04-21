@@ -19,8 +19,20 @@ function UpdateShiftSidebar() {
   const { isLoading, doctor } = useSelector((state) => state.booking);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const formattedStartDate = moment.utc(doctor?.startDate).format('YYYY-MM-DD');
-  const formattedEndDate = moment.utc(doctor?.endDate).format('YYYY-MM-DD');
+
+  //  ! ----------------------
+  // ! This code creates a new Date object from the UTC value retrieved from the database, and then uses the toLocaleString method to convert the UTC date to the Moscow timezone. The resulting moscowDate object can then be displayed to the user in the correct timezone.
+  const utcStartShiftTime = new Date(doctor?.startDate);
+  const utcEndShiftTime = new Date(doctor?.endDate);
+  // const moscowDate = new Date(
+  //   utcStartShiftTime.toLocaleString('en-US', { timeZone: 'Europe/Moscow' })
+  // );
+  // const formattedDate = moment(utcEndShiftTime).format('YYYY-MM-DD');
+  const formattedStartShiftTime =
+    moment(utcStartShiftTime).format('YYYY-MM-DD');
+  const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
+
+  // ! ---------------------------------------------------
 
   return (
     <>
@@ -93,8 +105,8 @@ function UpdateShiftSidebar() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell>{formattedStartDate}</TableCell>
-                    <TableCell>{formattedEndDate}</TableCell>
+                    <TableCell>{formattedStartShiftTime}</TableCell>
+                    <TableCell>{formattedEndShiftTime}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
