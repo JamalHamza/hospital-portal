@@ -88,7 +88,7 @@ const addDoctor = asyncHandler(async (req, res) => {
     specialist,
   });
 
-  // ! if user created successfuly & SEND to frontend
+  // ! if user created successfully & SEND to frontend
   if (user && doctor) {
     const { _id, name, email, phone, bio, photo, role, isVerified } = user;
     res

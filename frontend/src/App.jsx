@@ -135,7 +135,7 @@ function App() {
                 </Layout>
               }
             />
-            {/* ________________ */}
+            {/* ______AdminONly__________ */}
             <Route
               path='/admin/addDoctor'
               element={

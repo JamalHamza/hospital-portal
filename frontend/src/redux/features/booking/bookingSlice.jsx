@@ -13,6 +13,10 @@ const initialState = {
   message: '',
 };
 
+// *-----------------------------
+// *-------ADMIN-----------------
+// *-----------------------------
+
 // ! Add Doctor ----------------
 export const addDoctor = createAsyncThunk(
   'booking/addDoctor',
@@ -107,6 +111,10 @@ export const updateDoctorShift = createAsyncThunk(
   }
 );
 
+// *-----------------------------
+// *-------PATIENT---------------
+// *-----------------------------
+
 // * ---------------------------------------
 
 const bookingSlice = createSlice({
@@ -197,10 +205,11 @@ const bookingSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
-      });
+      })
+     
   },
 });
 
 // ~ ------------------------------------------
-export const {  } = bookingSlice.actions;
+export const {} = bookingSlice.actions;
 export default bookingSlice.reducer;

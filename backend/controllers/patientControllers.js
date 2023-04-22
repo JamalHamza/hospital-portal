@@ -8,62 +8,6 @@ const jwt = require('jsonwebtoken');
 const sendEmail = require('../utils/sendEmail');
 const Token = require('../models/tokenModel');
 
-// * --------------------------------------
-const allDoctors = asyncHandler(async (req, res) => {
-  const doctors = await Doctor.find().sort('-createAt').select('-password');
-  if (!doctors) {
-    res.status(500);
-    throw new Error('Something went wrong, please try again');
-  }
-  res.status(200).json(doctors);
-});
-
-// * -------------------------------------
-const getDoctor = asyncHandler(async (req, res) => {
-  // ! req.user is coming from AuthMiddleWare
-  const id = req.params.id;
-  const doctor = await Doctor.findById(id);
-  const {
-    name,
-    email,
-    specialist,
-    fee,
-    experiences,
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    phone,
-    photo,
-    createdAt,
-    userId,
-    _id,
-  } = doctor;
-  const user = await User.findById(userId);
-
-  if (doctor && user) {
-    const { isVerified } = user;
-    res.status(200).json({
-      name,
-      email,
-      phone,
-      specialist,
-      fee,
-      experiences,
-      startDate,
-      endDate,
-      startTime,
-      endTime,
-      isVerified,
-      photo,
-      createdAt,
-      _id,
-    });
-  } else {
-    res.status(404);
-    throw new Error('User not found');
-  }
-});
 
 
 
@@ -96,6 +40,5 @@ const updateDoctorShift = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  allDoctors,
 
 };

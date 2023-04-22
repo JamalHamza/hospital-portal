@@ -7,10 +7,15 @@ const {
   deleteDoctor,
   updateDoctorShift,
 } = require('../controllers/adminControllers');
-const { protect, adminOnly } = require('../middleware/AuthMiddleware');
+const {
+  protect,
+  adminOnly,
+  patientOnly,
+  adminOrPatient,
+} = require('../middleware/AuthMiddleware');
 
 router.post('/addDoctor', protect, adminOnly, addDoctor);
-router.get('/getDoctors', protect, adminOnly, getDoctors);
+router.get('/getDoctors', protect, adminOrPatient, getDoctors);
 // TODO LATER
 // ! may be I don't need protect here but I am not sure
 router.get('/getDoctors/:id', protect, adminOnly, getDoctor);
