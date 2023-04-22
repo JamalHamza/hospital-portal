@@ -12,7 +12,7 @@ const { protect, adminOnly } = require('../middleware/AuthMiddleware');
 router.post('/addDoctor', protect, adminOnly, addDoctor);
 router.get('/getDoctors', protect, adminOnly, getDoctors);
 // TODO LATER
-// ! may be I dont need protect here but I am not sure
+// ! may be I don't need protect here but I am not sure
 router.get('/getDoctors/:id', protect, adminOnly, getDoctor);
 router.delete('/getDoctors/:id', protect, adminOnly, deleteDoctor);
 router.patch('/getDoctors/:id', protect, adminOnly, updateDoctorShift);

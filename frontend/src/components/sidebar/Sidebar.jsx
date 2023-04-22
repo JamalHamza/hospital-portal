@@ -3,6 +3,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import GroupIcon from '@mui/icons-material/Group';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import Groups2Icon from '@mui/icons-material/Groups2';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
@@ -140,10 +141,7 @@ const Sidebar = ({ open, setOpen }) => {
         {
           text: 'Doctors',
           icon: (
-            <ManageAccountsIcon
-              fontSize='large'
-              sx={{ color: 'primary.light' }}
-            />
+            <Groups2Icon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
           onClick: () => {
             navigate('/patient/allDoctors'), setOpen(false);
