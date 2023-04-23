@@ -18,7 +18,7 @@ router.post('/addDoctor', protect, adminOnly, addDoctor);
 router.get('/getDoctors', protect, adminOrPatient, getDoctors);
 // TODO LATER
 // ! may be I don't need protect here but I am not sure
-router.get('/getDoctors/:id', protect, adminOnly, getDoctor);
+router.get('/getDoctors/:id', protect, adminOrPatient, getDoctor);
 router.delete('/getDoctors/:id', protect, adminOnly, deleteDoctor);
 router.patch('/getDoctors/:id', protect, adminOnly, updateDoctorShift);
 

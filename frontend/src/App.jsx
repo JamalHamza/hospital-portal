@@ -21,6 +21,7 @@ import ChangePassword from './pages/changePassword/ChangePassword';
 import Home from './pages/home/Home';
 import AllDoctors from './pages/patient/doctors/AllDoctors';
 import HistoryAppointment from './pages/patient/historyAppointment/HistoryAppointment';
+import PatientSingleDoctor from './pages/patient/singleDoctor/PatientSingleDoctor';
 import ProfileAdmin from './pages/profile/Profile';
 import UserList from './pages/userList/UserList';
 import {
@@ -179,6 +180,14 @@ function App() {
                 element={
                   <Layout>
                     <AllDoctors />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/allDoctors/:id'
+                element={
+                  <Layout>
+                    <PatientSingleDoctor />
                   </Layout>
                 }
               />

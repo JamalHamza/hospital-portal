@@ -5,6 +5,7 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import { Button, CardContent, Typography } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   Box: {
@@ -16,7 +17,12 @@ const style = {
   },
 };
 
-function CardContentDetails({ doctor, onClick }) {
+function CardContentDetails({ doctor }) {
+  const navigate = useNavigate();
+  const handleClick = (id) => {
+    navigate(`/patient/allDoctors/${id}`);
+  };
+
   //  ! ----------------------
   const today = new Date().toISOString();
   const todayDate = moment.utc(today).format('YYYY-MM-DD');
@@ -89,7 +95,7 @@ function CardContentDetails({ doctor, onClick }) {
         {doctor?.startTime} - {doctor?.endTime}
       </Typography>
       <Button
-        onClick={() => onClick()}
+        onClick={handleClick}
         variant='contained'
         sx={{
           borderRadius: '10px',

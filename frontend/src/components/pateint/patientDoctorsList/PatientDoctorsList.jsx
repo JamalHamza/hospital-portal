@@ -1,13 +1,12 @@
-import { Box, CardMedia, Grid, Typography } from '@mui/material';
+import {Box, CardMedia, Grid, Typography} from '@mui/material';
 import Card from '@mui/material/Card';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { selectorDoctors } from '../../../redux/features/auth/filterSlice';
-import { getDoctors } from '../../../redux/features/booking/bookingSlice';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {selectorDoctors} from '../../../redux/features/auth/filterSlice';
+import {getDoctors} from '../../../redux/features/booking/bookingSlice';
 import Loader from '../../loader/Loader';
 import CardContentDetails from './CardContentDetails';
-import moment from 'moment';
 // import './DoctorList.css';
 
 function DoctorList() {
@@ -15,9 +14,6 @@ function DoctorList() {
   const navigate = useNavigate();
   const { isLoading, doctors } = useSelector((state) => state.booking);
   const filteredDoctors = useSelector(selectorDoctors);
-  const handleClick = (id) => {
-    // navigate(`/admin/doctors/${id}`);
-  };
 
   //  ! -------------
   useEffect(() => {
@@ -56,7 +52,7 @@ function DoctorList() {
                       height: '100%',
                     }}
                   >
-                    <CardContentDetails doctor={doctor} onClick={handleClick} />
+                    <CardContentDetails doctor={doctor} />
                   </Box>
                   <CardMedia
                     component='img'
