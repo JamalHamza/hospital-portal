@@ -7,6 +7,7 @@ import { selectorDoctors } from '../../../redux/features/auth/filterSlice';
 import { getDoctors } from '../../../redux/features/booking/bookingSlice';
 import Loader from '../../loader/Loader';
 import CardContentDetails from './CardContentDetails';
+import moment from 'moment';
 // import './DoctorList.css';
 
 function DoctorList() {
@@ -17,6 +18,7 @@ function DoctorList() {
   const handleClick = (id) => {
     // navigate(`/admin/doctors/${id}`);
   };
+
   //  ! -------------
   useEffect(() => {
     dispatch(getDoctors());
