@@ -4,18 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const AdminRoutes = ({ children }) => {
-  const { isLoading, user } = useSelector((state) => state.auth);
+  const {  user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-    console.log(user);
-  let aut = { token: false };
-
+  const isAdmin = user?.role === 'patient';
+  //   console.log(isAdmin);
   useEffect(() => {
-    if (!aut.token) {
+    if (!isAdmin) {
       toast.error('You are logged in not as Admin!');
       navigate('/profile');
     }
-  }, []);
-
+  }, [navigate]);
   return children;
 };
 
