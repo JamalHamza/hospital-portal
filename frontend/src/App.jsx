@@ -30,6 +30,7 @@ import {
   selectorUser,
 } from './redux/features/auth/authSlice';
 import AdminRoutes from './utils/AdminRoutes';
+import PatientRoutes from './utils/PatientRoutes';
 axios.defaults.withCredentials = true;
 
 const theme = createTheme({
@@ -128,7 +129,7 @@ function App() {
                 </Layout>
               }
             />
-            {/* ______AdminONly__________ */}
+            {/* ______AdminOnly__________ */}
             <Route element={<AdminRoutes />}>
               <Route
                 path='/users'
@@ -171,23 +172,25 @@ function App() {
                 }
               />
             </Route>
-            {/* ________________ */}
-            <Route
-              path='/patient/allDoctors'
-              element={
-                <Layout>
-                  <AllDoctors />
-                </Layout>
-              }
-            />
-            <Route
-              path='/patient/historyApp'
-              element={
-                <Layout>
-                  <HistoryAppointment />
-                </Layout>
-              }
-            />
+            {/* ________PatientOnly__________ */}
+            <Route element={<PatientRoutes />}>
+              <Route
+                path='/patient/allDoctors'
+                element={
+                  <Layout>
+                    <AllDoctors />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/historyApp'
+                element={
+                  <Layout>
+                    <HistoryAppointment />
+                  </Layout>
+                }
+              />
+            </Route>
           </Routes>
         </GoogleOAuthProvider>
       </BrowserRouter>
