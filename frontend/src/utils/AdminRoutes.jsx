@@ -1,20 +1,35 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import authService from '../redux/features/auth/authServices';
 
 const AdminRoutes = ({ children }) => {
-  const {  user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const isAdmin = user?.role === 'patient';
-  //   console.log(isAdmin);
+
   useEffect(() => {
-    if (!isAdmin) {
-      toast.error('You are logged in not as Admin!');
-      navigate('/profile');
-    }
+    let user;
+    let admin;
+    const isAdmin = async () => {
+      try {
+        user = await authService.getUser();
+        admin = user.role == 'admin';
+        console.log(admin);
+      } catch (error) {
+        console.log(error.message);
+      }
+
+      if (!admin) {
+        toast.error('You are not logged in as Admin!');
+        navigate('/login');
+        return;
+      }
+    };
+    isAdmin();
   }, [navigate]);
-  return children;
+
+  // ! =============================
+
+  return <Outlet />;
 };
 
 export default AdminRoutes;
