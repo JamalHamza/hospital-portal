@@ -29,6 +29,7 @@ import {
   selectIsLoggedIn,
   selectorUser,
 } from './redux/features/auth/authSlice';
+import AdminRoutes from './utils/AdminRoutes';
 axios.defaults.withCredentials = true;
 
 const theme = createTheme({
@@ -127,47 +128,49 @@ function App() {
                 </Layout>
               }
             />
-            <Route
-              path='/users'
-              element={
-                <Layout>
-                  <UserList />
-                </Layout>
-              }
-            />
             {/* ______AdminONly__________ */}
-            <Route
-              path='/admin/addDoctor'
-              element={
-                <Layout>
-                  <AddDoctor />
-                </Layout>
-              }
-            />
-            <Route
-              path='/admin/doctors'
-              element={
-                <Layout>
-                  <Doctors />
-                </Layout>
-              }
-            />
-            <Route
-              path='/admin/doctors/:id'
-              element={
-                <Layout>
-                  <SingleDoctor />
-                </Layout>
-              }
-            />
-            <Route
-              path='/admin/doctors/updateShift/:id'
-              element={
-                <Layout>
-                  <UpdateDoctorShift />
-                </Layout>
-              }
-            />
+            <Route element={<AdminRoutes />}>
+              <Route
+                path='/users'
+                element={
+                  <Layout>
+                    <UserList />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/addDoctor'
+                element={
+                  <Layout>
+                    <AddDoctor />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/doctors'
+                element={
+                  <Layout>
+                    <Doctors />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/doctors/:id'
+                element={
+                  <Layout>
+                    <SingleDoctor />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/doctors/updateShift/:id'
+                element={
+                  <Layout>
+                    <UpdateDoctorShift />
+                  </Layout>
+                }
+              />
+            </Route>
             {/* ________________ */}
             <Route
               path='/patient/allDoctors'

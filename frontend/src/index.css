@@ -466,12 +466,6 @@ ul {
   list-style: none;
 }
 
-a:hover {
-  /* color: var(--color-dark); */
-  /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! removed */
-  /* font-size: 1.5rem; */
-}
-
 .ql-editor {
   min-height: 200px;
 }
@@ -529,8 +523,8 @@ a:hover {
   color: #045502;
   font-size: 1.2rem;
   padding: 0.1em;
-  max-width: 20em;
-  min-height: .6rem;
+  /* max-width: 20em; */
+  min-height: 0.6rem;
 }
 .Toastify__toast-theme--colored.Toastify__toast--error {
   background-color: #fcfcfc;
@@ -539,8 +533,8 @@ a:hover {
   color: #5e0404;
   font-size: 1.2rem;
   padding: 0.1em;
-  max-width: 20em;
-  min-height: .6rem;
+  /* max-width: 20em; */
+  min-height: 0.6rem;
 }
 
 @media screen and (max-width: 400px) {
