@@ -1,9 +1,10 @@
+import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PersonalInfo from '../../../components/admin/doctor/personalInfo/PersonalInfo';
 import WorkTime from '../../../components/admin/doctor/workTime/WorkTime';
 import Workday from '../../../components/admin/doctor/workday/Workday';
@@ -14,6 +15,7 @@ import { getDoctor } from '../../../redux/features/booking/bookingSlice';
 function SingleDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isLoading, doctor, startDoctorShiftDate } = useSelector(
     (state) => state.booking
   );
@@ -50,6 +52,7 @@ function SingleDoctor() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                mb: '2em',
               }}
             >
               <NotificationsActiveIcon
@@ -59,13 +62,24 @@ function SingleDoctor() {
               <Typography variant='h5' color='red'>
                 Doctor's work day needs to be renewed!
               </Typography>
+              <Box>
+                <IconButton
+                  onClick={() =>
+                    navigate(`/admin/doctors/updateShift/${doctor?._id}`)
+                  }
+                >
+                  <EditCalendarRoundedIcon
+                    sx={{ fontSize: '3rem', color: 'green' }}
+                  />
+                </IconButton>
+              </Box>
             </Box>
           ) : (
             ''
           )}
           <Grid
             container
-            sx={{ mt: '1em', display: 'flex', justifyContent: 'space-between' }}
+            sx={{ mt: '1em', display: 'flex', justifyContent: 'space-between', gap:'2em' }}
           >
             <Workday
               doctor={doctor}

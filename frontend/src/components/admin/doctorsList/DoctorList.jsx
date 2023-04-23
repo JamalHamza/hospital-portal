@@ -22,7 +22,6 @@ function DoctorList() {
   const navigate = useNavigate();
   const { isLoading, doctors } = useSelector((state) => state.booking);
   const filteredDoctors = useSelector(selectorDoctors);
-  console.log(filteredDoctors);
   const handleClick = (id) => {
     navigate(`/admin/doctors/${id}`);
   };

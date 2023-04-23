@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import '../PersonalInfo.css';
 
 function PersonalInfoAvatar(props) {
-  const { doctor, formatedDate, handleOpen } = props;
+  const { doctor, formattedDate, handleOpen } = props;
   const navigate = useNavigate();
   return (
     <>
@@ -67,7 +67,7 @@ function PersonalInfoAvatar(props) {
           <Typography
             variant='body1'
             sx={{ color: 'secondary.dark', ml: '1em' }}
-          >{`Created at ${formatedDate}`}</Typography>
+          >{`Created at ${formattedDate}`}</Typography>
         </Box>
       </Grid>
     </>

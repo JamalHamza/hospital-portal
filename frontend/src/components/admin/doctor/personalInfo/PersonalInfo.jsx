@@ -20,9 +20,9 @@ function PersonalInfo(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  
-  const formatedDate = moment.utc(doctor?.createdAt).format('YYYY-MM-DD');
-  // ! Count Doctor experinces from array
+
+  const formattedDate = moment.utc(doctor?.createdAt).format('YYYY-MM-DD');
+  // ! Count Doctor experiences from array
   const experienceDoctor = doctor?.experiences?.reduce((total, exp) => {
     return total + exp.years;
   }, 0);
@@ -35,11 +35,11 @@ function PersonalInfo(props) {
 
   return (
     <>
-      <Box>
-        <Grid container >
+      <Box mb='2em'>
+        <Grid container>
           <PersonalInfoAvatar
             doctor={doctor}
-            formatedDate={formatedDate}
+            formattedDate={formattedDate}
             doctorId={id}
             handleOpen={handleOpen}
           />

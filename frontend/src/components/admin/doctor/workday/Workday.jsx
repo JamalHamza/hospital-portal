@@ -1,9 +1,7 @@
-import AddIcon from '@mui/icons-material/Add';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import {
   Box,
   Grid,
-  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -32,7 +30,7 @@ function Workday(props) {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-evenly',
+          justifyContent: 'center',
           alignItems: 'center',
         }}
       >
@@ -50,7 +48,7 @@ function Workday(props) {
             Working Date
           </Typography>
         </Box>
-        <Box>
+        {/* <Box>
           {formattedEndShiftTime > todayDate ? (
             ''
           ) : (
@@ -62,11 +60,12 @@ function Workday(props) {
               <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
             </IconButton>
           )}
-        </Box>
+        </Box> */}
       </Box>
       <Box
         sx={{
-          mt: '0.8rem',
+          m: '0.8rem',
+          border: '1px solid lightgray',
         }}
       >
         <TableContainer>

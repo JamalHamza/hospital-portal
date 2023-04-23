@@ -5,7 +5,7 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import { Button, CardContent, Typography } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const style = {
   Box: {
@@ -18,7 +18,9 @@ const style = {
 };
 
 function CardContentDetails({ doctor }) {
+  const { id } = useParams();
   const navigate = useNavigate();
+  console.log(id);
   const handleClick = (id) => {
     navigate(`/patient/allDoctors/${id}`);
   };
@@ -95,7 +97,7 @@ function CardContentDetails({ doctor }) {
         {doctor?.startTime} - {doctor?.endTime}
       </Typography>
       <Button
-        onClick={handleClick}
+        onClick={() => handleClick(doctor._id)}
         variant='contained'
         sx={{
           borderRadius: '10px',

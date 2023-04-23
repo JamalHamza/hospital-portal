@@ -23,7 +23,7 @@ function WorkTime(props) {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-evenly',
+          justifyContent: 'center',
           alignItems: 'center',
         }}
       >
@@ -44,8 +44,8 @@ function WorkTime(props) {
       </Box>
       <Box
         sx={{
-          mt: '0.8rem',
-          ml: '4px',
+          m: '0.8rem',
+          border: '1px solid lightgray',
         }}
       >
         <TableContainer>
