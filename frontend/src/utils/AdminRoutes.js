@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const AdminRoutes = ({ children }) => {
   const { isLoading, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  //   console.log(user);
+    console.log(user);
   let aut = { token: false };
 
   useEffect(() => {
