@@ -65,7 +65,9 @@ function PersonalInfo(props) {
                   The doctor is currently accepting patients and is available
                   for appointments.
                 </Typography>
-                <IconButton>
+                <IconButton
+                  onClick={() => navigate(`/patient/allDoctors/booking/${id}`)}
+                >
                   <BookmarkAddTwoToneIcon
                     color='green'
                     sx={{ fontSize: '3rem', color: 'green' }}

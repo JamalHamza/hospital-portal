@@ -68,9 +68,9 @@ function Workday(props) {
           border: '1px solid lightgray',
         }}
       >
-        <TableContainer>
-          <Table>
-            <TableHead>
+        <TableContainer >
+          <Table >
+            <TableHead >
               <TableRow>
                 <TableCell>Start Date</TableCell>
                 <TableCell>End Date</TableCell>
@@ -78,7 +78,7 @@ function Workday(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{formattedStartShiftTime}</TableCell>
+                <TableCell >{formattedStartShiftTime}</TableCell>
                 <TableCell>{formattedEndShiftTime}</TableCell>
               </TableRow>
             </TableBody>
