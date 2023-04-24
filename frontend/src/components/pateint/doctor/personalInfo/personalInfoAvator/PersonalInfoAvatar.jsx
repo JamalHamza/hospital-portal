@@ -1,6 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Box, Grid, IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {Box, Grid, IconButton} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 // import '../PersonalInfo.css';
 
 function PersonalInfoAvatar(props) {
@@ -15,7 +15,7 @@ function PersonalInfoAvatar(props) {
           </IconButton>
         </Grid>
       </Grid>
-      <Grid item xs={12} sm={6} md={3}>
+      <Grid item xs={12} sm={10} md={6}>
         <Box
           sx={{
             display: 'flex',
