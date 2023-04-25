@@ -1,6 +1,5 @@
 import { Button, Grid } from '@mui/material';
 import { useFormik } from 'formik';
-import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -34,17 +33,17 @@ function UpdateShiftForm() {
   const navigate = useNavigate();
   // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
-    const hour = moment(time.$d).format('HH');
-    const min = moment(time.$d).format('mm');
-    const formattedTime = `${hour}:${min}`;
+    // const hour = moment(time.$d).format('HH');
+    // const min = moment(time.$d).format('mm');
+    // const formattedTime = `${hour}:${min}`;
     formik.setFieldValue(fieldName, time);
-    setFormData({ ...formData, [fieldName]: formattedTime });
+    setFormData({ ...formData, [fieldName]: time });
   };
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
-    const formattedDate = value?.toISOString();
+    // const formattedDate = value?.toISOString();
     formik.setFieldValue(fieldName, value);
-    setFormData({ ...formData, [fieldName]: formattedDate });
+    setFormData({ ...formData, [fieldName]: value });
   };
 
   // ! ------ Update Doctor Shift -------------

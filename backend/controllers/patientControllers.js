@@ -21,11 +21,16 @@ const bookAppointment = asyncHandler(async (req, res) => {
     throw new Error('Please fill in all the required fields ');
   }
 
+  const formattedAppointmentTime = moment(appointmentTime).format('HH:mm');
+  const formattedStartTime = moment(startTime).format('HH:mm');
+  const formattedEndTime = moment(endTime).format('HH:mm');
+  console.log(formattedAppointmentTime);
+
   if (
     appointmentDateFormatted >= startDate &&
     appointmentDateFormatted <= endDate &&
-    appointmentTime >= startTime &&
-    appointmentTime <= endTime
+    formattedAppointmentTime >= formattedStartTime &&
+    formattedAppointmentTime <= formattedEndTime
   ) {
     // ! If appointment date and time is available then save to db.
     const appointment = await Appointment.create({
@@ -85,3 +90,7 @@ module.exports = {
   bookAppointment,
   checkAvailability,
 };
+
+//  &&
+//   appointmentTime >= startTime &&
+//   appointmentTime <= endTime
