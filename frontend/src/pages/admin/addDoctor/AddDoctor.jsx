@@ -104,7 +104,7 @@ function AddDoctor() {
     // console.log(`${hour}:${min}`);
     formik.setFieldValue(fieldName, time);
     // ! bug fixed after 6 hours I forgot to setFormData
-    setFormData({ ...formData, [fieldName]: formatedTime });
+    setFormData({ ...formData, [fieldName]: time });
   };
 
   // ! ----- Add Doctor function -----

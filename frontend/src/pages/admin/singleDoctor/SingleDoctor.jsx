@@ -16,7 +16,7 @@ function SingleDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, doctor, startDoctorShiftDate } = useSelector(
+  const { isLoading, doctor } = useSelector(
     (state) => state.booking
   );
   //  ! ----------------------

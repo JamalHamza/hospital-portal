@@ -21,7 +21,9 @@ function UpdateShiftSidebar() {
   const { id } = useParams();
 
   //  ! ----------------------
-  // ! This code creates a new Date object from the UTC value retrieved from the database, and then uses the toLocaleString method to convert the UTC date to the Moscow timezone. The resulting moscowDate object can then be displayed to the user in the correct timezone.
+  // ! This code creates a new Date object from the UTC value retrieved from the database,
+  // ! and then uses the toLocaleString method to convert the UTC date to the Moscow timezone.
+  // ! The resulting moscowDate object can then be displayed to the user in the correct timezone.
   const utcStartShiftTime = new Date(doctor?.startDate);
   const utcEndShiftTime = new Date(doctor?.endDate);
   // const moscowDate = new Date(
@@ -33,6 +35,8 @@ function UpdateShiftSidebar() {
   const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
 
   // ! ---------------------------------------------------
+  const formattedStartTime = moment(doctor?.startTime).format('HH:mm');
+  const formattedEndTime = moment(doctor?.endTime).format('HH:mm');
 
   return (
     <>
@@ -152,8 +156,8 @@ function UpdateShiftSidebar() {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell>{doctor?.startTime}</TableCell>
-                    <TableCell>{doctor?.endTime}</TableCell>
+                    <TableCell>{formattedStartTime}</TableCell>
+                    <TableCell>{formattedEndTime}</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>

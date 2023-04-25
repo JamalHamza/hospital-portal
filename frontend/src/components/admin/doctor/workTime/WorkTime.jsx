@@ -10,6 +10,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import moment from 'moment';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Doctor.css';
@@ -17,6 +18,8 @@ import '../Doctor.css';
 function WorkTime(props) {
   const navigate = useNavigate();
   const { doctor } = props;
+  const formattedStartTime = moment(doctor?.startTime).format('HH:mm');
+  const formattedEndTime = moment(doctor?.endTime).format('HH:mm');
 
   return (
     <Grid item xs={12} md={5}>
@@ -58,8 +61,8 @@ function WorkTime(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{doctor?.startTime}</TableCell>
-                <TableCell>{doctor?.endTime}</TableCell>
+                <TableCell>{formattedStartTime}</TableCell>
+                <TableCell>{formattedEndTime}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

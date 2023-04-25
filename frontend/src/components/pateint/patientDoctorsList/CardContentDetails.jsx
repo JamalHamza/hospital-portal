@@ -35,6 +35,11 @@ function CardContentDetails({ doctor }) {
   const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
   // ! ---------------------------------------------------
 
+  // ! --------------------------------
+  const formattedStartTime = moment(doctor?.startTime).format('HH:mm');
+  const formattedEndTime = moment(doctor?.endTime).format('HH:mm');
+  // ! --------------------------------
+
   return (
     <CardContent sx={style.Box}>
       <Typography variant='h5' sx={style.info}>
@@ -93,7 +98,7 @@ function CardContentDetails({ doctor }) {
           fontSize='medium'
           sx={{ color: 'primary.dark', mr: '0.2em' }}
         />
-        {doctor?.startTime} - {doctor?.endTime}
+        {formattedStartTime} - {formattedEndTime}
       </Typography>
       <Button
         onClick={() => handleClick(doctor._id)}

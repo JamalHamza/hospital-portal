@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import moment from 'moment';
 import { useState } from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -23,6 +24,14 @@ const initialValues = {
 
 function BookingForm() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const { isLoading, doctor } = useSelector((state) => state.booking);
+  // TODO LATER !
+  // ! getting min/maxDate for DatePicker
+  const mongodb = doctor?.endDate;
+  const formattedDate = new Date(mongodb);
+  const asdfasf = moment(formattedDate).format('YYYY-MM-DD');
+
   const [formData, setFormData] = useState(initialValues);
   // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
@@ -35,6 +44,7 @@ function BookingForm() {
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
     const formattedDate = value?.toISOString();
+    console.log('hhe');
     formik.setFieldValue(fieldName, value);
     setFormData({ ...formData, [fieldName]: formattedDate });
   };
@@ -47,6 +57,7 @@ function BookingForm() {
       console.log(values);
     },
   });
+
   return (
     <Grid item xs={12} sm={6} md={6}>
       <form onSubmit={formik.handleSubmit}>
@@ -78,6 +89,7 @@ function BookingForm() {
                     inputFormat='DD/MM/yyyy'
                     value={formik.values.appointmentDate}
                     disablePast={true}
+                    // minDate={dayjs(asdfasf)}
                     onBlur={formik.handleBlur}
                     onChange={handleFieldChange('appointmentDate')}
                     sx={{ width: '100%', m: '4px' }}
