@@ -13,7 +13,8 @@ const bookAppointment = asyncHandler(async (req, res) => {
   const { patientId, doctorId, appointmentDate, appointmentTime } = req.body;
   const doctor = await Doctor.findOne({ _id: doctorId });
   const { startDate, endDate, startTime, endTime, name } = doctor;
-  // const formattedDate = appointmentDate?.toISOString();
+  // ! change date formate that client sent
+  const appointmentDateFormatted = new Date(appointmentDate);
 
   //! validation
   if (!appointmentDate || !appointmentTime) {
@@ -21,41 +22,30 @@ const bookAppointment = asyncHandler(async (req, res) => {
     throw new Error('Please fill in all the required fields ');
   }
 
-  const startDate1 = new Date(startDate);
-  const endDate1 = new Date(endDate);
-  const appointmentDate1 = new Date(appointmentDate);
-
-  if (appointmentDate1 >= startDate1 && appointmentDate1 <= endDate1) {
-    res.status(201).json('booked');
+  if (
+    appointmentDateFormatted >= startDate &&
+    appointmentDateFormatted <= endDate &&
+    appointmentTime >= startTime &&
+    appointmentTime <= endTime
+  ) {
+    // ! If appointment date and time is available then save to db.
+    const appointment = await Appointment.create({
+      patientId,
+      doctorId,
+      appointmentDate,
+      appointmentTime,
+    });
+    // ! Check if booked successfully
+    if (appointment) {
+      res.status(201).json(appointment);
+    } else {
+      res.status(400);
+      throw new Error('Invalid appointment data');
+    }
   } else {
     res.status(400);
     throw new Error(`Dr. ${name} is not available on that date`);
   }
-
-  // if (appointmentDate < startDate || appointmentDate > endDate) {
-
-  // }
-
-  console.log(startDate1);
-  console.log(endDate1);
-  console.log(appointmentDate1);
-
-  // const appointment = await Appointment.create({
-  //   patientId,
-  //   doctorId,
-  //   appointmentDate,
-  //   appointmentTime,
-  // });
-
-  // ! if user created successfully & SEND to frontend
-  // if (true) {
-  //   // const { appointmentDate, appointmentTime } = appointment;
-  //   // res.status(201).json({ appointmentDate, appointmentTime, patientId });
-  // res.status(201).json('booked');
-  // } else {
-  //   res.status(400);
-  //   throw new Error('Invalid appointment data');
-  // }
 });
 
 module.exports = {
