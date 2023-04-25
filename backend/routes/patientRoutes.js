@@ -1,7 +1,8 @@
 const express = require('express');
 const { protect, patientOnly } = require('../middleware/AuthMiddleware');
+const { bookAppointment } = require('../controllers/patientControllers');
 const router = express.Router();
 
-router.get('/allDoctors', protect, patientOnly);
+router.post('/allDoctors/:id', protect, patientOnly, bookAppointment);
 
 module.exports = router;

@@ -83,7 +83,7 @@ const doctorSchema = new mongoose.Schema(
   }
 );
 
-// ! Encrupt password before saving user.
+// ! Encrypt password before saving user.
 doctorSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();

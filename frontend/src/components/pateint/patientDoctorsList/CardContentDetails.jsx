@@ -20,7 +20,6 @@ const style = {
 function CardContentDetails({ doctor }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(id);
   const handleClick = (id) => {
     navigate(`/patient/allDoctors/${id}`);
   };
