@@ -48,19 +48,6 @@ function Workday(props) {
             Working Date
           </Typography>
         </Box>
-        {/* <Box>
-          {formattedEndShiftTime > todayDate ? (
-            ''
-          ) : (
-            <IconButton
-              onClick={() =>
-                navigate(`/admin/doctors/updateShift/${doctor?._id}`)
-              }
-            >
-              <AddIcon sx={{ fontSize: '3rem', color: 'green' }} />
-            </IconButton>
-          )}
-        </Box> */}
       </Box>
       <Box
         sx={{
@@ -68,9 +55,9 @@ function Workday(props) {
           border: '1px solid lightgray',
         }}
       >
-        <TableContainer >
-          <Table >
-            <TableHead >
+        <TableContainer>
+          <Table>
+            <TableHead>
               <TableRow>
                 <TableCell>Start Date</TableCell>
                 <TableCell>End Date</TableCell>
@@ -78,7 +65,7 @@ function Workday(props) {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell >{formattedStartShiftTime}</TableCell>
+                <TableCell>{formattedStartShiftTime}</TableCell>
                 <TableCell>{formattedEndShiftTime}</TableCell>
               </TableRow>
             </TableBody>

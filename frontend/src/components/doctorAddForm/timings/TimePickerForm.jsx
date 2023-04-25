@@ -5,22 +5,15 @@ import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import * as React from 'react';
 
 export default function TimePicker(props) {
-  const {
-    values,
-    handleBlur,
-    errors,
-    touched,
-    handleChange,
-    handleTimeChange,
-  } = props;
+  const { values, handleBlur, errors, touched, handleTimeChange } = props;
 
   return (
     <>
       <Box
-        sx={{
-          display: 'felx',
-          flexDirection: 'column',
-        }}
+      // sx={{
+      //   display: 'felx',
+      //   flexDirection: 'column',
+      // }}
       >
         <Grid
           container
