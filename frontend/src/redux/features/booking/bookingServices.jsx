@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const API_URL = `${BACKEND_URL}/api/admin`;
+const API_URL2 = `${BACKEND_URL}/api/patient`;
 
 // *-----------------------------
 // *-------ADMIN-----------------
@@ -40,6 +41,14 @@ const updateDoctorShift = async (userData) => {
 // *-----------------------------
 // *-------PATIENT---------------
 // *-----------------------------
+// ! Booking an Appointment
+const checkAvailability = async (userData) => {
+  const response = await axios.get(
+    API_URL2 + `/allDoctors/check-booking-availability`,
+    { params: userData }
+  );
+  return response.data;
+};
 
 const bookingService = {
   addDoctor,
@@ -47,6 +56,7 @@ const bookingService = {
   getDoctor,
   deleteDoctor,
   updateDoctorShift,
+  checkAvailability,
 };
 
 export default bookingService;

@@ -2,59 +2,65 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import dayjs from 'dayjs';
 import { useFormik } from 'formik';
-import moment from 'moment';
 import { useState } from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
+import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
 
 // ! -------- Form Validation ----------------
 const validationSchema = Yup.object().shape({
   appointmentDate: Yup.date().required('Please select a date'),
-  appointmentTime: Yup.string().required('Please select the time'),
+  // appointmentTime: Yup.string().required('Please select the time'),
 });
 
 const initialValues = {
-  appointmentDate: '',
-  appointmentTime: '',
+  appointmentDate: dayjs(new Date()),
+  // appointmentTime: '',
 };
 
 function BookingForm() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { isLoading, doctor } = useSelector((state) => state.booking);
-  // TODO LATER !
-  // ! getting min/maxDate for DatePicker
-  const mongodb = doctor?.endDate;
-  const formattedDate = new Date(mongodb);
-  const asdfasf = moment(formattedDate).format('YYYY-MM-DD');
+  const { isLoading, doctor, appointmentBooks } = useSelector(
+    (state) => state.booking
+  );
+  const [formData, setFormData] = useState(initialValues.appointmentDate);
+  console.log(appointmentBooks);
 
-  const [formData, setFormData] = useState(initialValues);
-  // ! handleChange for TimerPicker
-  const handleTimeChange = (fieldName) => (time) => {
-    const hour = moment(time.$d).format('HH');
-    const min = moment(time.$d).format('mm');
-    const formattedTime = `${hour}:${min}`;
-    formik.setFieldValue(fieldName, time);
-    setFormData({ ...formData, [fieldName]: formattedTime });
-  };
+  // // ! handleChange for TimerPicker
+  // const handleTimeChange = (fieldName) => (time) => {
+  //   const hour = moment(time.$d).format('HH');
+  //   const min = moment(time.$d).format('mm');
+  //   const formattedTime = `${hour}:${min}`;
+  //   formik.setFieldValue(fieldName, time);
+  //   setFormData({ ...formData, [fieldName]: formattedTime });
+  // };
   // ! handleChange For DatePicker ------
+
   const handleFieldChange = (fieldName) => (value) => {
     const formattedDate = value?.toISOString();
-    console.log('hhe');
     formik.setFieldValue(fieldName, value);
     setFormData({ ...formData, [fieldName]: formattedDate });
   };
+  // ! Submit Function ---------------
+  const submitDate = async () => {
+    const doctorId = id;
+    const appointmentDate = '2023-04-28T21:00:00.000+00:00';
 
+    const userData = { doctorId, appointmentDate };
+    await dispatch(checkAvailability(userData));
+  };
   //  ! --------------------
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      submitDate(values);
+      // console.log(values);
     },
   });
 
@@ -89,7 +95,6 @@ function BookingForm() {
                     inputFormat='DD/MM/yyyy'
                     value={formik.values.appointmentDate}
                     disablePast={true}
-                    // minDate={dayjs(asdfasf)}
                     onBlur={formik.handleBlur}
                     onChange={handleFieldChange('appointmentDate')}
                     sx={{ width: '100%', m: '4px' }}
@@ -104,7 +109,7 @@ function BookingForm() {
               </LocalizationProvider>
             </Grid>
             {/* ---------------------------------------------------- */}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Grid item xs={12} md={6}>
                 <MobileTimePicker
                   sx={{ width: '100%', margin: '4px' }}
@@ -127,7 +132,7 @@ function BookingForm() {
                   ) : null}
                 </Typography>
               </Grid>
-            </LocalizationProvider>
+            </LocalizationProvider> */}
           </Grid>
           <Button
             type='submit'
@@ -141,14 +146,14 @@ function BookingForm() {
               minWidth: '8em',
               bgcolor: 'fourth.main',
               textTransform: 'uppercase',
-              m: '1em 0',
+              m: '1em auto',
               '&:hover': {
                 backgroundColor: '#ccc6b4',
                 color: '#fff',
               },
             }}
           >
-            Book
+            Submit
           </Button>
         </Box>
       </form>

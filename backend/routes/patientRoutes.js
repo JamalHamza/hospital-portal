@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/allDoctors/:id', protect, patientOnly, bookAppointment);
 router.get(
-  '/allDoctors/check-booking-availibility',
+  '/allDoctors/check-booking-availability',
   protect,
   patientOnly,
   checkAvailability

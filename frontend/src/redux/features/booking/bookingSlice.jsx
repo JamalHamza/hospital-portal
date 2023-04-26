@@ -11,6 +11,7 @@ const initialState = {
   is: false,
   isLoading: false,
   message: '',
+  appointmentBooks: [],
 };
 
 // *-----------------------------
@@ -92,6 +93,7 @@ export const deleteDoctor = createAsyncThunk(
     }
   }
 );
+
 // ! Update Doctor Shift -----------------
 export const updateDoctorShift = createAsyncThunk(
   'booking/updateDoctorShift',
@@ -114,6 +116,25 @@ export const updateDoctorShift = createAsyncThunk(
 // *-----------------------------
 // *-------PATIENT---------------
 // *-----------------------------
+// ! Booking -----------------
+export const checkAvailability = createAsyncThunk(
+  'booking/checkAvailability',
+  async (userData, thunkAPI) => {
+    try {
+      console.log(userData);
+      return await bookingService.checkAvailability(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // * ---------------------------------------
 
@@ -206,7 +227,22 @@ const bookingSlice = createSlice({
         state.message = action.payload;
         toast.error(action.payload);
       })
-     
+      // ! CheckAvailability -----------
+      .addCase(checkAvailability.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkAvailability.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointmentBooks = action.payload;
+      })
+      .addCase(checkAvailability.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      });
   },
 });
 

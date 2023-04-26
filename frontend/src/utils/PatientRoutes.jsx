@@ -13,7 +13,6 @@ const PatientRoutes = ({ children }) => {
       try {
         user = await authService.getUser();
         patient = user.role == 'patient';
-        console.log(patient);
       } catch (error) {
         console.log(error.message);
       }

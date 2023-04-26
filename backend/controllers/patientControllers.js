@@ -61,8 +61,8 @@ const bookAppointment = asyncHandler(async (req, res) => {
 });
 
 // ! ------------------------------------------------------------------------------------------------
-// ! To select a booking time on a specific date, the patient must first choose an available workday 
-// ! for the doctor from the DatePicker.  The DatePicker has been configured using minDate and maxDate 
+// ! To select a booking time on a specific date, the patient must first choose an available workday
+// ! for the doctor from the DatePicker.  The DatePicker has been configured using minDate and maxDate
 // ! to restrict the patient to selecting only valid workdays.
 // ! After the patient selects a workday, the server will send three arrays to the frontend.
 // ! These arrays will include booked times, available times, and all times available for booking.
@@ -71,12 +71,14 @@ const bookAppointment = asyncHandler(async (req, res) => {
 
 // * ------------------------------------
 const checkAvailability = asyncHandler(async (req, res) => {
-  const { doctorId, appointmentDate } = req.body;
+  const { doctorId, appointmentDate } = req.query;
 
+  console.log(doctorId);
+  console.log(appointmentDate);
   const doctor = await Doctor.findById(doctorId);
   const { startTime, endTime } = doctor;
-  const formattedStartTime = moment(startTime).format('HH:mm');
   // ! we subtract 1 hour from the end time
+  const formattedStartTime = moment(startTime).format('HH:mm');
   const formattedEndTime = moment(endTime).subtract(1, 'hour').format('HH:mm');
 
   // ! Get the list of existing appointment

@@ -49,13 +49,6 @@ function PersonalInfo(props) {
             doctor={doctor}
             experienceDoctor={experienceDoctor}
           />
-          {/* <DeleteDoctorModal
-            open={open}
-            handleClose={handleClose}
-            handleDelete={handleDelete}
-            doctorId={id}
-            doctor={doctor}
-          /> */}
         </Grid>
         <Grid container>
           <Grid item xs={10} md={10} m='2em auto' textAlign='center'>

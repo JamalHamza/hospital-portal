@@ -1,9 +1,10 @@
 import CurrencyRubleIcon from '@mui/icons-material/CurrencyRuble';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ScienceIcon from '@mui/icons-material/Science';
 import StarsIcon from '@mui/icons-material/Stars';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import LiveDate from '../../../../admin/doctor/liveDate/LiveDate';
 // import '../PersonalInfo.css';
@@ -110,6 +111,9 @@ function PersonalInfoBody(props) {
             >
               {experienceDoctor} Years Experience
             </Typography>
+            <IconButton>
+              <MoreVertIcon sx={{ fontSize: '2rem', color: 'green' }} />
+            </IconButton>
           </Box>
         </Box>
       </Grid>

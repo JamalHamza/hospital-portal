@@ -95,12 +95,6 @@ function Login() {
   // ! --------------------------------------------
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
-      // if (isAdmin) {
-      //   navigate('/admin/profile');
-      // } else if (isDoctor) {
-      //   navigate('/doctor/profile');
-      // }
-
       navigate('/profile');
     }
     if (isError && towFactors) {
@@ -116,7 +110,6 @@ function Login() {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      // Handle form submission here
       LoginUser(values);
     },
   });
