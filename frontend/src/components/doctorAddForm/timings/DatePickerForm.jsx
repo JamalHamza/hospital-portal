@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import React from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import './DatePickerForm.css';
@@ -47,6 +48,7 @@ function DatePickerForm(props) {
               <DatePicker
                 label='Start Date'
                 name='startDate'
+                defaultValue={dayjs(new Date())}
                 inputFormat='DD/MM/yyyy'
                 value={values.startDate}
                 disablePast={true}

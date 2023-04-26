@@ -5,13 +5,15 @@ import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import * as React from 'react';
 
 export default function TimePicker(props) {
+  const disabledTimes = [
+    new Date('2023-04-26T12:00:00'),
+    new Date('2023-04-26T14:00:00'),
+  ];
   const { values, handleBlur, errors, touched, handleTimeChange } = props;
 
   return (
     <>
-      <Box
-
-      >
+      <Box>
         <Grid
           container
           spacing={2}
@@ -30,6 +32,7 @@ export default function TimePicker(props) {
                   ampm={false}
                   name='startTime'
                   value={values.startTime}
+                  disabledTimes={disabledTimes}
                   onChange={handleTimeChange('startTime')}
                   onBlur={handleBlur}
                   error={touched.startTime && Boolean(errors.startTime)}

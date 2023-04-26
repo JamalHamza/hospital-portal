@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import PersonalInformation from '../../../components/doctorAddForm/personalInfo/PersonalInformation';
 import SpecialistAndExperience from '../../../components/doctorAddForm/specialistInfo/SpecialistAndExperience';
 // import '../../dateRangePicker/DatePicker.css';
+import dayjs from 'dayjs';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -24,10 +25,10 @@ const initialValues = {
   years: '',
   fee: '',
   specialist: '',
-  startDate: '',
-  endDate: '',
-  startTime: '',
-  endTime: '',
+  startDate: dayjs(new Date()),
+  endDate: dayjs(new Date()),
+  startTime: dayjs(new Date()),
+  endTime: dayjs(new Date()),
 };
 
 // ! ------ Yup Validation ------------------
@@ -45,8 +46,8 @@ const validationSchema = Yup.object().shape({
   fee: Yup.number().required('Fee is required'),
   hospitalName: Yup.string().required('Hospital is required'),
   years: Yup.number().required('Years is required'),
-  startDate: Yup.date().required('Start Date is required'),
-  endDate: Yup.date().required('Start Date is required'),
+  startDate: Yup.date().required('Start Date is required').nullable(),
+  endDate: Yup.date().required('Start Date is required').nullable(),
   startTime: Yup.string().required('Start Time is required'),
   endTime: Yup.string().required('End Time is required'),
 });
