@@ -32,10 +32,6 @@ function SingleDoctor() {
     moment(utcStartShiftTime).format('YYYY-MM-DD');
   const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
 
-  // console.log(`from db `);
-  // console.log(doctor?.startDate);
-  // console.log(`after`);
-  // console.log(utcEndShiftTime);
 
   // ! ---------------------------------------------------
   useEffect(() => {

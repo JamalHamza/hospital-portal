@@ -1,16 +1,34 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Grid, IconButton } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import appointmentTime from '../../../assets/patient/booking.png';
-import UpdateShiftSidebar from '../../../components/admin/doctor/updateShift/updateShiftSidebar/UpdateShiftSidebar';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
+import Loader from '../../../components/loader/Loader';
+import SelectTime from '../../../components/pateint/selectTime/SelectTime';
+import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
 
 function BookingTime() {
-  const { isLoading, doctor } = useSelector((state) => state.booking);
+  const { id } = useParams();
+
+  const { isLoading, doctor, appointmentBooks } = useSelector(
+    (state) => state.booking
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // ! ---------------------------------------------------
+
+  useEffect(() => {
+    const doctorId = id;
+    // ! get date that we stored to localStorage in BookingForm page
+    const appointmentDate = localStorage.getItem('bookingTime').slice(1, -1);
+    const appointmentDateFormatted = new Date(appointmentDate);
+    const userData = { doctorId, appointmentDate: appointmentDateFormatted };
+    dispatch(checkAvailability(userData));
+  }, [dispatch]);
+
   return (
     <>
       {isLoading ? (
@@ -27,7 +45,7 @@ function BookingTime() {
                 <ArrowBackIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
               </IconButton>
             </Grid>
-            <UpdateShiftSidebar />
+            <SelectTime appointmentBooks={appointmentBooks} />
           </Grid>
         </FormWrapper>
       )}

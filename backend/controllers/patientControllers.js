@@ -115,7 +115,14 @@ const checkAvailability = asyncHandler(async (req, res) => {
     (time) => time != bookedTimeSlots
   );
 
-  res.status(200).json({ availableTime, bookedTimeSlots, availableTimeSlots });
+  res
+    .status(200)
+    .json({
+      availableTime,
+      bookedTimeSlots,
+      availableTimeSlots,
+      appointmentDate,
+    });
 });
 
 module.exports = {

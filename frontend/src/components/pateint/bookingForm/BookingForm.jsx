@@ -29,7 +29,7 @@ function BookingForm() {
   };
 
   const [formData, setFormData] = useState(initialValues.appointmentDate);
-  console.log(appointmentBooks);
+
 
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
@@ -41,6 +41,10 @@ function BookingForm() {
   const submitDate = async () => {
     const doctorId = id;
     const getDateFromDatePicker = new Date(formData);
+    console.log(getDateFromDatePicker);
+    // ! save it to localStorage to use it in BookingTime page
+    localStorage.setItem('bookingTime', JSON.stringify(getDateFromDatePicker));
+    // ! -----------------------------------------------------
     const userData = { doctorId, appointmentDate: getDateFromDatePicker };
     await dispatch(checkAvailability(userData));
     navigate(`/patient/allDoctors/booking/time/${id}`);
@@ -57,7 +61,7 @@ function BookingForm() {
 
   return (
     <Grid item xs={12} sm={6} md={6}>
-      <form onSubmit={(events) => formik.handleSubmit(events)}>
+      <form onSubmit={formik.handleSubmit}>
         <Box sx={{ m: '0 auto', width: '80%' }}>
           <Box>
             <Typography
