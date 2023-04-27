@@ -32,8 +32,9 @@ const bookAppointment = asyncHandler(async (req, res) => {
   const formattedStartTime = moment(startTime).format('HH:mm');
   // ! we subtract 1 hour from the end time
   const formattedEndTime = moment(endTime).subtract(1, 'hour').format('HH:mm');
-  console.log(formattedEndTime);
 
+
+  console.log(appointmentDateFormatted);
   if (
     appointmentDateFormatted >= startDate &&
     appointmentDateFormatted <= endDate &&
@@ -50,6 +51,7 @@ const bookAppointment = asyncHandler(async (req, res) => {
     // ! Check if booked successfully
     if (appointment) {
       res.status(201).json(appointment);
+      // res.status(201).json('sdf');
     } else {
       res.status(400);
       throw new Error('Invalid appointment data');
@@ -73,13 +75,10 @@ const bookAppointment = asyncHandler(async (req, res) => {
 const checkAvailability = asyncHandler(async (req, res) => {
   const { doctorId, appointmentDate } = req.query;
 
-  console.log(doctorId);
-  console.log(appointmentDate);
   const doctor = await Doctor.findById(doctorId);
   const { startTime, endTime } = doctor;
-  // ! we subtract 1 hour from the end time
-  const formattedStartTime = moment(startTime).format('HH:mm');
-  const formattedEndTime = moment(endTime).subtract(1, 'hour').format('HH:mm');
+
+
 
   // ! Get the list of existing appointment
   const existingAppointments = await Appointment.find({
@@ -91,7 +90,7 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const bookedTimeSlots = existingAppointments.map((appointment) =>
     moment(appointment.appointmentTime).format('HH:mm')
   );
-  // console.log(bookedTimeSlots);
+  console.log(bookedTimeSlots);
 
   // ! Calculate the all time slots
   const availableTimeSlots = [];
@@ -108,7 +107,6 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const availableTime = availableTimeSlots.filter(
     (time) => time != bookedTimeSlots
   );
-  // console.log(availableTimeSlots);
 
   res.status(200).json({ availableTime, bookedTimeSlots, availableTimeSlots });
 });

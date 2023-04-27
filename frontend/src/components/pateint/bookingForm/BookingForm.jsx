@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const initialValues = {
-  appointmentDate: dayjs(new Date()),
+  appointmentDate: '',
   // appointmentTime: '',
 };
 
@@ -28,8 +28,10 @@ function BookingForm() {
   const { isLoading, doctor, appointmentBooks } = useSelector(
     (state) => state.booking
   );
-  const [formData, setFormData] = useState(initialValues.appointmentDate);
+  console.log(doctor);
+
   console.log(appointmentBooks);
+  const [formData, setFormData] = useState(initialValues.appointmentDate);
 
   // // ! handleChange for TimerPicker
   // const handleTimeChange = (fieldName) => (time) => {
@@ -42,16 +44,16 @@ function BookingForm() {
   // ! handleChange For DatePicker ------
 
   const handleFieldChange = (fieldName) => (value) => {
-    const formattedDate = value?.toISOString();
     formik.setFieldValue(fieldName, value);
-    setFormData({ ...formData, [fieldName]: formattedDate });
+    setFormData(value);
   };
+
   // ! Submit Function ---------------
   const submitDate = async () => {
     const doctorId = id;
-    const appointmentDate = '2023-04-28T21:00:00.000+00:00';
-
-    const userData = { doctorId, appointmentDate };
+    const getDateFromDatePicker = new Date(formData);
+    console.log(getDateFromDatePicker);
+    const userData = { doctorId, appointmentDate: getDateFromDatePicker };
     await dispatch(checkAvailability(userData));
   };
   //  ! --------------------
@@ -60,7 +62,6 @@ function BookingForm() {
     validationSchema,
     onSubmit: (values) => {
       submitDate(values);
-      // console.log(values);
     },
   });
 
@@ -92,9 +93,11 @@ function BookingForm() {
                   <DatePicker
                     label='Appointment Date'
                     name='appointmentDate'
-                    inputFormat='DD/MM/yyyy'
-                    value={formik.values.appointmentDate}
+                    value={formData}
                     disablePast={true}
+                    minDate={dayjs(doctor?.startDate)}
+                    maxDate={dayjs(doctor?.endDate)}
+                    // maxDate={doctor?.endDate}
                     onBlur={formik.handleBlur}
                     onChange={handleFieldChange('appointmentDate')}
                     sx={{ width: '100%', m: '4px' }}
@@ -108,31 +111,6 @@ function BookingForm() {
                 </Box>
               </LocalizationProvider>
             </Grid>
-            {/* ---------------------------------------------------- */}
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <Grid item xs={12} md={6}>
-                <MobileTimePicker
-                  sx={{ width: '100%', margin: '4px' }}
-                  label='Appointment Time'
-                  minutesStep={30}
-                  ampm={false}
-                  name='appointmentTime'
-                  value={formik.values.appointmentTime}
-                  onChange={handleTimeChange('appointmentTime')}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.endDate && Boolean(formik.errors.endDate)
-                  }
-                  helperText={formik.touched.endDate && formik.errors.endDate}
-                />
-                <Typography sx={{ color: '#D62F8D', ml: '1.6rem' }}>
-                  {formik.errors.appointmentTime &&
-                  formik.touched.appointmentTime ? (
-                    <>{formik.errors.appointmentTime}</>
-                  ) : null}
-                </Typography>
-              </Grid>
-            </LocalizationProvider> */}
           </Grid>
           <Button
             type='submit'
