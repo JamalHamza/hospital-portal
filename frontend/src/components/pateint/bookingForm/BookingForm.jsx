@@ -10,16 +10,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
+import TimeSelectingModal from './TimeSelectingModal/TimeSelectingModal';
 
 // ! -------- Form Validation ----------------
 const validationSchema = Yup.object().shape({
   appointmentDate: Yup.date().required('Please select a date'),
-  // appointmentTime: Yup.string().required('Please select the time'),
 });
 
 const initialValues = {
   appointmentDate: '',
-  // appointmentTime: '',
 };
 
 function BookingForm() {
@@ -28,21 +27,15 @@ function BookingForm() {
   const { isLoading, doctor, appointmentBooks } = useSelector(
     (state) => state.booking
   );
-  console.log(doctor);
+  // ! Model State -----------------
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   console.log(appointmentBooks);
   const [formData, setFormData] = useState(initialValues.appointmentDate);
 
-  // // ! handleChange for TimerPicker
-  // const handleTimeChange = (fieldName) => (time) => {
-  //   const hour = moment(time.$d).format('HH');
-  //   const min = moment(time.$d).format('mm');
-  //   const formattedTime = `${hour}:${min}`;
-  //   formik.setFieldValue(fieldName, time);
-  //   setFormData({ ...formData, [fieldName]: formattedTime });
-  // };
   // ! handleChange For DatePicker ------
-
   const handleFieldChange = (fieldName) => (value) => {
     formik.setFieldValue(fieldName, value);
     setFormData(value);
@@ -52,10 +45,11 @@ function BookingForm() {
   const submitDate = async () => {
     const doctorId = id;
     const getDateFromDatePicker = new Date(formData);
-    console.log(getDateFromDatePicker);
     const userData = { doctorId, appointmentDate: getDateFromDatePicker };
     await dispatch(checkAvailability(userData));
+    setOpen(true);
   };
+
   //  ! --------------------
   const formik = useFormik({
     initialValues,
@@ -97,7 +91,6 @@ function BookingForm() {
                     disablePast={true}
                     minDate={dayjs(doctor?.startDate)}
                     maxDate={dayjs(doctor?.endDate)}
-                    // maxDate={doctor?.endDate}
                     onBlur={formik.handleBlur}
                     onChange={handleFieldChange('appointmentDate')}
                     sx={{ width: '100%', m: '4px' }}
@@ -112,6 +105,11 @@ function BookingForm() {
               </LocalizationProvider>
             </Grid>
           </Grid>
+          <TimeSelectingModal
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
           <Button
             type='submit'
             variant='contained'
