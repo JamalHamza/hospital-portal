@@ -7,33 +7,29 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
-import TimeSelectingModal from './TimeSelectingModal/TimeSelectingModal';
 
 // ! -------- Form Validation ----------------
 const validationSchema = Yup.object().shape({
   appointmentDate: Yup.date().required('Please select a date'),
 });
 
-const initialValues = {
-  appointmentDate: '',
-};
-
 function BookingForm() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { isLoading, doctor, appointmentBooks } = useSelector(
+  const navigate = useNavigate();
+  const { isLoading, doctor, appointmentBooks, isSuccess } = useSelector(
     (state) => state.booking
   );
-  // ! Model State -----------------
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
-  console.log(appointmentBooks);
+  const initialValues = {
+    appointmentDate: dayjs(doctor?.startDate),
+  };
+
   const [formData, setFormData] = useState(initialValues.appointmentDate);
+  console.log(appointmentBooks);
 
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
@@ -47,7 +43,7 @@ function BookingForm() {
     const getDateFromDatePicker = new Date(formData);
     const userData = { doctorId, appointmentDate: getDateFromDatePicker };
     await dispatch(checkAvailability(userData));
-    setOpen(true);
+    navigate(`/patient/allDoctors/booking/time/${id}`);
   };
 
   //  ! --------------------
@@ -61,7 +57,7 @@ function BookingForm() {
 
   return (
     <Grid item xs={12} sm={6} md={6}>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={(events) => formik.handleSubmit(events)}>
         <Box sx={{ m: '0 auto', width: '80%' }}>
           <Box>
             <Typography
@@ -105,11 +101,6 @@ function BookingForm() {
               </LocalizationProvider>
             </Grid>
           </Grid>
-          <TimeSelectingModal
-            open={open}
-            handleOpen={handleOpen}
-            handleClose={handleClose}
-          />
           <Button
             type='submit'
             variant='contained'

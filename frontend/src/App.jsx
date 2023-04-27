@@ -20,6 +20,7 @@ import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
 import Home from './pages/home/Home';
 import Booking from './pages/patient/booking/Booking';
+import BookingTime from './pages/patient/booking/BookingTime';
 import AllDoctors from './pages/patient/doctors/AllDoctors';
 import HistoryAppointment from './pages/patient/historyAppointment/HistoryAppointment';
 import PatientSingleDoctor from './pages/patient/singleDoctor/PatientSingleDoctor';
@@ -70,7 +71,6 @@ const theme = createTheme({
     btnAlert: {
       main: '#D61355',
     },
-
   },
 });
 
@@ -198,6 +198,14 @@ function App() {
                 element={
                   <Layout>
                     <Booking />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/allDoctors/booking/time/:id'
+                element={
+                  <Layout>
+                    <BookingTime />
                   </Layout>
                 }
               />

@@ -16,13 +16,12 @@ function SingleDoctor() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, doctor } = useSelector(
-    (state) => state.booking
-  );
+  const { isLoading, doctor } = useSelector((state) => state.booking);
   //  ! ----------------------
   const today = new Date().toISOString();
   const todayDate = moment.utc(today).format('YYYY-MM-DD');
   // ! This code creates a new Date object from the UTC value retrieved from the database, and then uses the toLocaleString method to convert the UTC date to the Moscow timezone. The resulting moscowDate object can then be displayed to the user in the correct timezone.
+
   const utcStartShiftTime = new Date(doctor?.startDate);
   const utcEndShiftTime = new Date(doctor?.endDate);
   // const moscowDate = new Date(
@@ -32,6 +31,11 @@ function SingleDoctor() {
   const formattedStartShiftTime =
     moment(utcStartShiftTime).format('YYYY-MM-DD');
   const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
+
+  // console.log(`from db `);
+  // console.log(doctor?.startDate);
+  // console.log(`after`);
+  // console.log(utcEndShiftTime);
 
   // ! ---------------------------------------------------
   useEffect(() => {
@@ -79,7 +83,12 @@ function SingleDoctor() {
           )}
           <Grid
             container
-            sx={{ mt: '1em', display: 'flex', justifyContent: 'space-between', gap:'2em' }}
+            sx={{
+              mt: '1em',
+              display: 'flex',
+              justifyContent: 'space-between',
+              gap: '2em',
+            }}
           >
             <Workday
               doctor={doctor}

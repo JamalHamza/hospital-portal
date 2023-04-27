@@ -121,7 +121,6 @@ export const checkAvailability = createAsyncThunk(
   'booking/checkAvailability',
   async (userData, thunkAPI) => {
     try {
-      console.log(userData);
       return await bookingService.checkAvailability(userData);
     } catch (error) {
       const message =
