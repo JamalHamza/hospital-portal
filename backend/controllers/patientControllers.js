@@ -29,14 +29,13 @@ const bookAppointment = asyncHandler(async (req, res) => {
   const newDateFormatted = new Date(dateTimeString).toISOString();
   const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
 
-  console.log(newDateFormatted);
-  console.log(addThreeHours);
+
 
   //! validation
-  // if (!appointmentDate || !appointmentTime) {
-  //   res.status(400);
-  //   throw new Error('Please fill in all the required fields ');
-  // }
+  if (!appointmentDate || !appointmentTime) {
+    res.status(400);
+    throw new Error('Please fill in all the required fields ');
+  }
 
   const formattedAppointmentTime = moment(appointmentTime).format('HH:mm');
   const formattedStartTime = moment(startTime).format('HH:mm');
