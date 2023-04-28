@@ -50,7 +50,7 @@ function DoctorList() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     bgcolor: 'fourth.lighter',
-                    maxHeight: '17rem',
+                    maxHeight: '20rem',
                     height: '100%',
                   }}
                 >
