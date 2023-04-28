@@ -29,7 +29,6 @@ function BookingForm() {
     dayjs(doctor?.startDate) > dayjs(new Date())
       ? dayjs(doctor?.startDate)
       : dayjs(new Date());
-  console.log(checkForTodayDate);
 
   const initialValues = {
     appointmentDate: checkForTodayDate,

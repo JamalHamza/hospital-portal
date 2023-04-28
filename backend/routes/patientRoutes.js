@@ -15,6 +15,6 @@ router.get(
   checkAvailability
 );
 
-router.get('/allDoctors/history', protect,  getAppointments);
+router.get('/allDoctors/history', protect, patientOnly, getAppointments);
 
 module.exports = router;

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   FormControl,
   Grid,
   InputLabel,
@@ -18,6 +17,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { bookingAnAppointment } from '../../../redux/features/booking/bookingSlice';
+import {CustomButtonOne} from '../../customUtils/customButtons/CustomButtonOne';
 
 function SelectTime() {
   const { id } = useParams();
@@ -44,8 +44,6 @@ function SelectTime() {
     //   .add(3, 'hours')
     //   .format();
   }
-
-  console.log(appointmentBooks);
   // ! ---------------------------------------------
   const appointmentDate = new Date(appointmentBooks?.appointmentDate);
   const appointmentDateFormatted =
@@ -193,29 +191,12 @@ function SelectTime() {
               })}
             </Select>
           </FormControl>
-          <Button
-            type='submit'
-            variant='contained'
+          <CustomButtonOne
+            label={'Submit'}
             disabled={!time}
+            sx={{ mt: '0', ml: '1em' }}
             onClick={handleSubmit}
-            sx={{
-              borderRadius: '10px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.4rem',
-              color: 'primary.dark',
-              minWidth: '8em',
-              bgcolor: 'fourth.main',
-              textTransform: 'uppercase',
-              ml: '5px',
-              '&:hover': {
-                backgroundColor: '#ccc6b4',
-                color: '#fff',
-              },
-            }}
-          >
-            Submit
-          </Button>
+          />
         </Grid>
       </Grid>
     </Box>

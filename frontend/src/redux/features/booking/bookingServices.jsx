@@ -56,8 +56,8 @@ const bookingAnAppointment = async (userData) => {
 };
 
 // ! Get Appointments
-const getAppointments = async () => {
-  const response = await axios.get(API_URL2 + '/allDoctor/history', {
+const getAppointments = async (userData) => {
+  const response = await axios.get(API_URL2 + '/allDoctors/history', {
     params: userData,
   });
   return response.data;

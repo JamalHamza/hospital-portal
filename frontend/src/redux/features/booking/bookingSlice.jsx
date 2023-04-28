@@ -158,6 +158,7 @@ export const bookingAnAppointment = createAsyncThunk(
 export const getAppointments = createAsyncThunk(
   'booking/getAppointments',
   async (userData, thunkAPI) => {
+    console.log(userData);
     try {
       return await bookingService.getAppointments(userData);
     } catch (error) {
