@@ -21,26 +21,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 function SelectTime() {
   const { id } = useParams();
   const [time, setTime] = useState('');
-  const { isLoading, doctor, appointmentBooks } = useSelector(
-    (state) => state.booking
-  );
+  const { isLoading, appointmentBooks } = useSelector((state) => state.booking);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // ! ------------------------------------------
   const handleChange = (event) => {
     setTime(event.target.value);
   };
-  console.log(`'${time}'`);
   // ! --------------------------------------------
-
+  let appointmentTimeFormatted;
   if (time) {
     const timeString = `${time}`;
     const today = new Date();
     const dateString = today.toISOString().substring(0, 10);
     const dateTimeString = `${dateString}T${timeString}:00`;
     const newDateFormatted = new Date(dateTimeString).toISOString();
-    console.log(newDateFormatted)
-    const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
-    console.log(addThreeHours);
+    appointmentTimeFormatted = moment
+      .utc(newDateFormatted)
+      .add(3, 'hours')
+      .format();
   }
 
   // ! ---------------------------------------------
@@ -133,6 +133,14 @@ function SelectTime() {
   );
 
   // ! ---------------------------------------------------
+  const handleSubmit = () => {
+    const doctorId = id;
+    const patientId = user?._id;
+    const appointmentTime = appointmentTimeFormatted;
+    console.log(appointmentTime);
+
+    // await dispatch(bookingAnAppointment());
+  };
 
   return (
     <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -177,6 +185,8 @@ function SelectTime() {
           <Button
             type='submit'
             variant='contained'
+            disabled={!time}
+            onClick={handleSubmit}
             sx={{
               borderRadius: '10px',
               padding: '8px 20px',

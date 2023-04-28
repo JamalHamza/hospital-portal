@@ -24,12 +24,17 @@ function BookingForm() {
     (state) => state.booking
   );
 
+  const checkForTodayDate =
+    dayjs(doctor?.startDate) > dayjs(new Date())
+      ? dayjs(doctor?.startDate)
+      : dayjs(new Date());
+  console.log(checkForTodayDate);
+
   const initialValues = {
-    appointmentDate: dayjs(doctor?.startDate),
+    appointmentDate: checkForTodayDate,
   };
 
   const [formData, setFormData] = useState(initialValues.appointmentDate);
-
 
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
@@ -41,7 +46,6 @@ function BookingForm() {
   const submitDate = async () => {
     const doctorId = id;
     const getDateFromDatePicker = new Date(formData);
-    console.log(getDateFromDatePicker);
     // ! save it to localStorage to use it in BookingTime page
     localStorage.setItem('bookingTime', JSON.stringify(getDateFromDatePicker));
     // ! -----------------------------------------------------
@@ -89,7 +93,7 @@ function BookingForm() {
                     name='appointmentDate'
                     value={formData}
                     disablePast={true}
-                    minDate={dayjs(doctor?.startDate)}
+                    minDate={checkForTodayDate}
                     maxDate={dayjs(doctor?.endDate)}
                     onBlur={formik.handleBlur}
                     onChange={handleFieldChange('appointmentDate')}
