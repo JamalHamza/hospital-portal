@@ -22,12 +22,12 @@ const bookAppointment = asyncHandler(async (req, res) => {
   // ! change date formate that client sent
   const appointmentDateFormatted = new Date(appointmentDate);
 
-  const timeString = '07:00';
-  const today = new Date();
-  const dateString = today.toISOString().substring(0, 10); // get today's date in the format "YYYY-MM-DD"
-  const dateTimeString = `${dateString}T${timeString}:00`;
-  const newDateFormatted = new Date(dateTimeString).toISOString();
-  const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
+  // const timeString = '07:00';
+  // const today = new Date();
+  // const dateString = today.toISOString().substring(0, 10); // get today's date in the format "YYYY-MM-DD"
+  // const dateTimeString = `${dateString}T${timeString}:00`;
+  // const newDateFormatted = new Date(dateTimeString).toISOString();
+  // const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
 
 
 
@@ -59,7 +59,6 @@ const bookAppointment = asyncHandler(async (req, res) => {
     // ! Check if booked successfully
     if (appointment) {
       res.status(201).json(appointment);
-      // res.status(201).json('sdf');
     } else {
       res.status(400);
       throw new Error('Invalid appointment data');

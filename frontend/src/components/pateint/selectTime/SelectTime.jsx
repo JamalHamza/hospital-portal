@@ -29,23 +29,24 @@ function SelectTime() {
   const handleChange = (event) => {
     setTime(event.target.value);
   };
-  console.log(`'${time}'`)
+  console.log(`'${time}'`);
   // ! --------------------------------------------
-    const timeString = `'${time}'`;
+
+  if (time) {
+    const timeString = `${time}`;
     const today = new Date();
-    const dateString = today.toISOString().substring(0, 10); // get today's date in the format "YYYY-MM-DD"
+    const dateString = today.toISOString().substring(0, 10);
     const dateTimeString = `${dateString}T${timeString}:00`;
     const newDateFormatted = new Date(dateTimeString).toISOString();
+    console.log(newDateFormatted)
     const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
-    console.log(addThreeHours)
-
+    console.log(addThreeHours);
+  }
 
   // ! ---------------------------------------------
   const appointmentDate = new Date(appointmentBooks?.appointmentDate);
   const appointmentDateFormatted =
     moment(appointmentDate).format('MMMM Do YYYY');
-
-
 
   const shift = appointmentBooks?.availableTimeSlots;
   const available = appointmentBooks?.availableTime;
@@ -141,7 +142,7 @@ function SelectTime() {
           xs={12}
           sm={12}
           md={12}
-          sx={{ fontSize: '2rem', color: 'primary.main', mt: '1em' }}
+          sx={{ fontSize: '2rem', color: 'primary.main', m: '1em' }}
         >
           {appointmentDateFormatted}
         </Grid>

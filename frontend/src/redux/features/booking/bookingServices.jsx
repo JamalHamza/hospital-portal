@@ -41,12 +41,17 @@ const updateDoctorShift = async (userData) => {
 // *-----------------------------
 // *-------PATIENT---------------
 // *-----------------------------
-// ! Booking an Appointment
+// ! Check Availability
 const checkAvailability = async (userData) => {
   const response = await axios.get(
     API_URL2 + `/allDoctors/check-booking-availability`,
     { params: userData }
   );
+  return response.data;
+};
+// ! Booking an Appointment
+const bookingAnAppointment = async (userData) => {
+  const response = await axios.post(API_URL2 + `/allDoctors/:id`, userData);
   return response.data;
 };
 
@@ -57,6 +62,7 @@ const bookingService = {
   deleteDoctor,
   updateDoctorShift,
   checkAvailability,
+  bookingAnAppointment,
 };
 
 export default bookingService;

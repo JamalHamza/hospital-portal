@@ -12,6 +12,7 @@ const initialState = {
   isLoading: false,
   message: '',
   appointmentBooks: [],
+  appointmentBooked: [],
 };
 
 // *-----------------------------
@@ -116,12 +117,30 @@ export const updateDoctorShift = createAsyncThunk(
 // *-----------------------------
 // *-------PATIENT---------------
 // *-----------------------------
-// ! Booking -----------------
+// ! checkAvailability -----------------
 export const checkAvailability = createAsyncThunk(
   'booking/checkAvailability',
   async (userData, thunkAPI) => {
     try {
       return await bookingService.checkAvailability(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Check Availability -----------------
+export const bookingAnAppointment = createAsyncThunk(
+  'booking/bookingAnAppointment',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.bookingAnAppointment(userData);
     } catch (error) {
       const message =
         (error.response &&
@@ -226,7 +245,7 @@ const bookingSlice = createSlice({
         state.message = action.payload;
         toast.error(action.payload);
       })
-      // ! CheckAvailability -----------
+      // ! Check Availability -----------
       .addCase(checkAvailability.pending, (state) => {
         state.isLoading = true;
       })
@@ -237,6 +256,22 @@ const bookingSlice = createSlice({
         state.appointmentBooks = action.payload;
       })
       .addCase(checkAvailability.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Booking an Appointment.. -----------
+      .addCase(bookingAnAppointment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(bookingAnAppointment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointmentBooked = action.payload;
+      })
+      .addCase(bookingAnAppointment.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
