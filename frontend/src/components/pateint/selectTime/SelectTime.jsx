@@ -17,7 +17,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import {bookingAnAppointment} from '../../../redux/features/booking/bookingSlice';
+import { bookingAnAppointment } from '../../../redux/features/booking/bookingSlice';
 
 function SelectTime() {
   const { id } = useParams();
@@ -31,13 +31,13 @@ function SelectTime() {
     setTime(event.target.value);
   };
   // ! --------------------------------------------
-  let appointmentTimeFormatted;
+  let newDateFormatted;
   if (time) {
     const timeString = `${time}`;
     const today = new Date();
     const dateString = today.toISOString().substring(0, 10);
     const dateTimeString = `${dateString}T${timeString}:00`;
-    const newDateFormatted = new Date(dateTimeString).toISOString();
+    newDateFormatted = new Date(dateTimeString).toISOString();
     // ! DON'T NEED TO ADD 3 HOURS
     // appointmentTimeFormatted = moment
     //   .utc(newDateFormatted)
@@ -45,7 +45,7 @@ function SelectTime() {
     //   .format();
   }
 
-  console.log(appointmentBooks)
+  console.log(appointmentBooks);
   // ! ---------------------------------------------
   const appointmentDate = new Date(appointmentBooks?.appointmentDate);
   const appointmentDateFormatted =
@@ -139,7 +139,7 @@ function SelectTime() {
   const handleSubmit = async () => {
     const doctorId = id;
     const patientId = user?._id;
-    const appointmentTime = appointmentTimeFormatted;
+    const appointmentTime = newDateFormatted;
     // ! get date that we stored to localStorage in BookingForm page
     const appointmentDate = localStorage.getItem('bookingTime').slice(1, -1);
     const appointmentDateFormatted = new Date(appointmentDate);
