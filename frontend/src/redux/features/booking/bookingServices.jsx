@@ -31,7 +31,7 @@ const deleteDoctor = async (id) => {
   const response = await axios.delete(API_URL + `/getDoctors/${id}`);
   return response.data;
 };
-// ! Delete Doctor ---------------------------
+// ! Update Doctor Shift ---------------------------
 const updateDoctorShift = async (userData) => {
   const { id } = userData;
   const response = await axios.patch(API_URL + `/getDoctors/${id}`, userData);
@@ -55,6 +55,14 @@ const bookingAnAppointment = async (userData) => {
   return response.data;
 };
 
+// ! Get Appointments
+const getAppointments = async () => {
+  const response = await axios.get(API_URL2 + '/allDoctor/history', {
+    params: userData,
+  });
+  return response.data;
+};
+
 const bookingService = {
   addDoctor,
   getDoctors,
@@ -63,6 +71,7 @@ const bookingService = {
   updateDoctorShift,
   checkAvailability,
   bookingAnAppointment,
+  getAppointments,
 };
 
 export default bookingService;

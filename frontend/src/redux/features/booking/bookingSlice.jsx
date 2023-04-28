@@ -13,6 +13,7 @@ const initialState = {
   message: '',
   appointmentBooks: [],
   appointmentBooked: [],
+  appointments: [],
 };
 
 // *-----------------------------
@@ -135,12 +136,30 @@ export const checkAvailability = createAsyncThunk(
     }
   }
 );
-// ! Check Availability -----------------
+// ! Booking -----------------
 export const bookingAnAppointment = createAsyncThunk(
   'booking/bookingAnAppointment',
   async (userData, thunkAPI) => {
     try {
       return await bookingService.bookingAnAppointment(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Booking -----------------
+export const getAppointments = createAsyncThunk(
+  'booking/getAppointments',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getAppointments(userData);
     } catch (error) {
       const message =
         (error.response &&
@@ -273,6 +292,22 @@ const bookingSlice = createSlice({
         toast.success('Booked');
       })
       .addCase(bookingAnAppointment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Appointments -----------
+      .addCase(getAppointments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAppointments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointments = action.payload;
+      })
+      .addCase(getAppointments.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
