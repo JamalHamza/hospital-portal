@@ -3,6 +3,7 @@ const { protect, patientOnly } = require('../middleware/AuthMiddleware');
 const {
   bookAppointment,
   checkAvailability,
+  getAppointments,
 } = require('../controllers/patientControllers');
 const router = express.Router();
 
@@ -13,5 +14,7 @@ router.get(
   patientOnly,
   checkAvailability
 );
+
+router.get('/allDoctors/history', protect, patientOnly, getAppointments);
 
 module.exports = router;

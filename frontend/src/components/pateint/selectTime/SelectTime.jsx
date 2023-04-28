@@ -150,6 +150,7 @@ function SelectTime() {
       appointmentDate: appointmentDateFormatted,
     };
     await dispatch(bookingAnAppointment(userData));
+    await navigate('/patient/historyApp');
   };
 
   return (

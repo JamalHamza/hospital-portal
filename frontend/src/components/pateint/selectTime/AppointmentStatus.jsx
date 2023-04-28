@@ -1,6 +1,6 @@
 import React from 'react';
 
-function HistoryAppointment() {
+function AppointmentStatus() {
   return (
     <>
       <h1>Sitora</h1>
@@ -11,4 +11,4 @@ function HistoryAppointment() {
   );
 }
 
-export default HistoryAppointment;
+export default AppointmentStatus;

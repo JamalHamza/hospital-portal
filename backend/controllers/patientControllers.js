@@ -4,7 +4,6 @@ const Doctor = require('../models/doctorModel');
 const { genereteteToken, hashToken } = require('../utils/index');
 const parser = require('ua-parser-js');
 const Appointment = require('../models/appointments');
-const { default: mongoose } = require('mongoose');
 const moment = require('moment');
 
 // ! ----------------------------------------------------------------------------------------------------------
@@ -125,7 +124,31 @@ const checkAvailability = asyncHandler(async (req, res) => {
   });
 });
 
+// * ------------------------------------
+const getAppointments = asyncHandler(async (req, res) => {
+  const { patientId } = req.query;
+  console.log(patientId);
+
+  if (!patientId) {
+    res.status(400);
+    throw new Error('Patient ID is required!');
+  }
+
+  const appointments = await Appointment.find({
+    patientId,
+  }).sort('-createdAt');
+
+  console.log(appointments);
+
+  if (!appointments) {
+    res.status(200);
+    res.json('History is empty');
+  }
+  res.status(200).json(appointments);
+});
+
 module.exports = {
   bookAppointment,
   checkAvailability,
+  getAppointments,
 };
