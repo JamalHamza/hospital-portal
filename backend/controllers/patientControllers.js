@@ -22,48 +22,55 @@ const bookAppointment = asyncHandler(async (req, res) => {
   // ! change date formate that client sent
   const appointmentDateFormatted = new Date(appointmentDate);
 
-  // const timeString = '07:00';
-  // const today = new Date();
-  // const dateString = today.toISOString().substring(0, 10); // get today's date in the format "YYYY-MM-DD"
-  // const dateTimeString = `${dateString}T${timeString}:00`;
-  // const newDateFormatted = new Date(dateTimeString).toISOString();
-  // const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
+  // ! check that patient if booked already at the same date
 
-  //! validation
-  if (!appointmentDate || !appointmentTime) {
+  const checkAppointment = await Appointment.findOne({
+    doctorId,
+    patientId,
+    appointmentDate: appointmentDateFormatted,
+  });
+
+  if (checkAppointment) {
     res.status(400);
-    throw new Error('Please fill in all the required fields ');
-  }
+    throw new Error(`You already booked on this date to ${name}`);
+  } else {
+    // ! validation ------------------------------
+    if (!appointmentDate || !appointmentTime) {
+      res.status(400);
+      throw new Error('Please fill in all the required fields ');
+    }
 
-  const formattedAppointmentTime = moment(appointmentTime).format('HH:mm');
-  const formattedStartTime = moment(startTime).format('HH:mm');
-  // ! we subtract 1 hour from the end time
-  const formattedEndTime = moment(endTime).subtract(1, 'hour').format('HH:mm');
+    const formattedAppointmentTime = moment(appointmentTime).format('HH:mm');
+    const formattedStartTime = moment(startTime).format('HH:mm');
+    // ! we subtract 1 hour from the end time
+    const formattedEndTime = moment(endTime)
+      .subtract(1, 'hour')
+      .format('HH:mm');
 
-  // console.log(appointmentDateFormatted);
-  if (
-    appointmentDateFormatted >= startDate &&
-    appointmentDateFormatted <= endDate &&
-    formattedAppointmentTime >= formattedStartTime &&
-    formattedAppointmentTime <= formattedEndTime
-  ) {
-    // ! If appointment date and time is available then save to db.
-    const appointment = await Appointment.create({
-      patientId,
-      doctorId,
-      appointmentDate,
-      appointmentTime,
-    });
-    // ! Check if booked successfully
-    if (appointment) {
-      res.status(201).json(appointment);
+    if (
+      appointmentDateFormatted >= startDate &&
+      appointmentDateFormatted <= endDate &&
+      formattedAppointmentTime >= formattedStartTime &&
+      formattedAppointmentTime <= formattedEndTime
+    ) {
+      // ! If appointment date and time is available then save to db.
+      const appointment = await Appointment.create({
+        patientId,
+        doctorId,
+        appointmentDate,
+        appointmentTime,
+      });
+      // ! Check if booked successfully
+      if (appointment) {
+        res.status(201).json(appointment);
+      } else {
+        res.status(400);
+        throw new Error('Invalid appointment data');
+      }
     } else {
       res.status(400);
-      throw new Error('Invalid appointment data');
+      throw new Error(`Dr. ${name} is not available on that date`);
     }
-  } else {
-    res.status(400);
-    throw new Error(`Dr. ${name} is not available on that date`);
   }
 });
 
@@ -81,7 +88,6 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const { doctorId, appointmentDate } = req.query;
 
   const doctor = await Doctor.findById(doctorId);
-  console.log(doctor);
   const { startTime, endTime } = doctor;
 
   // ! Get the list of existing appointment
@@ -94,7 +100,6 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const bookedTimeSlots = existingAppointments.map((appointment) =>
     moment(appointment.appointmentTime).format('HH:mm')
   );
-  console.log(bookedTimeSlots);
 
   // ! Calculate the all time slots
   const availableTimeSlots = [];
@@ -107,14 +112,10 @@ const checkAvailability = asyncHandler(async (req, res) => {
     currentTimeSlot.add(1, 'hour');
   }
 
-  console.log(availableTimeSlots);
-
   // ! calculate available time
   const availableTime = availableTimeSlots.filter(
     (time) => !bookedTimeSlots.includes(time)
   );
-
-  console.log(availableTime);
 
   res.status(200).json({
     availableTime,

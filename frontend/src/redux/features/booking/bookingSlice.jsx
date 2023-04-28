@@ -270,6 +270,7 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.appointmentBooked = action.payload;
+        toast.success('Booked');
       })
       .addCase(bookingAnAppointment.rejected, (state, action) => {
         state.isLoading = false;
