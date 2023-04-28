@@ -2,7 +2,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Box,
-  Button,
   IconButton,
   InputAdornment,
   TextField,
@@ -26,6 +25,7 @@ import {
   RESET,
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
+import {CustomButtonOne} from '../../components/customUtils/customButtons/CustomButtonOne';
 
 const initialValues = {
   name: '',
@@ -220,28 +220,7 @@ const Register = () => {
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
           />
-
-          <Button
-            type='submit'
-            variant='contained'
-            sx={{
-              borderRadius: '10px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.4rem',
-              minWidth: '8em',
-              color: 'primary.dark',
-              bgcolor: 'third.main',
-              textTransform: 'uppercase',
-              m: '1em 0',
-              '&:hover': {
-                backgroundColor: '#ccb7c0',
-                color: '#fff',
-              },
-            }}
-          >
-            Register
-          </Button>
+          <CustomButtonOne label={'Register'} disabled={formik.isSubmitting} />
           <PasswordStrength password={password} password2={password2} />
           <FormBottomLinksRegisterPage />
         </form>
