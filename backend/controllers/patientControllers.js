@@ -29,8 +29,6 @@ const bookAppointment = asyncHandler(async (req, res) => {
   // const newDateFormatted = new Date(dateTimeString).toISOString();
   // const addThreeHours = moment.utc(newDateFormatted).add(3, 'hours').format();
 
-
-
   //! validation
   if (!appointmentDate || !appointmentTime) {
     res.status(400);
@@ -83,6 +81,7 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const { doctorId, appointmentDate } = req.query;
 
   const doctor = await Doctor.findById(doctorId);
+  console.log(doctor);
   const { startTime, endTime } = doctor;
 
   // ! Get the list of existing appointment
@@ -108,19 +107,21 @@ const checkAvailability = asyncHandler(async (req, res) => {
     currentTimeSlot.add(1, 'hour');
   }
 
+  console.log(availableTimeSlots);
+
   // ! calculate available time
   const availableTime = availableTimeSlots.filter(
-    (time) => time != bookedTimeSlots
+    (time) => !bookedTimeSlots.includes(time)
   );
 
-  res
-    .status(200)
-    .json({
-      availableTime,
-      bookedTimeSlots,
-      availableTimeSlots,
-      appointmentDate,
-    });
+  console.log(availableTime);
+
+  res.status(200).json({
+    availableTime,
+    bookedTimeSlots,
+    availableTimeSlots,
+    appointmentDate,
+  });
 });
 
 module.exports = {

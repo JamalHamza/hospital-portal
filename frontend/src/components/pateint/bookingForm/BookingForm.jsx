@@ -24,6 +24,7 @@ function BookingForm() {
     (state) => state.booking
   );
 
+  // ! Checking for Doctor's workday 
   const checkForTodayDate =
     dayjs(doctor?.startDate) > dayjs(new Date())
       ? dayjs(doctor?.startDate)

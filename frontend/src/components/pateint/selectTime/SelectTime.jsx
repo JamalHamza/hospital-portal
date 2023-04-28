@@ -17,6 +17,7 @@ import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import {bookingAnAppointment} from '../../../redux/features/booking/bookingSlice';
 
 function SelectTime() {
   const { id } = useParams();
@@ -37,12 +38,14 @@ function SelectTime() {
     const dateString = today.toISOString().substring(0, 10);
     const dateTimeString = `${dateString}T${timeString}:00`;
     const newDateFormatted = new Date(dateTimeString).toISOString();
-    appointmentTimeFormatted = moment
-      .utc(newDateFormatted)
-      .add(3, 'hours')
-      .format();
+    // ! DON'T NEED TO ADD 3 HOURS
+    // appointmentTimeFormatted = moment
+    //   .utc(newDateFormatted)
+    //   .add(3, 'hours')
+    //   .format();
   }
 
+  console.log(appointmentBooks)
   // ! ---------------------------------------------
   const appointmentDate = new Date(appointmentBooks?.appointmentDate);
   const appointmentDateFormatted =
@@ -133,13 +136,20 @@ function SelectTime() {
   );
 
   // ! ---------------------------------------------------
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const doctorId = id;
     const patientId = user?._id;
     const appointmentTime = appointmentTimeFormatted;
-    console.log(appointmentTime);
-
-    // await dispatch(bookingAnAppointment());
+    // ! get date that we stored to localStorage in BookingForm page
+    const appointmentDate = localStorage.getItem('bookingTime').slice(1, -1);
+    const appointmentDateFormatted = new Date(appointmentDate);
+    const userData = {
+      doctorId,
+      patientId,
+      appointmentTime,
+      appointmentDate: appointmentDateFormatted,
+    };
+    await dispatch(bookingAnAppointment(userData));
   };
 
   return (
