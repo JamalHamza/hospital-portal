@@ -8,16 +8,27 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getAppointment } from '../../../redux/features/booking/bookingSlice';
 
 function Upcoming({ appointments, isLoading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleCLick = () => {
-    
-  }
+  const { appointment } = useSelector((state) => state.booking);
+
+  const handleCLick = async (appointmentId, doctorId) => {
+    const userData = {
+      appointmentId,
+      doctorId,
+    };
+    // ! save it to localStorage to use it in Appointment page
+    localStorage.setItem('appointmentId', JSON.stringify(appointmentId));
+    localStorage.setItem('doctorId', JSON.stringify(doctorId));
+    await dispatch(getAppointment(userData));
+    navigate('/patient/historyApp/appointment');
+  };
 
   // ! ----------Filter Upcoming Appointments ------------------
   const todayDate = moment(new Date()).format('YYYY:MM:DD');
@@ -112,7 +123,11 @@ function Upcoming({ appointments, isLoading }) {
                     >
                       {formattedTime}
                     </Typography>
-                    <IconButton onClick={handleCLick}>
+                    <IconButton
+                      onClick={() =>
+                        handleCLick(appointment._id, appointment.doctorId)
+                      }
+                    >
                       <ContentPasteGoIcon
                         sx={{
                           fontSize: '2.6rem',

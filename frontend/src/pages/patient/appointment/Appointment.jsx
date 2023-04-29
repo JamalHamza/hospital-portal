@@ -1,18 +1,35 @@
-import { Box } from '@mui/material';
-import React from 'react';
+import { Box, Grid } from '@mui/material';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import HistoryImg from '../../../assets/patient/history.png';
 import BackNav from '../../../components/customUtils/backNav/BackNav';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
+import AppointmentDetails from '../../../components/pateint/appointment/AppointmentDetails';
+import DoctorAppointmentDetails from '../../../components/pateint/appointment/DoctorAppointmentDetails';
+import { getAppointment } from '../../../redux/features/booking/bookingSlice';
 
 function Appointment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, user } = useSelector((state) => state.auth);
-  const { appointments } = useSelector((state) => state.booking);
+  const { appointment } = useSelector((state) => state.booking);
+
+  // ! get date that we stored to localStorage in HistoryAppointment page
+  const appointmentId = localStorage.getItem('appointmentId').slice(1, -1);
+  const doctorId = localStorage.getItem('doctorId').slice(1, -1);
+
   //  ! ----------------------------------------------------------
+  useEffect(() => {
+    const userData = {
+      appointmentId,
+      doctorId,
+    };
+    if (appointment) {
+      dispatch(getAppointment(userData));
+    }
+  }, [dispatch, user]);
   return (
     <>
       {isLoading ? (
@@ -25,6 +42,11 @@ function Appointment() {
         >
           <Box sx={{ width: '90%', m: '0 auto' }}>
             <BackNav />
+            <Grid container sx={{ border: '1px solid red' }}>
+                <Grid item xs={12} sx={{border: '1px solid'}}></Grid>
+              <DoctorAppointmentDetails doctor={appointment?.doctor} />
+              <AppointmentDetails appointment={appointment?.appointment} />
+            </Grid>
           </Box>
         </FormWrapper>
       )}
