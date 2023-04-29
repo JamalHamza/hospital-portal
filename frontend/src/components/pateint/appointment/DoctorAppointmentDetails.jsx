@@ -12,7 +12,7 @@ import React from 'react';
 
 const styleHeader = {
   color: 'secondary.dark',
-  textAlign: 'left',
+  textAlign: 'cent',
   fontSize: '2rem',
 };
 const style = {
@@ -27,7 +27,7 @@ const styleDetail = {
 };
 
 function DoctorAppointmentDetails({ doctor }) {
-  console.log(doctor);
+
   return (
     <Grid item xs={12} sm={6} md={6}>
       <Box sx={{ width: '90%', m: '0 auto' }}>
@@ -36,10 +36,10 @@ function DoctorAppointmentDetails({ doctor }) {
             <TableHead>
               <TableRow>
                 <TableCell sx={styleHeader}>Doctor</TableCell>
-                <TableCell></TableCell>
+                <TableCell sx={styleHeader}></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody >
               <TableRow>
                 <TableCell sx={style}>Name</TableCell>
                 <TableCell sx={styleDetail}>{doctor?.name}</TableCell>

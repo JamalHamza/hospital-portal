@@ -42,8 +42,7 @@ function Appointment() {
         >
           <Box sx={{ width: '90%', m: '0 auto' }}>
             <BackNav />
-            <Grid container sx={{ border: '1px solid red' }}>
-                <Grid item xs={12} sx={{border: '1px solid'}}></Grid>
+            <Grid container>
               <DoctorAppointmentDetails doctor={appointment?.doctor} />
               <AppointmentDetails appointment={appointment?.appointment} />
             </Grid>
