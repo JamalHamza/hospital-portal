@@ -19,6 +19,7 @@ import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
 import Home from './pages/home/Home';
+import Appointment from './pages/patient/appointment/Appointment';
 import Booking from './pages/patient/booking/Booking';
 import BookingTime from './pages/patient/booking/BookingTime';
 import AllDoctors from './pages/patient/doctors/AllDoctors';
@@ -214,6 +215,14 @@ function App() {
                 element={
                   <Layout>
                     <HistoryAppointment />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/historyApp/appointment'
+                element={
+                  <Layout>
+                    <Appointment />
                   </Layout>
                 }
               />

@@ -11,9 +11,13 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-function Upcoming({ appointments }) {
+function Upcoming({ appointments, isLoading }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleCLick = () => {
+    
+  }
 
   // ! ----------Filter Upcoming Appointments ------------------
   const todayDate = moment(new Date()).format('YYYY:MM:DD');
@@ -22,6 +26,7 @@ function Upcoming({ appointments }) {
     return formattedDate >= todayDate;
   });
   //   ! ----------------------------------------------------
+
   return (
     <Grid item xs={12} sm={12} md={12}>
       <Typography
@@ -33,14 +38,14 @@ function Upcoming({ appointments }) {
       >
         Upcoming Appointments
       </Typography>
-      {upComing?.length < 1 ? (
+      {upComing.length === 0 ? (
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
-            width: '20rem',
+            minWidth: '20rem',
             m: '0 auto',
           }}
         >
@@ -95,7 +100,7 @@ function Upcoming({ appointments }) {
                       justifyContent: 'space-around',
                       alignItems: 'center',
                       borderColor: 'third.dark',
-                      bgcolor: 'form.main'
+                      bgcolor: 'form.main',
                     }}
                   >
                     <Typography
@@ -107,7 +112,7 @@ function Upcoming({ appointments }) {
                     >
                       {formattedTime}
                     </Typography>
-                    <IconButton>
+                    <IconButton onClick={handleCLick}>
                       <ContentPasteGoIcon
                         sx={{
                           fontSize: '2.6rem',

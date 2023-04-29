@@ -1,11 +1,10 @@
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { Box, Grid } from '@mui/material';
-import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import HistoryImg from '../../../assets/patient/history.png';
+import BackNav from '../../../components/customUtils/backNav/BackNav';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
 import Archived from '../../../components/pateint/appointmentsHistory/Archived';
@@ -36,7 +35,7 @@ function HistoryAppointment() {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading? (
         <Loader />
       ) : (
         <FormWrapper
@@ -45,38 +44,12 @@ function HistoryAppointment() {
           altImg={'Your Appointment History'}
         >
           <Box sx={{ width: '90%', m: '0 auto' }}>
+            <BackNav />
             <Grid container minWidth='100%'>
-              {appointments.length < 1 ? (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    width: '20rem',
-                    m: '0 auto',
-                  }}
-                >
-                  <SentimentVeryDissatisfiedIcon
-                    sx={{ fontSize: '3rem', color: 'secondary.dark' }}
-                  />
-                  <Typography
-                    sx={{
-                      fontSize: '2rem',
-                      color: 'third.dark',
-                      ml: '0.4em',
-                      textAlign: 'center',
-                    }}
-                  >
-                    History is empty
-                  </Typography>
-                </Box>
-              ) : (
-                <>
-                  <Upcoming appointments={appointments} />
-                  <Archived appointments={appointments} />
-                </>
-              )}
+              <>
+                <Upcoming appointments={appointments} isLoading={isLoading} />
+                <Archived appointments={appointments} />
+              </>
             </Grid>
           </Box>
         </FormWrapper>

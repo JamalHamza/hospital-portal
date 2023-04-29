@@ -62,6 +62,16 @@ const getAppointments = async (userData) => {
   });
   return response.data;
 };
+// ! Get Appointment
+const getAppointment = async (userData) => {
+  const response = await axios.get(
+    API_URL2 + '/allDoctors/history/appointment',
+    {
+      params: userData,
+    }
+  );
+  return response.data;
+};
 
 const bookingService = {
   addDoctor,
@@ -72,6 +82,7 @@ const bookingService = {
   checkAvailability,
   bookingAnAppointment,
   getAppointments,
+  getAppointment,
 };
 
 export default bookingService;
