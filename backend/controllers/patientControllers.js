@@ -138,7 +138,6 @@ const getAppointments = asyncHandler(async (req, res) => {
     patientId,
   }).sort('-createdAt');
 
-
   if (!appointments) {
     res.status(200);
     res.json('History is empty');
@@ -146,8 +145,40 @@ const getAppointments = asyncHandler(async (req, res) => {
   res.status(200).json(appointments);
 });
 
+// * ------------------------------------
+const getAppointment = asyncHandler(async (req, res) => {
+  const { doctorId, appointmentId } = req.query;
+  console.log(doctorId, appointmentId);
+
+  // ! Validation ----------------------------
+  if (!doctorId) {
+    res.status(400);
+    throw new Error('Doctor ID is required!');
+  }
+  if (!appointmentId) {
+    res.status(400);
+    throw new Error('Appointment ID is required!');
+  }
+  //  ! Find appointment ----------------------
+  const appointment = await Appointment.findOne({
+    _id: appointmentId,
+  });
+
+  // ! Find Doctor -------------------------
+  const doctor = await Doctor.findOne({
+    _id: doctorId,
+  });
+
+  if (!appointment) {
+    res.status(200);
+    res.json('Appointment not found!');
+  }
+  res.status(200).json({ appointment, doctor });
+});
+
 module.exports = {
   bookAppointment,
   checkAvailability,
   getAppointments,
+  getAppointment,
 };
