@@ -138,7 +138,6 @@ const getAppointments = asyncHandler(async (req, res) => {
     patientId,
   }).sort('-createdAt');
 
-  console.log(appointments);
 
   if (!appointments) {
     res.status(200);
