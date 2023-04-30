@@ -11,7 +11,15 @@ const initialState = {
   is: false,
   isLoading: false,
   message: '',
+  appointmentBooks: [],
+  appointmentBooked: [],
+  appointments: [],
+  appointment: [],
 };
+
+// *-----------------------------
+// *-------ADMIN-----------------
+// *-----------------------------
 
 // ! Add Doctor ----------------
 export const addDoctor = createAsyncThunk(
@@ -88,12 +96,108 @@ export const deleteDoctor = createAsyncThunk(
     }
   }
 );
+
 // ! Update Doctor Shift -----------------
 export const updateDoctorShift = createAsyncThunk(
   'booking/updateDoctorShift',
   async (userData, thunkAPI) => {
     try {
       return await bookingService.updateDoctorShift(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// *-----------------------------
+// *-------PATIENT---------------
+// *-----------------------------
+// ! checkAvailability -----------------
+export const checkAvailability = createAsyncThunk(
+  'booking/checkAvailability',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.checkAvailability(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Booking -----------------
+export const bookingAnAppointment = createAsyncThunk(
+  'booking/bookingAnAppointment',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.bookingAnAppointment(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Get Appointments -----------------
+export const getAppointments = createAsyncThunk(
+  'booking/getAppointments',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getAppointments(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Get Appointment -----------------
+export const getAppointment = createAsyncThunk(
+  'booking/appointment',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getAppointment(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// ! Delete Appointment ------------
+export const deleteAppointment = createAsyncThunk(
+  'booking/deleteAppointment',
+  async (id, thunkAPI) => {
+    try {
+      return await bookingService.deleteAppointment(id);
     } catch (error) {
       const message =
         (error.response &&
@@ -197,10 +301,91 @@ const bookingSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      // ! Check Availability -----------
+      .addCase(checkAvailability.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(checkAvailability.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointmentBooks = action.payload;
+      })
+      .addCase(checkAvailability.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Booking an Appointment.. -----------
+      .addCase(bookingAnAppointment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(bookingAnAppointment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointmentBooked = action.payload;
+        toast.success('Booked');
+      })
+      .addCase(bookingAnAppointment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Appointments -----------
+      .addCase(getAppointments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAppointments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointments = action.payload;
+      })
+      .addCase(getAppointments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Appointment -----------
+      .addCase(getAppointment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAppointment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointment = action.payload;
+      })
+      .addCase(getAppointment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Delete Appointment ---------
+      .addCase(deleteAppointment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAppointment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+        toast.success(action.payload);
+      })
+      .addCase(deleteAppointment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
 
 // ~ ------------------------------------------
-export const {  } = bookingSlice.actions;
+export const {} = bookingSlice.actions;
 export default bookingSlice.reducer;

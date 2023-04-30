@@ -304,8 +304,7 @@ const updateUser = asyncHandler(async (req, res) => {
   // ! req.user is coming from AuthMiddleWare
   const user = await User.findById(req.user._id);
   const doctor = await Doctor.findOne({ userId: req.user._id });
-  console.log(doctor);
-  console.log(user);
+
   if (user) {
     const { name, email, phone, bio, photo, role, isVerified } = user;
     user.email = email;
@@ -332,7 +331,7 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updateUser.email,
       phone: updateUser.phone,
       bio: updateUser.bio,
-      photo: updateUser.phone,
+      photo: updateUser.photo,
       role: updateUser.role,
       isVerified: updateUser.isVerified,
     });

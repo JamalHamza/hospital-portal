@@ -68,7 +68,9 @@ function UserList() {
   useEffect(() => {
     dispatch(FILTER_USERS({ users, search }));
   }, [dispatch, users, search]);
-  
+
+
+
   return (
     <section>
       <div className='container'>

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   IconButton,
   InputAdornment,
   TextField,
@@ -20,6 +19,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useFormik } from 'formik';
 import resetImg from '../../assets/authPage/reset-password.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { CustomButtonOne } from '../../components/customUtils/customButtons/CustomButtonOne';
 import { FormBottomLinks } from '../../components/formBottomLinks/FormBottomLinks';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
 
@@ -195,29 +195,8 @@ function Reset() {
                 }
                 helperText={formik.touched.password2 && formik.errors.password2}
               />
-
               <Box textAlign='center'>
-                <Button
-                  type='submit'
-                  variant='contained'
-                  sx={{
-                    borderRadius: '10px',
-                    padding: '8px 20px',
-                    fontWeight: 'bold',
-                    fontSize: '1.4rem',
-                    minWidth: '8dem',
-                    color: 'primary.dark',
-                    bgcolor: 'third.main',
-                    textTransform: 'uppercase',
-                    m: '1em auto',
-                    '&:hover': {
-                      backgroundColor: '#ccb7c0',
-                      color: '#fff',
-                    },
-                  }}
-                >
-                  Reset Password
-                </Button>
+                <CustomButtonOne label={'Reset Password'} />
               </Box>
               <PasswordStrength password={password} password2={password2} />
               <FormBottomLinks />

@@ -2,7 +2,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Box,
-  Button,
   IconButton,
   InputAdornment,
   TextField,
@@ -17,6 +16,7 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import loginImg from '../../assets/authPage/login.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { CustomButtonTwo } from '../../components/customUtils/customButtons/CustomButtonOne';
 import { FormBottomLinksLoginPage } from '../../components/formBottomLinks/FormBottomLinks';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import {
@@ -95,12 +95,6 @@ function Login() {
   // ! --------------------------------------------
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
-      // if (isAdmin) {
-      //   navigate('/admin/profile');
-      // } else if (isDoctor) {
-      //   navigate('/doctor/profile');
-      // }
-
       navigate('/profile');
     }
     if (isError && towFactors) {
@@ -116,7 +110,6 @@ function Login() {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      // Handle form submission here
       LoginUser(values);
     },
   });
@@ -187,27 +180,7 @@ function Login() {
             helperText={formik.touched.password && formik.errors.password}
           />
           <Link to='/forgot'>Forgot Password</Link>
-          <Button
-            type='submit'
-            variant='contained'
-            sx={{
-              borderRadius: '10px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.4rem',
-              color: 'primary.dark',
-              minWidth: '8em',
-              bgcolor: 'fourth.main',
-              textTransform: 'uppercase',
-              margin: '0.8em',
-              '&:hover': {
-                backgroundColor: '#ccc6b4',
-                color: '#fff',
-              },
-            }}
-          >
-            Login
-          </Button>
+          <CustomButtonTwo label={'Login'} disabled={formik.isSubmitting} />
           <Box sx={{ p: '1.4em' }}>
             <GoogleLogin
               onSuccess={googleLogin}

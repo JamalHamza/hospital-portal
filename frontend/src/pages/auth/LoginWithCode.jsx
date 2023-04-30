@@ -19,6 +19,7 @@ import {
   loginWithCode,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
+import {CustomButtonTwo} from '../../components/customUtils/customButtons/CustomButtonOne';
 
 function LoginWithCode() {
   const [loginCode, setLoginCode] = useState('');
@@ -75,7 +76,7 @@ function LoginWithCode() {
         {isLoading && <Loader />}
         <Box sx={{ margin: '0 auto', p: '2em 1em' }}>
           <Box sx={{ textAlign: 'center' }}>
-            <img src={passCode} alt='passcode' />
+            <img src={passCode} alt='passCode' />
           </Box>
           <Typography
             variant='h4'
@@ -102,27 +103,7 @@ function LoginWithCode() {
                 alignItems: 'center',
               }}
             >
-              <Button
-                type='submit'
-                variant='contained'
-                sx={{
-                  borderRadius: '10px',
-                  padding: '8px 20px',
-                  fontWeight: 'bold',
-                  fontSize: '1.4rem',
-                  color: 'primary.dark',
-                  minWidth: '8em',
-                  bgcolor: 'fourth.main',
-                  textTransform: 'uppercase',
-                  m: '1em 0',
-                  '&:hover': {
-                    backgroundColor: '#ccc6b4',
-                    color: '#fff',
-                  },
-                }}
-              >
-                Login
-              </Button>
+              <CustomButtonTwo label={'Login'} />
               <Typography sx={{ color: 'orange' }}>
                 Check your email for login access code
               </Typography>

@@ -52,6 +52,7 @@ function ChangePassword() {
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  console.log(user);
 
   const togglePassword2 = () => {
     setShowPassword2(!showPassword2);

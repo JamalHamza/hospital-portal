@@ -19,6 +19,12 @@ import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
 import Home from './pages/home/Home';
+import Appointment from './pages/patient/appointment/Appointment';
+import Booking from './pages/patient/booking/Booking';
+import BookingTime from './pages/patient/booking/BookingTime';
+import AllDoctors from './pages/patient/doctors/AllDoctors';
+import HistoryAppointment from './pages/patient/historyAppointment/HistoryAppointment';
+import PatientSingleDoctor from './pages/patient/singleDoctor/PatientSingleDoctor';
 import ProfileAdmin from './pages/profile/Profile';
 import UserList from './pages/userList/UserList';
 import {
@@ -27,6 +33,8 @@ import {
   selectIsLoggedIn,
   selectorUser,
 } from './redux/features/auth/authSlice';
+import AdminRoutes from './utils/AdminRoutes';
+import PatientRoutes from './utils/PatientRoutes';
 axios.defaults.withCredentials = true;
 
 const theme = createTheme({
@@ -125,47 +133,100 @@ function App() {
                 </Layout>
               }
             />
-            <Route
-              path='/users'
-              element={
-                <Layout>
-                  <UserList />
-                </Layout>
-              }
-            />
-            {/* ________________ */}
-            <Route
-              path='/admin/addDoctor'
-              element={
-                <Layout>
-                  <AddDoctor />
-                </Layout>
-              }
-            />
-            <Route
-              path='/admin/doctors'
-              element={
-                <Layout>
-                  <Doctors />
-                </Layout>
-              }
-            />
-            <Route
-              path='/admin/doctors/:id'
-              element={
-                <Layout>
-                  <SingleDoctor />
-                </Layout>
-              }
-            />
-            <Route
-              path='/admin/doctors/updateShift/:id'
-              element={
-                <Layout>
-                  <UpdateDoctorShift />
-                </Layout>
-              }
-            />
+            {/* ______AdminOnly__________ */}
+            <Route element={<AdminRoutes />}>
+              <Route
+                path='/users'
+                element={
+                  <Layout>
+                    <UserList />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/addDoctor'
+                element={
+                  <Layout>
+                    <AddDoctor />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/doctors'
+                element={
+                  <Layout>
+                    <Doctors />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/doctors/:id'
+                element={
+                  <Layout>
+                    <SingleDoctor />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/admin/doctors/updateShift/:id'
+                element={
+                  <Layout>
+                    <UpdateDoctorShift />
+                  </Layout>
+                }
+              />
+            </Route>
+            {/* ________PatientOnly__________ */}
+            <Route element={<PatientRoutes />}>
+              <Route
+                path='/patient/allDoctors'
+                element={
+                  <Layout>
+                    <AllDoctors />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/allDoctors/:id'
+                element={
+                  <Layout>
+                    <PatientSingleDoctor />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/allDoctors/booking/:id'
+                element={
+                  <Layout>
+                    <Booking />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/allDoctors/booking/time/:id'
+                element={
+                  <Layout>
+                    <BookingTime />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/historyApp'
+                element={
+                  <Layout>
+                    <HistoryAppointment />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/patient/historyApp/appointment'
+                element={
+                  <Layout>
+                    <Appointment />
+                  </Layout>
+                }
+              />
+            </Route>
           </Routes>
         </GoogleOAuthProvider>
       </BrowserRouter>

@@ -11,6 +11,7 @@ import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import Loader from '../../components/loader/Loader';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import { RESET, forgotPassword } from '../../redux/features/auth/authSlice';
+import {CustomButtonTwo} from '../../components/customUtils/customButtons/CustomButtonOne';
 
 function Forgot() {
   const [email, setEmail] = useState('');
@@ -84,27 +85,7 @@ function Forgot() {
               style={{ margin: '8px', width: '100%' }}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button
-              type='submit'
-              variant='contained'
-              sx={{
-                borderRadius: '10px',
-                padding: '8px 20px',
-                fontWeight: 'bold',
-                fontSize: '1.4rem',
-                color: 'primary.dark',
-                minWidth: '8em',
-                bgcolor: 'fourth.main',
-                textTransform: 'uppercase',
-                m: '1em 0',
-                '&:hover': {
-                  backgroundColor: '#ccc6b4',
-                  color: '#fff',
-                },
-              }}
-            >
-              Get Reset Email
-            </Button>
+            <CustomButtonTwo label={'Get Reset Email'} />
             <Box
               sx={{
                 display: 'flex',

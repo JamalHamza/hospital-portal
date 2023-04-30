@@ -70,11 +70,11 @@ const doctorSchema = new mongoose.Schema(
       required: true,
     },
     startTime: {
-      type: String,
+      type: Date,
       required: true,
     },
     endTime: {
-      type: String,
+      type: Date,
       required: true,
     },
   },
@@ -83,7 +83,7 @@ const doctorSchema = new mongoose.Schema(
   }
 );
 
-// ! Encrupt password before saving user.
+// ! Encrypt password before saving user.
 doctorSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
