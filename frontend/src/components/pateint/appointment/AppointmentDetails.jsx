@@ -17,6 +17,7 @@ const styleHeader = {
   color: 'secondary.dark',
   textAlign: 'left',
   fontSize: '2rem',
+  fontWeight: '700'
 };
 const style = {
   color: 'secondary.dark',
@@ -33,6 +34,11 @@ const styleDetail = {
 const styleButton = {
   color: '#F15A59',
   fontSize: '2rem',
+};
+const styleButtonText = {
+  color: '#F15A59',
+  fontSize: '1.4rem',
+  fontWeight: '600'
 };
 
 function AppointmentDetails({ appointment }) {
@@ -64,7 +70,7 @@ function AppointmentDetails({ appointment }) {
                 <TableCell sx={styleDetail}>{formattedTime}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell sx={style}>Delete</TableCell>
+                <TableCell sx={styleButtonText}>Cancel Appointment</TableCell>
                 <TableCell sx={styleDetail}>
                   <IconButton>
                     <DeleteOutlineTwoToneIcon sx={styleButton} />

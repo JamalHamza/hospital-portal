@@ -12,8 +12,9 @@ import React from 'react';
 
 const styleHeader = {
   color: 'secondary.dark',
-  textAlign: 'cent',
+  textAlign: 'left',
   fontSize: '2rem',
+  fontWeight: '700'
 };
 const style = {
   color: 'secondary.dark',
