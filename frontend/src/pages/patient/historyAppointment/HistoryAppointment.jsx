@@ -24,9 +24,6 @@ function HistoryAppointment() {
     return formattedDate < todayDate;
   });
 
-  console.log(isLoading);
-  console.log(appointments.length);
-
   // ! ----------------------------------------------------------
   useEffect(() => {
     if (user?._id) {
@@ -47,7 +44,7 @@ function HistoryAppointment() {
             <BackNav />
             <Grid container minWidth='100%'>
               <>
-                {!isLoading && appointments.length === 0 ? (
+                {isLoading ? (
                   <h1>Loading</h1>
                 ) : (
                   <>

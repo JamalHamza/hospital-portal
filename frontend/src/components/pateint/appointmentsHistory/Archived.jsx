@@ -1,13 +1,28 @@
 import ContentPasteGoIcon from '@mui/icons-material/ContentPasteGo';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import {Box, Grid, IconButton} from '@mui/material';
+import { Box, Grid, IconButton } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import React from 'react';
+
+// ! ===============STYLE==================
+const textStyle = {
+  alert: {
+    fontSize: '2rem',
+    color: 'third.dark',
+    ml: '0.4em',
+    textAlign: 'center',
+  },
+  title: {
+    color: 'secondary.dark',
+    fontSize: '1.6rem',
+    fontWeight: '700',
+  },
+};
 
 function Archived({ appointments }) {
   // ! ---- Filter Archived Appointments -------------------
@@ -42,16 +57,7 @@ function Archived({ appointments }) {
           <SentimentVeryDissatisfiedIcon
             sx={{ fontSize: '3rem', color: 'secondary.dark' }}
           />
-          <Typography
-            sx={{
-              fontSize: '2rem',
-              color: 'third.dark',
-              ml: '0.4em',
-              textAlign: 'center',
-            }}
-          >
-            Archive is empty
-          </Typography>
+          <Typography sx={textStyle.alert}>Archive is empty</Typography>
         </Box>
       ) : (
         <>
@@ -69,15 +75,7 @@ function Archived({ appointments }) {
                   aria-controls='panel1a-content'
                   id='panel1a-header'
                 >
-                  <Typography
-                    sx={{
-                      color: 'secondary.dark',
-                      fontSize: '1.6rem',
-                      fontWeight: '700',
-                    }}
-                  >
-                    {formattedDate}
-                  </Typography>
+                  <Typography sx={textStyle.title}>{formattedDate}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Box
