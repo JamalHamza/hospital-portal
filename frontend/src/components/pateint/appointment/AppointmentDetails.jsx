@@ -12,6 +12,10 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { deleteAppointment } from '../../../redux/features/booking/bookingSlice';
 
 const styleHeader = {
   color: 'secondary.dark',
@@ -41,15 +45,17 @@ const styleButtonText = {
 };
 
 function AppointmentDetails({ appointment }) {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formattedCratedDate = moment(appointment?.createdAt).fromNow();
   const formattedDate = moment(appointment?.appointmentDate).format('ll');
   const formattedTime = moment(appointment?.appointmentTime).format('HH:mm');
 
   const handleDelete = async (id) => {
-
-    };
+    await dispatch(deleteAppointment(id));
+    navigate(-1);
+    toast.success('Appointment successfully canceled');
+  };
   return (
     <Grid item xs={12} sm={6} md={6}>
       <Box sx={{ width: '90%', m: '0 auto' }}>
