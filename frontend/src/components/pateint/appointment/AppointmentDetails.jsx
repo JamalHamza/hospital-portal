@@ -23,7 +23,6 @@ const style = {
   color: 'secondary.dark',
   textAlign: 'left',
   fontSize: '1.5rem',
-  '&:first-child td': { border: 0 },
 };
 const styleDetail = {
   color: 'primary.main',

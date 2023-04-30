@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import HistoryImg from '../../../assets/patient/history.png';
 import BackNav from '../../../components/customUtils/backNav/BackNav';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
-import Loader from '../../../components/loader/Loader';
 import Archived from '../../../components/pateint/appointmentsHistory/Archived';
 import Upcoming from '../../../components/pateint/appointmentsHistory/Upcoming';
 import { getAppointments } from '../../../redux/features/booking/bookingSlice';
@@ -14,8 +13,8 @@ import { getAppointments } from '../../../redux/features/booking/bookingSlice';
 function HistoryAppointment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, user } = useSelector((state) => state.auth);
-  const { appointments } = useSelector((state) => state.booking);
+  const { user } = useSelector((state) => state.auth);
+  const { appointments, isLoading } = useSelector((state) => state.booking);
   //  ! ----------------------------------------------------------
 
   // ! filterAppointments that is old
@@ -24,6 +23,9 @@ function HistoryAppointment() {
     const formattedDate = moment(date.appointmentDate).format('YYYY:MM:DD');
     return formattedDate < todayDate;
   });
+
+  console.log(isLoading);
+  console.log(appointments.length);
 
   // ! ----------------------------------------------------------
   useEffect(() => {
@@ -35,9 +37,7 @@ function HistoryAppointment() {
 
   return (
     <>
-      {isLoading? (
-        <Loader />
-      ) : (
+    
         <FormWrapper
           title={'Your Appointment History'}
           img={HistoryImg}
@@ -47,13 +47,19 @@ function HistoryAppointment() {
             <BackNav />
             <Grid container minWidth='100%'>
               <>
-                <Upcoming appointments={appointments} isLoading={isLoading} />
-                <Archived appointments={appointments} />
+                {!isLoading && appointments.length === 0 ? (
+                  <h1>Loading</h1>
+                ) : (
+                  <>
+                    <Upcoming appointments={appointments} />
+                    <Archived appointments={appointments} />
+                  </>
+                )}
               </>
             </Grid>
           </Box>
         </FormWrapper>
-      )}
+    
     </>
   );
 }

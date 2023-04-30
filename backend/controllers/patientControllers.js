@@ -176,9 +176,25 @@ const getAppointment = asyncHandler(async (req, res) => {
   res.status(200).json({ appointment, doctor });
 });
 
+// * ---------------------------------------
+
+const deleteAppointment = asyncHandler(async (req, res) => {
+  // ! Take user id from params
+  const appointment = Appointment.findById(req.params.id);
+  if (!appointment) {
+    res.status(404);
+    throw new Error('Appointment not found');
+  }
+  await appointment.remove();
+  res.status(200).json({
+    message: 'Appointment deleted successfully',
+  });
+});
+
 module.exports = {
   bookAppointment,
   checkAvailability,
   getAppointments,
   getAppointment,
+  deleteAppointment,
 };
