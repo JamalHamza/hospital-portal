@@ -41,7 +41,7 @@ const updateDoctorShift = async (userData) => {
 // *-----------------------------
 // *-------PATIENT---------------
 // *-----------------------------
-// ! Check Availability
+// ! Check Availability ------------------
 const checkAvailability = async (userData) => {
   const response = await axios.get(
     API_URL2 + `/allDoctors/check-booking-availability`,
@@ -49,26 +49,34 @@ const checkAvailability = async (userData) => {
   );
   return response.data;
 };
-// ! Booking an Appointment
+// ! Booking an Appointment ----------------
 const bookingAnAppointment = async (userData) => {
   const response = await axios.post(API_URL2 + `/allDoctors/:id`, userData);
   return response.data;
 };
 
-// ! Get Appointments
+// ! Get Appointments -------------------
 const getAppointments = async (userData) => {
   const response = await axios.get(API_URL2 + '/allDoctors/history', {
     params: userData,
   });
   return response.data;
 };
-// ! Get Appointment
+// ! Get Appointment -------------------
 const getAppointment = async (userData) => {
   const response = await axios.get(
     API_URL2 + '/allDoctors/history/appointment',
     {
       params: userData,
     }
+  );
+  return response.data;
+};
+
+// ! Delete Appointment ---------------------------
+const deleteAppointment = async (id) => {
+  const response = await axios.delete(
+    API_URL2 + `/allDoctors/history/appointment/${id}`
   );
   return response.data;
 };
@@ -83,6 +91,7 @@ const bookingService = {
   bookingAnAppointment,
   getAppointments,
   getAppointment,
+  deleteAppointment
 };
 
 export default bookingService;

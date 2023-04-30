@@ -5,6 +5,7 @@ const {
   checkAvailability,
   getAppointments,
   getAppointment,
+  deleteAppointment,
 } = require('../controllers/patientControllers');
 const router = express.Router();
 
@@ -23,6 +24,13 @@ router.get(
   protect,
   patientOnly,
   getAppointment
+);
+
+router.delete(
+  '/allDoctors/history/appointment/:id',
+  protect,
+  patientOnly,
+  deleteAppointment
 );
 
 module.exports = router;

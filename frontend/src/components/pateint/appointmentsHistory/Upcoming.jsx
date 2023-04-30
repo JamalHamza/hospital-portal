@@ -49,7 +49,7 @@ function Upcoming({ appointments, isLoading }) {
       >
         Upcoming Appointments
       </Typography>
-      {upComing.length === 0 ? (
+      {!isLoading && upComing.length === 0 ? (
         <Box
           sx={{
             display: 'flex',

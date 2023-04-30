@@ -17,7 +17,7 @@ const styleHeader = {
   color: 'secondary.dark',
   textAlign: 'left',
   fontSize: '2rem',
-  fontWeight: '700'
+  fontWeight: '700',
 };
 const style = {
   color: 'secondary.dark',
@@ -37,13 +37,19 @@ const styleButton = {
 const styleButtonText = {
   color: '#F15A59',
   fontSize: '1.4rem',
-  fontWeight: '600'
+  fontWeight: '600',
 };
 
 function AppointmentDetails({ appointment }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const formattedCratedDate = moment(appointment?.createdAt).fromNow();
   const formattedDate = moment(appointment?.appointmentDate).format('ll');
   const formattedTime = moment(appointment?.appointmentTime).format('HH:mm');
+
+  const handleDelete = async (id) => {
+
+    };
   return (
     <Grid item xs={12} sm={6} md={6}>
       <Box sx={{ width: '90%', m: '0 auto' }}>
@@ -71,7 +77,7 @@ function AppointmentDetails({ appointment }) {
               <TableRow>
                 <TableCell sx={styleButtonText}>Cancel Appointment</TableCell>
                 <TableCell sx={styleDetail}>
-                  <IconButton>
+                  <IconButton onClick={() => handleDelete(appointment?._id)}>
                     <DeleteOutlineTwoToneIcon sx={styleButton} />
                   </IconButton>
                 </TableCell>

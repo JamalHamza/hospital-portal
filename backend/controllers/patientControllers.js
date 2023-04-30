@@ -179,6 +179,7 @@ const getAppointment = asyncHandler(async (req, res) => {
 // * ---------------------------------------
 
 const deleteAppointment = asyncHandler(async (req, res) => {
+
   // ! Take user id from params
   const appointment = Appointment.findById(req.params.id);
   if (!appointment) {

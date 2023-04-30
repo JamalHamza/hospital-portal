@@ -192,6 +192,25 @@ export const getAppointment = createAsyncThunk(
   }
 );
 
+// ! Delete Appointment ------------
+export const deleteAppointment = createAsyncThunk(
+  'booking/deleteAppointment',
+  async (id, thunkAPI) => {
+    try {
+      return await bookingService.deleteAppointment(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // * ---------------------------------------
 
 const bookingSlice = createSlice({
@@ -343,6 +362,22 @@ const bookingSlice = createSlice({
         state.appointment = action.payload;
       })
       .addCase(getAppointment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Delete Appointment ---------
+      .addCase(deleteAppointment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAppointment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+        toast.success(action.payload);
+      })
+      .addCase(deleteAppointment.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
