@@ -18,16 +18,30 @@ const bookAppointment = asyncHandler(async (req, res) => {
   const { patientId, doctorId, appointmentDate, appointmentTime } = req.body;
   const doctor = await Doctor.findOne({ _id: doctorId });
   const { startDate, endDate, startTime, endTime, name } = doctor;
+
   // ! change date formate that client sent
-  const appointmentDateFormatted = new Date(appointmentDate);
+  // ! to compare date I must user 12/12/2034 format for date
+  const appointmentDateFormatted = new Date(
+    appointmentDate
+  ).toLocaleDateString();
+  const appointmentEndDateFormatted = new Date(endDate).toLocaleDateString();
+  const appointmentStartDateFormatted = new Date(
+    startDate
+  ).toLocaleDateString();
 
   // ! check that patient if booked already at the same date
-
   const checkAppointment = await Appointment.findOne({
     doctorId,
     patientId,
-    appointmentDate: appointmentDateFormatted,
+    appointmentDate: new Date(appointmentDate),
   });
+
+  console.log(`start appointment end`);
+  console.log(
+    appointmentStartDateFormatted,
+    appointmentDateFormatted,
+    appointmentEndDateFormatted
+  );
 
   if (checkAppointment) {
     res.status(400);
@@ -47,8 +61,8 @@ const bookAppointment = asyncHandler(async (req, res) => {
       .format('HH:mm');
 
     if (
-      appointmentDateFormatted >= startDate &&
-      appointmentDateFormatted <= endDate &&
+      appointmentDateFormatted >= appointmentStartDateFormatted &&
+      appointmentDateFormatted <= appointmentEndDateFormatted &&
       formattedAppointmentTime >= formattedStartTime &&
       formattedAppointmentTime <= formattedEndTime
     ) {
@@ -127,7 +141,6 @@ const checkAvailability = asyncHandler(async (req, res) => {
 // * ------------------------------------
 const getAppointments = asyncHandler(async (req, res) => {
   const { patientId } = req.query;
-  console.log(patientId);
 
   if (!patientId) {
     res.status(400);
@@ -179,7 +192,6 @@ const getAppointment = asyncHandler(async (req, res) => {
 // * ---------------------------------------
 
 const deleteAppointment = asyncHandler(async (req, res) => {
-
   // ! Take user id from params
   const appointment = Appointment.findById(req.params.id);
   if (!appointment) {

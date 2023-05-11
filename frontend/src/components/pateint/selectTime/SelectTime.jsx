@@ -17,13 +17,14 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { bookingAnAppointment } from '../../../redux/features/booking/bookingSlice';
-import {CustomButtonOne} from '../../customUtils/customButtons/CustomButtonOne';
+import { CustomButtonOne } from '../../customUtils/customButtons/CustomButtonOne';
 
 function SelectTime() {
   const { id } = useParams();
   const [time, setTime] = useState('');
   const { isLoading, appointmentBooks } = useSelector((state) => state.booking);
   const { user } = useSelector((state) => state.auth);
+  console.log(appointmentBooks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // ! ------------------------------------------
@@ -148,7 +149,7 @@ function SelectTime() {
       appointmentDate: appointmentDateFormatted,
     };
     await dispatch(bookingAnAppointment(userData));
-    await navigate('/patient/historyApp');
+    navigate.replace('/patient/historyApp');
   };
 
   return (

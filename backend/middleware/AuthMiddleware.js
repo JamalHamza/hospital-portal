@@ -72,7 +72,6 @@ const adminOrPatient = asyncHandler(async (req, res, next) => {
 // ! +++++++++++++++++++++++++++++++++++++++++
 const patientOnly = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.role === 'patient') {
-    console.log(req.user.role);
     next();
   } else {
     res.status(401);
