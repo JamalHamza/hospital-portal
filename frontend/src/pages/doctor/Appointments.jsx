@@ -1,10 +1,11 @@
 import WavingHandIcon from '@mui/icons-material/WavingHand';
 import { Grid, Typography } from '@mui/material';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import HistoryImg from '../../assets/patient/history.png';
 import MainAppointmentsInfo from '../../components/doctor/appointments/mainInfoTable';
 import FormWrapper from '../../components/formWrapper/FormWrapper';
+import { getAppointmentsDoctor } from '../../redux/features/booking/bookingSlice';
 
 const styleText = {
   text: {
@@ -23,7 +24,20 @@ const styleText = {
 };
 
 function Appointments() {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { appointments } = useSelector((state) => state.booking);
+  console.log(appointments);
+
+  useEffect(() => {
+    const userData = {
+      userId: user?._id,
+    };
+    if (user) {
+      dispatch(getAppointmentsDoctor(userData));
+    }
+  }, [dispatch, user]);
+
   return (
     <FormWrapper
       title={'Appointments'}
@@ -34,7 +48,7 @@ function Appointments() {
         <WavingHandIcon sx={styleText.icon} />
         Hello, {user?.name}
       </Typography>
-      <Grid container xs={12} sm={12} md={12} border='1px solid red'mt='2em'>
+      <Grid container border='1px solid red' mt='2em'>
         <MainAppointmentsInfo />
       </Grid>
     </FormWrapper>

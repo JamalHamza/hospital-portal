@@ -10,22 +10,27 @@ const doctorSendEmail = require('../utils/doctorSendEmail');
 
 // * ------------------------------------
 const getAppointments = asyncHandler(async (req, res) => {
-  const { doctorId } = req.query;
+  const { userId } = req.query;
 
-  if (!doctorId) {
+  if (!userId) {
     res.status(400);
-    throw new Error('Doctor ID is required!');
+    throw new Error('userId is required!');
   }
 
-  const appointments = await Appointment.find({
-    doctorId,
-  }).sort('-createdAt');
+  const doctor = await Doctor.findOne({
+    userId,
+  }).select('-password');
+
+  // ! Find doctor by userId
+  const appointments = await Appointment.find({ doctorId: doctor._id }).sort(
+    '-createdAt'
+  );
 
   if (!appointments) {
     res.status(200);
     res.json('History is empty');
   }
-  res.status(200).json(appointments);
+  res.status(200).json({ appointments, doctor });
 });
 
 module.exports = {

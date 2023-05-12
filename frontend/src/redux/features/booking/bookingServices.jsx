@@ -3,6 +3,7 @@ import axios from 'axios';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const API_URL = `${BACKEND_URL}/api/admin`;
 const API_URL2 = `${BACKEND_URL}/api/patient`;
+const API_URL3 = `${BACKEND_URL}/api/doctor`;
 
 // *-----------------------------
 // *-------ADMIN-----------------
@@ -81,6 +82,17 @@ const deleteAppointment = async (id) => {
   return response.data;
 };
 
+// *-----------------------------
+// *-------Doctor----------------
+// *-----------------------------
+// ! Get Appointments -------------------
+const getAppointmentsDoctor = async (userData) => {
+  const response = await axios.get(API_URL3 + '/appointments', {
+    params: userData,
+  });
+  return response.data;
+};
+
 const bookingService = {
   addDoctor,
   getDoctors,
@@ -91,7 +103,8 @@ const bookingService = {
   bookingAnAppointment,
   getAppointments,
   getAppointment,
-  deleteAppointment
+  deleteAppointment,
+  getAppointmentsDoctor,
 };
 
 export default bookingService;
