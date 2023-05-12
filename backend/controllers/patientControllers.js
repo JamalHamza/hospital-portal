@@ -30,18 +30,21 @@ const bookAppointment = asyncHandler(async (req, res) => {
   ).toLocaleDateString();
 
   // ! check that patient if booked already at the same date
+  const timestamp1 = new Date(appointmentDate);
+  const timestamp2 = new Date(
+    timestamp1.getFullYear(),
+    timestamp1.getMonth(),
+    timestamp1.getDate()
+  );
+  const appointmentDateToISOString = timestamp2.toISOString();
   const checkAppointment = await Appointment.findOne({
     doctorId,
     patientId,
-    appointmentDate: new Date(appointmentDate),
+    appointmentDate: {
+      $gte: appointmentDateToISOString,
+      $lte: appointmentDate,
+    },
   });
-
-  console.log(`start appointment end`);
-  console.log(
-    appointmentStartDateFormatted,
-    appointmentDateFormatted,
-    appointmentEndDateFormatted
-  );
 
   if (checkAppointment) {
     res.status(400);
@@ -103,10 +106,25 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const doctor = await Doctor.findById(doctorId);
   const { startTime, endTime } = doctor;
 
+  const dateFormatted = new Date(appointmentDate);
+  const timeStampsToISOString = dateFormatted.toISOString();
+  console.log(timeStampsToISOString);
+
+  const timestamp1 = new Date(appointmentDate);
+  const timestamp2 = new Date(
+    timestamp1.getFullYear(),
+    timestamp1.getMonth(),
+    timestamp1.getDate()
+  );
+  const appointmentDateToISOString = timestamp2.toISOString();
+
   // ! Get the list of existing appointment
   const existingAppointments = await Appointment.find({
     doctorId,
-    appointmentDate,
+    appointmentDate: {
+      $gte: appointmentDateToISOString,
+      $lte: appointmentDate,
+    },
   });
 
   // ! Calculate the booked time slots
