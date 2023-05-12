@@ -48,7 +48,7 @@ function Appointments() {
         <WavingHandIcon sx={styleText.icon} />
         Hello, {user?.name}
       </Typography>
-      <Grid container mt='2em'>
+      <Grid container mt='2em' columnGap={2}>
         <DoctorInfo doctor={appointments.doctor} />
         <MainAppointmentsInfo appointments={appointments.appointments} />
       </Grid>

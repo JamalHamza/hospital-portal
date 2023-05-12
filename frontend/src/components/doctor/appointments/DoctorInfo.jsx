@@ -34,14 +34,16 @@ const styleDetail = {
 };
 
 function DoctorInfo({ doctor }) {
-  const { startDate, endDate, startTime, endTime } = doctor;
-  const formattedStartDate = new Date(startDate).toLocaleDateString();
-  const formattedEndDate = new Date(endDate).toLocaleDateString();
-  const formattedStartTime = new Date(startTime).toLocaleTimeString().slice(0,-6);
-  const formattedEndTime = new Date(endTime).toLocaleTimeString().slice(0, -6);
-  console.log(formattedStartTime);
+  const formattedStartDate = new Date(doctor?.startDate).toLocaleDateString();
+  const formattedEndDate = new Date(doctor?.endDate).toLocaleDateString();
+  const formattedStartTime = new Date(doctor?.startTime)
+    .toLocaleTimeString()
+    .slice(0, -6);
+  const formattedEndTime = new Date(doctor?.endTime)
+    .toLocaleTimeString()
+    .slice(0, -6);
   return (
-    <Grid item xs={12} sm={6} md={6} border='1px solid'>
+    <Grid item xs={12} sm={5.8} md={5.8}>
       <TableContainer>
         <Table aria-label='simple table'>
           <TableHead>
