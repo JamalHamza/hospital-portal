@@ -5,6 +5,8 @@ const { genereteteToken, hashToken } = require('../utils/index');
 const parser = require('ua-parser-js');
 const Appointment = require('../models/appointments');
 const moment = require('moment');
+const sendEmail = require('../utils/sendEmail');
+const doctorSendEmail = require('../utils/doctorSendEmail');
 
 // ! ----------------------------------------------------------------------------------------------------------
 // ! Booking Appointment Logic to book an appointment:
@@ -18,6 +20,7 @@ const bookAppointment = asyncHandler(async (req, res) => {
   const { patientId, doctorId, appointmentDate, appointmentTime } = req.body;
   const doctor = await Doctor.findOne({ _id: doctorId });
   const { startDate, endDate, startTime, endTime, name } = doctor;
+  const patient = await User.findOne({ _id: patientId });
 
   // ! change date formate that client sent
   // ! to compare date I must user 12/12/2034 format for date
@@ -76,9 +79,41 @@ const bookAppointment = asyncHandler(async (req, res) => {
         appointmentDate,
         appointmentTime,
       });
+
+      const subject = 'A new appointment booked';
+      const send_to = doctor.email;
+      const sent_from = process.env.EMAIL_USER;
+      const reply_to = 'noreply@zino.com';
+      const template = 'bookingNotifications';
+      const doctorName = doctor.name;
+      const patientName = patient.name;
+      const patientEmail = patient.email;
+      const date = timestamp2;
+      const time = formattedAppointmentTime;
       // ! Check if booked successfully
       if (appointment) {
-        res.status(201).json(appointment);
+        // ! --------------------------------------------------
+        // ! Send Email
+        try {
+          await doctorSendEmail(
+            subject,
+            send_to,
+            sent_from,
+            reply_to,
+            template,
+            doctorName,
+            patientName,
+            patientEmail,
+            date,
+            time
+          );
+          res.status(201).json(appointment);
+        } catch (error) {
+          res.status(500);
+          // throw new Error('Email not sent, please try again');
+          console.log(error);
+        }
+        // ! --------------------------------------------------
       } else {
         res.status(400);
         throw new Error('Invalid appointment data');

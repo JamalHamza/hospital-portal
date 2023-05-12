@@ -2,19 +2,17 @@ const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
-const sendEmail = async (
+const doctorSendEmail = async (
   subject,
   send_to,
   sent_from,
   reply_to,
   template,
-  name,
-  link,
-  date,
   doctorName,
-  time,
   patientName,
-  patientEmail
+  patientEmail,
+  date,
+  time
 ) => {
   // Create Email Transporter
   const transporter = nodemailer.createTransport({
@@ -48,15 +46,12 @@ const sendEmail = async (
     replyTo: reply_to,
     subject,
     template,
-
     context: {
-      name,
-      link,
+      doctorName,
+      patientName,
+      patientEmail,
       date,
       time,
-      patientName,
-      doctorName,
-      patientEmail,
     },
   };
 
@@ -70,4 +65,4 @@ const sendEmail = async (
   });
 };
 
-module.exports = sendEmail;
+module.exports = doctorSendEmail;
