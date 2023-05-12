@@ -18,6 +18,7 @@ import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
+import Appointments from './pages/doctor/Appointments';
 import Home from './pages/home/Home';
 import Appointment from './pages/patient/appointment/Appointment';
 import Booking from './pages/patient/booking/Booking';
@@ -227,6 +228,15 @@ function App() {
                 }
               />
             </Route>
+            {/* ________PatientOnly__________ */}
+            <Route
+              path='/doctor/appointments'
+              element={
+                <Layout>
+                  <Appointments />
+                </Layout>
+              }
+            />
           </Routes>
         </GoogleOAuthProvider>
       </BrowserRouter>

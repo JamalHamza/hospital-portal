@@ -111,6 +111,17 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
       ],
+      [
+        {
+          text: 'Appointments',
+          icon: (
+            <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
+          ),
+          onClick: () => {
+            navigate('/doctor/appointments'), setOpen(false);
+          },
+        },
+      ],
     ];
   } else if (isPatient) {
     itemsList = [
