@@ -3,6 +3,7 @@ import { Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HistoryImg from '../../assets/patient/history.png';
+import AppointmentsDataGrid from '../../components/doctor/appointments/AppointmentsDataGrid';
 import DoctorInfo from '../../components/doctor/appointments/DoctorInfo';
 import MainAppointmentsInfo from '../../components/doctor/appointments/MainAppointmentsInfo';
 import FormWrapper from '../../components/formWrapper/FormWrapper';
@@ -49,8 +50,9 @@ function Appointments() {
         Hello, {user?.name}
       </Typography>
       <Grid container mt='2em' columnGap={2}>
-        <DoctorInfo doctor={appointments.doctor} />
-        <MainAppointmentsInfo appointments={appointments.appointments} />
+        <DoctorInfo doctor={appointments?.doctor} />
+        <MainAppointmentsInfo appointments={appointments?.appointments} />
+        <AppointmentsDataGrid appointments={appointments?.appointments} />
       </Grid>
     </FormWrapper>
   );

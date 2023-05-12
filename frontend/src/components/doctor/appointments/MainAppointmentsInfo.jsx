@@ -70,8 +70,6 @@ function MainAppointmentsInfo({ appointments }) {
     }
   });
 
-  console.log(futureAppointments);
-  console.log(pastAppointments);
   return (
     <Grid item xs={12} sm={6} md={6}>
       <Grid container>
@@ -98,9 +96,7 @@ function MainAppointmentsInfo({ appointments }) {
           sx={styleBoxes.upcoming}
         >
           <Typography sx={style}>Oncoming </Typography>
-          <Typography
-            sx={styleDetail}
-          >{`${futureAppointments?.length}`}</Typography>
+          <Typography sx={styleDetail}>{futureAppointments?.length}</Typography>
         </Grid>
         <Grid
           item
@@ -111,9 +107,7 @@ function MainAppointmentsInfo({ appointments }) {
           sx={styleBoxes.archived}
         >
           <Typography sx={style}>Archived </Typography>
-          <Typography
-            sx={styleDetail}
-          >{`${pastAppointments?.length}`}</Typography>
+          <Typography sx={styleDetail}>${pastAppointments.length}</Typography>
         </Grid>
         <Grid
           item
