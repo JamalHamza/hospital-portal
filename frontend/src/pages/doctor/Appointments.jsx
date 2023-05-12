@@ -3,7 +3,8 @@ import { Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HistoryImg from '../../assets/patient/history.png';
-import MainAppointmentsInfo from '../../components/doctor/appointments/mainInfoTable';
+import DoctorInfo from '../../components/doctor/appointments/DoctorInfo';
+import MainAppointmentsInfo from '../../components/doctor/appointments/MainAppointmentsInfo';
 import FormWrapper from '../../components/formWrapper/FormWrapper';
 import { getAppointmentsDoctor } from '../../redux/features/booking/bookingSlice';
 
@@ -27,7 +28,6 @@ function Appointments() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { appointments } = useSelector((state) => state.booking);
-  console.log(appointments);
 
   useEffect(() => {
     const userData = {
@@ -48,8 +48,9 @@ function Appointments() {
         <WavingHandIcon sx={styleText.icon} />
         Hello, {user?.name}
       </Typography>
-      <Grid container border='1px solid red' mt='2em'>
-        <MainAppointmentsInfo />
+      <Grid container mt='2em'>
+        <DoctorInfo doctor={appointments.doctor} />
+        <MainAppointmentsInfo appointments={appointments.appointments} />
       </Grid>
     </FormWrapper>
   );
