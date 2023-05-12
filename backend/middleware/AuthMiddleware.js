@@ -80,6 +80,16 @@ const patientOnly = asyncHandler(async (req, res, next) => {
 });
 
 // ! +++++++++++++++++++++++++++++++++++++++++
+const doctorOnly = asyncHandler(async (req, res, next) => {
+  if (req.user && req.user.role === 'doctor') {
+    next();
+  } else {
+    res.status(401);
+    throw new Error('Your are not authorized as an doctor');
+  }
+});
+
+// ! +++++++++++++++++++++++++++++++++++++++++
 
 const verifiedOnly = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.isVerified) {
@@ -98,4 +108,5 @@ module.exports = {
   verifiedOnly,
   patientOnly,
   adminOrPatient,
+  doctorOnly,
 };

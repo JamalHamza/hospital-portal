@@ -11,6 +11,7 @@ const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorMiddleware');
 const adminRoutes = require('./routes/adminRoutes');
 const patientRoutes = require('./routes/patientRoutes');
+const doctorRoutes = require('./routes/doctorRoutes');
 
 // ! Middleware -----------
 app.use(express.json());
@@ -29,6 +30,7 @@ app.use(
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/patient', patientRoutes);
+app.use('/api/doctor', doctorRoutes);
 
 app.get('/', (req, res) => {
   res.send('Home Page');
