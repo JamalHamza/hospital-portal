@@ -42,8 +42,7 @@ const Header = () => {
       <Box>
         <Sidebar open={open} setOpen={setOpen} />
       </Box>
-      {/* Open Appbar */}
-      <AppBar position='static'>
+      <AppBar position='fixed'>
         <Toolbar sx={{ bgcolor: 'primary.dark' }}>
           <Box
             sx={{
