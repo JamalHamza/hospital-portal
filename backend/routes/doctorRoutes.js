@@ -2,23 +2,20 @@ const express = require('express');
 const { protect, doctorOnly } = require('../middleware/AuthMiddleware');
 const {
   getAppointments,
-  uploadPdfResult,
-  downLoadResult,
+  getItems,
+  addItem,
+  downloadFile,
 } = require('../controllers/doctorControllers');
 const router = express.Router();
-const multer = require('multer');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = require('../middleware/multer');
+
+
+
+
 
 router.get('/appointments', protect, doctorOnly, getAppointments);
-router.post(
-  '/upload',
-  upload.single('pdf'),
-  protect,
-  doctorOnly,
-  uploadPdfResult
-);
-
-router.get('/file/:id', protect, doctorOnly, downLoadResult);
+// ! ----File Endpoints----------
+router.route('/files').get(getItems).post(upload.single('file'), addItem);
+router.route('/download/:id').get(downloadFile);
 
 module.exports = router;

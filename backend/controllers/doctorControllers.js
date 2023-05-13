@@ -7,9 +7,8 @@ const Appointment = require('../models/appointments');
 const moment = require('moment');
 const sendEmail = require('../utils/sendEmail');
 const multer = require('multer');
-const Pdf = require('../models/results');
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const File = require('../models/results');
+const path = require('path');
 
 // * ------------------------------------
 const getAppointments = asyncHandler(async (req, res) => {
@@ -28,8 +27,6 @@ const getAppointments = asyncHandler(async (req, res) => {
   const appointments = await Appointment.find({ doctorId: doctor._id }).sort(
     '-createdAt'
   );
-  // ! Find patient by patientId
-  const patient = await User.find({ _id: appointments[0].patientId });
 
   if (!appointments) {
     res.status(200);
@@ -39,67 +36,51 @@ const getAppointments = asyncHandler(async (req, res) => {
 });
 
 // * ------------------------------------
+// * -----Files Upload/Download----------
 // * ------------------------------------
 
-// ! Set up multer storage
-
-// router.post('/upload', upload.single('pdf'), async (req, res) => {
-//   const { doctorId, patientId } = req.body;
-//   const { originalname, mimetype, buffer } = req.file;
-
-//   const pdf = new Pdf({
-//     doctorId,
-//     patientId,
-//     filename: originalname,
-//     contentType: mimetype,
-//     data: buffer,
-//   });
-
-//   await pdf.save();
-
-//   res.status(201).json({ message: 'PDF uploaded successfully' });
-// });
-
-const uploadPdfResult = asyncHandler(async (req, res) => {
-  // const { doctorId, patientId } = req.body;
-  const { originalname, mimetype, buffer } = req.file;
-
-  // if (!doctorId && !patientId) {
-  //   res.status(400);
-  //   throw new Error('doctorId or patientId is not defined');
-  // }
-
-  const pdf = new Pdf({
-    // doctorId,
-    // patientId,
-    filename: originalname,
-    contentType: mimetype,
-    // data: buffer,
-  });
-
-  await pdf.save();
-
-  res.status(201).json({ message: 'PDF uploaded successfully' });
+const getItems = asyncHandler(async (req, res) => {
+  try {
+    const items = await File.find();
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(400);
+    throw new Error('Something went wrong!');
+  }
 });
-
-const downLoadResult = asyncHandler(async (req, res) => {
-  const id = req.params.id;
-
-  console.log(id);
-  const pdf = await Pdf.findById(id);
-
-  if (!pdf) {
+// * ------------------------------------
+const addItem = asyncHandler(async (req, res) => {
+  const { doctorId, patientId, name } = req.body;
+  console.log(req.file);
+  const file = req.file.path;
+  if (!doctorId && !patientId && !name && !file) {
+    res.status(404);
+    throw new Error('Please fill all fields');
+  }
+  const item = await File.create({ name, file, doctorId, patientId });
+  if (item) {
+    res.status(201).json({ item });
+  } else {
+    res.status(400);
+    throw new Error('File is not uploaded');
+  }
+});
+// * ------------------------------------
+const downloadFile = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const item = await File.findById(id);
+  if (!item) {
     res.status(404);
     throw new Error('File not found');
   }
-
-  res.setHeader('Content-Type', pdf.contentType);
-  res.setHeader('Content-Disposition', `attachment; filename=${pdf.filename}`);
-  res.send(pdf.data);
+  const file = item.file;
+  const filePath = path.join(__dirname, `../${file}`);
+  res.download(filePath);
 });
 
 module.exports = {
   getAppointments,
-  uploadPdfResult,
-  downLoadResult,
+  getItems,
+  addItem,
+  downloadFile,
 };

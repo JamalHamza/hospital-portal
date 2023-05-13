@@ -12,13 +12,14 @@ const pdfSchema = new mongoose.Schema(
       required: true,
       ref: 'user',
     },
-    filename: {
+    name: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a name'],
+      trim: true,
     },
-    contentType: {
+    file: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a file'],
     },
   },
   {
