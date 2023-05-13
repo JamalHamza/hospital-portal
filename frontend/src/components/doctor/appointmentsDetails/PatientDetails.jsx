@@ -28,12 +28,12 @@ const styleDetail = {
 function PatientDetails({ patient }) {
   return (
     <Grid item xs={12} sm={12} md={12}>
-      <Grid container>
+      <Grid container columnGap={2}>
         <Grid
           item
           xs={12}
-          sm={6}
-          md={6}
+          sm={5.8}
+          md={5.8}
           bgcolor='third.light'
           borderRadius='10px'
         >
@@ -69,8 +69,8 @@ function PatientDetails({ patient }) {
         <Grid
           item
           xs={12}
-          sm={6}
-          md={6}
+          sm={5.8}
+          md={5.8}
           bgcolor='third.light'
           borderRadius='10px'
         >

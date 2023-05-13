@@ -68,8 +68,9 @@ const getAppointment = asyncHandler(async (req, res) => {
 // * ------------------------------------
 
 const getItems = asyncHandler(async (req, res) => {
+  const { appointmentId } = req.query;
   try {
-    const items = await File.find();
+    const items = await File.find({ appointmentId });
     res.status(200).json(items);
   } catch (error) {
     res.status(400);
@@ -89,13 +90,19 @@ const getItem = asyncHandler(async (req, res) => {
 });
 // * ------------------------------------
 const addItem = asyncHandler(async (req, res) => {
-  const { doctorId, patientId, name } = req.body;
+  const { doctorId, patientId, name, appointmentId } = req.body;
   const file = req.file.path;
   if (!doctorId && !patientId && !name && !file) {
     res.status(404);
     throw new Error('Please fill all fields');
   }
-  const item = await File.create({ name, file, doctorId, patientId });
+  const item = await File.create({
+    name,
+    file,
+    doctorId,
+    patientId,
+    appointmentId,
+  });
   if (item) {
     res.status(201).json({ item });
   } else {

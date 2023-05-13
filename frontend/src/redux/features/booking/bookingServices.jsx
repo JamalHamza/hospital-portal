@@ -94,10 +94,15 @@ const getAppointmentsDoctor = async (userData) => {
 };
 const getAppointmentDoctor = async (userData) => {
   const { id } = userData;
-  console.log(userData)
   const response = await axios.get(API_URL3 + `/appointments/${id}`, {
     params: userData,
   });
+  return response.data;
+};
+// ! ------------------------------
+// ! Add file ---------------------
+const addFile = async (userData) => {
+  const response = await axios.post(API_URL + '/files', userData);
   return response.data;
 };
 
@@ -114,6 +119,7 @@ const bookingService = {
   deleteAppointment,
   getAppointmentsDoctor,
   getAppointmentDoctor,
+  addFile,
 };
 
 export default bookingService;

@@ -26,13 +26,12 @@ const styleDetail = {
 };
 
 function AppointmentBookedDetails({ appointment }) {
-  console.log(appointment);
   return (
     <Grid
       item
       xs={12}
       sm={12}
-      md={6}
+      md={5.8}
       bgcolor='fourth.light'
       borderRadius='10px'
     >

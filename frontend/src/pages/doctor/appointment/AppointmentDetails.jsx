@@ -14,7 +14,6 @@ function AppointmentDetails() {
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { appointment } = useSelector((state) => state.booking);
-  console.log(appointment);
 
   useEffect(() => {
     if (user) {
