@@ -77,10 +77,30 @@ const downloadFile = asyncHandler(async (req, res) => {
   const filePath = path.join(__dirname, `../${file}`);
   res.download(filePath);
 });
+// * ------------------------------------
+const deleteFile = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const item = await File.findByIdAndDelete(id);
+  if (!item) {
+    res.status(404);
+    throw new Error('File not found');
+  }
+
+  if (item) {
+    res.status(200).json({
+      message: 'File deleted successfully',
+    });
+  } else {
+    res.status(400).json({
+      message: 'Something went wrong',
+    });
+  }
+});
 
 module.exports = {
   getAppointments,
   getItems,
   addItem,
   downloadFile,
+  deleteFile
 };
