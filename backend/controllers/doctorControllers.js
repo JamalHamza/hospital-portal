@@ -34,6 +34,34 @@ const getAppointments = asyncHandler(async (req, res) => {
   }
   res.status(200).json({ appointments, doctor });
 });
+// * ------------------------------------
+const getAppointment = asyncHandler(async (req, res) => {
+  const { id, patientId, doctorId } = req.query;
+
+  // ! Appointment Id
+
+  if (!id && !patientId) {
+    res.status(400);
+    throw new Error('Please add id and patientId');
+  }
+
+  // ! Patient details
+  const user = await User.findOne({
+    _id: patientId,
+  }).select('-password');
+
+  // ! Find all appointment for the specific doctor and patient
+  const appointments = await Appointment.find({
+    doctorId,
+    patientId,
+  }).sort('-createdAt');
+
+  if (!appointments) {
+    res.status(200);
+    res.json('History is empty');
+  }
+  res.status(200).json({ appointments, user });
+});
 
 // * ------------------------------------
 // * -----Files Upload/Download----------
@@ -51,7 +79,6 @@ const getItems = asyncHandler(async (req, res) => {
 // * ------------------------------------
 const addItem = asyncHandler(async (req, res) => {
   const { doctorId, patientId, name } = req.body;
-  console.log(req.file);
   const file = req.file.path;
   if (!doctorId && !patientId && !name && !file) {
     res.status(404);
@@ -99,8 +126,9 @@ const deleteFile = asyncHandler(async (req, res) => {
 
 module.exports = {
   getAppointments,
+  getAppointment,
   getItems,
   addItem,
   downloadFile,
-  deleteFile
+  deleteFile,
 };

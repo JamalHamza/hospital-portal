@@ -6,11 +6,13 @@ const {
   addItem,
   downloadFile,
   deleteFile,
+  getAppointment,
 } = require('../controllers/doctorControllers');
 const router = express.Router();
 const upload = require('../middleware/multer');
 
 router.get('/appointments', protect, doctorOnly, getAppointments);
+router.get('/appointments/:id', protect, doctorOnly, getAppointment);
 // ! ----File Endpoints----------
 router.get('/files', protect, doctorOnly, getItems);
 router.post('/files', upload.single('file'), protect, doctorOnly, addItem);

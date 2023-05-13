@@ -36,6 +36,7 @@ import {
 } from './redux/features/auth/authSlice';
 import AdminRoutes from './utils/AdminRoutes';
 import PatientRoutes from './utils/PatientRoutes';
+import AppointmentDetails from './pages/doctor/appointment/AppointmentDetails';
 axios.defaults.withCredentials = true;
 
 const theme = createTheme({
@@ -234,6 +235,14 @@ function App() {
               element={
                 <Layout>
                   <Appointments />
+                </Layout>
+              }
+            />
+            <Route
+              path='/doctor/appointments/:id'
+              element={
+                <Layout>
+                  <AppointmentDetails />
                 </Layout>
               }
             />

@@ -1,7 +1,8 @@
-import { Box, Button, Grid, IconButton } from '@mui/material';
+import ReadMoreIcon from '@mui/icons-material/ReadMore';
+import { Box, Grid, IconButton } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // ! Style Date Grid Mui --------------------------------
 const styleDataGrid = {
@@ -40,8 +41,7 @@ const styleDataGrid = {
 };
 
 function AppointmentsDataGrid({ appointments }) {
- 
-
+  const navigate = useNavigate();
   const columns = [
     { field: 'id', headerName: 'id', width: 60 },
     { field: 'name', headerName: 'Date', width: 140 },
@@ -49,14 +49,13 @@ function AppointmentsDataGrid({ appointments }) {
     { field: 'booked', headerName: 'Created At', width: 140 },
     {
       field: 'actions',
-      headerName: 'Open Project',
-      width: 200,
+      headerName: 'Show Details',
+      width: 100,
       renderCell: (params) => (
         <>
-          <IconButton>
-            <input type='file' id='pdf' onChange={handleFileChange} />
+          <IconButton onClick={() => navigate(`${params.row?.idDB}`)}>
+            <ReadMoreIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
           </IconButton>
-          <Button onClick={handleUpload}>upload</Button>
         </>
       ),
     },
@@ -64,6 +63,7 @@ function AppointmentsDataGrid({ appointments }) {
 
   const rows = appointments?.map((appointment, index) => ({
     id: index + 1,
+    idDB: appointment?._id,
     name: new Date(appointment?.appointmentDate).toLocaleDateString(),
     time: new Date(appointment?.appointmentTime).toLocaleTimeString(),
     booked: new Date(appointment?.createdAt).toLocaleDateString(),
