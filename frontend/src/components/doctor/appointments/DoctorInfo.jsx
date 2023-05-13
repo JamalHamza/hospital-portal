@@ -43,7 +43,7 @@ function DoctorInfo({ doctor }) {
     .toLocaleTimeString()
     .slice(0, -6);
   return (
-    <Grid item xs={12} sm={5.8} md={5.8}>
+    <Grid item xs={12} sm={11.5} md={5.8}>
       <TableContainer>
         <Table aria-label='simple table'>
           <TableHead>

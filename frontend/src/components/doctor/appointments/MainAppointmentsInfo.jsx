@@ -71,7 +71,7 @@ function MainAppointmentsInfo({ appointments }) {
   });
 
   return (
-    <Grid item xs={12} sm={6} md={6}>
+    <Grid item xs={12} sm={11.5} md={6}>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} minHeight='4rem'>
           <Typography sx={styleHeader}>Appointments Status</Typography>
@@ -79,7 +79,7 @@ function MainAppointmentsInfo({ appointments }) {
         <Grid
           item
           xs={11.5}
-          sm={5.5}
+          sm={11.5}
           md={5.5}
           sx={styleBoxes.total}
           minHeight='8rem'
@@ -90,7 +90,7 @@ function MainAppointmentsInfo({ appointments }) {
         <Grid
           item
           xs={11.5}
-          sm={5.5}
+          sm={11.5}
           md={5.5}
           minHeight='8rem'
           sx={styleBoxes.upcoming}
@@ -101,23 +101,23 @@ function MainAppointmentsInfo({ appointments }) {
         <Grid
           item
           xs={11.5}
-          sm={5.5}
+          sm={11.5}
           md={5.5}
           minHeight='8rem'
           sx={styleBoxes.archived}
         >
           <Typography sx={style}>Archived </Typography>
-          <Typography sx={styleDetail}>${pastAppointments.length}</Typography>
+          <Typography sx={styleDetail}>{pastAppointments.length}</Typography>
         </Grid>
         <Grid
           item
           xs={11.5}
-          sm={5.5}
+          sm={11.5}
           md={5.5}
           minHeight='8rem'
           sx={styleBoxes.more}
         >
-          <Typography sx={style}>Archived </Typography>
+          <Typography sx={style}>Last Months </Typography>
           <Typography sx={styleDetail}>11</Typography>
         </Grid>
       </Grid>

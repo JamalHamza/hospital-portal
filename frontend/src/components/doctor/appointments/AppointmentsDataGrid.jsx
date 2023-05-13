@@ -1,6 +1,7 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Button, Grid, IconButton } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 
 // ! Style Date Grid Mui --------------------------------
 const styleDataGrid = {
@@ -39,11 +40,26 @@ const styleDataGrid = {
 };
 
 function AppointmentsDataGrid({ appointments }) {
+ 
+
   const columns = [
     { field: 'id', headerName: 'id', width: 60 },
     { field: 'name', headerName: 'Date', width: 140 },
     { field: 'time', headerName: 'Time', width: 140 },
     { field: 'booked', headerName: 'Created At', width: 140 },
+    {
+      field: 'actions',
+      headerName: 'Open Project',
+      width: 200,
+      renderCell: (params) => (
+        <>
+          <IconButton>
+            <input type='file' id='pdf' onChange={handleFileChange} />
+          </IconButton>
+          <Button onClick={handleUpload}>upload</Button>
+        </>
+      ),
+    },
   ];
 
   const rows = appointments?.map((appointment, index) => ({
