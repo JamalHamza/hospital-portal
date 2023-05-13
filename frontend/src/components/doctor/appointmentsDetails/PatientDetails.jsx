@@ -26,7 +26,6 @@ const styleDetail = {
 };
 
 function PatientDetails({ patient }) {
-  console.log(patient);
   return (
     <Grid item xs={12} sm={12} md={12}>
       <Grid container>
