@@ -92,6 +92,13 @@ const getAppointmentsDoctor = async (userData) => {
   });
   return response.data;
 };
+const getAppointmentDoctor = async (userData) => {
+  const { id } = userData;
+  const response = await axios.get(API_URL3 + `/appointments/${id}`, {
+    params: userData,
+  });
+  return response.data;
+};
 
 const bookingService = {
   addDoctor,
@@ -105,6 +112,7 @@ const bookingService = {
   getAppointment,
   deleteAppointment,
   getAppointmentsDoctor,
+  getAppointmentDoctor,
 };
 
 export default bookingService;

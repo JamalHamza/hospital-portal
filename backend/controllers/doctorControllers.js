@@ -40,7 +40,7 @@ const getAppointment = asyncHandler(async (req, res) => {
 
   // ! Appointment Id
 
-  if (!id && !patientId) {
+  if (!id && !patientId && !doctorId) {
     res.status(400);
     throw new Error('Please add id and patientId');
   }
