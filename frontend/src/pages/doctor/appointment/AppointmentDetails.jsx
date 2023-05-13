@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Appointment from '../../../assets/doctor/user.png';
 import AppointmentBookedDetails from '../../../components/doctor/appointmentsDetails/AppointmentBookedDetails';
+import File from '../../../components/doctor/appointmentsDetails/File';
 import PatientDetails from '../../../components/doctor/appointmentsDetails/PatientDetails';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import { getAppointmentDoctor } from '../../../redux/features/booking/bookingSlice';
@@ -31,9 +32,10 @@ function AppointmentDetails() {
       img={Appointment}
       altImg={'Your Appointment History'}
     >
-      <Grid container columnGap={4} rowGap={2}>
+      <Grid container columnGap={2} rowGap={2}>
         <PatientDetails patient={appointment?.user} />
         <AppointmentBookedDetails appointment={appointment?.appointment} />
+        <File  />
       </Grid>
     </FormWrapper>
   );

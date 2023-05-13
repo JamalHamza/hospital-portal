@@ -11,7 +11,7 @@ import React from 'react';
 const styleHeader = {
   color: 'secondary.dark',
   textAlign: 'left',
-  fontSize: '2rem',
+  fontSize: '1.6rem',
   fontWeight: '700',
 };
 const style = {
@@ -85,7 +85,9 @@ function PatientDetails({ patient }) {
               <TableBody>
                 <TableRow>
                   <TableCell sx={style}>Sugar</TableCell>
-                  <TableCell sx={styleDetail}>No</TableCell>
+                  <TableCell sx={styleDetail} >
+                    No
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell sx={style}>Allergies</TableCell>
@@ -103,7 +105,6 @@ function PatientDetails({ patient }) {
             </Table>
           </TableContainer>
         </Grid>
-
       </Grid>
     </Grid>
   );

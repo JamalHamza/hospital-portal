@@ -77,6 +77,17 @@ const getItems = asyncHandler(async (req, res) => {
   }
 });
 // * ------------------------------------
+const getItem = asyncHandler(async (req, res) => {
+  const { id, doctorId } = req.query;
+  try {
+    const item = await File.findOne({ _id: id, doctorId });
+    res.status(200).json(item);
+  } catch (error) {
+    res.status(400);
+    throw new Error('Something went wrong!');
+  }
+});
+// * ------------------------------------
 const addItem = asyncHandler(async (req, res) => {
   const { doctorId, patientId, name } = req.body;
   const file = req.file.path;
@@ -131,4 +142,5 @@ module.exports = {
   addItem,
   downloadFile,
   deleteFile,
+  getItem,
 };

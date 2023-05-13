@@ -11,7 +11,7 @@ import React from 'react';
 const styleHeader = {
   color: 'secondary.dark',
   textAlign: 'left',
-  fontSize: '2rem',
+  fontSize: '1.6rem',
   fontWeight: '700',
 };
 const style = {
@@ -32,7 +32,7 @@ function AppointmentBookedDetails({ appointment }) {
       item
       xs={12}
       sm={12}
-      md={12}
+      md={6}
       bgcolor='fourth.light'
       borderRadius='10px'
     >
@@ -71,12 +71,6 @@ function AppointmentBookedDetails({ appointment }) {
               <TableCell sx={style}>Appointment Time</TableCell>
               <TableCell sx={styleDetail}>
                 {new Date(appointment?.appointmentTime).toLocaleTimeString()}
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell sx={style}>File</TableCell>
-              <TableCell sx={styleDetail}>
-                sdf
               </TableCell>
             </TableRow>
           </TableBody>
