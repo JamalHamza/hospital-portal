@@ -36,31 +36,31 @@ const getAppointments = asyncHandler(async (req, res) => {
 });
 // * ------------------------------------
 const getAppointment = asyncHandler(async (req, res) => {
-  const { id, patientId, doctorId } = req.query;
+  const { id, doctorId } = req.query;
 
   // ! Appointment Id
-
-  if (!id && !patientId && !doctorId) {
+  if (!id && !doctorId) {
     res.status(400);
     throw new Error('Please add id and patientId');
   }
+  // ! Find Doctor first
+  const doctor = await Doctor.findOne({ userId: doctorId });
+  // ! Find  appointment for the specific doctor and patient
+  const appointment = await Appointment.findOne({
+    _id: id,
+    doctorId: doctor._id,
+  }).sort('-createdAt');
 
   // ! Patient details
   const user = await User.findOne({
-    _id: patientId,
+    _id: appointment.patientId,
   }).select('-password');
 
-  // ! Find all appointment for the specific doctor and patient
-  const appointments = await Appointment.find({
-    doctorId,
-    patientId,
-  }).sort('-createdAt');
-
-  if (!appointments) {
+  if (!appointment) {
     res.status(200);
     res.json('History is empty');
   }
-  res.status(200).json({ appointments, user });
+  res.status(200).json({ appointment, user });
 });
 
 // * ------------------------------------

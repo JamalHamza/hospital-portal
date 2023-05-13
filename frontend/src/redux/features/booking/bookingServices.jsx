@@ -94,6 +94,7 @@ const getAppointmentsDoctor = async (userData) => {
 };
 const getAppointmentDoctor = async (userData) => {
   const { id } = userData;
+  console.log(userData)
   const response = await axios.get(API_URL3 + `/appointments/${id}`, {
     params: userData,
   });
