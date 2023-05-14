@@ -1,5 +1,9 @@
 const express = require('express');
-const { protect, doctorOnly } = require('../middleware/AuthMiddleware');
+const {
+  protect,
+  doctorOnly,
+  patientOnly,
+} = require('../middleware/AuthMiddleware');
 const {
   getAppointments,
   getItems,
@@ -15,10 +19,10 @@ const upload = require('../middleware/multer');
 router.get('/appointments', protect, doctorOnly, getAppointments);
 router.get('/appointments/:id', protect, doctorOnly, getAppointment);
 // ! ----File Endpoints----------
-router.get('/files', protect, doctorOnly, getItems);
+router.get('/files', protect, patientOnly, doctorOnly, getItems);
 router.get('/files/file', protect, doctorOnly, getItem);
 router.post('/files', upload.single('file'), protect, doctorOnly, addItem);
-router.get('/download/:id', protect, doctorOnly, downloadFile);
+router.get('/download/:id', protect, patientOnly, doctorOnly, downloadFile);
 router.delete('/download/:id', protect, doctorOnly, deleteFile);
 // router.route('/files').get(getItems).post(upload.single('file'), addItem);
 // router.route('/download/:id').get(downloadFile);
