@@ -1,7 +1,5 @@
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DownloadIcon from '@mui/icons-material/Download';
 import {
-  Button,
   Grid,
   IconButton,
   Table,
@@ -9,24 +7,19 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TextField,
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import {
-  addFile,
-  deleteFile,
-  getFiles,
-} from '../../../redux/features/booking/bookingSlice';
+import { getFiles } from '../../../redux/features/booking/bookingSlice';
 
 const styleText = {
   fontSize: '1.6rem',
   fontWeight: '700',
   color: 'primary.dark',
+  ml: '2em',
 };
 const styleIcon = {
   download: {
@@ -39,45 +32,11 @@ const styleIcon = {
   },
 };
 
-function File({ patient, doctor }) {
+function File() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [file, setFile] = useState(null);
-  const [name, setName] = useState('');
   const { files, isLoading } = useSelector((state) => state.booking);
   const { user } = useSelector((state) => state.auth);
-
-  // ! ----------------------------------------
-
-  const addItem = async (e) => {
-    e.preventDefault();
-    try {
-      const userData = {
-        appointmentId: id,
-        patientId: patient?._id,
-        doctorId: doctor?._id,
-        name,
-        file,
-      };
-      await dispatch(addFile(userData));
-      await dispatch(getFiles({ appointmentId: id }));
-      setName('');
-      setFile(null);
-    } catch (error) {
-      console.log(error);
-      toast.error(error);
-    }
-  };
-  const deleteItem = async (id) => {
-    try {
-
-      await dispatch(deleteFile(id));
-      await dispatch(getFiles({ appointmentId: id }));
-    } catch (error) {
-      console.log(error);
-      toast.error(error);
-    }
-  };
 
   // ! Download appointments----------------------------
   // ! Download appointments----------------------------
@@ -97,49 +56,29 @@ function File({ patient, doctor }) {
     }
   };
 
-  // ! --------------------------------------------
+  //   ! ------------------------------------------------
   useEffect(() => {
+    const appointmentId = localStorage.getItem('appointmentId').slice(1, -1);
+
+    console.log(appointmentId);
     if (user) {
       const userData = {
-        appointmentId: id,
+        appointmentId,
       };
       dispatch(getFiles(userData));
     }
   }, [dispatch, user]);
-
-  // ! --------------------------------------------
   return (
-    <Grid item xs={12} sm={12} md={12}>
-      <Typography sx={styleText}>Results or Analysis</Typography>
-      <form onSubmit={addItem}>
-        <TextField
-          name='name'
-          label='File Title'
-          type='text'
-          variant='outlined'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{ margin: '4px', width: '20%' }}
-        />
-        <TextField
-          name='file'
-          type='file'
-          onChange={(e) => setFile(e.target.files[0])}
-          style={{ margin: '4px', width: '20%' }}
-        />
-        <Button variant='contained' onClick={addItem} sx={{ mt: '1.3em' }}>
-          Add
-        </Button>
-      </form>
+    <Grid item xs={12} sm={12} md={12} mt={3}>
       {!isLoading || !files ? (
         <>
+          <Typography sx={styleText}>Results or Analysis</Typography>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell>No</TableCell>
                 <TableCell>Title</TableCell>
                 <TableCell>Download</TableCell>
-                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -150,11 +89,6 @@ function File({ patient, doctor }) {
                   <TableCell>
                     <IconButton onClick={() => downloadFile(item?._id)}>
                       <DownloadIcon sx={styleIcon.download} />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => deleteItem(item?._id)}>
-                      <DeleteForeverIcon sx={styleIcon.delete} />
                     </IconButton>
                   </TableCell>
                 </TableRow>

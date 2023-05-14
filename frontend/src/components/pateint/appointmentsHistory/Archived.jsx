@@ -8,6 +8,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import moment from 'moment';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { getAppointment } from '../../../redux/features/booking/bookingSlice';
 
 // ! ===============STYLE==================
 const textStyle = {
@@ -25,6 +28,20 @@ const textStyle = {
 };
 
 function Archived({ appointments }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleCLick = async (appointmentId, doctorId) => {
+    const userData = {
+      appointmentId,
+      doctorId,
+    };
+    console.log(userData);
+    // ! save it to localStorage to use it in Appointment page
+    localStorage.setItem('appointmentId', JSON.stringify(appointmentId));
+    localStorage.setItem('doctorId', JSON.stringify(doctorId));
+    await dispatch(getAppointment(userData));
+    await navigate('/patient/historyApp/appointment');
+  };
   // ! ---- Filter Archived Appointments -------------------
   const todayDate = moment(new Date()).format('YYYY:MM:DD');
   const oldDate = appointments?.filter((date) => {
@@ -97,7 +114,11 @@ function Archived({ appointments }) {
                     >
                       {formattedTime}
                     </Typography>
-                    <IconButton>
+                    <IconButton
+                      onClick={() =>
+                        handleCLick(appointment._id, appointment.doctorId)
+                      }
+                    >
                       <ContentPasteGoIcon
                         sx={{
                           fontSize: '2.6rem',
