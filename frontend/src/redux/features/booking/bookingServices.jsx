@@ -102,9 +102,20 @@ const getAppointmentDoctor = async (userData) => {
 // ! ------------------------------
 // ! Add file ---------------------
 const addFile = async (userData) => {
-  const response = await axios.post(API_URL + '/files', userData);
+  const response = await axios.post(API_URL3 + '/files', userData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
   return response.data;
 };
+const getFiles = async (userData) => {
+  const response = await axios.get(API_URL3 + '/files', {
+    params: userData,
+  });
+  return response.data;
+};
+// *--------------------------------------------
+// ! Download pdf request is in components/doctor/appointmentDetails/AppointmentBookedDetails/File.jsx
+// *--------------------------------------------
 
 const bookingService = {
   addDoctor,
@@ -120,6 +131,7 @@ const bookingService = {
   getAppointmentsDoctor,
   getAppointmentDoctor,
   addFile,
+  getFiles,
 };
 
 export default bookingService;

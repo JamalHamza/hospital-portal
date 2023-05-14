@@ -31,7 +31,7 @@ function AppointmentBookedDetails({ appointment }) {
       item
       xs={12}
       sm={12}
-      md={5.8}
+      md={12}
       bgcolor='fourth.light'
       borderRadius='10px'
     >

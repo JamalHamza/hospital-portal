@@ -251,7 +251,7 @@ export const getAppointmentDoctor = createAsyncThunk(
     }
   }
 );
-// ! Add Item ----------------
+// ! Add File ----------------
 export const addFile = createAsyncThunk(
   'booking/addFile',
   async (userData, thunkAPI) => {
@@ -265,6 +265,24 @@ export const addFile = createAsyncThunk(
         error.message ||
         error.toString();
 
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Get Files
+export const getFiles = createAsyncThunk(
+  'booking/getFiles',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getFiles(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -485,6 +503,22 @@ const bookingSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(addFile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Files -----------
+      .addCase(getAppointmentsDoctor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAppointmentsDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.items = action.payload;
+      })
+      .addCase(getAppointmentsDoctor.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

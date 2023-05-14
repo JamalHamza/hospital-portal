@@ -34,7 +34,7 @@ function AppointmentDetails() {
       <Grid container columnGap={2} rowGap={2}>
         <PatientDetails patient={appointment?.user} />
         <AppointmentBookedDetails appointment={appointment?.appointment} />
-        <File  />
+        <File patient={appointment?.user} doctor={user} />
       </Grid>
     </FormWrapper>
   );

@@ -91,7 +91,9 @@ const getItem = asyncHandler(async (req, res) => {
 // * ------------------------------------
 const addItem = asyncHandler(async (req, res) => {
   const { doctorId, patientId, name, appointmentId } = req.body;
+  console.log(req.file);
   const file = req.file.path;
+
   if (!doctorId && !patientId && !name && !file) {
     res.status(404);
     throw new Error('Please fill all fields');
