@@ -113,6 +113,13 @@ const getFiles = async (userData) => {
   });
   return response.data;
 };
+const deleteFile = async (userData) => {
+  const { id } = userData;
+  const response = await axios.get(API_URL3 + `/download/${id}`, {
+    params: userData,
+  });
+  return response.data;
+};
 // *--------------------------------------------
 // ! Download pdf request is in components/doctor/appointmentDetails/AppointmentBookedDetails/File.jsx
 // *--------------------------------------------
@@ -132,6 +139,7 @@ const bookingService = {
   getAppointmentDoctor,
   addFile,
   getFiles,
+  deleteFile,
 };
 
 export default bookingService;

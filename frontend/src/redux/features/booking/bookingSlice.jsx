@@ -15,7 +15,8 @@ const initialState = {
   appointmentBooked: [],
   appointments: [],
   appointment: [],
-  items: [],
+  file: [],
+  files: [],
 };
 
 // *-----------------------------
@@ -287,6 +288,24 @@ export const getFiles = createAsyncThunk(
     }
   }
 );
+// ! Delete File ------------
+export const deleteFile = createAsyncThunk(
+  'booking/deleteFile',
+  async (id, thunkAPI) => {
+    try {
+      return await bookingService.deleteFile(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // * ---------------------------------------
 
@@ -500,7 +519,7 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.items = action.payload;
+        state.file = action.payload;
       })
       .addCase(addFile.rejected, (state, action) => {
         state.isLoading = false;
@@ -509,16 +528,32 @@ const bookingSlice = createSlice({
         toast.error(action.payload);
       })
       // ! Get Files -----------
-      .addCase(getAppointmentsDoctor.pending, (state) => {
+      .addCase(getFiles.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getAppointmentsDoctor.fulfilled, (state, action) => {
+      .addCase(getFiles.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.items = action.payload;
+        state.files = action.payload;
       })
-      .addCase(getAppointmentsDoctor.rejected, (state, action) => {
+      .addCase(getFiles.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Delete File ---------
+      .addCase(deleteFile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteFile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+        toast.success(action.payload);
+      })
+      .addCase(deleteFile.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

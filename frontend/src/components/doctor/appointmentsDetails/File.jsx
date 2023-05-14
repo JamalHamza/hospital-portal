@@ -1,6 +1,9 @@
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import DownloadIcon from '@mui/icons-material/Download';
 import {
   Button,
   Grid,
+  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -10,16 +13,29 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { addFile } from '../../../redux/features/booking/bookingSlice';
+import {
+  addFile,
+  getFiles,
+} from '../../../redux/features/booking/bookingSlice';
 
 const styleText = {
   fontSize: '1.6rem',
   fontWeight: '700',
   color: 'primary.dark',
+};
+const styleIcon = {
+  download: {
+    fontSize: '2rem',
+    color: 'green',
+  },
+  delete: {
+    fontSize: '2rem',
+    color: 'red',
+  },
 };
 
 function File({ patient, doctor }) {
@@ -29,14 +45,13 @@ function File({ patient, doctor }) {
     { id: 2, name: 'Mary', age: 25 },
     { id: 3, name: 'Bob', age: 40 },
     { id: 3, name: 'Bob', age: 40 },
-
   ];
   const { id } = useParams();
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
   const [name, setName] = useState('');
-  const { items } = useSelector((state) => state.booking);
-  console.log(items?.item?._id);
+  const { files, isLoading } = useSelector((state) => state.booking);
+  const { user } = useSelector((state) => state.auth);
 
   // ! ----------------------------------------
 
@@ -51,6 +66,9 @@ function File({ patient, doctor }) {
         file,
       };
       await dispatch(addFile(userData));
+      await dispatch(getFiles({ appointmentId: id }));
+      setName('');
+      setFile(null);
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -74,6 +92,17 @@ function File({ patient, doctor }) {
       console.log(error);
     }
   };
+
+  // ! --------------------------------------------
+  useEffect(() => {
+    if (user) {
+      const userData = {
+        appointmentId: id,
+      };
+      dispatch(getFiles(userData));
+    }
+  }, [dispatch, user]);
+
   // ! --------------------------------------------
   return (
     <Grid item xs={12} sm={12} md={12}>
@@ -98,35 +127,40 @@ function File({ patient, doctor }) {
           Add
         </Button>
       </form>
-      {/* {<div className='items'>
-         {items &&
-          items?.map((item) => (  */}
-        <div className='item'>
-          <h3>{items?.item?.name}</h3>
-          <button onClick={() => downloadFile(items?.item?._id)}>
-            Download File
-          </button>
-        {/* </div> */}
-        
-      </div> 
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>No</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Age</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.age}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      {!isLoading || !files ? (
+        <>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>No</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Download</TableCell>
+                <TableCell>Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {files?.map((item, index) => (
+                <TableRow key={item._id}>
+                  <TableCell>{index + 1}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>
+                    <IconButton onClick={() => downloadFile(item?._id)}>
+                      <DownloadIcon sx={styleIcon.download} />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>
+                    <IconButton>
+                      <DeleteForeverIcon sx={styleIcon.delete} />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </>
+      ) : (
+        ''
+      )}
     </Grid>
   );
 }
