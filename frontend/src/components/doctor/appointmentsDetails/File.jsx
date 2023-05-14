@@ -19,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   addFile,
+  deleteFile,
   getFiles,
 } from '../../../redux/features/booking/bookingSlice';
 
@@ -69,6 +70,16 @@ function File({ patient, doctor }) {
       await dispatch(getFiles({ appointmentId: id }));
       setName('');
       setFile(null);
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
+    }
+  };
+  const deleteItem = async (id) => {
+    try {
+
+      await dispatch(deleteFile(id));
+      await dispatch(getFiles({ appointmentId: id }));
     } catch (error) {
       console.log(error);
       toast.error(error);
@@ -149,7 +160,7 @@ function File({ patient, doctor }) {
                     </IconButton>
                   </TableCell>
                   <TableCell>
-                    <IconButton>
+                    <IconButton onClick={() => deleteItem(item?._id)}>
                       <DeleteForeverIcon sx={styleIcon.delete} />
                     </IconButton>
                   </TableCell>

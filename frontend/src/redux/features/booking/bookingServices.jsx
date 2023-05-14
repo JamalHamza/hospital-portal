@@ -113,11 +113,8 @@ const getFiles = async (userData) => {
   });
   return response.data;
 };
-const deleteFile = async (userData) => {
-  const { id } = userData;
-  const response = await axios.get(API_URL3 + `/download/${id}`, {
-    params: userData,
-  });
+const deleteFile = async (id) => {
+  const response = await axios.delete(API_URL3 + `/download/${id}`);
   return response.data;
 };
 // *--------------------------------------------
