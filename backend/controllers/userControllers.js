@@ -125,7 +125,7 @@ const sendVerificationEmail = asyncHandler(async (req, res) => {
     );
     res.status(200).json({
       message:
-        'Verification Email Sent, If you did not recieve email, please check your spam or try again',
+        'Verification Email Sent, If you did not receive email, please check your spam or try again',
     });
   } catch (error) {
     res.status(500);
@@ -432,7 +432,7 @@ const sendAutomatedEmail = asyncHandler(async (req, res) => {
     );
     res.status(200).json({
       message:
-        'Email Sent, If you did not recieve email, please check your spam or try again',
+        'Email Sent, If you did not receive email, please check your spam or try again',
     });
   } catch (error) {
     res.status(500);

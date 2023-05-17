@@ -18,6 +18,7 @@ import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
+import Appointments from './pages/doctor/Appointments';
 import Home from './pages/home/Home';
 import Appointment from './pages/patient/appointment/Appointment';
 import Booking from './pages/patient/booking/Booking';
@@ -35,6 +36,7 @@ import {
 } from './redux/features/auth/authSlice';
 import AdminRoutes from './utils/AdminRoutes';
 import PatientRoutes from './utils/PatientRoutes';
+import AppointmentDetails from './pages/doctor/appointment/AppointmentDetails';
 axios.defaults.withCredentials = true;
 
 const theme = createTheme({
@@ -227,6 +229,23 @@ function App() {
                 }
               />
             </Route>
+            {/* ________PatientOnly__________ */}
+            <Route
+              path='/doctor/appointments'
+              element={
+                <Layout>
+                  <Appointments />
+                </Layout>
+              }
+            />
+            <Route
+              path='/doctor/appointments/:id'
+              element={
+                <Layout>
+                  <AppointmentDetails />
+                </Layout>
+              }
+            />
           </Routes>
         </GoogleOAuthProvider>
       </BrowserRouter>

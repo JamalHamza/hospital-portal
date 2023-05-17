@@ -19,10 +19,12 @@ function HistoryAppointment() {
 
   // ! filterAppointments that is old
   const todayDate = moment(new Date()).format('YYYY:MM:DD');
-  const oldDate = appointments?.filter((date) => {
-    const formattedDate = moment(date.appointmentDate).format('YYYY:MM:DD');
-    return formattedDate < todayDate;
-  });
+  if (appointments) {
+    const oldDate = appointments?.filter((date) => {
+      const formattedDate = moment(date.appointmentDate).format('YYYY:MM:DD');
+      return formattedDate < todayDate;
+    });
+  }
 
   // ! ----------------------------------------------------------
   useEffect(() => {
@@ -34,29 +36,27 @@ function HistoryAppointment() {
 
   return (
     <>
-    
-        <FormWrapper
-          title={'Your Appointment History'}
-          img={HistoryImg}
-          altImg={'Your Appointment History'}
-        >
-          <Box sx={{ width: '90%', m: '0 auto' }}>
-            <BackNav />
-            <Grid container minWidth='100%'>
-              <>
-                {isLoading ? (
-                  <h1>Loading</h1>
-                ) : (
-                  <>
-                    <Upcoming appointments={appointments} />
-                    <Archived appointments={appointments} />
-                  </>
-                )}
-              </>
-            </Grid>
-          </Box>
-        </FormWrapper>
-    
+      <FormWrapper
+        title={'Your Appointment History'}
+        img={HistoryImg}
+        altImg={'Your Appointment History'}
+      >
+        <Box sx={{ width: '90%', m: '0 auto' }}>
+          <BackNav />
+          <Grid container minWidth='100%'>
+            <>
+              {isLoading ? (
+                <h1>Loading</h1>
+              ) : (
+                <>
+                  <Upcoming appointments={appointments} />
+                  <Archived appointments={appointments} />
+                </>
+              )}
+            </>
+          </Grid>
+        </Box>
+      </FormWrapper>
     </>
   );
 }

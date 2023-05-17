@@ -8,6 +8,7 @@ import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
 import AppointmentDetails from '../../../components/pateint/appointment/AppointmentDetails';
 import DoctorAppointmentDetails from '../../../components/pateint/appointment/DoctorAppointmentDetails';
+import File from '../../../components/pateint/appointment/File';
 import { getAppointment } from '../../../redux/features/booking/bookingSlice';
 
 function Appointment() {
@@ -45,6 +46,7 @@ function Appointment() {
             <Grid container>
               <DoctorAppointmentDetails doctor={appointment?.doctor} />
               <AppointmentDetails appointment={appointment?.appointment} />
+              <File />
             </Grid>
           </Box>
         </FormWrapper>

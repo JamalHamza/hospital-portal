@@ -3,6 +3,7 @@ import axios from 'axios';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const API_URL = `${BACKEND_URL}/api/admin`;
 const API_URL2 = `${BACKEND_URL}/api/patient`;
+const API_URL3 = `${BACKEND_URL}/api/doctor`;
 
 // *-----------------------------
 // *-------ADMIN-----------------
@@ -81,6 +82,45 @@ const deleteAppointment = async (id) => {
   return response.data;
 };
 
+// *-----------------------------
+// *-------Doctor----------------
+// *-----------------------------
+// ! Get Appointments -------------------
+const getAppointmentsDoctor = async (userData) => {
+  const response = await axios.get(API_URL3 + '/appointments', {
+    params: userData,
+  });
+  return response.data;
+};
+const getAppointmentDoctor = async (userData) => {
+  const { id } = userData;
+  const response = await axios.get(API_URL3 + `/appointments/${id}`, {
+    params: userData,
+  });
+  return response.data;
+};
+// ! ------------------------------
+// ! Add file ---------------------
+const addFile = async (userData) => {
+  const response = await axios.post(API_URL3 + '/files', userData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
+  return response.data;
+};
+const getFiles = async (userData) => {
+  const response = await axios.get(API_URL3 + '/files', {
+    params: userData,
+  });
+  return response.data;
+};
+const deleteFile = async (id) => {
+  const response = await axios.delete(API_URL3 + `/download/${id}`);
+  return response.data;
+};
+// *--------------------------------------------
+// ! Download pdf request is in components/doctor/appointmentDetails/AppointmentBookedDetails/File.jsx
+// *--------------------------------------------
+
 const bookingService = {
   addDoctor,
   getDoctors,
@@ -91,7 +131,12 @@ const bookingService = {
   bookingAnAppointment,
   getAppointments,
   getAppointment,
-  deleteAppointment
+  deleteAppointment,
+  getAppointmentsDoctor,
+  getAppointmentDoctor,
+  addFile,
+  getFiles,
+  deleteFile,
 };
 
 export default bookingService;

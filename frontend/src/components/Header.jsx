@@ -1,6 +1,14 @@
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
-import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import {
+  AppBar,
+  Badge,
+  Box,
+  IconButton,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -34,8 +42,7 @@ const Header = () => {
       <Box>
         <Sidebar open={open} setOpen={setOpen} />
       </Box>
-      {/* Open Appbar */}
-      <AppBar position='static'>
+      <AppBar position='fixed'>
         <Toolbar sx={{ bgcolor: 'primary.dark' }}>
           <Box
             sx={{
@@ -63,8 +70,13 @@ const Header = () => {
                 <MenuIcon sx={{ color: '#fff', fontSize: '1.8em' }} />
               </IconButton>
               <img src={AppleLogo} alt='logo' className='app-header-logo' />
+              <Badge badgeContent={4} color='success'>
+                <NotificationsIcon
+                  sx={{ color: '#fff', fontSize: '2.8em', ml: '0.4em' }}
+                />
+              </Badge>
             </Box>
-            <Box sx={{ display: 'flex', alignItems:'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography
                 variant='h6'
                 sx={{ color: 'fourth.main', m: '0.5em 1em' }}

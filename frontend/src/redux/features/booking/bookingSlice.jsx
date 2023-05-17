@@ -15,6 +15,8 @@ const initialState = {
   appointmentBooked: [],
   appointments: [],
   appointment: [],
+  file: [],
+  files: [],
 };
 
 // *-----------------------------
@@ -211,6 +213,100 @@ export const deleteAppointment = createAsyncThunk(
   }
 );
 
+// *-----------------------------
+// *-------Doctor ---------------
+// *-----------------------------
+// ! Get Appointments -----------------
+export const getAppointmentsDoctor = createAsyncThunk(
+  'booking/getAppointmentsDoctor',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getAppointmentsDoctor(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Get Appointments -----------------
+export const getAppointmentDoctor = createAsyncThunk(
+  'booking/getAppointmentDoctor',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getAppointmentDoctor(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Add File ----------------
+export const addFile = createAsyncThunk(
+  'booking/addFile',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.addFile(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Get Files
+export const getFiles = createAsyncThunk(
+  'booking/getFiles',
+  async (userData, thunkAPI) => {
+    try {
+      return await bookingService.getFiles(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// ! Delete File ------------
+export const deleteFile = createAsyncThunk(
+  'booking/deleteFile',
+  async (id, thunkAPI) => {
+    try {
+      return await bookingService.deleteFile(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // * ---------------------------------------
 
 const bookingSlice = createSlice({
@@ -378,6 +474,86 @@ const bookingSlice = createSlice({
         toast.success(action.payload);
       })
       .addCase(deleteAppointment.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Appointments -----------
+      .addCase(getAppointmentsDoctor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAppointmentsDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointments = action.payload;
+      })
+      .addCase(getAppointmentsDoctor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Appointment -----------
+      .addCase(getAppointmentDoctor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAppointmentDoctor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.appointment = action.payload;
+      })
+      .addCase(getAppointmentDoctor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Add File -----------
+      .addCase(addFile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addFile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.file = action.payload;
+      })
+      .addCase(addFile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Get Files -----------
+      .addCase(getFiles.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getFiles.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+        state.files = action.payload;
+      })
+      .addCase(getFiles.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Delete File ---------
+      .addCase(deleteFile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteFile.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload;
+        toast.success(action.payload);
+      })
+      .addCase(deleteFile.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

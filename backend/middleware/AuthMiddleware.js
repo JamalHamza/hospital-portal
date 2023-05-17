@@ -65,18 +65,37 @@ const adminOrPatient = asyncHandler(async (req, res, next) => {
     next();
   } else {
     res.status(401);
-    throw new Error('Your are not authorized as an author');
+    throw new Error('Your are not allowed to do this action');
+  }
+});
+
+// ! +++++++++++++++++++++++++++++++++++++++++
+const doctorOrPatient = asyncHandler(async (req, res, next) => {
+  if (req.user.role === 'patient' || req.user.role === 'doctor') {
+    next();
+  } else {
+    res.status(401);
+    throw new Error('Your are not allowed to access');
   }
 });
 
 // ! +++++++++++++++++++++++++++++++++++++++++
 const patientOnly = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.role === 'patient') {
-    console.log(req.user.role);
     next();
   } else {
     res.status(401);
     throw new Error('Your are not authorized as an patient');
+  }
+});
+
+// ! +++++++++++++++++++++++++++++++++++++++++
+const doctorOnly = asyncHandler(async (req, res, next) => {
+  if (req.user && req.user.role === 'doctor') {
+    next();
+  } else {
+    res.status(401);
+    throw new Error('Your are not authorized as an doctor');
   }
 });
 
@@ -99,4 +118,6 @@ module.exports = {
   verifiedOnly,
   patientOnly,
   adminOrPatient,
+  doctorOnly,
+  doctorOrPatient
 };

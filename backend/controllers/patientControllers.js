@@ -5,6 +5,8 @@ const { genereteteToken, hashToken } = require('../utils/index');
 const parser = require('ua-parser-js');
 const Appointment = require('../models/appointments');
 const moment = require('moment');
+const sendEmail = require('../utils/sendEmail');
+const doctorSendEmail = require('../utils/doctorSendEmail');
 
 // ! ----------------------------------------------------------------------------------------------------------
 // ! Booking Appointment Logic to book an appointment:
@@ -18,15 +20,33 @@ const bookAppointment = asyncHandler(async (req, res) => {
   const { patientId, doctorId, appointmentDate, appointmentTime } = req.body;
   const doctor = await Doctor.findOne({ _id: doctorId });
   const { startDate, endDate, startTime, endTime, name } = doctor;
+  const patient = await User.findOne({ _id: patientId });
+
   // ! change date formate that client sent
-  const appointmentDateFormatted = new Date(appointmentDate);
+  // ! to compare date I must user 12/12/2034 format for date
+  const appointmentDateFormatted = new Date(
+    appointmentDate
+  ).toLocaleDateString();
+  const appointmentEndDateFormatted = new Date(endDate).toLocaleDateString();
+  const appointmentStartDateFormatted = new Date(
+    startDate
+  ).toLocaleDateString();
 
   // ! check that patient if booked already at the same date
-
+  const timestamp1 = new Date(appointmentDate);
+  const timestamp2 = new Date(
+    timestamp1.getFullYear(),
+    timestamp1.getMonth(),
+    timestamp1.getDate()
+  );
+  const appointmentDateToISOString = timestamp2.toISOString();
   const checkAppointment = await Appointment.findOne({
     doctorId,
     patientId,
-    appointmentDate: appointmentDateFormatted,
+    appointmentDate: {
+      $gte: appointmentDateToISOString,
+      $lte: appointmentDate,
+    },
   });
 
   if (checkAppointment) {
@@ -47,8 +67,8 @@ const bookAppointment = asyncHandler(async (req, res) => {
       .format('HH:mm');
 
     if (
-      appointmentDateFormatted >= startDate &&
-      appointmentDateFormatted <= endDate &&
+      appointmentDateFormatted >= appointmentStartDateFormatted &&
+      appointmentDateFormatted <= appointmentEndDateFormatted &&
       formattedAppointmentTime >= formattedStartTime &&
       formattedAppointmentTime <= formattedEndTime
     ) {
@@ -59,9 +79,41 @@ const bookAppointment = asyncHandler(async (req, res) => {
         appointmentDate,
         appointmentTime,
       });
+
+      const subject = 'A new appointment booked';
+      const send_to = doctor.email;
+      const sent_from = process.env.EMAIL_USER;
+      const reply_to = 'noreply@zino.com';
+      const template = 'bookingNotifications';
+      const doctorName = doctor.name;
+      const patientName = patient.name;
+      const patientEmail = patient.email;
+      const date = timestamp2;
+      const time = formattedAppointmentTime;
       // ! Check if booked successfully
       if (appointment) {
-        res.status(201).json(appointment);
+        // ! --------------------------------------------------
+        // ! Send Email
+        try {
+          await doctorSendEmail(
+            subject,
+            send_to,
+            sent_from,
+            reply_to,
+            template,
+            doctorName,
+            patientName,
+            patientEmail,
+            date,
+            time
+          );
+          res.status(201).json(appointment);
+        } catch (error) {
+          res.status(500);
+          // throw new Error('Email not sent, please try again');
+          console.log(error);
+        }
+        // ! --------------------------------------------------
       } else {
         res.status(400);
         throw new Error('Invalid appointment data');
@@ -89,10 +141,25 @@ const checkAvailability = asyncHandler(async (req, res) => {
   const doctor = await Doctor.findById(doctorId);
   const { startTime, endTime } = doctor;
 
+  const dateFormatted = new Date(appointmentDate);
+  const timeStampsToISOString = dateFormatted.toISOString();
+  console.log(timeStampsToISOString);
+
+  const timestamp1 = new Date(appointmentDate);
+  const timestamp2 = new Date(
+    timestamp1.getFullYear(),
+    timestamp1.getMonth(),
+    timestamp1.getDate()
+  );
+  const appointmentDateToISOString = timestamp2.toISOString();
+
   // ! Get the list of existing appointment
   const existingAppointments = await Appointment.find({
     doctorId,
-    appointmentDate,
+    appointmentDate: {
+      $gte: appointmentDateToISOString,
+      $lte: appointmentDate,
+    },
   });
 
   // ! Calculate the booked time slots
@@ -127,7 +194,6 @@ const checkAvailability = asyncHandler(async (req, res) => {
 // * ------------------------------------
 const getAppointments = asyncHandler(async (req, res) => {
   const { patientId } = req.query;
-  console.log(patientId);
 
   if (!patientId) {
     res.status(400);
@@ -179,7 +245,6 @@ const getAppointment = asyncHandler(async (req, res) => {
 // * ---------------------------------------
 
 const deleteAppointment = asyncHandler(async (req, res) => {
-
   // ! Take user id from params
   const appointment = Appointment.findById(req.params.id);
   if (!appointment) {
