@@ -58,7 +58,7 @@ function Archived({ appointments }) {
           mt: '1em',
         }}
       >
-        Archived
+        Архив записей
       </Typography>
       {oldDate.length < 1 ? (
         <Box

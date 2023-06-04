@@ -218,7 +218,7 @@ const Sidebar = ({ open, setOpen }) => {
           </Box>
         </Box>
         <Divider sx={{ bgcolor: 'primary.main' }} />
-        <div style={{ width: 250 }}>
+        <div style={{ width: 350 }}>
           <List>
             {itemsList[0]?.map((item, index) => {
               const { text, icon, onClick } = item;

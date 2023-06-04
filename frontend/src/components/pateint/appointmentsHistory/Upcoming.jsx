@@ -47,7 +47,7 @@ function Upcoming({ appointments, isLoading }) {
           ml: '0.4em',
         }}
       >
-        Upcoming Appointments
+        Предстоящие записи
       </Typography>
       {!isLoading && upComing.length === 0 ? (
         <Box
