@@ -119,5 +119,5 @@ module.exports = {
   patientOnly,
   adminOrPatient,
   doctorOnly,
-  doctorOrPatient
+  doctorOrPatient,
 };
