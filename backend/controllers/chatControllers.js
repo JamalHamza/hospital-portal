@@ -20,7 +20,7 @@ const accessChat = asyncHandler(async (req, res) => {
     ],
   })
     .populate('users', '-password')
-    .populate('lastMessage');
+    .populate('latestMessage');
 
   // ! -----------------------------
   isChat = await User.populate(isChat, {
