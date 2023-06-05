@@ -72,7 +72,7 @@ const Header = () => {
               <img src={AppleLogo} alt='logo' className='app-header-logo' />
               <Badge badgeContent={4} color='success'>
                 <NotificationsIcon
-                  sx={{ color: '#fff', fontSize: '2.8em', ml: '0.4em' }}
+                  sx={{ color: '#fff', fontSize: '2.2em', ml: '0.4em' }}
                 />
               </Badge>
             </Box>
