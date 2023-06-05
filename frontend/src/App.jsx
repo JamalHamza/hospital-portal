@@ -18,6 +18,8 @@ import Register from './pages/auth/Register';
 import Reset from './pages/auth/Reset';
 import Verify from './pages/auth/Verify';
 import ChangePassword from './pages/changePassword/ChangePassword';
+import Chat from './pages/chat/Chat';
+import AppointmentDetails from './pages/doctor/appointment/AppointmentDetails';
 import Appointments from './pages/doctor/Appointments';
 import Home from './pages/home/Home';
 import Appointment from './pages/patient/appointment/Appointment';
@@ -35,8 +37,8 @@ import {
   selectorUser,
 } from './redux/features/auth/authSlice';
 import AdminRoutes from './utils/AdminRoutes';
+import DoctorRoutes from './utils/DoctorRoutes';
 import PatientRoutes from './utils/PatientRoutes';
-import AppointmentDetails from './pages/doctor/appointment/AppointmentDetails';
 axios.defaults.withCredentials = true;
 
 const theme = createTheme({
@@ -96,7 +98,7 @@ function App() {
         <ToastContainer
           pauseOnHover='false'
           hideProgressBar
-          autoClose={700}
+          autoClose={4000}
           position='top-center'
           theme='colored'
           bodyClassName='toast'
@@ -228,24 +230,42 @@ function App() {
                   </Layout>
                 }
               />
+              <Route
+                path='/doc/chat'
+                element={
+                  <Layout>
+                    <Chat />
+                  </Layout>
+                }
+              />
             </Route>
             {/* ________PatientOnly__________ */}
-            <Route
-              path='/doctor/appointments'
-              element={
-                <Layout>
-                  <Appointments />
-                </Layout>
-              }
-            />
-            <Route
-              path='/doctor/appointments/:id'
-              element={
-                <Layout>
-                  <AppointmentDetails />
-                </Layout>
-              }
-            />
+            <Route element={<DoctorRoutes />}>
+              <Route
+                path='/doctor/appointments'
+                element={
+                  <Layout>
+                    <Appointments />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/doctor/appointments/:id'
+                element={
+                  <Layout>
+                    <AppointmentDetails />
+                  </Layout>
+                }
+              />
+              <Route
+                path='/pac/chat'
+                element={
+                  <Layout>
+                    <Chat />
+                  </Layout>
+                }
+              />
+            </Route>
           </Routes>
         </GoogleOAuthProvider>
       </BrowserRouter>

@@ -180,7 +180,7 @@ function Login() {
             helperText={formik.touched.password && formik.errors.password}
           />
           <Link to='/forgot'>Forgot Password</Link>
-          <CustomButtonTwo label={'Login'} disabled={formik.isSubmitting} />
+          <CustomButtonTwo label={'Login'} />
           <Box sx={{ p: '1.4em' }}>
             <GoogleLogin
               onSuccess={googleLogin}

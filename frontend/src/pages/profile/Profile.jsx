@@ -111,7 +111,7 @@ function ProfileAdmin() {
   // ! -----------
   return (
     <>
-      {isLoading ? (
+      {isLoading || !user ? (
         <Loader />
       ) : (
         <>
