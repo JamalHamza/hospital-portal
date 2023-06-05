@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.route('/').post(protect, verifiedOnly, doctorOrPatient, accessChat);
 router.route('/').get(protect, verifiedOnly, doctorOrPatient, fetchChats);
-router.route('/').post(protect, verifiedOnly, doctorOrPatient, sendMessage);
+router.route('/send').post(protect, verifiedOnly, doctorOrPatient, sendMessage);
 router
   .route('/:chatId')
   .get(protect, verifiedOnly, doctorOrPatient, allMessages);

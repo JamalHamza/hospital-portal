@@ -103,7 +103,6 @@ const doctorOnly = asyncHandler(async (req, res, next) => {
 
 const verifiedOnly = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.isVerified) {
-    console.log(req.user);
     next();
   } else {
     res.status(401);
