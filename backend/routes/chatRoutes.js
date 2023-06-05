@@ -1,10 +1,23 @@
 const express = require('express');
-const { protect, doctorOrPatient } = require('../middleware/AuthMiddleware');
-const { accessChat, fetchChats } = require('../controllers/chatControllers');
+const {
+  protect,
+  doctorOrPatient,
+  verifiedOnly,
+} = require('../middleware/AuthMiddleware');
+const {
+  accessChat,
+  fetchChats,
+  sendMessage,
+  allMessages,
+} = require('../controllers/chatControllers');
 
 const router = express.Router();
 
-router.route('/').post(protect, doctorOrPatient, accessChat);
-router.route('/').get(protect, doctorOrPatient, fetchChats);
+router.route('/').post(protect, verifiedOnly, doctorOrPatient, accessChat);
+router.route('/').get(protect, verifiedOnly, doctorOrPatient, fetchChats);
+router.route('/').post(protect, verifiedOnly, doctorOrPatient, sendMessage);
+router
+  .route('/:chatId')
+  .get(protect, verifiedOnly, doctorOrPatient, allMessages);
 
 module.exports = router;

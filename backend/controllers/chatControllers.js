@@ -72,4 +72,56 @@ const fetchChats = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { accessChat, fetchChats };
+// * --------------------------------------------------
+const allMessages = asyncHandler(async (req, res) => {
+  try {
+    const messages = await Message.find({ chat: req.params.chatId })
+      .populate('sender', 'name pic email')
+      .populate('chat');
+    res.json(messages);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+});
+
+// * --------------------------------------------------
+const sendMessage = asyncHandler(async (req, res) => {
+  const { content, chatId } = req.body;
+  // ! Validation
+  if (!content || !chatId) {
+    console.log('Invalid data passed into request');
+    res.status(400);
+    throw new Error('Invalid data passed into request');
+  }
+
+  let newMessage = {
+    sender: req.user._id,
+    content: content,
+    chat: chatId,
+  };
+
+  try {
+    // ! Get the Message Model -------------
+    let message = await Message.create(newMessage);
+    // ! Get the sender (name, pic) --------
+    message = await message.populate('sender', 'name pic ');
+    // ! Get the chat details --------------
+    message = await message.populate('chat');
+    // ! Get the the users for this chat ---
+    message = await User.populate(message, {
+      path: 'chat.users',
+      select: 'name pic email',
+    });
+    // ! Update LatestMessage ---------
+    await Chat.findByIdAndUpdate(req.body.chatId, {
+      latestMessage: message,
+    });
+    res.json(message);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+});
+
+module.exports = { accessChat, fetchChats, sendMessage, allMessages };
