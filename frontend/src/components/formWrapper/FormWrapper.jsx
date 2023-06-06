@@ -16,7 +16,7 @@ function FormWrapper(props) {
           borderRadius: '10px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.5em',
+          // gap: '0.5em',
         }}
       >
         <Box

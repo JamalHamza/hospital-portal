@@ -10,7 +10,7 @@ const initialState = {
   notification: [],
 };
 
-// ! Get Doctors ---------------
+// ! Search Doctors ---------------
 export const searchDoctor = createAsyncThunk(
   '/searchDoctor',
   async (userData, thunkAPI) => {
