@@ -29,29 +29,24 @@ export const searchDoctor = createAsyncThunk(
   }
 );
 // ! Get Chats ---------------
-export const getChats = createAsyncThunk(
-  '/getChats',
-  async (userData, thunkAPI) => {
-    try {
-      return await chatServices.getChats(userData);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString() ||
-        response.message;
-      return thunkAPI.rejectWithValue(message);
-    }
+export const getChats = createAsyncThunk('/getChats', async (_, thunkAPI) => {
+  try {
+    return await chatServices.getChats();
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString() ||
+      response.message;
+    return thunkAPI.rejectWithValue(message);
   }
-);
+});
 // ! Access/Create Chat ------------
 export const accessChat = createAsyncThunk(
   '/accessChat',
   async (userData, thunkAPI) => {
     try {
-      return await chatServices.searchDoctor(userData);
+      return await chatServices.accessChat(userData);
     } catch (error) {
       const message =
         (error.response &&
@@ -103,7 +98,7 @@ const bookingSLice = createSlice({
       })
       .addCase(accessChat.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.doctors = action.payload;
+        state.selectedChat = action.payload;
       })
       .addCase(accessChat.rejected, (state, action) => {
         state.isLoading = false;

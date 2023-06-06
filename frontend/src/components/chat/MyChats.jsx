@@ -1,6 +1,5 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import RecentChats from './RecentChats';
 import SearchDrawer from './SearchDrawer';
 

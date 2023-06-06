@@ -12,16 +12,15 @@ const searchDoctor = async (userData) => {
   });
   return response.data;
 };
-// ! Access/Create Chat ---------
-const getChats = async (userData) => {
-  const response = await axios.get(BACKEND_URL + '/api/chat', userData);
+// ! Get Chats ------------------
+const getChats = async () => {
+  const response = await axios.get(BACKEND_URL + '/api/chat');
   return response.data;
 };
 // ! Access/Create Chat ---------
 const accessChat = async (userData) => {
-  const response = await axios.post(BACKEND_URL + '/api/chat', {
-    params: userData,
-  });
+  console.log(userData);
+  const response = await axios.post(BACKEND_URL + '/api/chat', userData);
   return response.data;
 };
 

@@ -15,7 +15,7 @@ function RecentChats() {
             <List>
               {chats?.map((chat, index) => (
                 <ListItem
-                  key={chat.id}
+                  key={chat._id}
                   sx={{
                     minHeight: '6rem',
                     bgcolor: 'third.light',
@@ -45,7 +45,7 @@ function RecentChats() {
           }
         </>
       ) : (
-        <Typography>Empty</Typography>
+        <Typography textAlign='center'>Loading...</Typography>
       )}
     </Box>
   );

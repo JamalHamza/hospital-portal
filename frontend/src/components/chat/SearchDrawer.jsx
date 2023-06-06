@@ -5,7 +5,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchDoctor } from '../../redux/features/chat/chatSlice';
+import {
+  accessChat,
+  getChats,
+  searchDoctor,
+} from '../../redux/features/chat/chatSlice';
 
 function SearchDrawer() {
   const dispatch = useDispatch();
@@ -21,15 +25,19 @@ function SearchDrawer() {
     e.preventDefault();
     await dispatch(searchDoctor(searchData));
   };
-
+  // ! Handle Access/Create Chat -------
+  const handleAccess = async (chatId) => {
+    const userData = {
+      userId: chatId,
+    };
+    await dispatch(accessChat(userData));
+    await dispatch(getChats());
+    setSearch('');
+  };
+  // ! ----------------------------------
   useEffect(() => {
     dispatch(searchDoctor(searchData));
   }, [dispatch, search]);
-
-  // ! Handle Access/Create Chat -------
-  const handleAccess = async (e) => {
-    e.preventDefault();
-  };
 
   // ! ----------------------------------
   return (
@@ -48,9 +56,7 @@ function SearchDrawer() {
                 type='submit'
                 variant='contained'
                 id='basic-button'
-                aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup='true'
-                aria-expanded={open ? 'true' : undefined}
                 onClick={handleSearch}
               >
                 <SearchIcon />
@@ -70,7 +76,7 @@ function SearchDrawer() {
           >
             {doctors?.map((doctor) => (
               <ListItem
-                key={doctor.id}
+                key={doctor._id}
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -84,12 +90,11 @@ function SearchDrawer() {
                   <Typography variant='body1' color='third.main'>
                     {doctor.specialist}
                   </Typography>
-
                   <Typography variant='body1' color='third.main'>
                     {doctor.email}
                   </Typography>
                 </Stack>
-                <IconButton onClick={() => console.log(doctor._id)}>
+                <IconButton onClick={() => handleAccess(doctor.userId)}>
                   <ArrowForwardIosIcon
                     fontSize='24px'
                     sx={{ color: 'form.main' }}
