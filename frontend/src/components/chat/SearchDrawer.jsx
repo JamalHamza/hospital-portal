@@ -53,7 +53,12 @@ function SearchDrawer() {
       </form>
       {search && doctors?.length > 0 && !isLoading ? (
         <>
-          <List sx={{ bgcolor: 'primay.main' }}>
+          <List
+            sx={{
+              bgcolor: 'primary.main',
+              position: 'relative',
+            }}
+          >
             {doctors?.map((doctor) => (
               <ListItem
                 key={doctor.id}
@@ -83,6 +88,25 @@ function SearchDrawer() {
                 </IconButton>
               </ListItem>
             ))}
+          </List>
+        </>
+      ) : (
+        ''
+      )}
+      {search && doctors?.length === 0 && !isLoading ? (
+        <>
+          <List
+            sx={{
+              bgcolor: 'primary.main',
+            }}
+          >
+            <ListItem>
+              <Stack>
+                <Typography variant='h5' color='form.main'>
+                  Not found
+                </Typography>
+              </Stack>
+            </ListItem>
           </List>
         </>
       ) : (

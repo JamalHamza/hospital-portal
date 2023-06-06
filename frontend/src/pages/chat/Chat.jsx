@@ -13,14 +13,14 @@ const gridStyle = {
 
 function Chat() {
   return (
-    <FormWrapper>
+    <FormWrapper >
       <Grid container display='flex' justifyContent='space-between'>
         <Grid item xs={12}>
           <Player
             autoplay
             loop
             src={ChatAnimation}
-            style={{ height: '60px' }}
+            style={{ height: '100px' }}
           />
         </Grid>
         <Grid item xs={12} md={3.8} sx={gridStyle}>
