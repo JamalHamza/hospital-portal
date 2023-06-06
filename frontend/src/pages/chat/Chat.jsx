@@ -33,10 +33,10 @@ function Chat() {
             style={{ height: '100px' }}
           />
         </Grid>
-        <Grid item xs={12} md={3.8} sx={gridStyle}>
+        <Grid item xs={12} md={2.8} sx={gridStyle}>
           <MyChats />
         </Grid>
-        <Grid item xs={12} md={8} sx={gridStyle} b>
+        <Grid item xs={12} md={9} sx={gridStyle} b>
           <ChatBox />
         </Grid>
       </Grid>

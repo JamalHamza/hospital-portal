@@ -19,8 +19,14 @@ const getChats = async () => {
 };
 // ! Access/Create Chat ---------
 const accessChat = async (userData) => {
-  console.log(userData);
   const response = await axios.post(BACKEND_URL + '/api/chat', userData);
+  return response.data;
+};
+// ! Get Messages ---------
+const getMessages = async (userData) => {
+  const response = await axios.get(BACKEND_URL + '/api/chat', {
+    params: userData,
+  });
   return response.data;
 };
 
@@ -29,6 +35,7 @@ const chatServices = {
   searchDoctor,
   accessChat,
   getChats,
+  getMessages,
 };
 
 export default chatServices;

@@ -4,9 +4,11 @@ import chatServices from './chatServices';
 
 const initialState = {
   isLoading: false,
+  message: '',
   selectedChat: null,
   doctors: [],
   chats: [],
+  messages: [],
   notification: [],
 };
 
@@ -59,11 +61,33 @@ export const accessChat = createAsyncThunk(
     }
   }
 );
+// ! Get Messages ---------------
+export const getMessages = createAsyncThunk(
+  '/getMessages',
+  async (userData, thunkAPI) => {
+    try {
+      return await chatServices.getMessages(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
-const bookingSLice = createSlice({
+const chatSlice = createSlice({
   name: 'chat',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedChat: (state, action) => {
+      state.selectedChat = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // ! Search Doctor -----------
@@ -104,10 +128,23 @@ const bookingSLice = createSlice({
         state.isLoading = false;
         state.message = action.payload;
         toast.error(action.payload);
+      })
+      // ! Get Chats -----------
+      .addCase(getMessages.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMessages.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.messages = action.payload;
+      })
+      .addCase(getMessages.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });
 
 // ~ ----------------------------------------------
-export const {} = bookingSLice.actions;
-export default bookingSLice.reducer;
+export const { setSelectedChat } = chatSlice.actions;
+export default chatSlice.reducer;
