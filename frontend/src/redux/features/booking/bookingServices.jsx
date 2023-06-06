@@ -99,8 +99,9 @@ const getAppointmentDoctor = async (userData) => {
   });
   return response.data;
 };
-// ! ------------------------------
-// ! Add file ---------------------
+// * ------------------------------
+// * --------Add file -------------
+// * ------------------------------
 const addFile = async (userData) => {
   const response = await axios.post(API_URL3 + '/files', userData, {
     headers: { 'Content-Type': 'multipart/form-data' },

@@ -2,7 +2,25 @@ const asyncHandler = require('express-async-handler');
 const Chat = require('../models/chatModel');
 const User = require('../models/userModel');
 const Message = require('../models/messageModel');
+const Doctor = require('../models/doctorModel');
 
+// * -------------------------------------------------
+// * -------------------------------------------------
+const allDoctors = asyncHandler(async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: 'i' } },
+          { email: { $regex: req.query.search, $options: 'i' } },
+        ],
+      }
+    : {};
+
+  const doctors = await Doctor.find(keyword).find({
+    _id: { $ne: req.user._id },
+  });
+  res.send(doctors);
+});
 // * -------------------------------------------------
 const accessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body;
@@ -125,4 +143,10 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { accessChat, fetchChats, sendMessage, allMessages };
+module.exports = {
+  accessChat,
+  fetchChats,
+  sendMessage,
+  allMessages,
+  allDoctors,
+};
