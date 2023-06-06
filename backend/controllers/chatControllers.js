@@ -5,7 +5,6 @@ const Message = require('../models/messageModel');
 const Doctor = require('../models/doctorModel');
 
 // * -------------------------------------------------
-// * -------------------------------------------------
 const allDoctors = asyncHandler(async (req, res) => {
   const keyword = req.query.search;
   const filter = keyword

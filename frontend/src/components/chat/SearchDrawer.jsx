@@ -15,6 +15,8 @@ function SearchDrawer() {
   let searchData = {
     search,
   };
+
+  // ! HandleSearch --------------------
   const handleSearch = async (e) => {
     e.preventDefault();
     await dispatch(searchDoctor(searchData));
@@ -24,6 +26,12 @@ function SearchDrawer() {
     dispatch(searchDoctor(searchData));
   }, [dispatch, search]);
 
+  // ! Handle Access/Create Chat -------
+  const handleAccess = async (e) => {
+    e.preventDefault();
+  };
+
+  // ! ----------------------------------
   return (
     <>
       <form onSubmit={handleSearch}>
@@ -51,6 +59,7 @@ function SearchDrawer() {
           }}
         />
       </form>
+      {/* When search result is not empty */}
       {search && doctors?.length > 0 && !isLoading ? (
         <>
           <List
@@ -80,7 +89,7 @@ function SearchDrawer() {
                     {doctor.email}
                   </Typography>
                 </Stack>
-                <IconButton>
+                <IconButton onClick={() => console.log(doctor._id)}>
                   <ArrowForwardIosIcon
                     fontSize='24px'
                     sx={{ color: 'form.main' }}
@@ -93,6 +102,7 @@ function SearchDrawer() {
       ) : (
         ''
       )}
+      {/* When search result is empty */}
       {search && doctors?.length === 0 && !isLoading ? (
         <>
           <List
