@@ -5,7 +5,6 @@ import RecentChats from './RecentChats';
 import SearchDrawer from './SearchDrawer';
 
 const MyChats = () => {
-  const { doctors } = useSelector((state) => state.chat);
   return (
     <Grid container>
       <Grid item xs={12}>

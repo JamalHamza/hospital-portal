@@ -59,7 +59,7 @@ function SearchDrawer() {
           }}
         />
       </form>
-      {/* When search result is not empty */}
+      {/*  When search result is not empty */}
       {search && doctors?.length > 0 && !isLoading ? (
         <>
           <List

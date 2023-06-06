@@ -12,10 +12,16 @@ const searchDoctor = async (userData) => {
   });
   return response.data;
 };
-
+// ! Access/Create Chat ---------
+const getChats = async (userData) => {
+  const response = await axios.get(BACKEND_URL + '/api/chat', userData);
+  return response.data;
+};
 // ! Access/Create Chat ---------
 const accessChat = async (userData) => {
-  const response = await axios.post(BACKEND_URL + '/api/chat', userData);
+  const response = await axios.post(BACKEND_URL + '/api/chat', {
+    params: userData,
+  });
   return response.data;
 };
 
@@ -23,6 +29,7 @@ const accessChat = async (userData) => {
 const chatServices = {
   searchDoctor,
   accessChat,
+  getChats,
 };
 
 export default chatServices;
