@@ -6,10 +6,11 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 // *-----------------------------
 
 // ! Search Chat/Create Chat ----
-const searchDoctor = async (search) => {
-  const response = await axios.get(
-    BACKEND_URL + `/chat/doctor?search=${search}`
-  );
+
+const searchDoctor = async (userData) => {
+  const response = await axios.get(BACKEND_URL + '/api/chat/doctors', {
+    params: userData,
+  });
   return response.data;
 };
 

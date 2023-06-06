@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import chatServices from './chatServices';
 
@@ -13,9 +13,9 @@ const initialState = {
 // ! Get Doctors ---------------
 export const searchDoctor = createAsyncThunk(
   '/searchDoctor',
-  async (search, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      return await chatServices.searchDoctor(search);
+      return await chatServices.searchDoctor(userData);
     } catch (error) {
       const message =
         (error.response &&

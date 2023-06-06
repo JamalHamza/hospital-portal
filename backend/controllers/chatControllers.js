@@ -7,16 +7,17 @@ const Doctor = require('../models/doctorModel');
 // * -------------------------------------------------
 // * -------------------------------------------------
 const allDoctors = asyncHandler(async (req, res) => {
-  const keyword = req.query.search
+  const keyword = req.query.search;
+  const filter = keyword
     ? {
         $or: [
-          { name: { $regex: req.query.search, $options: 'i' } },
-          { email: { $regex: req.query.search, $options: 'i' } },
+          { name: { $regex: keyword, $options: 'i' } },
+          { email: { $regex: keyword, $options: 'i' } },
         ],
       }
     : {};
 
-  const doctors = await Doctor.find(keyword).find({
+  const doctors = await Doctor.find(filter).find({
     _id: { $ne: req.user._id },
   });
   res.send(doctors);
