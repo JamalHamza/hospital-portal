@@ -1,14 +1,14 @@
 .loader {
   width: 120px;
   height: 24px;
-  -webkit-mask: radial-gradient(circle closest-side, #ada2ff 94%, #0000) 0 0/25%
+  -webkit-mask: radial-gradient(circle closest-side, #ffffff 94%, #0000) 0 0/25%
       100%,
-    linear-gradient(#ada2ff 0 0) center/calc(100% - 12px) calc(100% - 12px)
+    linear-gradient(#fff 0 0) center/calc(100% - 12px) calc(100% - 12px)
       no-repeat;
-  mask: radial-gradient(circle closest-side, #ada2ff 94%, #0000) 0 0/25% 100%,
-    linear-gradient(#ada2ff 0 0) center/calc(100% - 12px) calc(100% - 12px)
+  mask: radial-gradient(circle closest-side, #fff 94%, #0000) 0 0/25% 100%,
+    linear-gradient(#fff 0 0) center/calc(100% - 12px) calc(100% - 12px)
       no-repeat;
-  background: linear-gradient(#fffcf6 0 0) left/0% 100% no-repeat #fff;
+  background: linear-gradient(#d2e7ff 0 0) left/0% 100% no-repeat #ada2ff;
   animation: bblprg 2s infinite linear;
 }
 @keyframes bblprg {

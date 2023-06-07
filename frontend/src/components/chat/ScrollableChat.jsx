@@ -10,6 +10,7 @@ import {
   isSameUser,
 } from '../../config/chatLogic';
 import { getMessages } from '../../redux/features/chat/chatSlice';
+import Loading from '../loader/Loading';
 
 function ScrollableChat() {
   const { selectedChat, messages, isLoading } = useSelector(
@@ -27,6 +28,10 @@ function ScrollableChat() {
     }
   }, [dispatch, selectedChat]);
   // ! ------------------------------
+
+  if(!isLoading && !messages){
+    return <
+  }
   return (
     <Grid container height='100%'>
       <Grid
@@ -53,10 +58,9 @@ function ScrollableChat() {
         </Typography>
       </Grid>
 
-      <Box sx={{ width: '100%', height: '100%', p: '1em 1em', pb: '4em' }}>
-        {messages && !isLoading ? (
-          <>
-            {' '}
+      {messages && !isLoading  ? (
+        <>
+          <Box sx={{ width: '100%', height: '100%', p: '1em 1em', pb: '4em' }}>
             <Scrollbar style={{ width: '100%', height: '100%' }}>
               {messages &&
                 messages?.map((m, i) => (
@@ -85,10 +89,10 @@ function ScrollableChat() {
                           user._id
                         ),
                         marginTop: isSameUser(messages, m, i, user._id)
-                          ? 3
+                          ? 4
                           : 10,
-                        borderRadius: '20px',
-                        padding: '5px 15px',
+                        borderRadius: '10px',
+                        padding: '4px 8px',
                         maxWidth: '75%',
                       }}
                     >
@@ -97,11 +101,11 @@ function ScrollableChat() {
                   </div>
                 ))}
             </Scrollbar>
-          </>
-        ) : (
-          'asdf'
-        )}
-      </Box>
+          </Box>
+        </>
+      ) : (
+        <Loading />
+      )}
     </Grid>
   );
 }
