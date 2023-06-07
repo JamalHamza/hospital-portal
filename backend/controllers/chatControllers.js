@@ -43,7 +43,7 @@ const accessChat = asyncHandler(async (req, res) => {
   // ! -----------------------------
   isChat = await User.populate(isChat, {
     path: 'latestMessage.sender',
-    select: 'name pic email',
+    select: 'name photo email',
   });
   // ! isChat exists
   if (isChat.length > 0) {
@@ -82,7 +82,7 @@ const fetchChats = asyncHandler(async (req, res) => {
 
     results = await User.populate(results, {
       path: 'latestMessage.sender',
-      select: 'name, pic, email',
+      select: 'name, photo, email',
     });
     res.status(200).send(results);
   } catch (error) {
@@ -96,7 +96,7 @@ const allMessages = asyncHandler(async (req, res) => {
   console.log(req.params.chatId);
   try {
     const messages = await Message.find({ chat: req.params.chatId })
-      .populate('sender', 'name pic email')
+      .populate('sender', 'name photo email')
       .populate('chat');
     res.json(messages);
   } catch (error) {
@@ -124,14 +124,14 @@ const sendMessage = asyncHandler(async (req, res) => {
   try {
     // ! Get the Message Model -------------
     let message = await Message.create(newMessage);
-    // ! Get the sender (name, pic) --------
-    message = await message.populate('sender', 'name pic ');
+    // ! Get the sender (name, photo) --------
+    message = await message.populate('sender', 'name photo ');
     // ! Get the chat details --------------
     message = await message.populate('chat');
     // ! Get the the users for this chat ---
     message = await User.populate(message, {
       path: 'chat.users',
-      select: 'name pic email',
+      select: 'name photo email',
     });
     // ! Update LatestMessage ---------
     await Chat.findByIdAndUpdate(req.body.chatId, {

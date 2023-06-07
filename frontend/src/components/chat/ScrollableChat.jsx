@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid, Tooltip, Typography } from '@mui/material';
+import { Avatar, Box, Grid, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Scrollbar } from 'react-scrollbars-custom';
@@ -27,11 +27,9 @@ function ScrollableChat() {
       dispatch(getMessages(userData));
     }
   }, [dispatch, selectedChat]);
-  // ! ------------------------------
 
-  if(!isLoading && !messages){
-    return <
-  }
+  console.log(messages);
+  // ! ------------------------------
   return (
     <Grid container height='100%'>
       <Grid
@@ -58,7 +56,7 @@ function ScrollableChat() {
         </Typography>
       </Grid>
 
-      {messages && !isLoading  ? (
+      {messages && !isLoading ? (
         <>
           <Box sx={{ width: '100%', height: '100%', p: '1em 1em', pb: '4em' }}>
             <Scrollbar style={{ width: '100%', height: '100%' }}>
@@ -67,39 +65,50 @@ function ScrollableChat() {
                   <div style={{ display: 'flex' }} key={m._id}>
                     {(isSameSender(messages, m, i, user?._id) ||
                       isLastMessage(messages, i, user?._id)) && (
-                      <Tooltip label={m.sender.name} hasArrow>
-                        <Avatar
-                          mt='12px'
-                          mr='1em'
-                          cursor='pointer'
-                          name={m.sender.name}
-                          src={m.sender.photo}
-                        />
-                      </Tooltip>
+          
+                      <Avatar
+                        alt={m.sender.name}
+                        src={m.sender.photo}
+                      />
                     )}
                     <span
                       style={{
                         backgroundColor: `${
-                          m.sender._id === user._id ? '#BEE3F8' : '#B9F5D0'
+                          m.sender?._id === user?._id ? '#BEE3F8' : '#B9F5D0'
                         }`,
                         marginLeft: isSameSenderMargin(
                           messages,
                           m,
                           i,
-                          user._id
+                          user?._id
                         ),
-                        marginTop: isSameUser(messages, m, i, user._id)
+                        marginTop: isSameUser(messages, m, i, user?._id)
                           ? 4
                           : 10,
                         borderRadius: '10px',
-                        padding: '4px 8px',
+                        padding: '6px 14px',
                         maxWidth: '75%',
+                        fontSize: '1.6rem'
                       }}
                     >
                       {m.content}
                     </span>
                   </div>
                 ))}
+              {!isLoading && messages.length == 0 ? (
+                <>
+                  <Typography
+                    variant='h5'
+                    color='primary.main'
+                    textAlign='center'
+                    my='auto'
+                  >
+                    No messages
+                  </Typography>
+                </>
+              ) : (
+                ''
+              )}
             </Scrollbar>
           </Box>
         </>
