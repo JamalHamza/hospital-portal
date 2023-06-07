@@ -108,7 +108,7 @@ function SearchDrawer() {
         ''
       )}
       {/* When search result is empty */}
-      {search && doctors?.length === 0 && !isLoading ? (
+      {!search && doctors?.length === 0 && !isLoading ? (
         <>
           <List
             sx={{

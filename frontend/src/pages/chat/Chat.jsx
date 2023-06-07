@@ -11,7 +11,7 @@ import { getChats } from '../../redux/features/chat/chatSlice';
 const gridStyle = {
   minHeight: '65vh',
   borderRadius: '10px',
-  boxShadow: 4,
+  boxShadow: '4',
 };
 
 function Chat() {

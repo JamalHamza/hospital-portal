@@ -11,9 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getMessages } from '../../redux/features/chat/chatSlice';
 import ScrollableChat from './ScrollableChat';
 function ChatBox() {
-  const { selectedChat } = useSelector((state) => state.chat);
+  const { selectedChat, messages, isLoading } = useSelector(
+    (state) => state.chat
+  );
   const [newMessage, setNewMessage] = useState('');
   const dispatch = useDispatch();
+
   // ! -------------------------
   useEffect(() => {
     if (selectedChat) {
@@ -26,10 +29,11 @@ function ChatBox() {
         console.log(error);
       }
     }
-  }, [dispatch]);
+  }, [dispatch, selectedChat]);
+
   return (
     <>
-      {selectedChat ? (
+      {selectedChat || isLoading ? (
         <Box
           sx={{
             display: 'flex',
@@ -38,7 +42,7 @@ function ChatBox() {
             height: '100%',
           }}
         >
-          <ScrollableChat />
+          <ScrollableChat messages={messages} />
           <TextField
             label='New Message'
             value={newMessage}

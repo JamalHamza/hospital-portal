@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import loadingImg from '../../assets/loader.gif';
 import './Loader.scss';
+import './Spinner.css';
 
 function Loader() {
   return ReactDOM.createPortal(
@@ -14,12 +15,15 @@ function Loader() {
   );
 }
 
+// export const Spinner = () => {
+// return (
+//   <div className='--center-all'>
+//     <img src={loadingImg} alt='Loading...' />
+//   </div>
+// );
+// };
 export const Spinner = () => {
-return (
-  <div className='--center-all'>
-    <img src={loadingImg} alt='Loading...' />
-  </div>
-);
+  return <span className='loader'></span>;
 };
 
 export default Loader;

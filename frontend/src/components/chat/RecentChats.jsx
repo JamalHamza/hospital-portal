@@ -21,7 +21,7 @@ function RecentChats() {
   };
 
   // !-------------------------------------------------------
-  if (!isLoading && chats && chats.length === 0) {
+  if (!isLoading && !chats) {
     return (
       <Typography variant='h5' color='primary.main' textAlign='center' my='1em'>
         Chat isEmpty
@@ -32,7 +32,7 @@ function RecentChats() {
 
   return (
     <Box>
-      {!isLoading && chats ? (
+      {chats || !isLoading? (
         <>
           {
             <List>
