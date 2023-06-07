@@ -31,7 +31,7 @@ function FormWrapper(props) {
               <img src={img} alt={altImg} className='add-new-doctor-logo' />
               <Typography
                 variant='h4'
-                sx={{ color: 'primary.main', p: '0.2em', fontWeight: 800 }}
+                sx={{ color: 'primary.main', p: '0.2em', fontWeight: '800' }}
               >
                 {title}
               </Typography>

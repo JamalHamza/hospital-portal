@@ -1,11 +1,18 @@
-import { Box, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import SendIcon from '@mui/icons-material/Send';
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessages } from '../../redux/features/chat/chatSlice';
 import ScrollableChat from './ScrollableChat';
-
 function ChatBox() {
   const { selectedChat } = useSelector((state) => state.chat);
+  const [newMessage, setNewMessage] = useState('');
   const dispatch = useDispatch();
   // ! -------------------------
   useEffect(() => {
@@ -23,7 +30,31 @@ function ChatBox() {
   return (
     <>
       {selectedChat ? (
-        <ScrollableChat />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: '100%',
+          }}
+        >
+          <ScrollableChat />
+          <TextField
+            label='New Message'
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='start'>
+                  <IconButton>
+                    <SendIcon sx={{ color: 'green' }} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            variant='outlined'
+          />
+        </Box>
       ) : (
         <Box
           display='flex'
