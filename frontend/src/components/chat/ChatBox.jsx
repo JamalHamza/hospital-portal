@@ -1,9 +1,30 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMessages } from '../../redux/features/chat/chatSlice';
 
 function ChatBox() {
-  const { selectedChat } = useSelector((state) => state.chat);
+  const { selectedChat, messages } = useSelector((state) => state.chat);
+  const dispatch = useDispatch();
+  console.log(messages);
+
+  const userData = {
+    chatId: selectedChat?._id,
+  };
+
+  // ! -------------------------
+  useEffect(() => {
+    if (selectedChat) {
+      try {
+        const userData = {
+          chatId: selectedChat?._id,
+        };
+        dispatch(getMessages(userData));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [dispatch, selectedChat]);
   return (
     <>
       {selectedChat ? (

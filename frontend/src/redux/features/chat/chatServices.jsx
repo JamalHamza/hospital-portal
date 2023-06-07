@@ -24,7 +24,8 @@ const accessChat = async (userData) => {
 };
 // ! Get Messages ---------
 const getMessages = async (userData) => {
-  const response = await axios.get(BACKEND_URL + '/api/chat', {
+  const { chatId } = userData;
+  const response = await axios.get(BACKEND_URL + `/api/chat/${chatId}`, {
     params: userData,
   });
   return response.data;
