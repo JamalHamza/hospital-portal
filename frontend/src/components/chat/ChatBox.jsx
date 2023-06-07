@@ -2,16 +2,11 @@ import { Box, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessages } from '../../redux/features/chat/chatSlice';
+import ScrollableChat from './ScrollableChat';
 
 function ChatBox() {
-  const { selectedChat, messages } = useSelector((state) => state.chat);
+  const { selectedChat } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-  console.log(messages);
-
-  const userData = {
-    chatId: selectedChat?._id,
-  };
-
   // ! -------------------------
   useEffect(() => {
     if (selectedChat) {
@@ -24,11 +19,11 @@ function ChatBox() {
         console.log(error);
       }
     }
-  }, [dispatch, selectedChat]);
+  }, [dispatch]);
   return (
     <>
       {selectedChat ? (
-        <>sad</>
+        <ScrollableChat />
       ) : (
         <Box
           display='flex'

@@ -14,14 +14,10 @@ const {
 
 const router = express.Router();
 
-router
-  .route('/doctors')
-  .get(protect, verifiedOnly, doctorOrPatient, allDoctors);
-router.route('/').post(protect, verifiedOnly, doctorOrPatient, accessChat);
-router.route('/').get(protect, verifiedOnly, doctorOrPatient, fetchChats);
-router.route('/send').post(protect, verifiedOnly, doctorOrPatient, sendMessage);
-router
-  .route('/:chatId')
-  .get(protect, verifiedOnly, doctorOrPatient, allMessages);
+router.route('/doctors').get(protect, doctorOrPatient, allDoctors);
+router.route('/').post(protect, doctorOrPatient, accessChat);
+router.route('/').get(protect, doctorOrPatient, fetchChats);
+router.route('/send').post(protect, doctorOrPatient, sendMessage);
+router.route('/:chatId').get(protect, doctorOrPatient, allMessages);
 
 module.exports = router;
