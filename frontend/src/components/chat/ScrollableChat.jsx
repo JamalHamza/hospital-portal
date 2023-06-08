@@ -1,6 +1,6 @@
 import { Avatar, Box, Grid, Typography } from '@mui/material';
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { Scrollbar } from 'react-scrollbars-custom';
 import {
   getSender,
@@ -15,9 +15,15 @@ function ScrollableChat({ fetchMessages }) {
     (state) => state.chat
   );
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const scrollContainerRef = useRef(null);
 
-  // ! ------------------------------
+  // ! -------------------------------------------
+  useEffect(() => {
+    // ! Scroll to the bottom when messages change
+    scrollContainerRef.current.scrollTop =
+      scrollContainerRef.current.scrollHeight; 
+  }, [messages]);
+  // ! -------------------------------------------
   return (
     <Grid container height='100%'>
       <Grid
@@ -47,7 +53,10 @@ function ScrollableChat({ fetchMessages }) {
       {messages && !isLoading ? (
         <>
           <Box sx={{ width: '100%', height: '100%', p: '1em 1em', pb: '4em' }}>
-            <Scrollbar style={{ width: '100%', height: '100%' }}>
+            <Scrollbar
+              style={{ width: '100%', height: '100%' }}
+              ref={scrollContainerRef}
+            >
               {messages &&
                 messages?.map((m, i) => (
                   <div style={{ display: 'flex' }} key={m._id}>
@@ -134,7 +143,6 @@ function ScrollableChat({ fetchMessages }) {
                     </span>
                   </div>
                 ))}
-              
             </Scrollbar>
           </Box>
         </>
