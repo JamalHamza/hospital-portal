@@ -11,6 +11,7 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
+import i18next from 'i18next';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -19,16 +20,19 @@ import Sidebar from '../components/sidebar/Sidebar';
 import i18n from '../language/i18n';
 import { RESET, logout } from '../redux/features/auth/authSlice';
 import './Header.css';
-import { CustomButtonLanguage, CustomButtonTwo } from './customUtils/customButtons/CustomButtonOne';
+import { CustomButtonLanguage } from './customUtils/customButtons/CustomButtonOne';
+
 // ! ----------------------------------------
 const Header = () => {
+  // ! Get the currently selected language --
+  const currentLanguage = i18next.language;
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const userRole = user?.role;
   const capitalizedUserRole = userRole ? userRole.toUpperCase() : '';
-  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,16 +42,12 @@ const Header = () => {
     setAnchorEl(null);
   };
 
+  // ! --------------------------------------
   const handleLanguageSelect = (language) => {
     setSelectedLanguage(language);
     i18n.changeLanguage(language);
     handleClose();
   };
-  // ! --------------------------------------
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
-
   // ! --- Drawer --------------------------
   const handleOpen = () => {
     setOpen(true);
