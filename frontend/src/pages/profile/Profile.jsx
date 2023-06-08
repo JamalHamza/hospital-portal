@@ -1,5 +1,6 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader/Loader';
@@ -26,6 +27,8 @@ function ProfileAdmin() {
   const { isLoading, isLoggedIn, isSuccess, message, user } = useSelector(
     (state) => state.auth
   );
+
+  const { t, i18n } = useTranslation();
 
   const initialState = {
     name: user?.name || '',
@@ -129,7 +132,7 @@ function ProfileAdmin() {
               variant='h3'
               sx={{ textAlign: 'center', color: 'primary.main', p: '0.6em' }}
             >
-              Profile
+              {t('profile.title')}
             </Typography>
             <Box
               className='profile--form'

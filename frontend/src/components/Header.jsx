@@ -6,6 +6,8 @@ import {
   Badge,
   Box,
   IconButton,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -14,8 +16,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AppleLogo from '../../../frontend/src/assets/logo/apple-white.png';
 import Sidebar from '../components/sidebar/Sidebar';
+import i18n from '../language/i18n';
 import { RESET, logout } from '../redux/features/auth/authSlice';
 import './Header.css';
+import { CustomButtonLanguage, CustomButtonTwo } from './customUtils/customButtons/CustomButtonOne';
 // ! ----------------------------------------
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -24,6 +28,25 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const userRole = user?.role;
   const capitalizedUserRole = userRole ? userRole.toUpperCase() : '';
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLanguageSelect = (language) => {
+    setSelectedLanguage(language);
+    i18n.changeLanguage(language);
+    handleClose();
+  };
+  // ! --------------------------------------
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   // ! --- Drawer --------------------------
   const handleOpen = () => {
@@ -77,6 +100,24 @@ const Header = () => {
               </Badge>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <CustomButtonLanguage
+                onClick={handleClick}
+                variant='contained'
+                label={selectedLanguage === 'ru' ? 'RU' : 'EN'}
+              ></CustomButtonLanguage>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                sx={{ padding: '2px 4px' }}
+              >
+                <MenuItem onClick={() => handleLanguageSelect('ru')}>
+                  RU
+                </MenuItem>
+                <MenuItem onClick={() => handleLanguageSelect('en')}>
+                  EN
+                </MenuItem>
+              </Menu>
               <Typography
                 variant='h6'
                 sx={{ color: 'fourth.main', m: '0.5em 1em' }}
