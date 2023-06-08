@@ -6,9 +6,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {getMessages, sendMessage} from '../../redux/features/chat/chatSlice';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMessages, sendMessage } from '../../redux/features/chat/chatSlice';
 import ScrollableChat from './ScrollableChat';
 function ChatBox() {
   const { selectedChat, messages, isLoading } = useSelector(
@@ -24,9 +24,8 @@ function ChatBox() {
       chatId: selectedChat?._id,
     };
     if (e.key === 'Enter' && newMessage) {
+      setNewMessage('');
       await dispatch(sendMessage(userData));
-      setNewMessage('')
-      await dispatch(getMessages())
     }
   };
 
@@ -46,7 +45,7 @@ function ChatBox() {
 
   return (
     <>
-      {selectedChat || isLoading ? (
+      {selectedChat ? (
         <Box
           sx={{
             display: 'flex',
@@ -55,7 +54,7 @@ function ChatBox() {
             height: '100%',
           }}
         >
-          <ScrollableChat messages={messages} />
+          <ScrollableChat />
           <TextField
             label='New Message'
             value={newMessage}

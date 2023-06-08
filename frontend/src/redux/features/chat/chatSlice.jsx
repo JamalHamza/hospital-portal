@@ -9,6 +9,7 @@ const initialState = {
   doctors: [],
   chats: [],
   messages: [],
+  newMessage: '',
   notification: [],
 };
 
@@ -166,8 +167,8 @@ const chatSlice = createSlice({
       })
       .addCase(sendMessage.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
-        // state.messages = action.payload;
+        state.newMessage = action.payload;
+        state.messages = [...state.messages, state.newMessage];
       })
       .addCase(sendMessage.rejected, (state, action) => {
         state.isLoading = false;
