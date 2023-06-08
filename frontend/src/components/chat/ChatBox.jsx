@@ -6,9 +6,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getMessages } from '../../redux/features/chat/chatSlice';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {getMessages, sendMessage} from '../../redux/features/chat/chatSlice';
 import ScrollableChat from './ScrollableChat';
 function ChatBox() {
   const { selectedChat, messages, isLoading } = useSelector(
@@ -16,6 +16,19 @@ function ChatBox() {
   );
   const [newMessage, setNewMessage] = useState('');
   const dispatch = useDispatch();
+
+  // ! -------------------------
+  const handleSendMessage = async (e) => {
+    const userData = {
+      content: newMessage,
+      chatId: selectedChat?._id,
+    };
+    if (e.key === 'Enter' && newMessage) {
+      await dispatch(sendMessage(userData));
+      setNewMessage('')
+      await dispatch(getMessages())
+    }
+  };
 
   // ! -------------------------
   useEffect(() => {
@@ -47,10 +60,14 @@ function ChatBox() {
             label='New Message'
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
+            onKeyDown={handleSendMessage}
             InputProps={{
               endAdornment: (
                 <InputAdornment position='start'>
-                  <IconButton>
+                  <IconButton
+                    onClick={handleSendMessage}
+                    disabled={!newMessage}
+                  >
                     <SendIcon sx={{ color: 'green' }} />
                   </IconButton>
                 </InputAdornment>

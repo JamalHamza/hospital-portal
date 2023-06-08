@@ -28,7 +28,6 @@ function ScrollableChat() {
     }
   }, [dispatch, selectedChat]);
 
-  console.log(messages);
   // ! ------------------------------
   return (
     <Grid container height='100%'>
@@ -62,7 +61,7 @@ function ScrollableChat() {
             <Scrollbar style={{ width: '100%', height: '100%' }}>
               {messages &&
                 messages?.map((m, i) => (
-                  <div style={{ display: 'flex' }} key={m._id}>
+                  <div style={{ display: 'flex'}} key={m._id}>
                     {(isSameSender(messages, m, i, user?._id) ||
                       isLastMessage(messages, i, user?._id)) && (
           
@@ -95,6 +94,7 @@ function ScrollableChat() {
                     </span>
                   </div>
                 ))}
+                {/* When there is no messages */}
               {!isLoading && messages.length == 0 ? (
                 <>
                   <Typography

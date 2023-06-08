@@ -79,6 +79,24 @@ export const getMessages = createAsyncThunk(
     }
   }
 );
+// ! Send Message ---------------
+export const sendMessage = createAsyncThunk(
+  '/sendMessage',
+  async (userData, thunkAPI) => {
+    try {
+      return await chatServices.sendMessage(userData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString() ||
+        response.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 const chatSlice = createSlice({
   name: 'chat',
@@ -138,6 +156,20 @@ const chatSlice = createSlice({
         state.messages = action.payload;
       })
       .addCase(getMessages.rejected, (state, action) => {
+        state.isLoading = false;
+        state.message = action.payload;
+        toast.error(action.payload);
+      })
+      // ! Send Message ----------
+      .addCase(sendMessage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(sendMessage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        console.log(action.payload);
+        // state.messages = action.payload;
+      })
+      .addCase(sendMessage.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
         toast.error(action.payload);

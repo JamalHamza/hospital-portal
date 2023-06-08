@@ -22,12 +22,17 @@ const accessChat = async (userData) => {
   const response = await axios.post(BACKEND_URL + '/api/chat', userData);
   return response.data;
 };
-// ! Get Messages ---------
+// ! Get Messages ---------------
 const getMessages = async (userData) => {
   const { chatId } = userData;
   const response = await axios.get(BACKEND_URL + `/api/chat/${chatId}`, {
     params: userData,
   });
+  return response.data;
+};
+// ! Send Message ---------------
+const sendMessage = async (userData) => {
+  const response = await axios.post(BACKEND_URL + '/api/chat/send', userData);
   return response.data;
 };
 
@@ -37,6 +42,7 @@ const chatServices = {
   accessChat,
   getChats,
   getMessages,
+  sendMessage,
 };
 
 export default chatServices;
