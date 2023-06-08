@@ -20,6 +20,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { BsFillChatRightQuoteFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // ! ----------------------------------------
@@ -122,6 +123,21 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
       ],
+      [
+        {
+          text: 'Chat',
+          icon: (
+            <BsFillChatRightQuoteFill
+              fontSize={26}
+              sx={{ color: 'primary.light' }}
+              color='#dcd7ff'
+            />
+          ),
+          onClick: () => {
+            navigate('/pac/chat'), setOpen(false);
+          },
+        },
+      ],
     ];
   } else if (isPatient) {
     itemsList = [
@@ -163,6 +179,21 @@ const Sidebar = ({ open, setOpen }) => {
           icon: <UpdateIcon fontSize='large' sx={{ color: 'primary.light' }} />,
           onClick: () => {
             navigate('/patient/historyApp'), setOpen(false);
+          },
+        },
+      ],
+      [
+        {
+          text: 'Chat',
+          icon: (
+            <BsFillChatRightQuoteFill
+              fontSize={26}
+              sx={{ color: 'primary.light' }}
+              color='#dcd7ff'
+            />
+          ),
+          onClick: () => {
+            navigate('/doc/chat'), setOpen(false);
           },
         },
       ],
@@ -217,8 +248,7 @@ const Sidebar = ({ open, setOpen }) => {
             </Typography>
           </Box>
         </Box>
-        <Divider sx={{ bgcolor: 'primary.main' }} />
-        <div style={{ width: 250 }}>
+        <div style={{ width: 350 }}>
           <List>
             {itemsList[0]?.map((item, index) => {
               const { text, icon, onClick } = item;
@@ -232,12 +262,17 @@ const Sidebar = ({ open, setOpen }) => {
           </List>
           <Divider sx={{ bgcolor: 'primary.main' }} />
           <List>
-            {/* {itemsList[1] && isAdmin && (
-              <Typography variant='h5' sx={{ color: 'secondary.main', m: '0.2em 1.2em', fontWeight: '700' }}>
-                Doctor
-              </Typography>
-            )} */}
             {itemsList[1]?.map((item, index) => {
+              const { text, icon, onClick } = item;
+              return (
+                <ListItem key={text} onClick={onClick}>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              );
+            })}
+            <Divider sx={{ bgcolor: 'primary.main' }} />
+            {itemsList[2]?.map((item, index) => {
               const { text, icon, onClick } = item;
               return (
                 <ListItem key={text} onClick={onClick}>

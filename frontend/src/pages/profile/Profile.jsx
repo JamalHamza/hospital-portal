@@ -72,7 +72,7 @@ function ProfileAdmin() {
 
         // ! Save image to Cloudinary
         const response = await fetch(
-          'https://api.cloudinary.com/v1_1/dgx69wsh7/image/upload',
+          'https://api.cloudinary.com/v1_1/djb1pr8bq/image/upload',
           { method: 'post', body: image }
         );
         const imgData = await response.json();
@@ -111,7 +111,7 @@ function ProfileAdmin() {
   // ! -----------
   return (
     <>
-      {isLoading ? (
+      {isLoading || !user ? (
         <Loader />
       ) : (
         <>

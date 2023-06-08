@@ -16,25 +16,31 @@ function FormWrapper(props) {
           borderRadius: '10px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0.5em',
+          // gap: '0.5em',
         }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <img src={img} alt={altImg} className='add-new-doctor-logo' />
-          <Typography
-            variant='h4'
-            sx={{ color: 'primary.main', p: '0.2em', fontWeight: 800 }}
-          >
-            {title}
-          </Typography>
-        </Box>
-        {props.children}
+        {img ? (
+          <>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={img} alt={altImg} className='add-new-doctor-logo' />
+              <Typography
+                variant='h4'
+                sx={{ color: 'primary.main', p: '0.2em', fontWeight: '800' }}
+              >
+                {title}
+              </Typography>
+            </Box>
+            {props.children}
+          </>
+        ) : (
+          <>{props.children}</>
+        )}
       </Box>
     </>
   );
