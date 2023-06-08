@@ -1,11 +1,14 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/HomePageLogo.png';
 import './Home.scss';
 
 function Home() {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  
   return (
     <Box sx={{ bgcolor: 'secondary.main', minHeight: '100vh' }}>
       <Box className='container hero'>
