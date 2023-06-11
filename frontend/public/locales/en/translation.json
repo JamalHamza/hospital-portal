@@ -1,0 +1,31 @@
+{
+  "title": "Vita Health",
+   "profile": {
+    "title": "Profile",
+    "role": "Role"
+  },
+  "home": {
+    "title": "Vita Health",
+    "desc": "Instant appointment with doctors-Guaranteed.100% Safe Consultations Be assured that your online consultation will be fully private and secured."
+  },
+  "button":{
+    "login": "Login",
+    "register": "Register"
+  },
+
+    "sidebarDoctor": {
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "appointments": "Appointments",
+    "chatRoom": "Chat Room"
+    
+  },
+   "sidebarPatient": {
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "doctors": "doctors",
+    "history": "history",
+    "chatRoom": "Chat Room"
+
+  }
+}

@@ -20,6 +20,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsFillChatRightQuoteFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +29,7 @@ const Sidebar = ({ open, setOpen }) => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   // ! --- checking for user Role to show content
+  const { t, i18n } = useTranslation();
   const isAdmin = user?.role === 'admin';
   const isPatient = user?.role === 'patient';
   const isDoctor = user?.role === 'doctor';
@@ -91,7 +93,7 @@ const Sidebar = ({ open, setOpen }) => {
     itemsList = [
       [
         {
-          text: 'Profile',
+          text: `${t('sidebarDoctor.profile')}`,
           icon: (
             <ManageAccountsIcon
               fontSize='large'
@@ -103,7 +105,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Change Password',
+          text: `${t('sidebarDoctor.changePassword')}`,
           icon: (
             <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -114,7 +116,7 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Appointments',
+          text: `${t('sidebarDoctor.appointments')}`,
           icon: (
             <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -125,7 +127,7 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Chat',
+          text: `${t('sidebarDoctor.chatRoom')}`,
           icon: (
             <BsFillChatRightQuoteFill
               fontSize={26}
@@ -143,7 +145,7 @@ const Sidebar = ({ open, setOpen }) => {
     itemsList = [
       [
         {
-          text: 'Profile',
+          text: `${t('sidebarPatient.profile')}`,
           icon: (
             <ManageAccountsIcon
               fontSize='large'
@@ -155,7 +157,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Change Password',
+          text: `${t('sidebarPatient.changePassword')}`,
           icon: (
             <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -166,7 +168,7 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Doctors',
+          text: `${t('sidebarPatient.doctors')}`,
           icon: (
             <Groups2Icon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -175,7 +177,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'History',
+          text: `${t('sidebarPatient.history')}`,
           icon: <UpdateIcon fontSize='large' sx={{ color: 'primary.light' }} />,
           onClick: () => {
             navigate('/patient/historyApp'), setOpen(false);
@@ -184,7 +186,7 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Chat',
+          text: `${t('sidebarPatient.chatRoom')}`,
           icon: (
             <BsFillChatRightQuoteFill
               fontSize={26}

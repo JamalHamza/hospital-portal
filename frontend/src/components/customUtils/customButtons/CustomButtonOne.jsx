@@ -9,14 +9,12 @@ export const CustomButtonOne = (props) => {
       variant='contained'
       sx={{
         borderRadius: '10px',
-        padding: '8px 20px',
-        fontWeight: 'bold',
-        fontSize: '1.4rem',
-        minWidth: '8em',
+        padding: '4px 10px',
+        fontWeight: '600',
+        fontSize: '1rem',
+        minWidth: '8rem',
         color: 'primary.dark',
         bgcolor: 'third.main',
-        textTransform: 'uppercase',
-        m: '1em 0',
         '&:hover': {
           backgroundColor: '#ccb7c0',
           color: '#fff',
@@ -37,14 +35,39 @@ export const CustomButtonTwo = (props) => {
       variant='contained'
       sx={{
         borderRadius: '10px',
-        padding: '8px 20px',
-        fontWeight: 'bold',
-        fontSize: '1.4rem',
+        padding: '4px 10px',
+        fontWeight: '600',
+        fontSize: '1rem',
         color: 'primary.dark',
-        minWidth: '8em',
+        minWidth: '8rem',
+        bgcolor: 'fourth.main',
+        mr: '0.4em',
+        '&:hover': {
+          backgroundColor: '#ccc6b4',
+          color: '#fff',
+        },
+      }}
+      {...rest}
+    >
+      {label}
+    </Button>
+  );
+};
+
+export const CustomButtonLanguage = (props) => {
+  const { label, ...rest } = props;
+  return (
+    <Button
+      variant='contained'
+      sx={{
+        borderRadius: '4px',
+        padding: '2px 4px',
+        fontWeight: 'bold',
+        fontSize: '1rem',
+        color: 'primary.dark',
+        minWidth: '4em',
         bgcolor: 'fourth.main',
         textTransform: 'uppercase',
-        margin: '0.8em',
         '&:hover': {
           backgroundColor: '#ccc6b4',
           color: '#fff',
