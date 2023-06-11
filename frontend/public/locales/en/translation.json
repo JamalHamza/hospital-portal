@@ -11,5 +11,21 @@
   "button":{
     "login": "Login",
     "register": "Register"
+  },
+
+    "sidebarDoctor": {
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "appointments": "Appointments",
+    "chatRoom": "Chat Room"
+    
+  },
+   "sidebarPatient": {
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "doctors": "doctors",
+    "history": "history",
+    "chatRoom": "Chat Room"
+
   }
 }

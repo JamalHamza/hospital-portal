@@ -13,9 +13,18 @@
     "register": "Зарегистрироваться"
   },
   "sidebarDoctor": {
+    "profile": "Профиль",
+    "changePassword": "Изменить пароль",
+    "appointments": "Записи на приём",
+    "chatRoom": "Сообщения"
     
   },
   "sidebarPatient": {
+    "profile": "Профиль",
+    "changePassword": "Изменить пароль",
+    "doctors": "Врачи",
+    "history": "История записей",
+    "chatRoom": "Сообщения"
 
   },
   "sidebarAdmin": {

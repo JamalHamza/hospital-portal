@@ -182,13 +182,13 @@ function Login() {
           <Link to='/forgot'>Forgot Password</Link>
           <CustomButtonTwo label={'Login'} />
           <Box sx={{ p: '1.4em' }}>
-            <GoogleLogin
+            {/* <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
                 console.log('Login Failed');
                 toast.error('Login Failed');
               }}
-            />
+            /> */}
           </Box>
           <FormBottomLinksLoginPage />
         </form>
