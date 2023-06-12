@@ -27,7 +27,12 @@
     "chatRoom": "Сообщения"
 
   },
-  "sidebarAdmin": {
+    "sidebarAdmin": {
+    "profile": "Профиль",
+    "changePassword": "Изменить пароль",
+    "users": "Пользователи",
+    "addDoctor": "Добавить Доктора",
+    "doctors": "Врачи"
 
   }
 

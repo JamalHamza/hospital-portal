@@ -40,7 +40,8 @@ const Sidebar = ({ open, setOpen }) => {
     itemsList = [
       [
         {
-          text: 'Profile',
+          text: `${t('sidebarAdmin.profile')}`,
+
           icon: (
             <ManageAccountsIcon
               fontSize='large'
@@ -52,7 +53,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Change Password',
+          text: `${t('sidebarAdmin.changePassword')}`,
           icon: (
             <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -61,7 +62,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Users',
+          text: `${t('sidebarAdmin.users')}`,
           icon: <GroupIcon fontSize='large' sx={{ color: 'primary.light' }} />,
           onClick: () => {
             navigate('/users'), setOpen(false);
@@ -70,7 +71,7 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Add Doctor',
+          text: `${t('sidebarAdmin.addDoctor')}`,
           icon: (
             <GroupAddIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -79,7 +80,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Doctors',
+          text: `${t('sidebarAdmin.doctors')}`,
           icon: (
             <Diversity1Icon fontSize='large' sx={{ color: 'primary.light' }} />
           ),

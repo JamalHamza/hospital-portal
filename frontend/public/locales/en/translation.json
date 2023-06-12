@@ -23,9 +23,17 @@
    "sidebarPatient": {
     "profile": "Profile",
     "changePassword": "Change Password",
-    "doctors": "doctors",
-    "history": "history",
+    "doctors": "Doctors",
+    "history": "History",
     "chatRoom": "Chat Room"
+
+  },
+   "sidebarAdmin": {
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "users": "Users",
+    "addDoctor": "Add Doctor",
+    "doctors": "Doctors"
 
   }
 }
