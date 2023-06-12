@@ -12,11 +12,13 @@ import Loader from '../../components/loader/Loader';
 import { validateEmail } from '../../redux/features/auth/authServices';
 import { RESET, forgotPassword } from '../../redux/features/auth/authSlice';
 import {CustomButtonTwo} from '../../components/customUtils/customButtons/CustomButtonOne';
+import {useTranslation} from 'react-i18next';
 
 function Forgot() {
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.auth);
+    const { t, i18n } = useTranslation();
 
   // ! ------ Forgot Function ----------------------
   const forgot = async (e) => {

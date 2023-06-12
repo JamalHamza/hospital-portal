@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ImCheckmark, ImCross } from 'react-icons/im';
 
 function PasswordStrength({ password, password2 }) {
@@ -9,6 +10,7 @@ function PasswordStrength({ password, password2 }) {
   const [sChar, setSChar] = useState(false);
   const [passLength, setPassLength] = useState(false);
   const [passMatch, setPassMatch] = useState(false);
+  const { t, i18n } = useTranslation();
   // ! -----------------------------------------------
 
   // ! ---- Dynamic function for passwrod stength ----
@@ -79,31 +81,31 @@ function PasswordStrength({ password, password2 }) {
         <li>
           <span>
             {switchIcon(uCase)}
-            &nbsp; Lowercase & UpperCase
+            &nbsp; {t('passwordStrength.cases')}
           </span>
         </li>
         <li>
           <span>
             {switchIcon(num)}
-            &nbsp; Number (0-9)
+            &nbsp; {t('passwordStrength.numbers')} (0-9)
           </span>
         </li>
         <li>
           <span>
             {switchIcon(sChar)}
-            &nbsp; Special Character(!@#$%^&*)
+            &nbsp; {t('passwordStrength.special')}(!@#$%^&*)
           </span>
         </li>
         <li>
           <span>
             {switchIcon(passLength)}
-            &nbsp; At least 6 Character
+            &nbsp; {t('passwordStrength.atLeast')}
           </span>
         </li>
         <li>
           <span>
             {switchIcon(passMatch)}
-            &nbsp; Password Match
+            &nbsp; {t('passwordStrength.match')}
           </span>
         </li>
       </ul>

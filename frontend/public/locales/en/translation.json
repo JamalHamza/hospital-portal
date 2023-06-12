@@ -8,6 +8,35 @@
     "title": "Vita Health",
     "desc": "Instant appointment with doctors-Guaranteed.100% Safe Consultations Be assured that your online consultation will be fully private and secured."
   },
+  "auth": {
+    "login": "Login",
+    "registerTitle": "Register",
+    "register": "Register",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirm": "Confirm Password",
+    "forgot": "Forgot Password",
+    "yourEmail": "Enter Your Email",
+    "getEmail": "Get Email"
+    
+    
+  },
+  "authAlert": {
+    "all": "All fields are required",
+    "validEmail": "Please enter valid email",
+    "required": "Required",
+    "password": "Password must be at least 6 characters",
+    "passwordsMatch": "Passwords must match"
+  },
+  "passwordStrength":
+  {
+    "cases": "Lowercase & UpperCase",
+    "numbers":"Numbers",
+    "special":"Special Character",
+    "atLeast": "At least 6 Character", 
+    "match": "Passwords Match"
+  },
   "button":{
     "login": "Login",
     "register": "Register"
@@ -34,6 +63,5 @@
     "users": "Users",
     "addDoctor": "Add Doctor",
     "doctors": "Doctors"
-
   }
 }
