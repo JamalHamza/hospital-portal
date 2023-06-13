@@ -67,7 +67,7 @@ function PersonalInfoAvatar(props) {
                 <RiErrorWarningLine
                   fontSize={20}
                   color='red'
-                  style={{ marginRight: '42rem' }}
+                  style={{ marginRight: '0.2rem' }}
                 />
                 <Typography variant='h6' sx={{ color: 'red' }}>
                   {t('admin.notVerified')}

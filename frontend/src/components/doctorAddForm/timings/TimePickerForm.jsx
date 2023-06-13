@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
+import {t} from 'i18next';
 import * as React from 'react';
 
 export default function TimePicker(props) {
@@ -27,10 +28,10 @@ export default function TimePicker(props) {
               <Box sx={{ width: '100%' }}>
                 <MobileTimePicker
                   sx={{ width: '100%', margin: '4px' }}
-                  label='Start Time'
+                  name='startTime'
+                  label={`${t('admin.startTime')}`}
                   minutesStep={30}
                   ampm={false}
-                  name='startTime'
                   value={values.startTime}
                   disabledTimes={disabledTimes}
                   onChange={handleTimeChange('startTime')}
@@ -44,16 +45,14 @@ export default function TimePicker(props) {
                   ) : null}
                 </Typography>
               </Box>
-              {/* </LocalizationProvider> */}
             </Grid>
             <Grid item xs={12} md={4}>
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
               <MobileTimePicker
                 sx={{ width: '100%', margin: '4px' }}
-                label='End Time'
+                name='endTime' 
+                label={`${t('admin.endTime')}`}
                 minutesStep={30}
                 ampm={false}
-                name='endTime'
                 value={values.endTime}
                 minTime={values.startTime}
                 onChange={handleTimeChange('endTime')}

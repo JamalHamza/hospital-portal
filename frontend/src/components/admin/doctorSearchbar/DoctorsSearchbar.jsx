@@ -1,4 +1,5 @@
 import { Grid, Typography } from '@mui/material';
+import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FILTER_DOCTORS } from '../../../redux/features/auth/filterSlice';
@@ -37,7 +38,7 @@ function DoctorsSearchBar() {
               variant='h5'
               sx={{ fontWeight: '700', color: 'primary.main' }}
             >
-              Total Available Doctors: {allDoctorsNumber}
+              {t('admin.totalAvailableDoctors')}: {allDoctorsNumber}
             </Typography>
           </Grid>
           <Grid item xs={12} md={4}>

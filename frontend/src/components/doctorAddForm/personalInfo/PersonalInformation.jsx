@@ -11,6 +11,7 @@ import {
 import React, { useState } from 'react';
 import { ImProfile } from 'react-icons/im';
 import PasswordStrength from '../../passwordStrength/PasswordStrength';
+import {t} from 'i18next';
 
 function PersonalInformation(props) {
   const {
@@ -41,7 +42,7 @@ function PersonalInformation(props) {
     <>
       <Box
         sx={{
-          display: 'felx',
+          display: 'flex',
           flexDirection: 'column',
         }}
       >
@@ -58,18 +59,18 @@ function PersonalInformation(props) {
           }}
         >
           <ImProfile fontSize={26} />
-          Personal Information
+          {t('admin.personalInfo')}
         </Typography>
       </Box>
       <Grid
         container
         spacing={2}
-        sx={{ display: 'felx', justifyContent: 'center', mb: '1em' }}
+        sx={{ display: 'flex', justifyContent: 'center', mb: '1em' }}
       >
         <Grid item xs={12} md={4}>
           <TextField
             name='name'
-            label='Name'
+            label={t('auth.name')}
             type='text'
             variant='outlined'
             value={values.name}
@@ -83,7 +84,7 @@ function PersonalInformation(props) {
         <Grid item xs={12} md={4}>
           <TextField
             name='phone'
-            label='Phone'
+            label={t('auth.phone')}
             variant='outlined'
             type='text'
             value={values.phone}
@@ -97,7 +98,7 @@ function PersonalInformation(props) {
         <Grid item xs={12} md={4}>
           <TextField
             name='email'
-            label='Email'
+            label={t('auth.email')}
             variant='outlined'
             type='email'
             value={values.email}
@@ -119,7 +120,7 @@ function PersonalInformation(props) {
           <TextField
             name='password'
             type={showPassword ? 'text' : 'password'}
-            label='Password'
+            label={t('auth.password')}
             onChange={handleChange}
             value={values.password}
             style={{ margin: '4px', width: '100%' }}
@@ -141,7 +142,7 @@ function PersonalInformation(props) {
           <TextField
             name='password2'
             type={showPassword2 ? 'text' : 'password'}
-            label='Confirm Password'
+            label={t('auth.confirm')}
             onChange={handleChange}
             value={values.password2}
             style={{ margin: '4px', width: '100%' }}

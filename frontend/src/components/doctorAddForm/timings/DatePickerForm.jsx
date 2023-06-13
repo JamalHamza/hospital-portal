@@ -3,28 +3,17 @@ import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import { t } from 'i18next';
 import React from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import './DatePickerForm.css';
 
 function DatePickerForm(props) {
-  const {
-    values,
-    errors,
-    touched,
-    handleFieldChange,
-    handleBlur,
-    handleChange,
-  } = props;
+  const { values, errors, touched, handleFieldChange } = props;
 
   return (
     <>
-      <Box
-      // sx={{
-      //   display: 'flex',
-      //   flexDirection: 'column',
-      // }}
-      >
+      <Box>
         <Typography
           variant='h5'
           sx={{
@@ -38,7 +27,7 @@ function DatePickerForm(props) {
           }}
         >
           <BsFillCalendar2WeekFill fontSize={26} />
-          Workday & Work hours
+          {t('admin.workDayAndHours')}
         </Typography>
       </Box>
       <Grid container spacing={2} gap='0.4rem'>
@@ -46,8 +35,8 @@ function DatePickerForm(props) {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ width: '100%' }}>
               <DatePicker
-                label='Start Date'
                 name='startDate'
+                label={`${t('admin.startDate')}`}
                 defaultValue={dayjs(new Date())}
                 inputFormat='DD/MM/yyyy'
                 value={values.startDate}
@@ -67,8 +56,8 @@ function DatePickerForm(props) {
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ width: '100%' }}>
               <DatePicker
-                label='End Date'
                 name='endDate'
+                label={`${t('admin.endDate')}`}
                 inputFormat='DD/MM/YYYY'
                 value={values.endDate}
                 disablePast={true}

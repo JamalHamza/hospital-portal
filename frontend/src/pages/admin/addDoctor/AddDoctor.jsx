@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
@@ -195,8 +195,14 @@ function AddDoctor() {
             errors={formik.errors}
             handleTimeChange={handleTimeChange}
           />
-
-          <CustomButtonOne label={`${t('admin.addDoctorBtn')}`} />
+          <Stack
+            mt='1em'
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+          >
+            <CustomButtonOne label={`${t('admin.addDoctorBtn')}`} />
+          </Stack>
         </form>
       </Box>
     </FormWrapper>
