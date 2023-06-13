@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import * as Yup from 'yup';
@@ -6,10 +6,12 @@ import PersonalInformation from '../../../components/doctorAddForm/personalInfo/
 import SpecialistAndExperience from '../../../components/doctorAddForm/specialistInfo/SpecialistAndExperience';
 // import '../../dateRangePicker/DatePicker.css';
 import dayjs from 'dayjs';
+import { t } from 'i18next';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import AddNewDoctor from '../../../assets/admin/logo2.png';
+import { CustomButtonOne } from '../../../components/customUtils/customButtons/CustomButtonOne';
 import DatePickerForm from '../../../components/doctorAddForm/timings/DatePickerForm';
 import TimePickerForm from '../../../components/doctorAddForm/timings/TimePickerForm';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
@@ -30,27 +32,6 @@ const initialValues = {
   startTime: dayjs(new Date()),
   endTime: dayjs(new Date()),
 };
-
-// ! ------ Yup Validation ------------------
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  phone: Yup.string().required('Phone is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 8 characters')
-    .required('Password is required'),
-  password2: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Confirm Password is required'),
-  specialist: Yup.string().required('Specialist is required'),
-  fee: Yup.number().required('Fee is required'),
-  hospitalName: Yup.string().required('Hospital is required'),
-  years: Yup.number().required('Years is required'),
-  startDate: Yup.date().required('Start Date is required').nullable(),
-  endDate: Yup.date().required('Start Date is required').nullable(),
-  startTime: Yup.string().required('Start Time is required'),
-  endTime: Yup.string().required('End Time is required'),
-});
 
 function AddDoctor() {
   useRedirectLoggedOutUser('/login');
@@ -74,6 +55,32 @@ function AddDoctor() {
     specialist,
   } = formData;
 
+  // ! ------ Yup Validation ------------------
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required(`${t('authAlert.required')}`),
+    email: Yup.string()
+      .email(`${t('authAlert.validEmail')}`)
+      .required(`${t('authAlert.required')}`),
+    phone: Yup.string().required(`${t('authAlert.required')}`),
+    password: Yup.string()
+      .min(6, `${t('authAlert.password')}`)
+      .required(`${t('authAlert.required')}`),
+    password2: Yup.string()
+      .oneOf([Yup.ref('password'), null], `${t('authAlert.passwordsMatch')}`)
+      .required(`${t('authAlert.required')}`),
+    specialist: Yup.string().required(`${t('authAlert.required')}`),
+    fee: Yup.number().required(`${t('authAlert.required')}`),
+    hospitalName: Yup.string().required(`${t('authAlert.required')}`),
+    years: Yup.number().required(`${t('authAlert.required')}`),
+    startDate: Yup.date()
+      .required(`${t('authAlert.required')}`)
+      .nullable(),
+    endDate: Yup.date()
+      .required(`${t('authAlert.required')}`)
+      .nullable(),
+    startTime: Yup.string().required(`${t('authAlert.required')}`),
+    endTime: Yup.string().required(`${t('authAlert.required')}`),
+  });
   // ! Add Experince -----------------
   function addExperience(hospitalName, years) {
     setExperiences((prevExperiences) => [
@@ -90,7 +97,6 @@ function AddDoctor() {
 
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
-    const formatedDate = value?.toISOString();
     // ! this just for formik validation
     formik.setFieldValue(fieldName, value);
     // ! bug fixed after 6 hours I forgot to setFormData
@@ -139,7 +145,7 @@ function AddDoctor() {
   });
   return (
     <FormWrapper
-      title={'Add New Doctor'}
+      title={`${t('admin.addNewDoctor')}`}
       img={AddNewDoctor}
       altImg={'Add new Doctor'}
     >
@@ -190,27 +196,7 @@ function AddDoctor() {
             handleTimeChange={handleTimeChange}
           />
 
-          <Button
-            type='submit'
-            variant='contained'
-            sx={{
-              borderRadius: '10px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.4rem',
-              minWidth: '8dem',
-              color: 'primary.dark',
-              bgcolor: 'third.main',
-              textTransform: 'uppercase',
-              m: '1em',
-              '&:hover': {
-                backgroundColor: '#ccb7c0',
-                color: '#fff',
-              },
-            }}
-          >
-            Add Doctor
-          </Button>
+          <CustomButtonOne label={`${t('admin.addDoctorBtn')}`} />
         </form>
       </Box>
     </FormWrapper>

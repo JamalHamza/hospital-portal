@@ -69,5 +69,26 @@
     "users": "Users",
     "addDoctor": "Add Doctor",
     "doctors": "Doctors"
+  },
+  "admin": {
+    "addNewDoctor": "Add New Doctor",
+    "personalInfo": "Personal Information",
+    "specialistAndFee": "Specialist and Fee",
+    "workDayAndHours": "Workday & Work hours",
+    "specialist": "Specialist",
+    "fee": "Fee",
+    "hospital": "Hospital",
+    "years": "Years",
+    "addBtn": "Add",
+    "addDoctorBtn": "Add Doctor",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "experiences": "Added Work Experiences",
+    "emptyExp": "Experience is not added",
+    "doctorList": "Doctor List",
+    "updateWorkDay": " Doctor's work day needs to be renewed!",
+    "updateText": "Update Shift"
   }
 }

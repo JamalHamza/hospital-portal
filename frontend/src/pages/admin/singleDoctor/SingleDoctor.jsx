@@ -1,6 +1,7 @@
 import EditCalendarRoundedIcon from '@mui/icons-material/EditCalendarRounded';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { t } from 'i18next';
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +33,6 @@ function SingleDoctor() {
     moment(utcStartShiftTime).format('YYYY-MM-DD');
   const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
 
-
   // ! ---------------------------------------------------
   useEffect(() => {
     dispatch(getDoctor(id));
@@ -60,7 +60,7 @@ function SingleDoctor() {
                 sx={{ color: 'red', mr: '0.4em' }}
               />
               <Typography variant='h5' color='red'>
-                Doctor's work day needs to be renewed!
+                {t('admin.updateWorkDay')}
               </Typography>
               <Box>
                 <IconButton
