@@ -18,9 +18,11 @@
     "confirm": "Confirm Password",
     "forgot": "Forgot Password",
     "yourEmail": "Enter Your Email",
-    "getEmail": "Get Email"
-    
-    
+    "getEmail": "Get Email",
+    "resendAccessCode": "Check your email for login access code",
+    "resendBtn": "Resend Code",
+    "enterAccessCode": "Access Code",
+    "resetPassword": "Reset Password"
   },
   "authAlert": {
     "all": "All fields are required",

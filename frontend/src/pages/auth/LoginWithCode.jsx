@@ -1,27 +1,29 @@
 import HomeIcon from '@mui/icons-material/Home';
 import {
   Box,
-  Button,
   Divider,
   IconButton,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import passCode from '../../assets/authPage/password-code.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { CustomButtonTwo } from '../../components/customUtils/customButtons/CustomButtonOne';
 import Loader from '../../components/loader/Loader';
 import {
   RESET,
   loginWithCode,
   sendLoginCode,
 } from '../../redux/features/auth/authSlice';
-import {CustomButtonTwo} from '../../components/customUtils/customButtons/CustomButtonOne';
 
 function LoginWithCode() {
+  const { t, i18n } = useTranslation();
   const [loginCode, setLoginCode] = useState('');
   const { email } = useParams();
 
@@ -82,7 +84,7 @@ function LoginWithCode() {
             variant='h4'
             sx={{ color: 'primary.main', textAlign: 'center', pb: '0.6em' }}
           >
-            Enter Access Code
+            {t('auth.enterAccessCode')}
           </Typography>
 
           <form onSubmit={loginUserWithCode} noValidate>
@@ -103,9 +105,11 @@ function LoginWithCode() {
                 alignItems: 'center',
               }}
             >
-              <CustomButtonTwo label={'Login'} />
+              <Stack my='1em'>
+                <CustomButtonTwo label={`${t('auth.login')}`} />
+              </Stack>
               <Typography sx={{ color: 'orange' }}>
-                Check your email for login access code
+                {t('auth.resendAccessCode')}
               </Typography>
             </Box>
             <Divider sx={{ p: '0.6em' }} />
@@ -126,7 +130,7 @@ function LoginWithCode() {
                 variant='h6'
                 onClick={resendUserLoginCode}
               >
-                <b>Resend Code</b>
+                <b>{t('auth.resendBtn')}</b>
               </Typography>
             </Box>
           </form>
