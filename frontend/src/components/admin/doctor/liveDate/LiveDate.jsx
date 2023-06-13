@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import {t} from 'i18next';
 import React, { useEffect, useState } from 'react';
 
 function LiveDate() {
@@ -15,7 +16,7 @@ function LiveDate() {
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
       <Box sx={{ display: 'flex' }}>
         <Typography variant='h5' sx={{ color: 'primary.dark' }}>
-          Date:
+          {t('admin.date')}
         </Typography>
         <Typography variant='h6' sx={{ color: 'secondary.dark', ml: '0.5em' }}>
           {currentDateTime.toLocaleDateString()}
@@ -23,7 +24,7 @@ function LiveDate() {
       </Box>
       <Box sx={{ display: 'flex' }}>
         <Typography variant='h5' sx={{ color: 'primary.dark' }}>
-          Time:
+          {t('admin.time')}
         </Typography>
         <Typography variant='h6' sx={{ color: 'secondary.dark', ml: '0.5em' }}>
           {currentDateTime.toLocaleTimeString()}

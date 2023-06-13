@@ -1,5 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { t } from 'i18next';
 import { AiFillDelete } from 'react-icons/ai';
 import { GoVerified } from 'react-icons/go';
 import { RiErrorWarningLine } from 'react-icons/ri';
@@ -44,22 +45,32 @@ function PersonalInfoAvatar(props) {
               <Box
                 sx={{
                   display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                <GoVerified fontSize={20} color='green' />
+                <GoVerified
+                  fontSize={20}
+                  color='green'
+                  style={{ marginRight: '0.2em' }}
+                />
                 <Typography variant='h6' sx={{ color: 'green' }}>
-                  Verified
+                  {t('admin.verified')}
                 </Typography>
               </Box>
             ) : (
               <Box
                 sx={{
                   display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                <RiErrorWarningLine fontSize={20} color='red' />
+                <RiErrorWarningLine
+                  fontSize={20}
+                  color='red'
+                  style={{ marginRight: '42rem' }}
+                />
                 <Typography variant='h6' sx={{ color: 'red' }}>
-                  Not Verified
+                  {t('admin.notVerified')}
                 </Typography>
               </Box>
             )}
@@ -67,7 +78,7 @@ function PersonalInfoAvatar(props) {
           <Typography
             variant='body1'
             sx={{ color: 'secondary.dark', ml: '1em' }}
-          >{`Created at ${formattedDate}`}</Typography>
+          >{`${t('admin.createdAt')} ${formattedDate}`}</Typography>
         </Box>
       </Grid>
     </>

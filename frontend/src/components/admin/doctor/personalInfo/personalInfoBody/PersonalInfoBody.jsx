@@ -7,6 +7,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 import LiveDate from '../../liveDate/LiveDate';
 import '../PersonalInfo.css';
+import {t} from 'i18next';
 
 function PersonalInfoBody(props) {
   const { doctor, experienceDoctor } = props;
@@ -108,7 +109,7 @@ function PersonalInfoBody(props) {
                 fontWeight: '700',
               }}
             >
-              {experienceDoctor} Years Experience
+              {experienceDoctor} {t('admin.yearsExperiences')}
             </Typography>
           </Box>
         </Box>

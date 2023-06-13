@@ -89,6 +89,16 @@
     "emptyExp": "Experience is not added",
     "doctorList": "Doctor List",
     "updateWorkDay": " Doctor's work day needs to be renewed!",
-    "updateText": "Update Shift"
+    "updateText": "Update Shift",
+    "deleteDoctor": "Delete Doctor",
+    "deleteDoctorText": "Are you sure you want to delete your account?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "time": "Time",
+    "date": "Date",
+    "notVerified": "Not Verified",
+    "verified": "Verified",
+    "createdAt": "Created At",
+    "yearsExperiences": "Years Experiences"
   }
 }
