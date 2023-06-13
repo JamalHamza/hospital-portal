@@ -80,7 +80,7 @@ function Forgot() {
           >
             <TextField
               type='email'
-              placeholder='Your email'
+              placeholder={`${t('auth.email')}`}
               required
               name='email'
               value={email}

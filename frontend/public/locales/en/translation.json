@@ -22,7 +22,11 @@
     "resendAccessCode": "Check your email for login access code",
     "resendBtn": "Resend Code",
     "enterAccessCode": "Access Code",
-    "resetPassword": "Reset Password"
+    "resetPassword": "Reset Password",
+    "verification": "Action Verification",
+    "verificationDetails": "To verify your account, click the button below.",
+    "verificationBtn": "Verify Account"
+
   },
   "authAlert": {
     "all": "All fields are required",
