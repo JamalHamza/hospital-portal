@@ -99,6 +99,11 @@
     "notVerified": "Not Verified",
     "verified": "Verified",
     "createdAt": "Created At",
-    "yearsExperiences": "Years Experiences"
+    "yearsExperiences": "Years Experiences",
+    "update": "Update",
+    "ID": "ID",
+    "fullName": "FullName",
+    "workingDates": "Working Dates",
+    "workingHours": "Working Hours"
   }
 }

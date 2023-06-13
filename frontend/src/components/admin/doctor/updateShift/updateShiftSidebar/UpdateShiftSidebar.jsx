@@ -9,6 +9,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { t } from 'i18next';
 import moment from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,10 +27,6 @@ function UpdateShiftSidebar() {
   // ! The resulting moscowDate object can then be displayed to the user in the correct timezone.
   const utcStartShiftTime = new Date(doctor?.startDate);
   const utcEndShiftTime = new Date(doctor?.endDate);
-  // const moscowDate = new Date(
-  //   utcStartShiftTime.toLocaleString('en-US', { timeZone: 'Europe/Moscow' })
-  // );
-  // const formattedDate = moment(utcEndShiftTime).format('YYYY-MM-DD');
   const formattedStartShiftTime =
     moment(utcStartShiftTime).format('YYYY-MM-DD');
   const formattedEndShiftTime = moment(utcEndShiftTime).format('YYYY-MM-DD');
@@ -47,7 +44,7 @@ function UpdateShiftSidebar() {
             variant='h6'
             sx={{ fontWeight: 700, color: 'primary.dark' }}
           >
-            ID:&nbsp;
+            {t('admin.ID')}:&nbsp;
           </Typography>
           <Typography
             variant='h6'
@@ -61,7 +58,7 @@ function UpdateShiftSidebar() {
             variant='h6'
             sx={{ fontWeight: 700, color: 'primary.dark' }}
           >
-            FullName:&nbsp;
+            {t('admin.fullName')}:&nbsp;
           </Typography>
           <Typography
             variant='h6'
@@ -90,7 +87,7 @@ function UpdateShiftSidebar() {
                 variant='h5'
                 sx={{ color: 'primary.dark', mt: '2em', fontWeight: '700' }}
               >
-                Working Date
+                {t('admin.workingDates')}
               </Typography>
             </Box>
           </Box>
@@ -103,8 +100,8 @@ function UpdateShiftSidebar() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Start Date</TableCell>
-                    <TableCell>End Date</TableCell>
+                    <TableCell>{t('admin.startDate')}</TableCell>
+                    <TableCell>{t('admin.endDate')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -137,7 +134,7 @@ function UpdateShiftSidebar() {
                 variant='h5'
                 sx={{ color: 'primary.dark', mt: '2em', fontWeight: '700' }}
               >
-                Working Hours
+                {t('admin.workingHours')}
               </Typography>
             </Box>
           </Box>
@@ -150,8 +147,8 @@ function UpdateShiftSidebar() {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Start Time</TableCell>
-                    <TableCell>End Time</TableCell>
+                    <TableCell>{t('admin.startTime')}</TableCell>
+                    <TableCell>{t('admin.endTime')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
