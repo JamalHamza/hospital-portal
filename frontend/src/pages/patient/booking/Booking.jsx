@@ -7,7 +7,7 @@ import UpdateShift from '../../../assets/admin/calendar.png';
 import UpdateShiftSidebar from '../../../components/admin/doctor/updateShift/updateShiftSidebar/UpdateShiftSidebar';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
-import BookingForm from '../../../components/pateint/bookingForm/BookingForm';
+import BookingForm from '../../../components/patient/bookingForm/BookingForm';
 import { getDoctor } from '../../../redux/features/booking/bookingSlice';
 import {t} from 'i18next';
 

@@ -6,9 +6,9 @@ import HistoryImg from '../../../assets/patient/history.png';
 import BackNav from '../../../components/customUtils/backNav/BackNav';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
-import AppointmentDetails from '../../../components/pateint/appointment/AppointmentDetails';
-import DoctorAppointmentDetails from '../../../components/pateint/appointment/DoctorAppointmentDetails';
-import File from '../../../components/pateint/appointment/File';
+import AppointmentDetails from '../../../components/patient/appointment/AppointmentDetails';
+import DoctorAppointmentDetails from '../../../components/patient/appointment/DoctorAppointmentDetails';
+import File from '../../../components/patient/appointment/File';
 import { getAppointment } from '../../../redux/features/booking/bookingSlice';
 import {t} from 'i18next';
 

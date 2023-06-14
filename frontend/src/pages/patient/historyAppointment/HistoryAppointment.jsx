@@ -7,8 +7,8 @@ import HistoryImg from '../../../assets/patient/history.png';
 import BackNav from '../../../components/customUtils/backNav/BackNav';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import { Spinner } from '../../../components/loader/Loader';
-import Archived from '../../../components/pateint/appointmentsHistory/Archived';
-import Upcoming from '../../../components/pateint/appointmentsHistory/Upcoming';
+import Archived from '../../../components/patient/appointmentsHistory/Archived';
+import Upcoming from '../../../components/patient/appointmentsHistory/Upcoming';
 import { getAppointments } from '../../../redux/features/booking/bookingSlice';
 import {t} from 'i18next';
 
