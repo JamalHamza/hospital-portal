@@ -1,21 +1,12 @@
 import EmailIcon from '@mui/icons-material/Email';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import {
-  Box,
-  CardContent,
-  CardMedia,
-  Grid,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Box, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
-import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectorDoctors } from '../../../redux/features/auth/filterSlice';
 import { getDoctors } from '../../../redux/features/booking/bookingSlice';
-import { CustomButtonOne } from '../../customUtils/customButtons/CustomButtonOne';
 import Loader from '../../loader/Loader';
 import './DoctorList.css';
 

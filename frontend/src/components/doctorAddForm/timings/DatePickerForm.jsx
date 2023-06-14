@@ -3,13 +3,18 @@ import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import { t } from 'i18next';
+import 'dayjs/locale/ru';
+import i18next, { t } from 'i18next';
 import React from 'react';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import './DatePickerForm.css';
 
 function DatePickerForm(props) {
   const { values, errors, touched, handleFieldChange } = props;
+  // ! Get the currently selected language  -----------
+  // ! Change the datePicker according the timezone ---
+  const currentLanguage = i18next.language;
+  dayjs.locale(currentLanguage == 'ru' ? dayjs.locale('ru') : '');
 
   return (
     <>
