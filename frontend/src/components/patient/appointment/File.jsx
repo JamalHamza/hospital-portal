@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -59,8 +60,6 @@ function File() {
   //   ! ------------------------------------------------
   useEffect(() => {
     const appointmentId = localStorage.getItem('appointmentId').slice(1, -1);
-
-    console.log(appointmentId);
     if (user) {
       const userData = {
         appointmentId,
@@ -68,32 +67,61 @@ function File() {
       dispatch(getFiles(userData));
     }
   }, [dispatch, user]);
+
   return (
-    <Grid item xs={12} sm={12} md={12} mt={3}>
+    <Grid
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      mt={3}
+      my='2em'
+      py='1em'
+      border='1px dotted'
+      borderColor='primary.main'
+    >
       {!isLoading || !files ? (
         <>
-          <Typography sx={styleText}>Results or Analysis</Typography>
+          <Typography sx={styleText} textAlign='center'>
+            {t('patient.resultOrAnalysis')}
+          </Typography>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>No</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Download</TableCell>
+                <TableCell> {t('patient.no')}</TableCell>
+                <TableCell>{t('patient.Title')}</TableCell>
+                <TableCell>{t('patient.download')}</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {files?.map((item, index) => (
-                <TableRow key={item._id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => downloadFile(item?._id)}>
-                      <DownloadIcon sx={styleIcon.download} />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            {!isLoading && files.length == 0 ? (
+              <>
+                <TableCell colSpan={3}>
+                  <Typography
+                    sx={{
+                      ...styleText,
+                      color: 'primary.light',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {t('patient.emptyFile')}
+                  </Typography>
+                </TableCell>
+              </>
+            ) : (
+              <TableBody>
+                {files?.map((item, index) => (
+                  <TableRow key={item._id}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>
+                      <IconButton onClick={() => downloadFile(item?._id)}>
+                        <DownloadIcon sx={styleIcon.download} />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
         </>
       ) : (

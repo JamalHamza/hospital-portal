@@ -156,9 +156,25 @@
   },
   "patient": {
     "appointment": "Appointment",
+    "booked": "Booked",
+    "date": "Date",
+    "time": "Time",
+    "doctor": "Doctor",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "specialist": "Specialist",
+    "fee": "Fee",
     "appointmentHistory": "Your Appointment History",
     "booking": "Book An Appointment",
     "selectTime": "Select Time",
-    "doctorList": "Doctor List"
+    "doctorList": "Doctor List",
+    "cancelAppointmentBtn": "Cancel Appointment",
+    "cancelAppointmentText": "Appointment successfully canceled",
+    "resultOrAnalysis": "Results or Analysis",
+    "no": "s/n",
+    "Title": "Title",
+    "download": "Download",
+    "emptyFile": "No file is uploaded"
   }
 }

@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -47,6 +48,7 @@ const styleButtonText = {
 function AppointmentDetails({ appointment }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const formattedCratedDate = moment(appointment?.createdAt).fromNow();
   const formattedDate = moment(appointment?.appointmentDate).format('ll');
   const formattedTime = moment(appointment?.appointmentTime).format('HH:mm');
@@ -54,7 +56,7 @@ function AppointmentDetails({ appointment }) {
   const handleDelete = async (id) => {
     await dispatch(deleteAppointment(id));
     navigate(-1);
-    toast.success('Appointment successfully canceled');
+    toast.success(`${t('patient.cancelAppointmentText')}`);
   };
   return (
     <Grid item xs={12} sm={6} md={6}>
@@ -63,25 +65,29 @@ function AppointmentDetails({ appointment }) {
           <Table aria-label='simple table'>
             <TableHead>
               <TableRow>
-                <TableCell sx={styleHeader}>Appointment</TableCell>
+                <TableCell sx={styleHeader}>
+                  {t('patient.appointment')}
+                </TableCell>
                 <TableCell sx={styleHeader}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody sx={style}>
               <TableRow>
-                <TableCell sx={style}>Booked</TableCell>
+                <TableCell sx={style}>{t('patient.booked')}</TableCell>
                 <TableCell sx={styleDetail}>{formattedCratedDate}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell sx={style}>Date</TableCell>
+                <TableCell sx={style}>{t('patient.date')}</TableCell>
                 <TableCell sx={styleDetail}>{formattedDate}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell sx={style}>Time</TableCell>
+                <TableCell sx={style}>{t('patient.time')}</TableCell>
                 <TableCell sx={styleDetail}>{formattedTime}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell sx={styleButtonText}>Cancel Appointment</TableCell>
+                <TableCell sx={styleButtonText}>
+                  {t('patient.cancelAppointmentBtn')}
+                </TableCell>
                 <TableCell sx={styleDetail}>
                   <IconButton onClick={() => handleDelete(appointment?._id)}>
                     <DeleteOutlineTwoToneIcon sx={styleButton} />
