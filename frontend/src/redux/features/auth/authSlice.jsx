@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import authService from './authServices';
 
@@ -370,7 +371,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = action.payload;
-        toast.success('Registration successful');
+        toast.success(`${t('reduxSlice.register')}`);
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
@@ -388,7 +389,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = action.payload;
-        toast.success('Login  successful');
+        // toast.success('Login  successful');
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -409,7 +410,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = false;
         state.user = null;
-        toast.success(action.payload);
+        // toast.success(action.payload);
       })
       .addCase(logout.rejected, (state, action) => {
         state.isLoading = false;
@@ -425,7 +426,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
       })
       .addCase(loginStatus.rejected, (state, action) => {
         state.isLoading = false;
@@ -458,7 +459,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = action.payload;
-        toast.success('User Updated');
+        toast.success(`${t('reduxSlice.updateUser')}`);
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -474,7 +475,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.verificationCode')}`);
       })
       .addCase(sendVerificationEmail.rejected, (state, action) => {
         state.isLoading = false;
@@ -490,7 +492,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.userVerified')}`);
       })
       .addCase(verifyUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -506,7 +509,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.changePassword')}`);
       })
       .addCase(changePassword.rejected, (state, action) => {
         state.isLoading = false;
@@ -522,7 +526,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
       })
       .addCase(forgotPassword.rejected, (state, action) => {
         state.isLoading = false;
@@ -538,7 +542,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.resetPassword')}`);
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.isLoading = false;
@@ -569,7 +574,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.userDeleted')}`);
       })
       .addCase(deleteUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -585,7 +591,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.userUpgrade')}`);
       })
       .addCase(upgradeUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -601,7 +608,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
       })
       .addCase(sendLoginCode.rejected, (state, action) => {
         state.isLoading = false;
@@ -619,7 +626,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.towFactors = false;
         state.user = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
       })
       .addCase(loginWithCode.rejected, (state, action) => {
         state.isLoading = false;
@@ -637,7 +644,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = action.payload;
-        toast.success('Login Successful');
+        toast.success(`${t('reduxSlice.register')}`);
       })
       .addCase(loginWithGoogle.rejected, (state, action) => {
         state.isLoading = false;

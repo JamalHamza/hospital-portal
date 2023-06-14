@@ -247,15 +247,24 @@
   "searchUser": "Поиск пользователя"
 },
 "reduxSlice": {
-  "sendEmailSucc": "Send email successful",
-  "sendEmailFailed": "Send email failed",
-  "deleteDoctor": "Doctor account successfully deleted",
-  "doctorShiftUpdated": "Doctor shift updated",
-  "appointmentBooked": "Appointment booked successfully",
-  "appointmentCanceled": "Appointment canceled",
-  "addFile": "New file added",
-  "deleteFile": "File deleted"
+    "sendEmailSucc": "Почта успешно отправлена",
+    "sendEmailFailed": "Не удалось отправить почту",
+    "deleteDoctor": "Учетная запись врача успешно удалена",
+    "doctorShiftUpdated": "Смена врача обновлена",
+    "appointmentBooked": "Запись на прием успешно выполнена",
+    "appointmentCanceled": "Прием отменен",
+    "addFile": "Добавлен новый файл",
+    "deleteFile": "Файл удален",
+    "register": "Регистрация успешна",
+    "updateUser": "Пользователь обновлен",
+    "verificationCode": "Код верификации отправлен",
+    "userVerified": "Пользователь успешно верифицирован",
+    "changePassword":"Пароль успешно изменен",
+    "resetPassword": "Пароль успешно сброшен",
+    "userDeleted": "Аккаунт пользователя удален",
+    "userUpgrade": "Пользователь повышен"
 }
+
 }
 
 

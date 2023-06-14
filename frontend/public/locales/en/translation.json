@@ -247,6 +247,24 @@
     "noMessages": "No messages",
     "notFound": "Not Found",
     "searchUser": "Search User"
-  }
+  },
+  "reduxSlice": {
+    "sendEmailSucc": "Send email successful",
+    "sendEmailFailed": "Send email failed",
+    "deleteDoctor": "Doctor account successfully deleted",
+    "doctorShiftUpdated": "Doctor shift updated",
+    "appointmentBooked": "Appointment booked successfully",
+    "appointmentCanceled": "Appointment canceled",
+    "addFile": "New file added",
+    "deleteFile": "File deleted",
+    "register": "Registration successful",
+    "updateUser": "User Updated",
+    "verificationCode": "Verification code sent",
+    "userVerified": "User verified successfully",
+    "changePassword":"Password changed successfully",
+    "resetPassword": "Password rested successfully",
+    "userDeleted": "User account deleted",
+    "userUpgrade": "User upgraded"
+}
   
 }
