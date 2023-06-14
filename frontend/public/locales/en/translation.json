@@ -9,6 +9,11 @@
     "bio": "Bio",
     "update": "Update"
   },
+  "notification": {
+    "notificationHeader": "Account needs to verify",
+    "notificationText": "To verify your account, check your email for a verification link",
+    "resendBtn": "Resend Code"
+  },
   "changePassword": {
     "oldPassword": "Old Password",
     "newPassword": "New Password",
