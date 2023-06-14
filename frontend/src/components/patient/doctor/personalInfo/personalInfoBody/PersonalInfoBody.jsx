@@ -7,6 +7,7 @@ import StarsIcon from '@mui/icons-material/Stars';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import LiveDate from '../../../../admin/doctor/liveDate/LiveDate';
+import {t} from 'i18next';
 // import '../PersonalInfo.css';
 
 function PersonalInfoBody(props) {
@@ -18,7 +19,7 @@ function PersonalInfoBody(props) {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
           }}
         >
           <Typography
@@ -109,7 +110,7 @@ function PersonalInfoBody(props) {
                 fontWeight: '700',
               }}
             >
-              {experienceDoctor} Years Experience
+              {experienceDoctor} {t('patient.yearsExperiences')}
             </Typography>
             <IconButton>
               <MoreVertIcon sx={{ fontSize: '2rem', color: 'green' }} />

@@ -2,15 +2,16 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import { Button, CardContent, Typography } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
 import moment from 'moment';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const style = {
   Box: {
     width: '100%',
     display: 'flex',
+    height: '100%',
     flexDirection: 'column',
     justifyContent: 'center',
     gap: '0.5em',
@@ -19,11 +20,6 @@ const style = {
 
 function CardContentDetails({ doctor }) {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const handleClick = (id) => {
-    navigate(`/patient/allDoctors/${id}`);
-  };
-
   //  ! ----------------------
   const today = new Date().toISOString();
   const todayDate = moment.utc(today).format('YYYY-MM-DD');
@@ -100,27 +96,6 @@ function CardContentDetails({ doctor }) {
         />
         {formattedStartTime} - {formattedEndTime}
       </Typography>
-      <Button
-        onClick={() => handleClick(doctor._id)}
-        variant='contained'
-        sx={{
-          borderRadius: '10px',
-          padding: '6px 16px',
-          fontWeight: 'bold',
-          fontSize: '1.2rem',
-          width: '12rem',
-          color: 'primary.main',
-          bgcolor: 'third.main',
-          textTransform: 'capitalize',
-          m: '1em 0',
-          '&:hover': {
-            backgroundColor: '#ccb7c0',
-            color: '#fff',
-          },
-        }}
-      >
-        More details
-      </Button>
     </CardContent>
   );
 }

@@ -12,6 +12,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { t } from 'i18next';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,7 +66,7 @@ function SelectTime() {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Shift</TableCell>
+              <TableCell>{t('patient.shift')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -93,7 +94,7 @@ function SelectTime() {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Available</TableCell>
+              <TableCell>{t('patient.available')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -119,7 +120,7 @@ function SelectTime() {
         >
           <TableHead>
             <TableRow>
-              <TableCell>Booked</TableCell>
+              <TableCell>{t('patient.booked')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -175,7 +176,9 @@ function SelectTime() {
         </Grid>
         <Grid item xs={12} sm={6} md={6} my='2em'>
           <FormControl sx={{ width: '60%' }}>
-            <InputLabel id='demo-simple-select-label'>Times</InputLabel>
+            <InputLabel id='demo-simple-select-label'>
+              {t('patient.times')}
+            </InputLabel>
             <Select
               labelId='demo-simple-select-label'
               id='demo-simple-select'
