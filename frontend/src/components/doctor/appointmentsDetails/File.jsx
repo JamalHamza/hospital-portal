@@ -13,6 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -70,7 +71,6 @@ function File({ patient, doctor }) {
   };
   const deleteItem = async (id) => {
     try {
-
       await dispatch(deleteFile(id));
       await dispatch(getFiles({ appointmentId: id }));
     } catch (error) {
@@ -131,40 +131,50 @@ function File({ patient, doctor }) {
           Add
         </Button>
       </form>
-      {!isLoading || !files ? (
-        <>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>No</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Download</TableCell>
-                <TableCell>Delete</TableCell>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell> {t('patient.no')}</TableCell>
+            <TableCell>{t('patient.Title')}</TableCell>
+            <TableCell>{t('patient.download')}</TableCell>
+            <TableCell>{t('patient.delete')}</TableCell>
+          </TableRow>
+        </TableHead>
+        {!isLoading && files.length == 0 ? (
+          <>
+            <TableCell colSpan={4}>
+              <Typography
+                sx={{
+                  ...styleText,
+                  color: 'primary.light',
+                  textAlign: 'center',
+                }}
+              >
+                {t('patient.emptyFile')}
+              </Typography>
+            </TableCell>
+          </>
+        ) : (
+          <TableBody>
+            {files?.map((item, index) => (
+              <TableRow key={item._id}>
+                <TableCell>{index + 1}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>
+                  <IconButton onClick={() => downloadFile(item?._id)}>
+                    <DownloadIcon sx={styleIcon.download} />
+                  </IconButton>
+                </TableCell>
+                <TableCell>
+                  <IconButton onClick={() => deleteItem(item?._id)}>
+                    <DeleteForeverIcon sx={styleIcon.delete} />
+                  </IconButton>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {files?.map((item, index) => (
-                <TableRow key={item._id}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => downloadFile(item?._id)}>
-                      <DownloadIcon sx={styleIcon.download} />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>
-                    <IconButton onClick={() => deleteItem(item?._id)}>
-                      <DeleteForeverIcon sx={styleIcon.delete} />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </>
-      ) : (
-        ''
-      )}
+            ))}
+          </TableBody>
+        )}
+      </Table>
     </Grid>
   );
 }

@@ -180,6 +180,7 @@
     "no": "s/n",
     "Title": "Title",
     "download": "Download",
+    "delete": "Delete",
     "emptyFile": "No file is uploaded",
     "archive": "Archive",
     "emptyArchive": "Empty Archive",
@@ -199,6 +200,7 @@
   },
   "doctor": {
     "appointments": "Appointments",
+    "appointment": "Appointment",
     "id": "ID",
     "date": "Date",
     "time": "Time",
@@ -214,7 +216,24 @@
     "total": "Total",
     "upcoming": "Upcoming",
     "archived": "Archived",
-    "lastMonths": "Last Months"
+    "lastMonths": "Last Months",
+    "appointmentDetails": "Appointment Details",
+    "appointmentID": "Appointment ID",
+    "bookedDate": "Booked Date",
+    "bookedTime": "Booked Time",
+    "appointmentDate": "Appointment Date",
+    "appointmentTime": "Appointment Time",
+    "medicineCard":  "Patient Medicine Card",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "bio": "Bio",
+    "healthStatus": "Health Status",
+    "sugar": "Sugar",
+    "allergies": "Allergies",
+    "tuberculosis": "Tuberculosis",
+    "coldAndFlu": "Colds and Flu",
+    "no": "NO"
   }
   
 }

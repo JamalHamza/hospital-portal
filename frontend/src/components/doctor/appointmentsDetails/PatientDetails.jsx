@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { t } from 'i18next';
 import React from 'react';
 const styleHeader = {
   color: 'secondary.dark',
@@ -41,25 +42,27 @@ function PatientDetails({ patient }) {
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={styleHeader}>Patient Medicine Card</TableCell>
+                  <TableCell sx={styleHeader}>
+                    {t('doctor.medicineCard')}
+                  </TableCell>
                   <TableCell sx={styleHeader}></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell sx={style}>Name</TableCell>
+                  <TableCell sx={style}>{t('doctor.name')}</TableCell>
                   <TableCell sx={styleDetail}>{patient?.name}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={style}>Phone</TableCell>
+                  <TableCell sx={style}>{t('doctor.phone')}</TableCell>
                   <TableCell sx={styleDetail}>{patient?.phone}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={style}>Email</TableCell>
+                  <TableCell sx={style}>{t('doctor.email')}</TableCell>
                   <TableCell sx={styleDetail}>{patient?.email}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={style}>Bio</TableCell>
+                  <TableCell sx={style}>{t('doctor.bio')}</TableCell>
                   <TableCell sx={styleDetail}>{patient?.bio}</TableCell>
                 </TableRow>
               </TableBody>
@@ -78,28 +81,28 @@ function PatientDetails({ patient }) {
             <Table aria-label='simple table'>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={styleHeader}>Health Status</TableCell>
+                  <TableCell sx={styleHeader}>
+                    {t('doctor.healthStatus')}
+                  </TableCell>
                   <TableCell sx={styleHeader}></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell sx={style}>Sugar</TableCell>
-                  <TableCell sx={styleDetail} >
-                    No
-                  </TableCell>
+                  <TableCell sx={style}>{t('doctor.sugar')}</TableCell>
+                  <TableCell sx={styleDetail}>{t('doctor.no')}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={style}>Allergies</TableCell>
-                  <TableCell sx={styleDetail}>No</TableCell>
+                  <TableCell sx={style}>{t('doctor.allergies')}</TableCell>
+                  <TableCell sx={styleDetail}>{t('doctor.no')}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={style}>Tuberculosis</TableCell>
-                  <TableCell sx={styleDetail}>No</TableCell>
+                  <TableCell sx={style}>{t('doctor.tuberculosis')}</TableCell>
+                  <TableCell sx={styleDetail}>{t('doctor.no')}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell sx={style}>Colds and Flu</TableCell>
-                  <TableCell sx={styleDetail}>No</TableCell>
+                  <TableCell sx={style}>{t('doctor.coldAndFlu')}</TableCell>
+                  <TableCell sx={styleDetail}>{t('doctor.no')}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>

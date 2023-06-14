@@ -8,6 +8,7 @@ import {
   TableRow,
 } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 const styleHeader = {
   color: 'secondary.dark',
   textAlign: 'left',
@@ -26,6 +27,7 @@ const styleDetail = {
 };
 
 function AppointmentBookedDetails({ appointment }) {
+  const { t } = useTranslation();
   return (
     <Grid
       item
@@ -39,35 +41,37 @@ function AppointmentBookedDetails({ appointment }) {
         <Table aria-label='simple table'>
           <TableHead>
             <TableRow>
-              <TableCell sx={styleHeader}>Appointment's Details</TableCell>
+              <TableCell sx={styleHeader}>
+                {t('doctor.appointmentDetails')}
+              </TableCell>
               <TableCell sx={styleHeader}></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             <TableRow>
-              <TableCell sx={style}>Appointment's ID</TableCell>
+              <TableCell sx={style}>{t('doctor.appointmentID')}</TableCell>
               <TableCell sx={styleDetail}>{appointment?._id}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell sx={style}>Booked Date</TableCell>
+              <TableCell sx={style}>{t('doctor.bookedDate')}</TableCell>
               <TableCell sx={styleDetail}>
                 {new Date(appointment?.createdAt).toLocaleDateString()}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell sx={style}>Booked Time</TableCell>
+              <TableCell sx={style}>{t('doctor.bookedTime')}</TableCell>
               <TableCell sx={styleDetail}>
                 {new Date(appointment?.createdAt).toLocaleTimeString()}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell sx={style}>Appointment Date</TableCell>
+              <TableCell sx={style}>{t('doctor.appointmentDate')}</TableCell>
               <TableCell sx={styleDetail}>
                 {new Date(appointment?.appointmentDate).toDateString()}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell sx={style}>Appointment Time</TableCell>
+              <TableCell sx={style}>{t('doctor.appointmentTime')}</TableCell>
               <TableCell sx={styleDetail}>
                 {new Date(appointment?.appointmentTime).toLocaleTimeString()}
               </TableCell>
