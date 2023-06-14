@@ -8,6 +8,7 @@ import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
 import SelectTime from '../../../components/pateint/selectTime/SelectTime';
 import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
+import {t} from 'i18next';
 
 function BookingTime() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ function BookingTime() {
         <Loader />
       ) : (
         <FormWrapper
-          title={'Select Time'}
+          title={t('patient.selectTime')}
           img={appointmentTime}
           altImg={'booking an appointment'}
         >

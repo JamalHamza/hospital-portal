@@ -9,9 +9,10 @@ import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
 import BookingForm from '../../../components/pateint/bookingForm/BookingForm';
 import { getDoctor } from '../../../redux/features/booking/bookingSlice';
+import {t} from 'i18next';
 
 function Booking() {
-  const { isLoading, doctor } = useSelector((state) => state.booking);
+  const { isLoading } = useSelector((state) => state.booking);
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Booking() {
         <Loader />
       ) : (
         <FormWrapper
-          title={'Book An Appointment'}
+          title={t('patient.booking')}
           img={UpdateShift}
           altImg={'booking an appointment'}
         >

@@ -153,5 +153,12 @@
     "doctorNotFound": "No Doctor Found",
     "moreDetails": "More Details",
     "totalAvailableDoctors": "Total Available Doctors"
+  },
+  "patient": {
+    "appointment": "Appointment",
+    "appointmentHistory": "Your Appointment History",
+    "booking": "Book An Appointment",
+    "selectTime": "Select Time",
+    "doctorList": "Doctor List"
   }
 }

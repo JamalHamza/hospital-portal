@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 import AllDoctorsList from '../../../assets/patient/medical-team.png';
 import DoctorsSearchBar from '../../../components/admin/doctorSearchbar/DoctorsSearchbar';
@@ -9,7 +10,7 @@ function AllDoctors() {
     <FormWrapper
       img={AllDoctorsList}
       altImg='medical team'
-      title='Doctors List'
+      title={t('patient.doctorList')}
     >
       <DoctorsSearchBar />
       <PatientDoctorsList />

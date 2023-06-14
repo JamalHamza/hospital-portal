@@ -10,6 +10,7 @@ import AppointmentDetails from '../../../components/pateint/appointment/Appointm
 import DoctorAppointmentDetails from '../../../components/pateint/appointment/DoctorAppointmentDetails';
 import File from '../../../components/pateint/appointment/File';
 import { getAppointment } from '../../../redux/features/booking/bookingSlice';
+import {t} from 'i18next';
 
 function Appointment() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function Appointment() {
         <Loader />
       ) : (
         <FormWrapper
-          title={'Your Appointment History'}
+          title={t('patient.appointment')}
           img={HistoryImg}
           altImg={'Your Appointment History'}
         >
