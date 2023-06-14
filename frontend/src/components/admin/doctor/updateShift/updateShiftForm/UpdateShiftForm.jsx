@@ -10,16 +10,6 @@ import { CustomButtonTwo } from '../../../../customUtils/customButtons/CustomBut
 import DatePickerForm from '../../../../doctorAddForm/timings/DatePickerForm';
 import TimePickerForm from '../../../../doctorAddForm/timings/TimePickerForm';
 
-// ! -------- Form Validation ----------------
-const validationSchema = Yup.object().shape({
-  startDate: Yup.date().required('Start date is required'),
-  endDate: Yup.date()
-    .min(Yup.ref('startDate'), 'End date must be after start date')
-    .required('End date is required'),
-  startTime: Yup.string().required('Start Time is required'),
-  endTime: Yup.string().required('End Time is required'),
-});
-
 const initialValues = {
   startDate: '',
   endDate: '',
@@ -33,6 +23,17 @@ function UpdateShiftForm() {
   const { startDate, endDate, startTime, endTime } = formData;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // ! -------- Form Validation ----------------
+  const validationSchema = Yup.object().shape({
+    startDate: Yup.date().required(`${t('admin.dateRequiredText')}`),
+    endDate: Yup.date()
+      .min(Yup.ref('startDate'), `${t('admin.endDateValid')}`)
+      .required(`${t('admin.dateRequiredText')}`),
+    startTime: Yup.string().required(`${t('admin.timeRequiredText')}`),
+    endTime: Yup.string().required(`${t('admin.timeRequiredText')}`),
+  });
+
   // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
     formik.setFieldValue(fieldName, time);
@@ -68,7 +69,7 @@ function UpdateShiftForm() {
   });
 
   return (
-    <Grid item xs={12} md={6} sx={{ p: '0 em', m: '0 auto',  }}>
+    <Grid item xs={12} md={6} sx={{ p: '0 em', m: '0 auto' }}>
       <form onSubmit={formik.handleSubmit}>
         <DatePickerForm
           values={formik.values}
@@ -85,11 +86,7 @@ function UpdateShiftForm() {
           errors={formik.errors}
           handleTimeChange={handleTimeChange}
         />
-        <Stack
-          my='1em'
-          display='flex'
-          alignItems='flex-start'
-        >
+        <Stack my='1em' display='flex' alignItems='flex-start'>
           <CustomButtonTwo label={`${t('admin.update')}`} />
         </Stack>
       </form>

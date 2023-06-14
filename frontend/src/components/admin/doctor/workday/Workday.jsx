@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Doctor.css';
 
 function Workday(props) {
-  const { doctor, formattedEndShiftTime, todayDate, formattedStartShiftTime } =
+  const {  formattedEndShiftTime, todayDate, formattedStartShiftTime } =
     props;
   const navigate = useNavigate();
 

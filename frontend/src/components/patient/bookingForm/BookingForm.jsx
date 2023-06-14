@@ -12,6 +12,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
 import { CustomButtonTwo } from '../../customUtils/customButtons/CustomButtonOne';
+import 'dayjs/locale/ru';
+import i18next from 'i18next';
 
 function BookingForm() {
   const { id } = useParams();
@@ -21,6 +23,10 @@ function BookingForm() {
     (state) => state.booking
   );
   const { t, i18n } = useTranslation();
+  // ! Get the currently selected language  -----------
+  // ! Change the datePicker according the timezone ---
+  const currentLanguage = i18next.language;
+  dayjs.locale(currentLanguage == 'ru' ? dayjs.locale('ru') : '');
 
   // ! -------- Form Validation ----------------
   const validationSchema = Yup.object().shape({

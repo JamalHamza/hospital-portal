@@ -152,7 +152,12 @@
     "workingHours": "Working Hours",
     "doctorNotFound": "No Doctor Found",
     "moreDetails": "More Details",
-    "totalAvailableDoctors": "Total Available Doctors"
+    "totalAvailableDoctors": "Total Available Doctors",
+    "dateRequiredText": "Date is required",
+    "timeRequiredText": "Time is required",
+    "endDateValid":"End Date must be after start date",
+    "endTimeValid":"End Time must be after start start"
+    
   },
   "patient": {
     "appointment": "Appointment",
@@ -192,4 +197,5 @@
     "available": "Available",
     "shift": "Shift"
   }
+  
 }
