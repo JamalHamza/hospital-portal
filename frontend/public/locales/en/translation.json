@@ -2,7 +2,11 @@
   "title": "Vita Health",
    "profile": {
     "title": "Profile",
-    "role": "Role"
+    "role": "Role",
+    "name": "Name",
+    "phone": "Phone",
+    "bio": "Bio",
+    "update": "Update"
   },
   "home": {
     "title": "Vita Health",
