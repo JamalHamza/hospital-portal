@@ -239,6 +239,14 @@
     "tuberculosis": "Tuberculosis",
     "coldAndFlu": "Colds and Flu",
     "no": "NO"
+  },
+  "chat": {
+    "newMessage" : "New Message",
+    "selectChat": "Please Select a chat",
+    "loadingText": "Loading...",
+    "noMessages": "No messages",
+    "notFound": "Not Found",
+    "searchUser": "Search User"
   }
   
 }

@@ -190,7 +190,7 @@ const Sidebar = ({ open, setOpen }) => {
           text: `${t('sidebarPatient.chatRoom')}`,
           icon: (
             <BsFillChatRightQuoteFill
-              fontSize={26}
+              fontSize={24}
               sx={{ color: 'primary.light' }}
               color='#dcd7ff'
             />
@@ -274,7 +274,6 @@ const Sidebar = ({ open, setOpen }) => {
                 </ListItem>
               );
             })}
-            <Divider sx={{ bgcolor: 'primary.main' }} />
             {itemsList[2]?.map((item, index) => {
               const { text, icon, onClick } = item;
               return (

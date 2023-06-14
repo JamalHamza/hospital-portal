@@ -10,12 +10,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getMessages, sendMessage } from '../../redux/features/chat/chatSlice';
 import ScrollableChat from './ScrollableChat';
+import { useTranslation } from 'react-i18next';
 function ChatBox() {
-  const { selectedChat, messages, isLoading } = useSelector(
-    (state) => state.chat
-  );
+  const { selectedChat } = useSelector((state) => state.chat);
   const [newMessage, setNewMessage] = useState('');
   const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
 
   // ! -------------------------
   const handleSendMessage = async (e) => {
@@ -56,7 +56,7 @@ function ChatBox() {
         >
           <ScrollableChat />
           <TextField
-            label='New Message'
+            label={t('chat.newMessage')}
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyDown={handleSendMessage}
@@ -83,7 +83,7 @@ function ChatBox() {
           height='100%'
         >
           <Typography variant='h4' color='fourth.dark'>
-            Please Select a chat
+            {t('chat.selectChat')}
           </Typography>
         </Box>
       )}

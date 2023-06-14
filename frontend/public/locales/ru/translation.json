@@ -237,6 +237,14 @@
 "tuberculosis": "Туберкулез",
 "coldAndFlu": "Простуда и грипп",
 "no": "НЕТ"
+},
+"chat": {
+  "newMessage": "Новое сообщение",
+  "selectChat": "Выберите чат",
+  "loadingText": "Загрузка...",
+  "noMessages": "Нет сообщений",
+  "notFound": "Не найдено",
+  "searchUser": "Поиск пользователя"
 }
 }
 
