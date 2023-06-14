@@ -245,6 +245,16 @@
   "noMessages": "Нет сообщений",
   "notFound": "Не найдено",
   "searchUser": "Поиск пользователя"
+},
+"reduxSlice": {
+  "sendEmailSucc": "Send email successful",
+  "sendEmailFailed": "Send email failed",
+  "deleteDoctor": "Doctor account successfully deleted",
+  "doctorShiftUpdated": "Doctor shift updated",
+  "appointmentBooked": "Appointment booked successfully",
+  "appointmentCanceled": "Appointment canceled",
+  "addFile": "New file added",
+  "deleteFile": "File deleted"
 }
 }
 

@@ -120,7 +120,8 @@ const chatSlice = createSlice({
       .addCase(searchDoctor.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       })
       // ! Get Chats -----------
       .addCase(getChats.pending, (state) => {
@@ -133,7 +134,8 @@ const chatSlice = createSlice({
       .addCase(getChats.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       })
       // ! Access/Create Chat ------------
       .addCase(accessChat.pending, (state) => {
@@ -146,7 +148,8 @@ const chatSlice = createSlice({
       .addCase(accessChat.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       })
       // ! Get Chats -----------
       .addCase(getMessages.pending, (state) => {
@@ -159,7 +162,8 @@ const chatSlice = createSlice({
       .addCase(getMessages.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload)
       })
       // ! Send Message ----------
       .addCase(sendMessage.pending, (state) => {
@@ -173,7 +177,8 @@ const chatSlice = createSlice({
       .addCase(sendMessage.rejected, (state, action) => {
         state.isLoading = false;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       });
   },
 });
