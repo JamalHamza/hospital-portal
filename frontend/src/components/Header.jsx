@@ -47,6 +47,7 @@ const Header = () => {
     setSelectedLanguage(language);
     i18n.changeLanguage(language);
     handleClose();
+    window.location.reload();
   };
   // ! --- Drawer --------------------------
   const handleOpen = () => {
