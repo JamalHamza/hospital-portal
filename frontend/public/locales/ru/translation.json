@@ -1,5 +1,6 @@
 {
   "title": "Вита Здоровье",
+   "search": "Поиск",
   "profile": {
     "title": "Профиль",
     "role": "Роль",
@@ -20,6 +21,31 @@
     "passwordChanged": "Пароль успешно изменен",
     "changePassTitle": "Изменить пароль",
     "updatePassword": "Обновить пароль"
+},
+"changeRole": {
+    "totalUser": "Всего пользователей",
+    "verifiedUsers": "Подтвержденные пользователи",
+    "unverifiedUsers": "Неподтвержденные пользователи",
+    "suspendedUsers": "Приостановленные пользователи",
+    "changeRoleText": "Пожалуйста, выберите роль",
+    "accountRoleChanged": "Роль аккаунта изменена",
+    "select": "--Выбрать--",
+    "admin": "Администратор",
+    "doctor": "Врач",
+    "patient": "Пациент",
+    "suspended": "Приостановлен",
+    "deleteBtn": "Удалить",
+    "cancelBtn": "Отмена",
+    "deleteUser": "Удалить пользователя",
+    "deleteUserText": "Вы уверены, что хотите удалить этого пользователя?",
+    "allUser": "Все пользователи",
+    "notFound": "Пользователь не найден...",
+    "no": "№",
+    "name": "Имя",
+    "email": "Email",
+    "role": "Роль",
+    "changedRole": "Изменить роль",
+    "action": "Действие"
 },
 "home": {
     "title": "Вита Здоровье",

@@ -1,5 +1,6 @@
 {
   "title": "Vita Health",
+  "search": "Search",
    "profile": {
     "title": "Profile",
     "role": "Role",
@@ -20,6 +21,31 @@
     "passwordChanged": "Password changed successfully",
     "changePassTitle": "Change Password",
     "updatePassword": "Update Password"
+  },
+  "changeRole": {
+    "totalUser": "Total User",
+    "verifiedUsers": "Verified Users",
+    "unverifiedUsers": "Unverified Users",
+    "suspendedUsers": "Suspended Users",
+    "changeRoleText": "Please select a role",
+    "accountRoleChanged": "Account Role Changed",
+    "select": "--Select--",
+    "admin": "Admin",
+    "doctor": "Doctor",
+    "patient": "Patient",
+    "suspended": "Suspended",
+    "deleteBtn": "Delete",
+    "cancelBtn": "Cancel",
+    "deleteUser": "Delete user",
+    "deleteUserText": "Are you sure to delete this user?",
+    "allUser": "All users",
+    "notFound": "No user found...",
+    "no": "s/n",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "changedRole": "Change Role",
+    "action": "Action"
   },
   "home": {
     "title": "Vita Health",

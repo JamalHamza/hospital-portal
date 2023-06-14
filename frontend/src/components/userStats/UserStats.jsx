@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { BiUserX } from 'react-icons/bi';
 import { FiUserCheck, FiUserMinus } from 'react-icons/fi';
@@ -31,25 +32,25 @@ function UserStats() {
       <div className='info-summary'>
         <InfoBox
           icon={icon1}
-          title={'Title Users'}
+          title={`${t('changeRole.totalUser')}`}
           count={users.length}
           bgColor='card1'
         />
         <InfoBox
           icon={icon2}
-          title={'Verified Users'}
+          title={`${t('changeRole.verifiedUsers')}`}
           count={verifiedUsers}
           bgColor='card2'
         />
         <InfoBox
           icon={icon3}
-          title={'Unverified Users'}
+          title={`${t('changeRole.unverifiedUsers')}`}
           count={users.length - verifiedUsers}
           bgColor='card3'
         />
         <InfoBox
           icon={icon4}
-          title={'Suspended Users'}
+          title={`${t('changeRole.suspendedUsers')}`}
           count={suspendedUsers}
           bgColor='card4'
         />

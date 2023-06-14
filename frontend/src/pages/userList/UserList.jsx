@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -32,15 +33,15 @@ function UserList() {
 
   const confirmDelete = (id) => {
     confirmAlert({
-      title: 'Delete user',
-      message: 'Are you sure to delete this user?',
+      title: `${t('changeRole.deleteUser')}`,
+      message: `${t('changeRole.deleteUserText')}`,
       buttons: [
         {
-          label: 'Delete',
+          label: `${t('changeRole.deleteBtn')}`,
           onClick: () => removeUser(id),
         },
         {
-          label: 'Cancel',
+          label: `${t('changeRole.cancelBtn')}`,
         },
       ],
     });
@@ -69,8 +70,6 @@ function UserList() {
     dispatch(FILTER_USERS({ users, search }));
   }, [dispatch, users, search]);
 
-
-
   return (
     <section>
       <div className='container'>
@@ -80,7 +79,7 @@ function UserList() {
           <div className='table'>
             <div className='--flex-between'>
               <span>
-                <h3>All users</h3>
+                <h3>{t('changeRole.allUser')}</h3>
               </span>
               <span>
                 <Search
@@ -91,17 +90,19 @@ function UserList() {
             </div>
             {/* table ends */}
             {!isLoading && users.length === 0 ? (
-              <h2>No user found...</h2>
+              <h2 style={{ textAlign: 'center' }}>
+                {t('changeRole.notFound')}
+              </h2>
             ) : (
               <table>
                 <thead>
                   <tr>
-                    <th>s/n</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Change Role</th>
-                    <th>Action</th>
+                    <th>{t('changeRole.no')}</th>
+                    <th>{t('changeRole.name')}</th>
+                    <th>{t('changeRole.email')}</th>
+                    <th>{t('changeRole.role')}</th>
+                    <th>{t('changeRole.changedRole')}</th>
+                    <th>{t('changeRole.action')}</th>
                   </tr>
                 </thead>
                 <tbody>

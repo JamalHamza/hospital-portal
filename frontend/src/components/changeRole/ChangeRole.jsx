@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useState } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
@@ -16,7 +17,7 @@ function ChangeRole({ id, email }) {
     e.preventDefault();
 
     if (!userRole) {
-      toast.error('Please select a role');
+      toast.error(`${t('changeRole.changeRoleText')}`);
       return;
     }
 
@@ -26,9 +27,9 @@ function ChangeRole({ id, email }) {
     };
 
     const emailData = {
-      subject: 'Account Role Changed - AUTH:Z',
+      subject: `${t('changeRole.accountRoleChanged')}`,
       send_to: email,
-      reply_to: 'noreply@zino',
+      reply_to: 'noreply@admin',
       template: 'changeRole',
       url: '/login',
     };
@@ -46,11 +47,11 @@ function ChangeRole({ id, email }) {
         onSubmit={(e) => changeRole(e, id, userRole)}
       >
         <select value={userRole} onChange={(e) => setUserRole(e.target.value)}>
-          <option value=''>--Selecet--</option>
-          <option value='admin'>Admin</option>
-          <option value='subscriber'>Doctor</option>
-          <option value='subscriber'>Patient</option>
-          <option value='suspended'>Suspended</option>
+          <option value=''>{t('changeRole.select')}</option>
+          <option value='admin'>{t('changeRole.admin')}</option>
+          <option value='subscriber'>{t('changeRole.doctor')}</option>
+          <option value='subscriber'>{t('changeRole.patient')}</option>
+          <option value='suspended'>{t('changeRole.suspended')}</option>
         </select>
         <button className='--btn --btn-primary'>
           <BsCheckLg size={14} color='white' />
