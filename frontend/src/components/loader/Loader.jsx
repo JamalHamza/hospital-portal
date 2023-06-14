@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import loadingImg from '../../assets/loader.gif';
 import './Loader.scss';
 import './Spinner.css';
 

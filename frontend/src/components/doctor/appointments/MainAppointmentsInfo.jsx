@@ -1,5 +1,6 @@
-import { Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { DoughnutDiagramArea } from '../../pieChart/PieChart';
 
 const styleHeader = {
@@ -66,6 +67,7 @@ const styleBoxes = {
 };
 
 function MainAppointmentsInfo({ appointments }) {
+  const { t } = useTranslation();
   // ! Today Date
   const todayDate = new Date();
   const futureAppointments = [];
@@ -82,7 +84,9 @@ function MainAppointmentsInfo({ appointments }) {
     <Grid item xs={12} sm={11.5} md={6}>
       <Grid container>
         <Grid item xs={12} sm={12} md={12} minHeight='4rem'>
-          <Typography sx={styleHeader}>Appointments Status</Typography>
+          <Typography sx={styleHeader}>
+            {t('doctor.appointmentStatus')}
+          </Typography>
         </Grid>
         <Grid
           item
@@ -92,7 +96,7 @@ function MainAppointmentsInfo({ appointments }) {
           sx={styleBoxes.total}
           minHeight='5rem'
         >
-          <Typography sx={style}>Total </Typography>
+          <Typography sx={style}> {t('doctor.total')} </Typography>
           <Typography sx={styleDetail}>{`${appointments?.length}`}</Typography>
         </Grid>
         <Grid
@@ -103,7 +107,7 @@ function MainAppointmentsInfo({ appointments }) {
           minHeight='5rem'
           sx={styleBoxes.upcoming}
         >
-          <Typography sx={style}>Oncoming </Typography>
+          <Typography sx={style}> {t('doctor.upcoming')} </Typography>
           <Typography sx={styleDetail}>{futureAppointments?.length}</Typography>
         </Grid>
         <Grid
@@ -114,7 +118,7 @@ function MainAppointmentsInfo({ appointments }) {
           minHeight='5rem'
           sx={styleBoxes.archived}
         >
-          <Typography sx={style}>Archived </Typography>
+          <Typography sx={style}> {t('doctor.archived')} </Typography>
           <Typography sx={styleDetail}>{pastAppointments.length}</Typography>
         </Grid>
         <Grid
@@ -125,14 +129,16 @@ function MainAppointmentsInfo({ appointments }) {
           minHeight='5rem'
           sx={styleBoxes.more}
         >
-          <Typography sx={style}>Last Months </Typography>
+          <Typography sx={style}>{t('doctor.lastMonths')} </Typography>
           <Typography sx={styleDetail}>11</Typography>
         </Grid>
         <Grid item xs={12} sm={12} md={12} sx={styleBoxes.pie}>
-          <DoughnutDiagramArea
-            upComing={futureAppointments?.length}
-            archived={pastAppointments?.length}
-          />
+          <Box sx={{ minHeight: '300px' }}>
+            <DoughnutDiagramArea
+              upComing={futureAppointments?.length}
+              archived={pastAppointments?.length}
+            />
+          </Box>
         </Grid>
       </Grid>
     </Grid>

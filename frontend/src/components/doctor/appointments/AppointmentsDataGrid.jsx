@@ -2,6 +2,7 @@ import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import { Box, Grid, IconButton } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 // ! Style Date Grid Mui --------------------------------
@@ -42,15 +43,16 @@ const styleDataGrid = {
 
 function AppointmentsDataGrid({ appointments }) {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const columns = [
-    { field: 'id', headerName: 'id', width: 60 },
-    { field: 'name', headerName: 'Date', width: 140 },
-    { field: 'time', headerName: 'Time', width: 140 },
-    { field: 'booked', headerName: 'Created At', width: 140 },
+    { field: 'id', headerName: `${t('doctor.id')}`, width: 60 },
+    { field: 'date', headerName: `${t('doctor.date')}`, width: 140 },
+    { field: 'time', headerName: `${t('doctor.time')}`, width: 140 },
+    { field: 'booked', headerName: `${t('doctor.booked')}`, width: 160 },
     {
       field: 'actions',
-      headerName: 'Show Details',
-      width: 100,
+      headerName: `${t('doctor.showDetails')}`,
+      width: 200,
       renderCell: (params) => (
         <>
           <IconButton onClick={() => navigate(`${params.row?.idDB}`)}>
@@ -64,7 +66,7 @@ function AppointmentsDataGrid({ appointments }) {
   const rows = appointments?.map((appointment, index) => ({
     id: index + 1,
     idDB: appointment?._id,
-    name: new Date(appointment?.appointmentDate).toLocaleDateString(),
+    date: new Date(appointment?.appointmentDate).toLocaleDateString(),
     time: new Date(appointment?.appointmentTime).toLocaleTimeString(),
     booked: new Date(appointment?.createdAt).toLocaleDateString(),
   }));

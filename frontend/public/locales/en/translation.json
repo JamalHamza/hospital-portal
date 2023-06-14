@@ -196,6 +196,25 @@
     "times": "Times",
     "available": "Available",
     "shift": "Shift"
+  },
+  "doctor": {
+    "appointments": "Appointments",
+    "id": "ID",
+    "date": "Date",
+    "time": "Time",
+    "booked":"Created At",
+    "showDetails": "Show Details",
+    "shift": "Your Shift",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "fee": "Fee",
+    "appointmentStatus": "Appointments Status",
+    "total": "Total",
+    "upcoming": "Upcoming",
+    "archived": "Archived",
+    "lastMonths": "Last Months"
   }
   
 }

@@ -1,16 +1,18 @@
-import { Grid } from '@mui/material';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import {Grid} from '@mui/material';
+import React, {useEffect} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
+import {useParams} from 'react-router-dom';
 import Appointment from '../../../assets/doctor/user.png';
 import AppointmentBookedDetails from '../../../components/doctor/appointmentsDetails/AppointmentBookedDetails';
 import File from '../../../components/doctor/appointmentsDetails/File';
 import PatientDetails from '../../../components/doctor/appointmentsDetails/PatientDetails';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
-import { getAppointmentDoctor } from '../../../redux/features/booking/bookingSlice';
+import {getAppointmentDoctor} from '../../../redux/features/booking/bookingSlice';
 
 function AppointmentDetails() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { id } = useParams();
   const { user } = useSelector((state) => state.auth);
   const { appointment } = useSelector((state) => state.booking);
@@ -27,7 +29,7 @@ function AppointmentDetails() {
 
   return (
     <FormWrapper
-      title={'Appointment'}
+      title={`${t('doctor.appointments')}`}
       img={Appointment}
       altImg={'Your Appointment History'}
     >
