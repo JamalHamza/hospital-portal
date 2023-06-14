@@ -8,6 +8,19 @@
     "bio": "Bio",
     "update": "Update"
   },
+  "changePassword": {
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "oldPasswordRequired": "Old password is required",
+    "atLeast": "At least 6 Character",
+    "required": "New password required",
+    "mustMatch": "Passwords must match",
+    "confirm": "Confirm Password is required",
+    "passwordChanged": "Password changed successfully",
+    "changePassTitle": "Change Password",
+    "updatePassword": "Update Password"
+  },
   "home": {
     "title": "Vita Health",
     "desc": "Instant appointment with doctors-Guaranteed.100% Safe Consultations Be assured that your online consultation will be fully private and secured."

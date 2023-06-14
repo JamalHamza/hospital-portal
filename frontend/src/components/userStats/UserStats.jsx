@@ -10,17 +10,16 @@ import {
 import InfoBox from '../infoBox/InfoBox';
 import './UsersStats.scss';
 
-const icon1 = <GrGroup size={40} color='red' />;
-const icon2 = <FiUserCheck size={40} color='#fff' />;
-const icon3 = <FiUserMinus size={40} color='#fff' />;
-const icon4 = <BiUserX size={40} color='#fff' />;
+const icon1 = <GrGroup size={36} color='red' />;
+const icon2 = <FiUserCheck size={36} color='#fff' />;
+const icon3 = <FiUserMinus size={36} color='#fff' />;
+const icon4 = <BiUserX size={36} color='#fff' />;
 
 function UserStats() {
   const dispatch = useDispatch();
   const { verifiedUsers, users, suspendedUsers } = useSelector(
     (state) => state.auth
   );
-  console.log(verifiedUsers);
 
   useEffect(() => {
     dispatch(CALC_VERIFIED_USER());
