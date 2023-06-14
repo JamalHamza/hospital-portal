@@ -11,6 +11,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getAppointment } from '../../../redux/features/booking/bookingSlice';
+import {t} from 'i18next';
 
 // ! ===============STYLE==================
 const textStyle = {
@@ -35,7 +36,6 @@ function Archived({ appointments }) {
       appointmentId,
       doctorId,
     };
-    console.log(userData);
     // ! save it to localStorage to use it in Appointment page
     localStorage.setItem('appointmentId', JSON.stringify(appointmentId));
     localStorage.setItem('doctorId', JSON.stringify(doctorId));
@@ -58,7 +58,7 @@ function Archived({ appointments }) {
           mt: '1em',
         }}
       >
-        Архив записей
+        {t('patient.archive')}
       </Typography>
       {oldDate.length < 1 ? (
         <Box
@@ -67,14 +67,15 @@ function Archived({ appointments }) {
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
-            width: '20rem',
             m: '0 auto',
           }}
         >
           <SentimentVeryDissatisfiedIcon
             sx={{ fontSize: '3rem', color: 'secondary.dark' }}
           />
-          <Typography sx={textStyle.alert}>Archive is empty</Typography>
+          <Typography sx={textStyle.alert}>
+            {t('patient.emptyArchive')}
+          </Typography>
         </Box>
       ) : (
         <>
@@ -86,7 +87,12 @@ function Archived({ appointments }) {
               'HH:mm'
             );
             return (
-              <Accordion key={appointment._id} sx={{ bgcolor: 'third.main' }}>
+              <Accordion
+                key={appointment._id}
+                sx={{
+                  bgcolor: 'third.main',
+                }}
+              >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls='panel1a-content'

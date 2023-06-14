@@ -175,6 +175,14 @@
     "no": "s/n",
     "Title": "Title",
     "download": "Download",
-    "emptyFile": "No file is uploaded"
+    "emptyFile": "No file is uploaded",
+    "archive": "Archive",
+    "emptyArchive": "Empty Archive",
+    "upcomingAppointments": "Upcoming Appointments",
+    "upcomingAppointmentsEmpty": "Upcoming Appointments is empty",
+    "appointmentDateText": "Please select a date",
+    "selectDateText": "Please, select date",
+    "datePickerLabel": "Appointment Date",
+    "submitBtn": "Submit" 
   }
 }

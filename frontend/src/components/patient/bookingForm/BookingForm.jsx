@@ -1,30 +1,33 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsFillCalendar2WeekFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
-
-// ! -------- Form Validation ----------------
-const validationSchema = Yup.object().shape({
-  appointmentDate: Yup.date().required('Please select a date'),
-});
+import { CustomButtonTwo } from '../../customUtils/customButtons/CustomButtonOne';
 
 function BookingForm() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, doctor, appointmentBooks, isSuccess } = useSelector(
+  const { isLoading, doctor, appointmentBooks } = useSelector(
     (state) => state.booking
   );
+  const { t, i18n } = useTranslation();
 
-  // ! Checking for Doctor's workday 
+  // ! -------- Form Validation ----------------
+  const validationSchema = Yup.object().shape({
+    appointmentDate: Yup.date().required(`${t('patient.appointmentDateText')}`),
+  });
+
+  // ! Checking for Doctor's workday
   const checkForTodayDate =
     dayjs(doctor?.startDate) > dayjs(new Date())
       ? dayjs(doctor?.startDate)
@@ -81,7 +84,7 @@ function BookingForm() {
               }}
             >
               <BsFillCalendar2WeekFill fontSize={26} />
-              Please, select date:
+              {t('patient.selectDateText')}
             </Typography>
           </Box>
           <Grid container spacing={2}>
@@ -89,7 +92,7 @@ function BookingForm() {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Box sx={{ width: '100%' }}>
                   <DatePicker
-                    label='Appointment Date'
+                    label={`${t('patient.datePickerLabel')}`}
                     name='appointmentDate'
                     value={formData}
                     disablePast={true}
@@ -109,27 +112,14 @@ function BookingForm() {
               </LocalizationProvider>
             </Grid>
           </Grid>
-          <Button
-            type='submit'
-            variant='contained'
-            sx={{
-              borderRadius: '10px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.4rem',
-              color: 'primary.dark',
-              minWidth: '8em',
-              bgcolor: 'fourth.main',
-              textTransform: 'uppercase',
-              m: '1em auto',
-              '&:hover': {
-                backgroundColor: '#ccc6b4',
-                color: '#fff',
-              },
-            }}
+          <Stack
+            my='1em'
+            display='flex'
+            justifyContent='center'
+            alignItems='flex-start'
           >
-            Submit
-          </Button>
+            <CustomButtonTwo label={`${t('patient.submitBtn')}`} />
+          </Stack>
         </Box>
       </form>
     </Grid>
