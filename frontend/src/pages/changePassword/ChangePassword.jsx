@@ -106,7 +106,6 @@ function ChangePassword() {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
       updatePassword(values);
     },
   });
@@ -117,7 +116,6 @@ function ChangePassword() {
         sx={{
           maxWidth: '40rem',
           width: '31rem',
-          minHeight: '68vh',
           m: '2em auto',
           p: '0.5em 2em',
           bgcolor: 'form.main',
