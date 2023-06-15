@@ -92,7 +92,7 @@ function ProfileAdmin() {
         photo: profileImage ? imageURL : profile.photo,
       };
 
-      dispatch(updateUser(userData));
+     await dispatch(updateUser(userData));
     } catch (error) {
       toast.error(error.message);
     }

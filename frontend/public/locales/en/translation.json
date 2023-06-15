@@ -264,7 +264,8 @@
     "changePassword":"Password changed successfully",
     "resetPassword": "Password rested successfully",
     "userDeleted": "User account deleted",
-    "userUpgrade": "User upgraded"
+    "userUpgrade": "User upgraded",
+    "doctorAdded": "New doctor added"
 }
   
 }

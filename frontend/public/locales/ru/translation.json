@@ -125,7 +125,7 @@
     "workDayAndHours": "Рабочий день и часы",
     "experience": "Опыт работы",
     "specialist": "Специалист",
-    "fee": "Оплата",
+    "fee": "Стоимость за час",
     "hospital": "Больница",
     "years": "Годы",
     "addBtn": "Добавить",
@@ -197,7 +197,7 @@
     "notAvailableDoctor": "Сообщаем вам, что врач в данный момент недоступен",
     "yearsExperiences": "Опыт работы (лет)",
     "doctorListEmpty": "Врачи не найдены",
-    "times": "Разы",
+    "times": "Время",
     "available": "Доступно",
     "shift": "Смена"
 },
@@ -262,7 +262,8 @@
     "changePassword":"Пароль успешно изменен",
     "resetPassword": "Пароль успешно сброшен",
     "userDeleted": "Аккаунт пользователя удален",
-    "userUpgrade": "Пользователь повышен"
+    "userUpgrade": "Пользователь повышен",
+    "doctorAdded": "Добавлен новый врач"
 }
 
 }
