@@ -1,6 +1,7 @@
 import BookmarkAddTwoToneIcon from '@mui/icons-material/BookmarkAddTwoTone';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { t } from 'i18next';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,9 +11,6 @@ import {
 } from '../../../../redux/features/booking/bookingSlice';
 import PersonalInfoAvatar from './personalInfoAvator/PersonalInfoAvatar';
 import PersonalInfoBody from './personalInfoBody/PersonalInfoBody';
-// import DeleteDoctorModal from '../deleteDoctorModal/DeleteDoctorModal';
-// import PersonalInfoBody from './personalInfoBody/PersonalInfoBody';
-// import './PersonalInfo.css';
 
 function PersonalInfo(props) {
   const { doctor, todayDate, formattedStartShiftTime, formattedEndShiftTime } =
@@ -52,11 +50,10 @@ function PersonalInfo(props) {
         </Grid>
         <Grid container>
           <Grid item xs={10} md={10} m='2em auto' textAlign='center'>
-            {formattedEndShiftTime > todayDate ? (
+            {formattedEndShiftTime >= todayDate ? (
               <Box>
                 <Typography variant='h5' sx={{ color: 'green' }}>
-                  The doctor is currently accepting patients and is available
-                  for appointments.
+                  {t('patient.availableDoctor')}
                 </Typography>
                 <IconButton
                   onClick={() => navigate(`/patient/allDoctors/booking/${id}`)}
@@ -75,10 +72,9 @@ function PersonalInfo(props) {
                   alignItems: 'center',
                 }}
               >
-                <PriorityHighIcon sx={{ color: 'red', fontSize: '3rem' }} />
+                <PriorityHighIcon sx={{ color: 'red', fontSize: '2.6rem' }} />
                 <Typography variant='h5' sx={{ color: 'red' }}>
-                  I regret to inform you that the doctor is unavailable at this
-                  time.
+                  {t('patient.notAvailableDoctor')}
                 </Typography>
               </Box>
             )}

@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaUserTimes } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import {
@@ -11,7 +12,7 @@ import {
 const Notification = () => {
   const dispatch = useDispatch();
   const [hide, setHide] = useState(false);
-
+  const { t, i18n } = useTranslation();
   const sendVerEmail = async () => {
     await dispatch(sendVerificationEmail());
     await dispatch(RESET());
@@ -45,14 +46,14 @@ const Notification = () => {
           >
             <FaUserTimes color='red' fontSize={24} />
             <Typography
-              variant='h4'
+              variant='h5'
               sx={{ fontWeight: 700, color: 'red', m: '0.4em' }}
             >
-              Account needs to verify
+              {t('notification.notificationHeader')}
             </Typography>
           </Stack>
-          <Typography variant='body1'>
-            To verify your account, check your email for a verification link
+          <Typography variant='body1' color='gray'>
+            {t('notification.notificationText')}
           </Typography>
           <Button onClick={sendVerEmail}>
             <Typography
@@ -69,7 +70,7 @@ const Notification = () => {
                 },
               }}
             >
-              Resend Link
+              {t('notification.resendBtn')}
             </Typography>
           </Button>
         </Box>

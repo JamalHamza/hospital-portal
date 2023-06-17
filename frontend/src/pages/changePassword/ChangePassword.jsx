@@ -2,19 +2,21 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {
   Box,
-  Button,
   IconButton,
   InputAdornment,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import { useFormik } from 'formik';
+import { t } from 'i18next';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import chnagePasswordIcon from '../../assets/authPage/changePassword.png';
+import { CustomButtonTwo } from '../../components/customUtils/customButtons/CustomButtonOne';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
 import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
 import {
@@ -30,29 +32,16 @@ const initialValues = {
   password2: '',
 };
 
-// ! ------ Yup Validation ------------------
-const validationSchema = Yup.object().shape({
-  oldPassword: Yup.string().required('Old password is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
-  password2: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Confirm Password is required'),
-});
-
 function ChangePassword() {
   useRedirectLoggedOutUser('/login');
   const [formData, setFormData] = useState(initialValues);
   const { oldPassword, password, password2 } = formData;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { isLoading, user } = useSelector((state) => state.auth);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
-  console.log(user);
 
   const togglePassword2 = () => {
     setShowPassword2(!showPassword2);
@@ -64,6 +53,18 @@ function ChangePassword() {
   const toggleOldPassword = () => {
     setShowOldPassword(!showOldPassword);
   };
+  // ! ------ Yup Validation ------------------
+  const validationSchema = Yup.object().shape({
+    oldPassword: Yup.string().required(
+      `${t('changePassword.oldPasswordRequired')}`
+    ),
+    password: Yup.string()
+      .min(6, `${t('changePassword.atLeast')}`)
+      .required(`${t('changePassword.required')}`),
+    password2: Yup.string()
+      .oneOf([Yup.ref('password'), null], `${t('changePassword.mustMatch')}`)
+      .required(`${t('changePassword.confirm')}`),
+  });
 
   // ! ---- handleInputChange ------------------
   const handleChange = (event) => {
@@ -87,9 +88,9 @@ function ChangePassword() {
     };
 
     const emailData = {
-      subject: 'Password Changed',
+      subject: `${t('changePassword.passwordChanged')}`,
       send_to: user.email,
-      reply_to: 'noreply@zino',
+      reply_to: 'noreply@admin',
       template: 'changePassword',
       url: '/forgot',
     };
@@ -105,7 +106,6 @@ function ChangePassword() {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
       updatePassword(values);
     },
   });
@@ -113,11 +113,9 @@ function ChangePassword() {
   return (
     <>
       <Box
-        className='boxxx'
         sx={{
           maxWidth: '40rem',
           width: '31rem',
-          minheight: '68vh',
           m: '2em auto',
           p: '0.5em 2em',
           bgcolor: 'form.main',
@@ -135,7 +133,7 @@ function ChangePassword() {
         >
           <img src={chnagePasswordIcon} alt='changePassword' />
           <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h4'>
-            Change Password
+            {t('changePassword.changePassTitle')}
           </Typography>
         </Box>
         <form
@@ -149,7 +147,7 @@ function ChangePassword() {
           <TextField
             name='oldPassword'
             type={showOldPassword ? 'text' : 'password'}
-            label='Old Password'
+            label={`${t('changePassword.oldPassword')}`}
             onChange={handleChange}
             value={formik.values.oldPassword}
             style={{ margin: '8px', width: '100%' }}
@@ -175,7 +173,7 @@ function ChangePassword() {
           <TextField
             name='password'
             type={showPassword ? 'text' : 'password'}
-            label='password'
+            label={`${t('changePassword.newPassword')}`}
             onChange={handleChange}
             value={formik.values.password}
             style={{ margin: '8px', width: '100%' }}
@@ -195,7 +193,7 @@ function ChangePassword() {
           <TextField
             name='password2'
             type={showPassword2 ? 'text' : 'password'}
-            label='Confirm Password'
+            label={`${t('changePassword.confirmPassword')}`}
             onChange={handleChange}
             value={formik.values.password2}
             style={{ margin: '8px', width: '100%' }}
@@ -212,27 +210,9 @@ function ChangePassword() {
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
           />
-          <Button
-            type='submit'
-            variant='contained'
-            sx={{
-              borderRadius: '10px',
-              padding: '8px 20px',
-              fontWeight: 'bold',
-              fontSize: '1.2rem',
-              minWidth: '8dem',
-              color: 'primary.dark',
-              bgcolor: 'third.main',
-              textTransform: 'uppercase',
-              m: '1em 0',
-              '&:hover': {
-                backgroundColor: '#ccb7c0',
-                color: '#fff',
-              },
-            }}
-          >
-            Update Password
-          </Button>
+          <Stack my='1em'>
+            <CustomButtonTwo label={`${t('changePassword.updatePassword')}`} />
+          </Stack>
           <PasswordStrength password={password} password2={password2} />
         </form>
       </Box>

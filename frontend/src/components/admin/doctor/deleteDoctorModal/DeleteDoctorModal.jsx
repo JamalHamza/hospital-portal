@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
+import { t } from 'i18next';
 import * as React from 'react';
 const style = {
   position: 'absolute',
@@ -42,47 +43,47 @@ export default function DeleteDoctorModal(props) {
               />
               <Typography
                 id='modal-modal-description'
-                variant='h4'
+                variant='h5'
                 sx={{ color: 'secondary.dark' }}
               >
-                Delete Doctor Account
+                {t('admin.deleteDoctor')}
               </Typography>
             </Box>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant='h6' sx={{ color: 'primary.dark' }}>
-                Are you sure you want to delete your account?
+              <Typography variant='body1' sx={{ color: 'primary.dark' }}>
+                {t('admin.deleteDoctorText')}
               </Typography>
               <Button
                 onClick={handleClose}
                 sx={{
                   bgcolor: 'secondary.main',
-                  margin: '0.8em',
-                  padding: '0.4em 2em',
+                  margin: '0.4em',
+                  padding: '0.2em 0.6em',
                   fontWeight: 700,
-                  fontSize: '1.2rem',
+                  fontSize: '1rem',
                   color: 'primary.dark',
                   '&:hover': {
                     background: '#D9EBFF',
                   },
                 }}
               >
-                Cancel
+                {t('admin.cancel')}
               </Button>
               <Button
                 onClick={() => handleDelete(doctorId)}
                 sx={{
                   bgcolor: 'third.main',
                   margin: '0.8em',
-                  padding: '0.4em 2em',
+                  padding: '0.2em 0.6em',
                   fontWeight: 700,
-                  fontSize: '1.2rem',
+                  fontSize: '1rem',
                   color: 'primary.dark',
                   '&:hover': {
                     background: '#ccb7c0',
                   },
                 }}
               >
-                Confirm
+                {t('admin.confirm')}
               </Button>
             </Box>
           </Box>

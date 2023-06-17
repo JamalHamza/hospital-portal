@@ -1,5 +1,6 @@
 // import Chart from 'chart.js/auto';
 import 'chart.js/auto';
+import { t } from 'i18next';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -30,7 +31,7 @@ export const DoughnutDiagramArea = ({ upComing, archived }) => {
   const upComingToNumber = parseInt(upComing);
   const archivedToNumber = parseInt(archived);
   const data = {
-    labels: ['upComing', 'Archived'],
+    labels: [`${t('doctor.archived')}`, `${t('doctor.upcoming')}`],
     datasets: [
       {
         label: 'Details',

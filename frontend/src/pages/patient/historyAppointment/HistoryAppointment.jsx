@@ -6,9 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import HistoryImg from '../../../assets/patient/history.png';
 import BackNav from '../../../components/customUtils/backNav/BackNav';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
-import Archived from '../../../components/pateint/appointmentsHistory/Archived';
-import Upcoming from '../../../components/pateint/appointmentsHistory/Upcoming';
+import { Spinner } from '../../../components/loader/Loader';
+import Archived from '../../../components/patient/appointmentsHistory/Archived';
+import Upcoming from '../../../components/patient/appointmentsHistory/Upcoming';
 import { getAppointments } from '../../../redux/features/booking/bookingSlice';
+import {t} from 'i18next';
 
 function HistoryAppointment() {
   const navigate = useNavigate();
@@ -36,27 +38,27 @@ function HistoryAppointment() {
 
   return (
     <>
-      <FormWrapper
-        title={'Your Appointment History'}
-        img={HistoryImg}
-        altImg={'Your Appointment History'}
-      >
-        <Box sx={{ width: '90%', m: '0 auto' }}>
-          <BackNav />
-          <Grid container minWidth='100%'>
-            <>
-              {isLoading ? (
-                <h1>Loading</h1>
-              ) : (
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <FormWrapper
+          title={t('patient.appointmentHistory')}
+          img={HistoryImg}
+          altImg={'Your Appointment History'}
+        >
+          <Box sx={{ width: '90%', m: '0 auto' }}>
+            <BackNav />
+            <Grid container minWidth='100%'>
+              <>
                 <>
                   <Upcoming appointments={appointments} />
                   <Archived appointments={appointments} />
                 </>
-              )}
-            </>
-          </Grid>
-        </Box>
-      </FormWrapper>
+              </>
+            </Grid>
+          </Box>
+        </FormWrapper>
+      )}
     </>
   );
 }

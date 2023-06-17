@@ -4,12 +4,14 @@ import {
   Box,
   IconButton,
   InputAdornment,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import { GoogleLogin } from '@react-oauth/google';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -31,16 +33,18 @@ const initialValues = {
   password: '',
 };
 
-// ! ------ Yup Validation ------------------
-const validationSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().required('Password is required'),
-});
-
 function Login() {
   const [formData, setFormData] = useState(initialValues);
   const [showPassword, setShowPassword] = useState(false);
   const { email, password } = formData;
+  const { t, i18n } = useTranslation();
+  // ! ------ Yup Validation ------------------
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email(`${t('authAlert.validEmail')}`)
+      .required(`${t('authAlert.required')}`),
+    password: Yup.string().required(`${t('authAlert.required')}`),
+  });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -136,7 +140,7 @@ function Login() {
         >
           <img src={loginImg} alt='login' />
           <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
-            Login
+            {`${t('auth.login')}`}
           </Typography>
         </Box>
         <form
@@ -149,7 +153,7 @@ function Login() {
         >
           <TextField
             name='email'
-            label='Email'
+            label={`${t('auth.email')}`}
             type='text'
             variant='outlined'
             value={formik.values.email}
@@ -162,7 +166,7 @@ function Login() {
           <TextField
             name='password'
             type={showPassword ? 'text' : 'password'}
-            label='password'
+            label={`${t('auth.password')}`}
             onChange={handleChange}
             value={formik.values.password}
             style={{ margin: '8px', width: '100%' }}
@@ -179,16 +183,18 @@ function Login() {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          <Link to='/forgot'>Forgot Password</Link>
-          <CustomButtonTwo label={'Login'} />
+          <Link to='/forgot'>{`${t('auth.forgot')}`}</Link>
+          <Stack my='1em'>
+            <CustomButtonTwo label={`${t('auth.login')}`} />
+          </Stack>
           <Box sx={{ p: '1.4em' }}>
-            {/* <GoogleLogin
+            <GoogleLogin
               onSuccess={googleLogin}
               onError={() => {
                 console.log('Login Failed');
                 toast.error('Login Failed');
               }}
-            /> */}
+            />
           </Box>
           <FormBottomLinksLoginPage />
         </form>

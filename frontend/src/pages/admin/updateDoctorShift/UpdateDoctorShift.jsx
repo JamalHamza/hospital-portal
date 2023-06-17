@@ -1,5 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Grid, IconButton } from '@mui/material';
+import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,7 +10,6 @@ import UpdateShiftSidebar from '../../../components/admin/doctor/updateShift/upd
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
 import { getDoctor } from '../../../redux/features/booking/bookingSlice';
-import moment from 'moment';
 
 function UpdateDoctorShift() {
   const { isLoading, doctor } = useSelector((state) => state.booking);
@@ -27,9 +27,9 @@ function UpdateDoctorShift() {
         <Loader />
       ) : (
         <FormWrapper
-          title={'Update Doctor Workday'}
+          title={t('admin.updateText')}
           img={UpdateShift}
-          altImg={'Update Doctor Workday'}
+          altImg={t('admin.updateText')}
         >
           <Grid container sx={{ mt: '2em' }}>
             <Grid item xs={12} md={12} sx={{ m: '1em 0' }}>
@@ -37,7 +37,7 @@ function UpdateDoctorShift() {
                 <ArrowBackIcon sx={{ color: 'third.dark', fontSize: '3rem' }} />
               </IconButton>
             </Grid>
-            <UpdateShiftSidebar  />
+            <UpdateShiftSidebar />
             <UpdateShiftForm />
           </Grid>
         </FormWrapper>

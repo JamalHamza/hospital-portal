@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { t } from 'i18next';
 import React from 'react';
 import { AiTwotoneExperiment } from 'react-icons/ai';
 import { FaBookMedical } from 'react-icons/fa';
@@ -41,7 +42,7 @@ function SpecialistAndExperience(props) {
     <>
       <Box
         sx={{
-          display: 'felx',
+          display: 'flex',
           flexDirection: 'column',
         }}
       >
@@ -57,7 +58,7 @@ function SpecialistAndExperience(props) {
           }}
         >
           <FaBookMedical fontSize={26} />
-          Specialist & Fee
+          {t('admin.specialistAndFee')}
         </Typography>
       </Box>
       {/* ------------------------------------ */}
@@ -71,7 +72,7 @@ function SpecialistAndExperience(props) {
         <Grid item xs={12} md={4}>
           <TextField
             name='specialist'
-            label='Specialist'
+            label={t('admin.specialist')}
             type='text'
             variant='outlined'
             value={values.specialist}
@@ -85,7 +86,7 @@ function SpecialistAndExperience(props) {
         <Grid item xs={12} md={4}>
           <TextField
             name='fee'
-            label='Fee'
+            label={t('admin.fee')}
             variant='outlined'
             type='number'
             value={values.fee}
@@ -102,7 +103,7 @@ function SpecialistAndExperience(props) {
 
       <Box
         sx={{
-          display: 'felx',
+          display: 'flex',
           flexDirection: 'column',
         }}
       >
@@ -118,18 +119,14 @@ function SpecialistAndExperience(props) {
           }}
         >
           <AiTwotoneExperiment fontSize={26} />
-          Experience
+          {t('admin.experience')}
         </Typography>
       </Box>
-      <Grid
-        container
-        spacing={2}
-        gap='0.4rem'
-      >
+      <Grid container spacing={2} gap='0.4rem'>
         <Grid item xs={12} md={4}>
           <TextField
             name='hospitalName'
-            label='Hospital Name'
+            label={t('admin.hospital')}
             variant='outlined'
             type='text'
             value={values.hospitalName}
@@ -143,7 +140,7 @@ function SpecialistAndExperience(props) {
         <Grid item xs={12} md={4}>
           <TextField
             name='years'
-            label='Years'
+            label={t('admin.years')}
             variant='outlined'
             type='Number'
             value={values.years}
@@ -160,18 +157,18 @@ function SpecialistAndExperience(props) {
             disabled={!hospitalName || !years}
             sx={{
               bgcolor: 'third.main',
-              padding: '1.4em 3em',
-              fontWeight: 600,
+              padding: '0.4em 0.2em',
+              fontWeight: 500,
               fontSize: '1rem',
-              m: '0.5em 0.4em',
-              mb: '0.4em',
-              color: 'primary.dark',
+              m: '0em 0.4em',
+              mt: '0.8em',
+              color: 'primary.light',
               '&:hover': {
                 background: '#ccb7c0',
               },
             }}
           >
-            Add
+            {t('admin.addBtn')}
           </Button>
         </Grid>
       </Grid>
@@ -192,7 +189,7 @@ function SpecialistAndExperience(props) {
               ml: '0.4em',
             }}
           >
-            Added Work Experiencesd:
+            {t('admin.experiences')}
           </Typography>
           <Box sx={{ p: '0.3em 0em' }}>
             {experiences.length ? (
@@ -201,10 +198,10 @@ function SpecialistAndExperience(props) {
                   <TableHead>
                     <TableRow sx={{ bgcolor: 'third.main' }}>
                       <TableCell sx={{ fontSize: '1.5rem', fontWeight: '700' }}>
-                        Hospital
+                        {t('admin.hospital')}
                       </TableCell>
                       <TableCell sx={{ fontSize: '1.5rem', fontWeight: '700' }}>
-                        Years
+                        {t('admin.years')}
                       </TableCell>
                       <TableCell></TableCell>
                     </TableRow>
@@ -234,7 +231,7 @@ function SpecialistAndExperience(props) {
               </TableContainer>
             ) : (
               <Typography variant='h6' sx={{ color: 'red', ml: '0.4em' }}>
-                Experience is not added
+                {t('admin.emptyExp')}
               </Typography>
             )}
           </Box>

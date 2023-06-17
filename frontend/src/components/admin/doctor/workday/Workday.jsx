@@ -10,20 +10,15 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { t } from 'i18next';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Doctor.css';
 
 function Workday(props) {
-  const { doctor, formattedEndShiftTime, todayDate, formattedStartShiftTime } =
+  const {  formattedEndShiftTime, todayDate, formattedStartShiftTime } =
     props;
   const navigate = useNavigate();
-
-  if (formattedEndShiftTime > todayDate) {
-    // console.log(false);
-  } else {
-    // console.log(true);
-  }
 
   return (
     <Grid item xs={12} md={5}>
@@ -45,7 +40,7 @@ function Workday(props) {
             sx={{ color: 'secondary.dark', fontSize: '3rem', mr: '0.5em' }}
           />
           <Typography variant='h4' sx={{ color: 'primary.dark' }}>
-            Working Date
+            {t('admin.workingDates')}
           </Typography>
         </Box>
       </Box>
@@ -59,8 +54,8 @@ function Workday(props) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Start Date</TableCell>
-                <TableCell>End Date</TableCell>
+                <TableCell>{t('admin.startDate')}</TableCell>
+                <TableCell>{t('admin.endDate')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

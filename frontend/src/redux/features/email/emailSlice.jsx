@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import emailServices from './emailServices';
 
@@ -47,13 +48,14 @@ const emailSlice = createSlice({
         state.sendingEmail = false;
         state.emailSent = true;
         state.msg = action.payload;
-        toast.success(action.payload);
+        toast.success(`${t('reduxSlice.sendEmailSucc')}`);
       })
       .addCase(sendAutomatedEmail.rejected, (state, action) => {
         state.sendingEmail = false;
         state.emailSent = false;
         state.msg = action.payload;
-        toast.error(action.payload);
+        toast.success(`${t('reduxSlice.sendEmailFailed')}`);
+        console.log(action.payload);
       });
   },
 });

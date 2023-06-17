@@ -40,7 +40,8 @@ const Sidebar = ({ open, setOpen }) => {
     itemsList = [
       [
         {
-          text: 'Profile',
+          text: `${t('sidebarAdmin.profile')}`,
+
           icon: (
             <ManageAccountsIcon
               fontSize='large'
@@ -52,7 +53,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Change Password',
+          text: `${t('sidebarAdmin.changePassword')}`,
           icon: (
             <LockResetIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -61,7 +62,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Users',
+          text: `${t('sidebarAdmin.users')}`,
           icon: <GroupIcon fontSize='large' sx={{ color: 'primary.light' }} />,
           onClick: () => {
             navigate('/users'), setOpen(false);
@@ -70,7 +71,7 @@ const Sidebar = ({ open, setOpen }) => {
       ],
       [
         {
-          text: 'Add Doctor',
+          text: `${t('sidebarAdmin.addDoctor')}`,
           icon: (
             <GroupAddIcon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -79,7 +80,7 @@ const Sidebar = ({ open, setOpen }) => {
           },
         },
         {
-          text: 'Doctors',
+          text: `${t('sidebarAdmin.doctors')}`,
           icon: (
             <Diversity1Icon fontSize='large' sx={{ color: 'primary.light' }} />
           ),
@@ -189,7 +190,7 @@ const Sidebar = ({ open, setOpen }) => {
           text: `${t('sidebarPatient.chatRoom')}`,
           icon: (
             <BsFillChatRightQuoteFill
-              fontSize={26}
+              fontSize={24}
               sx={{ color: 'primary.light' }}
               color='#dcd7ff'
             />
@@ -273,7 +274,6 @@ const Sidebar = ({ open, setOpen }) => {
                 </ListItem>
               );
             })}
-            <Divider sx={{ bgcolor: 'primary.main' }} />
             {itemsList[2]?.map((item, index) => {
               const { text, icon, onClick } = item;
               return (

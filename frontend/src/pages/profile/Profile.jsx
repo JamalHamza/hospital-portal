@@ -1,8 +1,9 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { CustomButtonTwo } from '../../components/customUtils/customButtons/CustomButtonOne';
 import Loader from '../../components/loader/Loader';
 import Notification from '../../components/notification/Notification';
 import useRedirectLoggedOutUser from '../../customHooks/useRedirectLoggedOutUser';
@@ -91,7 +92,7 @@ function ProfileAdmin() {
         photo: profileImage ? imageURL : profile.photo,
       };
 
-      dispatch(updateUser(userData));
+     await dispatch(updateUser(userData));
     } catch (error) {
       toast.error(error.message);
     }
@@ -163,7 +164,7 @@ function ProfileAdmin() {
                         variant='h5'
                         sx={{ textAlign: 'center', color: 'primary.main' }}
                       >
-                        Role: {profile?.role}
+                        {t('profile.role')}: {profile?.role}
                       </Typography>
                     </Box>
                   </Box>
@@ -191,6 +192,7 @@ function ProfileAdmin() {
                           <TextField
                             type='text'
                             name='name'
+                            label={`${t('profile.name')}`}
                             value={profile?.name}
                             onChange={handleInputChange}
                             style={{ margin: '4px 0', width: '100%' }}
@@ -210,6 +212,7 @@ function ProfileAdmin() {
                           <TextField
                             type='text'
                             name='phone'
+                            label={`${t('profile.phone')}`}
                             value={profile?.phone}
                             onChange={handleInputChange}
                             style={{ margin: '4px 0', width: '100%' }}
@@ -218,8 +221,8 @@ function ProfileAdmin() {
                         <Box>
                           <TextField
                             id='outlined-multiline-static'
-                            label='Bio'
                             name='bio'
+                            label={`${t('profile.bio')}`}
                             value={profile?.bio}
                             multiline
                             rows={4}
@@ -227,27 +230,9 @@ function ProfileAdmin() {
                             style={{ margin: '8px 0', width: '100%' }}
                           />
                         </Box>
-                        <Button
-                          type='submit'
-                          variant='contained'
-                          sx={{
-                            borderRadius: '10px',
-                            padding: '8px 20px',
-                            fontWeight: 'bold',
-                            fontSize: '1.2rem',
-                            color: 'primary.dark',
-                            minWidth: '8em',
-                            bgcolor: 'fourth.main',
-                            textTransform: 'uppercase',
-                            m: '1em 0',
-                            '&:hover': {
-                              backgroundColor: '#ccc6b4',
-                              color: '#fff',
-                            },
-                          }}
-                        >
-                          Update Profile
-                        </Button>
+                        <Stack my='1em' display='flex' justifyContent='center' alignItems='center'>
+                          <CustomButtonTwo label={`${t('profile.update')}`} />
+                        </Stack>
                       </Box>
                     </form>
                   </Box>

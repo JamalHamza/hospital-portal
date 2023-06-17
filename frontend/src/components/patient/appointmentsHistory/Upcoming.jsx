@@ -6,6 +6,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
+import { t } from 'i18next';
 import moment from 'moment';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +48,7 @@ function Upcoming({ appointments, isLoading }) {
           ml: '0.4em',
         }}
       >
-        Предстоящие записи
+        {t('patient.upcomingAppointments')}
       </Typography>
       {!isLoading && upComing.length === 0 ? (
         <Box
@@ -71,7 +72,7 @@ function Upcoming({ appointments, isLoading }) {
               textAlign: 'center',
             }}
           >
-            Upcoming Appointments is empty
+            {t('patient.upcomingAppointmentsEmpty')}
           </Typography>
         </Box>
       ) : (

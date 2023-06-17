@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 import { CiSearch } from 'react-icons/ci';
 import styles from './Search.module.scss';
@@ -8,7 +9,7 @@ function Search({ value, onChange }) {
       <CiSearch size={16} className={styles.icon} />
       <input
         type='text'
-        placeholder='Search'
+        placeholder={`${t('search')}`}
         value={value}
         onChange={onChange}
       />

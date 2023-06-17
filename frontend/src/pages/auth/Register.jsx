@@ -4,6 +4,7 @@ import {
   Box,
   IconButton,
   InputAdornment,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
@@ -14,18 +15,17 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import './auth-mui-overwrited.css';
 
-import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import RegisterImg from '../../assets/authPage//register.png';
 import BodyWrapper from '../../components/bodyWraper/bodyWraper';
+import { CustomButtonOne } from '../../components/customUtils/customButtons/CustomButtonOne';
 import { FormBottomLinksRegisterPage } from '../../components/formBottomLinks/FormBottomLinks';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
-import { validateEmail } from '../../redux/features/auth/authServices';
 import {
   register,
   RESET,
   sendVerificationEmail,
 } from '../../redux/features/auth/authSlice';
-import {CustomButtonOne} from '../../components/customUtils/customButtons/CustomButtonOne';
 
 const initialValues = {
   name: '',
@@ -34,19 +34,8 @@ const initialValues = {
   password2: '',
 };
 
-// ! ------ Yup Validation ------------------
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string()
-    .min(6, 'Password must be at least 8 characters')
-    .required('Password is required'),
-  password2: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Confirm Password is required'),
-});
-
 const Register = () => {
+  const { t, i18n } = useTranslation();
   // ! Initial Values for form
   const [formData, setFormData] = useState(initialValues);
   const [showPassword, setShowPassword] = useState(false);
@@ -58,6 +47,22 @@ const Register = () => {
   const { isLoading, isLoggedIn, isSuccess, message } = useSelector(
     (state) => state.auth
   );
+
+  // ! ------ Yup Validation ------------------
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required(`${t('authAlert.required')}`),
+    email: Yup.string()
+      .email(`${t('authAlert.validEmail')}`)
+      .required(`${t('authAlert.required')}`),
+    password: Yup.string()
+      .min(6, `${t('authAlert.password')}`)
+      .required(`${t('authAlert.required')}`),
+    password2: Yup.string()
+      .oneOf([Yup.ref('password'), null], `${t('authAlert.passwordsMatch')}`)
+      .required(`${t('authAlert.required')}`),
+  });
+
+  // ! ------------------------------------------
 
   const togglePassword2 = () => {
     setShowPassword2(!showPassword2);
@@ -77,18 +82,18 @@ const Register = () => {
 
   const RegisterUser = async () => {
     // e.preventDefault();
-    if (!name || !email || !password) {
-      return toast.error('All field are required!');
-    }
-    if (password.length < 6) {
-      return toast.error('Password must be up to 6 characters');
-    }
-    if (!validateEmail(email)) {
-      return toast.error('Please enter a valid email');
-    }
-    if (password !== password2) {
-      return toast.error('Password did not match');
-    }
+    // if (!name || !email || !password) {
+    //   return toast.error('All field are required!');
+    // }
+    // if (password.length < 6) {
+    //   return toast.error('Password must be up to 6 characters');
+    // }
+    // if (!validateEmail(email)) {
+    //   return toast.error('Please enter a valid email');
+    // }
+    // if (password !== password2) {
+    //   return toast.error('Password did not match');
+    // }
     const userData = {
       name,
       email,
@@ -121,7 +126,6 @@ const Register = () => {
   return (
     <BodyWrapper>
       <Box
-        className='boxxx'
         sx={{
           maxWidth: '30rem',
           width: '32rem',
@@ -143,7 +147,7 @@ const Register = () => {
         >
           <img src={RegisterImg} alt='login' />
           <Typography sx={{ color: 'primary.main', ml: '0.4em' }} variant='h3'>
-            Register
+            {t('auth.registerTitle')}
           </Typography>
         </Box>
         <form
@@ -156,7 +160,7 @@ const Register = () => {
         >
           <TextField
             name='name'
-            label='Name'
+            label={t('auth.name')}
             type='text'
             variant='outlined'
             value={formik.values.name}
@@ -169,7 +173,7 @@ const Register = () => {
 
           <TextField
             name='email'
-            label='Email'
+            label={t('auth.email')}
             variant='outlined'
             type='email'
             value={formik.values.email}
@@ -183,7 +187,7 @@ const Register = () => {
           <TextField
             name='password'
             type={showPassword ? 'text' : 'password'}
-            label='password'
+            label={t('auth.password')}
             onChange={handleChange}
             value={formik.values.password}
             style={{ margin: '8px', width: '100%' }}
@@ -203,7 +207,7 @@ const Register = () => {
           <TextField
             name='password2'
             type={showPassword2 ? 'text' : 'password'}
-            label='Confirm Password'
+            label={t('auth.confirm')}
             onChange={handleChange}
             value={formik.values.password2}
             style={{ margin: '8px', width: '100%' }}
@@ -220,7 +224,12 @@ const Register = () => {
             error={formik.touched.password2 && Boolean(formik.errors.password2)}
             helperText={formik.touched.password2 && formik.errors.password2}
           />
-          <CustomButtonOne label={'Register'} disabled={formik.isSubmitting} />
+          <Stack my='1em'>
+            <CustomButtonOne
+              label={t('auth.register')}
+              disabled={formik.isSubmitting}
+            />
+          </Stack>
           <PasswordStrength password={password} password2={password2} />
           <FormBottomLinksRegisterPage />
         </form>

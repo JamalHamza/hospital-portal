@@ -1,22 +1,14 @@
-import { Button, Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { useFormik } from 'formik';
+import { t } from 'i18next';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import { updateDoctorShift } from '../../../../../redux/features/booking/bookingSlice';
+import { CustomButtonTwo } from '../../../../customUtils/customButtons/CustomButtonOne';
 import DatePickerForm from '../../../../doctorAddForm/timings/DatePickerForm';
 import TimePickerForm from '../../../../doctorAddForm/timings/TimePickerForm';
-
-// ! -------- Form Validation ----------------
-const validationSchema = Yup.object().shape({
-  startDate: Yup.date().required('Start date is required'),
-  endDate: Yup.date()
-    .min(Yup.ref('startDate'), 'End date must be after start date')
-    .required('End date is required'),
-  startTime: Yup.string().required('Start Time is required'),
-  endTime: Yup.string().required('End Time is required'),
-});
 
 const initialValues = {
   startDate: '',
@@ -31,17 +23,24 @@ function UpdateShiftForm() {
   const { startDate, endDate, startTime, endTime } = formData;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // ! -------- Form Validation ----------------
+  const validationSchema = Yup.object().shape({
+    startDate: Yup.date().required(`${t('admin.dateRequiredText')}`),
+    endDate: Yup.date()
+      .min(Yup.ref('startDate'), `${t('admin.endDateValid')}`)
+      .required(`${t('admin.dateRequiredText')}`),
+    startTime: Yup.string().required(`${t('admin.timeRequiredText')}`),
+    endTime: Yup.string().required(`${t('admin.timeRequiredText')}`),
+  });
+
   // ! handleChange for TimerPicker
   const handleTimeChange = (fieldName) => (time) => {
-    // const hour = moment(time.$d).format('HH');
-    // const min = moment(time.$d).format('mm');
-    // const formattedTime = `${hour}:${min}`;
     formik.setFieldValue(fieldName, time);
     setFormData({ ...formData, [fieldName]: time });
   };
   // ! handleChange For DatePicker ------
   const handleFieldChange = (fieldName) => (value) => {
-    // const formattedDate = value?.toISOString();
     formik.setFieldValue(fieldName, value);
     setFormData({ ...formData, [fieldName]: value });
   };
@@ -87,28 +86,9 @@ function UpdateShiftForm() {
           errors={formik.errors}
           handleTimeChange={handleTimeChange}
         />
-
-        <Button
-          type='submit'
-          variant='contained'
-          sx={{
-            borderRadius: '10px',
-            padding: '8px 20px',
-            fontWeight: 'bold',
-            fontSize: '1.4rem',
-            color: 'primary.dark',
-            minWidth: '8em',
-            bgcolor: 'fourth.main',
-            textTransform: 'uppercase',
-            m: '1em 0',
-            '&:hover': {
-              backgroundColor: '#ccc6b4',
-              color: '#fff',
-            },
-          }}
-        >
-          Update
-        </Button>
+        <Stack my='1em' display='flex' alignItems='flex-start'>
+          <CustomButtonTwo label={`${t('admin.update')}`} />
+        </Stack>
       </form>
     </Grid>
   );

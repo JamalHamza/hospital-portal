@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { IconButton, List, ListItem, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import { t } from 'i18next';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -44,7 +45,7 @@ function SearchDrawer() {
     <>
       <form onSubmit={handleSearch}>
         <TextField
-          label='Search User'
+          label={`${t('chat.searchUser')}`}
           variant='filled'
           aria-haspopup='true'
           fullWidth
@@ -118,7 +119,7 @@ function SearchDrawer() {
             <ListItem>
               <Stack>
                 <Typography variant='h5' color='form.main'>
-                  Not found
+                  {t('chat.notFound')}
                 </Typography>
               </Stack>
             </ListItem>

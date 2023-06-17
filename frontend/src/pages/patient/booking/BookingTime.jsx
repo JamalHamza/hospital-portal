@@ -1,12 +1,13 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Grid, IconButton } from '@mui/material';
+import { t } from 'i18next';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import appointmentTime from '../../../assets/patient/booking.png';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
-import SelectTime from '../../../components/pateint/selectTime/SelectTime';
+import SelectTime from '../../../components/patient/selectTime/SelectTime';
 import { checkAvailability } from '../../../redux/features/booking/bookingSlice';
 
 function BookingTime() {
@@ -35,7 +36,7 @@ function BookingTime() {
         <Loader />
       ) : (
         <FormWrapper
-          title={'Select Time'}
+          title={t('patient.selectTime')}
           img={appointmentTime}
           altImg={'booking an appointment'}
         >

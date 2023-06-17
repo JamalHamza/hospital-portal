@@ -9,7 +9,6 @@ import {
   Menu,
   MenuItem,
   Toolbar,
-  Typography,
 } from '@mui/material';
 import i18next from 'i18next';
 import React, { useState } from 'react';
@@ -47,6 +46,7 @@ const Header = () => {
     setSelectedLanguage(language);
     i18n.changeLanguage(language);
     handleClose();
+    window.location.reload();
   };
   // ! --- Drawer --------------------------
   const handleOpen = () => {
@@ -103,8 +103,9 @@ const Header = () => {
               <CustomButtonLanguage
                 onClick={handleClick}
                 variant='contained'
+                
                 label={selectedLanguage === 'ru' ? 'RU' : 'EN'}
-              ></CustomButtonLanguage>
+              />
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
@@ -118,12 +119,7 @@ const Header = () => {
                   EN
                 </MenuItem>
               </Menu>
-              <Typography
-                variant='h6'
-                sx={{ color: 'fourth.main', m: '0.5em 1em' }}
-              >
-                {capitalizedUserRole}
-              </Typography>
+
               <IconButton onClick={() => logoutUser()}>
                 <LogoutIcon
                   fontSize='large'

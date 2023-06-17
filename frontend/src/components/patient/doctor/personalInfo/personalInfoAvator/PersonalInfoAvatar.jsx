@@ -1,7 +1,6 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {Box, Grid, IconButton} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-// import '../PersonalInfo.css';
+import { Box, Grid, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function PersonalInfoAvatar(props) {
   const { doctor, handleOpen } = props;
@@ -20,7 +19,6 @@ function PersonalInfoAvatar(props) {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
             alignItems: 'center',
             gap: '0.4em',
             mb: '1em',

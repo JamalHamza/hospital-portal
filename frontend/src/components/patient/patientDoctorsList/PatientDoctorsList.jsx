@@ -1,12 +1,13 @@
-import {Box, CardMedia, Grid, Typography} from '@mui/material';
+import { Box, CardMedia, Grid, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {selectorDoctors} from '../../../redux/features/auth/filterSlice';
-import {getDoctors} from '../../../redux/features/booking/bookingSlice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectorDoctors } from '../../../redux/features/auth/filterSlice';
+import { getDoctors } from '../../../redux/features/booking/bookingSlice';
 import Loader from '../../loader/Loader';
 import CardContentDetails from './CardContentDetails';
+import {useTranslation} from 'react-i18next';
 // import './DoctorList.css';
 
 function DoctorList() {
@@ -14,8 +15,11 @@ function DoctorList() {
   const navigate = useNavigate();
   const { isLoading, doctors } = useSelector((state) => state.booking);
   const filteredDoctors = useSelector(selectorDoctors);
-  
-  
+  const { t, i18n } = useTranslation();
+
+  const handleClick = (id) => {
+    navigate(`/patient/allDoctors/${id}`);
+  };
 
   //  ! -------------
   useEffect(() => {
@@ -31,7 +35,7 @@ function DoctorList() {
             variant='h5'
             sx={{ m: '0 auto', p: '1em', color: 'third.dark' }}
           >
-            No Doctor Found
+            {t('patient.doctorListEmpty')}
           </Typography>
         ) : (
           filteredDoctors.map((doctor) => {
@@ -42,9 +46,13 @@ function DoctorList() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     bgcolor: 'fourth.lighter',
-                    maxHeight: '24rem',
-                    height: '100%',
+                    height: '16rem',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      backgroundColor: '#ccc6b48e',
+                    },
                   }}
+                  onClick={() => handleClick(doctor._id)}
                 >
                   <Box
                     sx={{

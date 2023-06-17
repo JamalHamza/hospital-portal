@@ -99,7 +99,8 @@
     </style>
 </head>
 
-<body>
+{{!-- ------------------------------- --}}
+{{!-- <body>
     <div class="container">
         <div class="logo flex-center">
             <h2 class="color-white">Vita Health</h2>
@@ -118,6 +119,28 @@
         <div class="my">
             <p>Regards</p>
             <p><b class="color-danger">Vita Health</b> Team</p>
+        </div>
+    </div>
+</body> --}}
+{{!-- ----------------------------------- --}}
+<body>
+    <div class="container">
+        <div class="logo flex-center">
+            <h2 class="color-white">Вита Здоровье</h2>
+        </div>
+        <h2>Здравствуйте <span class="color-danger">{{doctorName}}</span></h2>
+        <p>У вас назначена новая встреча</p>
+        <ul>
+            <li>Имя пациента: {{patientName}}</li>
+            <li>Электронная почта пациента: {{patientEmail}} </li>
+            <li>Дата: {{date}}</li>
+            <li>Время: {{time}}</li>
+        </ul>
+
+
+        <div class="my">
+            <p>С уважением</p>
+            <p><b class="color-danger">Команда Вита Здоровье</b></p>
         </div>
     </div>
 </body>

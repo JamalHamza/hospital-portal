@@ -22,6 +22,7 @@ import BodyWrapper from '../../components/bodyWraper/bodyWraper';
 import { CustomButtonOne } from '../../components/customUtils/customButtons/CustomButtonOne';
 import { FormBottomLinks } from '../../components/formBottomLinks/FormBottomLinks';
 import PasswordStrength from '../../components/passwordStrength/PasswordStrength';
+import {t} from 'i18next';
 
 const initialValues = {
   password: '',
@@ -137,16 +138,16 @@ function Reset() {
               <img src={resetImg} alt='login' />
               <Typography
                 sx={{ color: 'primary.main', ml: '0.4em' }}
-                variant='h3'
+                variant='h4'
               >
-                Register
+                {t('auth.resetPassword')}
               </Typography>
             </Box>
             <form onSubmit={reset} noValidate>
               <TextField
                 name='password'
                 type={showPassword ? 'text' : 'password'}
-                label='New Password'
+                label={`${t('auth.password')}`}
                 onChange={handleChange}
                 value={formik.values.password}
                 style={{ margin: '8px 0', width: '100%' }}
@@ -172,7 +173,7 @@ function Reset() {
               <TextField
                 name='password2'
                 type={showPassword2 ? 'text' : 'password'}
-                label='Confirm New Password'
+                label={`${t('auth.confirm')}`}
                 onChange={handleChange}
                 value={formik.values.password2}
                 style={{ margin: '8px 0', width: '100%' }}
@@ -195,8 +196,8 @@ function Reset() {
                 }
                 helperText={formik.touched.password2 && formik.errors.password2}
               />
-              <Box textAlign='center'>
-                <CustomButtonOne label={'Reset Password'} />
+              <Box textAlign='center' my='1em'>
+                <CustomButtonOne label={`${t('auth.resetPassword')}`} />
               </Box>
               <PasswordStrength password={password} password2={password2} />
               <FormBottomLinks />

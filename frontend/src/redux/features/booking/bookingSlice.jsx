@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 import { toast } from 'react-toastify';
 import bookingService from './bookingServices';
 
@@ -331,7 +332,8 @@ const bookingSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.doctor = null;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       })
       // ! Get All Doctors --------
       .addCase(getDoctors.pending, (state) => {
@@ -347,7 +349,8 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       })
       // ! Get Doctor ------------
       .addCase(getDoctor.pending, (state) => {
@@ -363,7 +366,8 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        toast.error(action.payload);
+        // toast.error(action.payload);
+        console.log(action.payload);
       })
       // ! Delete Doctor ---------
       .addCase(deleteDoctor.pending, (state) => {
@@ -373,7 +377,8 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.deleteDoctor')}`);
       })
       .addCase(deleteDoctor.rejected, (state, action) => {
         state.isLoading = false;
@@ -390,7 +395,8 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.doctorShiftUpdated')}`);
       })
       .addCase(updateDoctorShift.rejected, (state, action) => {
         state.isLoading = false;
@@ -423,7 +429,7 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.appointmentBooked = action.payload;
-        toast.success('Booked');
+        toast.success(`${t('reduxSlice.appointmentBooked')}`);
       })
       .addCase(bookingAnAppointment.rejected, (state, action) => {
         state.isLoading = false;
@@ -471,7 +477,8 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        // toast.success(action.payload);
+        toast.success(`${t('reduxSlice.appointmentCanceled')}`);
       })
       .addCase(deleteAppointment.rejected, (state, action) => {
         state.isLoading = false;
@@ -520,6 +527,7 @@ const bookingSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.file = action.payload;
+        toast.success(`${t('reduxSlice.addFile')}`);
       })
       .addCase(addFile.rejected, (state, action) => {
         state.isLoading = false;
@@ -551,7 +559,7 @@ const bookingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.message = action.payload;
-        toast.success(action.payload);
+        toast.success(`${t('reduxSlice.deleteFile')}`);
       })
       .addCase(deleteFile.rejected, (state, action) => {
         state.isLoading = false;

@@ -1,4 +1,5 @@
 import { Avatar, Box, List, ListItem, Stack, Typography } from '@mui/material';
+import { t } from 'i18next';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getImage, getSender } from '../../config/chatLogic';
@@ -24,7 +25,7 @@ function RecentChats() {
   if (!isLoading && !chats) {
     return (
       <Typography variant='h5' color='primary.main' textAlign='center' my='1em'>
-        Chat isEmpty
+        Chat is Empty
       </Typography>
     );
   }
@@ -32,7 +33,7 @@ function RecentChats() {
 
   return (
     <Box>
-      {chats || !isLoading? (
+      {chats || !isLoading ? (
         <>
           {
             <List>
@@ -79,7 +80,7 @@ function RecentChats() {
       ) : (
         <>
           <Typography variant='h5' color='primary.main' textAlign='center'>
-            Loading....
+            {t('chat.loadingText')}
           </Typography>
         </>
       )}

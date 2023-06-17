@@ -1,13 +1,6 @@
 import EmailIcon from '@mui/icons-material/Email';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import {
-  Box,
-  Button,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { Box, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,12 +39,17 @@ function DoctorList() {
             return (
               <Grid item xs={12} sm={6} md={6} key={doctor._id}>
                 <Card
+                  onClick={() => handleClick(doctor._id)}
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-between',
                     bgcolor: 'fourth.lighter',
-                    maxHeight: '20rem',
+                    maxHeight: '14rem',
                     height: '100%',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      backgroundColor: '#ccc6b48e',
+                    },
                   }}
                 >
                   <Box
@@ -111,27 +109,6 @@ function DoctorList() {
                         />
                         {doctor?.specialist}
                       </Typography>
-                      <Button
-                        onClick={() => handleClick(doctor._id)}
-                        variant='contained'
-                        sx={{
-                          borderRadius: '10px',
-                          padding: '6px 16px',
-                          fontWeight: 'bold',
-                          fontSize: '1.2rem',
-                          width: '12rem',
-                          color: 'primary.main',
-                          bgcolor: 'third.main',
-                          textTransform: 'capitalize',
-                          m: '1em 0',
-                          '&:hover': {
-                            backgroundColor: '#ccb7c0',
-                            color: '#fff',
-                          },
-                        }}
-                      >
-                        More details
-                      </Button>
                     </CardContent>
                   </Box>
                   <CardMedia

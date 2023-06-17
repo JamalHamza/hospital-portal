@@ -10,6 +10,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { t } from 'i18next';
 import moment from 'moment';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -41,7 +42,7 @@ function WorkTime(props) {
             sx={{ color: 'secondary.dark', fontSize: '3rem', mr: '0.5em' }}
           />
           <Typography variant='h4' sx={{ color: 'primary.dark' }}>
-            Working Time
+            {t('admin.workingHours')}
           </Typography>
         </Box>
       </Box>
@@ -55,8 +56,8 @@ function WorkTime(props) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Start Time</TableCell>
-                <TableCell>End Time</TableCell>
+                <TableCell>{t('admin.startTime')}</TableCell>
+                <TableCell>{t('admin.endTime')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

@@ -7,7 +7,7 @@ import WorkTime from '../../../components/admin/doctor/workTime/WorkTime';
 import Workday from '../../../components/admin/doctor/workday/Workday';
 import FormWrapper from '../../../components/formWrapper/FormWrapper';
 import Loader from '../../../components/loader/Loader';
-import PersonalInfo from '../../../components/pateint/doctor/personalInfo/PersonalInfo';
+import PersonalInfo from '../../../components/patient/doctor/personalInfo/PersonalInfo';
 import { getDoctor } from '../../../redux/features/booking/bookingSlice';
 
 function SingleDoctor() {

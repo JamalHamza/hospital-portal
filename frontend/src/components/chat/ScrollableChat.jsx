@@ -9,6 +9,7 @@ import {
   isSameSenderMargin,
   isSameUser,
 } from '../../config/chatLogic';
+import {t} from 'i18next';
 
 function ScrollableChat({ fetchMessages }) {
   const { selectedChat, messages, isLoading } = useSelector(
@@ -98,7 +99,7 @@ function ScrollableChat({ fetchMessages }) {
                     textAlign='center'
                     my='auto'
                   >
-                    No messages
+                    {t('chat.noMessages')}
                   </Typography>
                 </>
               ) : (
