@@ -92,7 +92,7 @@ function ProfileAdmin() {
         photo: profileImage ? imageURL : profile.photo,
       };
 
-     await dispatch(updateUser(userData));
+      await dispatch(updateUser(userData));
     } catch (error) {
       toast.error(error.message);
     }
@@ -164,7 +164,8 @@ function ProfileAdmin() {
                         variant='h5'
                         sx={{ textAlign: 'center', color: 'primary.main' }}
                       >
-                        {t('profile.role')}: {profile?.role}
+                        {/* {t('profile.role')}: {profile?.role} */}
+                        {t('profile.role')}: Пациент
                       </Typography>
                     </Box>
                   </Box>
@@ -230,7 +231,12 @@ function ProfileAdmin() {
                             style={{ margin: '8px 0', width: '100%' }}
                           />
                         </Box>
-                        <Stack my='1em' display='flex' justifyContent='center' alignItems='center'>
+                        <Stack
+                          my='1em'
+                          display='flex'
+                          justifyContent='center'
+                          alignItems='center'
+                        >
                           <CustomButtonTwo label={`${t('profile.update')}`} />
                         </Stack>
                       </Box>

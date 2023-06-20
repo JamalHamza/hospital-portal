@@ -100,7 +100,7 @@
     "profile": "Профиль",
     "changePassword": "Изменить пароль",
     "appointments": "Записи на приём",
-    "chatRoom": "Сообщения"
+    "chatRoom": "Консультация"
     
   },
   "sidebarPatient": {
@@ -108,7 +108,7 @@
     "changePassword": "Изменить пароль",
     "doctors": "Врачи",
     "history": "История записей",
-    "chatRoom": "Сообщения"
+    "chatRoom": "Консультация"
 
   },
     "sidebarAdmin": {
