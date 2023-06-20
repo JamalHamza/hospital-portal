@@ -13,13 +13,13 @@ const styleHeader = {
 const style = {
   color: 'secondary.dark',
   textAlign: 'left',
-  fontSize: '2rem',
+  fontSize: '1.6rem',
   fontWeight: '600',
 };
 const styleDetail = {
   color: 'primary.main',
   textAlign: 'left',
-  fontSize: '2rem',
+  fontSize: '1.4rem',
   fontWeight: '700',
   ml: '0.6em',
 };
@@ -94,7 +94,7 @@ function MainAppointmentsInfo({ appointments }) {
           sm={6}
           md={5.5}
           sx={styleBoxes.total}
-          minHeight='5rem'
+          height='5rem'
         >
           <Typography sx={style}> {t('doctor.total')} </Typography>
           <Typography sx={styleDetail}>{`${appointments?.length}`}</Typography>
@@ -104,7 +104,7 @@ function MainAppointmentsInfo({ appointments }) {
           xs={12}
           sm={6}
           md={5.5}
-          minHeight='5rem'
+          height='5rem'
           sx={styleBoxes.upcoming}
         >
           <Typography sx={style}> {t('doctor.upcoming')} </Typography>
@@ -115,7 +115,7 @@ function MainAppointmentsInfo({ appointments }) {
           xs={12}
           sm={6}
           md={5.5}
-          minHeight='5rem'
+          height='5rem'
           sx={styleBoxes.archived}
         >
           <Typography sx={style}> {t('doctor.archived')} </Typography>
@@ -126,11 +126,13 @@ function MainAppointmentsInfo({ appointments }) {
           xs={12}
           sm={11.5}
           md={5.5}
-          minHeight='5rem'
+          height='5rem'
           sx={styleBoxes.more}
         >
           <Typography sx={style}>{t('doctor.lastMonths')} </Typography>
-          <Typography sx={styleDetail}>11</Typography>
+          <Typography sx={styleDetail}>
+            {futureAppointments?.length + pastAppointments.length}
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={12} md={12} sx={styleBoxes.pie}>
           <Box sx={{ minHeight: '300px' }}>

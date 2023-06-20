@@ -38,7 +38,7 @@ function Verify() {
       <Stack  width='15rem' m='1em auto'>
         <CustomButtonTwo
           onClick={verifyUserAccount}
-          label={`${'auth.verificationBtn'}`}
+          label={`${t('auth.verificationBtn')}`}
         />
       </Stack>
     </Box>
